@@ -1,0 +1,111 @@
+<!doctype html><html lang=ko><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>한국미술사 Q&amp;A</title>
+<style>
+:root{--ink:#1c1a17;--paper:#f2efe6;--indigo:#2f4858;--red:#a8332a;--line:#d8d2c2}
+*{box-sizing:border-box}
+body{margin:0;padding:20px 16px 60px;max-width:760px;margin-inline:auto;background:var(--paper);color:var(--ink);font:16px/1.65 "Noto Serif KR",serif;-webkit-text-size-adjust:100%}
+h1{font-size:15px;font-weight:600;letter-spacing:.04em;color:var(--indigo);border-bottom:2px solid var(--indigo);padding-bottom:8px;margin:0 0 14px}
+#bar{position:sticky;top:0;background:var(--paper);padding:10px 0;border-bottom:1px solid var(--line);margin-bottom:18px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:14px}
+button{font:inherit;font-size:13px;padding:6px 12px;border:1px solid var(--indigo);background:transparent;color:var(--indigo);border-radius:2px;cursor:pointer}
+button:active{background:var(--indigo);color:var(--paper)}
+#n{margin-left:auto;font-size:13px;color:var(--indigo);font-variant-numeric:tabular-nums}
+details{border-bottom:1px solid var(--line);padding:12px 2px}
+summary{cursor:pointer;font-weight:600;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary b{color:var(--indigo);font-variant-numeric:tabular-nums;margin-right:6px}
+details[open] summary{color:var(--indigo)}
+details p{margin:12px 0 10px;padding-left:14px;border-left:3px solid var(--line);white-space:pre-line}
+.w{font-size:13px;color:#7a7266;user-select:none}
+.w input:checked+span{color:var(--red);font-weight:600}
+</style></head><body>
+<script>
+const KEY="qa-20260824-한국미술사";
+const QA=[
+["고구려 고분벽화의 시기별 묘실 구조 변화","전기 다실묘 → 중기 이실묘 → 후기 단실묘. 시대가 내려올수록 묘실 수가 줄어든다."],
+["고구려 고분벽화의 시기별 주제 변화","1기: 묘주 부부 초상, 인물 풍속화(생활상)\n2기: 인물 풍속화 중심 + 불교적 요소(연화문) 유입, 천장에 사신도 등장\n3기: 도교색이 강해지며 사신도가 벽면을 차지하는 주 주제가 됨"],
+["고구려 고분벽화의 시기별 내세사상","1기 계세사상(유교) → 2기 극락왕생사상(불교) → 3기 신선사상·음양오행사상(도교)"],
+["고구려 고분벽화의 시기별 제작 기법 변화","전기에 조벽지법으로 잠깐 그리다가 화장지법으로 옮겨가고, 후기에 다시 조벽지법으로 돌아간다."],
+["고분벽화 제작 기법 두 가지","조벽지법: 다듬은 돌 벽면에 직접 그리는 방법\n화장지법: 벽에 회칠을 한 뒤 그 위에 그리는 방법"],
+["화장지법의 두 갈래","회칠이 마른 뒤에 그리는 건식, 회칠이 마르기 전에 그리는 습식(습지벽화, 프레스코)"],
+["고구려 고분의 건축 종류 두 가지","돌무지무덤(적석총), 굴식 돌방무덤(횡혈식 석실분)"],
+["덕흥리 고분 묘주 초상의 특징","13군 태수가 묘주에게 배례하는 장면. 병렬형 구도와 주대종소법으로 표현. 부인을 위한 자리가 비워져 있어 5세기 초 고구려에서 이미 부부병좌상이 그려지고 있었음을 시사한다."],
+["덕흥리 고분 13군 태수도에 보이는 중국 미술과의 연관성","주대종소·병렬형 구도가 중국 한대 화상석·화상전의 영향. 인물의 직함을 노란색 바탕에 기록한 방식도 중국의 영향이다."],
+["무용총 수렵도의 특징","고졸한 표현이 두드러져 인물이 산보다 크고 산이 동글동글하다. 인물화에 비해 산수 표현이 뒤떨어짐. 나무는 삼각형으로 솟은 모양. 백→적→황 순으로 가까운 산부터 칠하는 중국식 설채법."],
+["무용총 수렵도의 의의","5세기경 고구려 인물화와 산수화의 발달 정도를 짐작할 수 있다."],
+["덕흥리 고분 수렵도의 특징","산이 같은 선상에 횡으로 줄지어 있어 평면적이고, 산의 괴량감·공간감이 느껴지지 않는다. 산등성이의 버섯 모양 나무에서 고졸한 표현이 나타난다."],
+["상체는 사람, 하체는 뱀인 도상의 이름","인수사신(人首蛇身). 도교 계통의 복희와 여와."],
+["공주 송산리 6호분은 어떤 기법으로 그렸나","백제 고분. 그림 그릴 부분에 진흙을 발라 토벽을 만든 뒤 회칠을 하고 먹과 채색으로 그렸다."],
+["고려 화단의 특징","화원뿐 아니라 왕공귀족·승려까지 참여해 화가 계층이 넓어짐. 인물화 위주에서 산수·영모·묵죽·묵매 등 문인 취향 소재로 확대. 도화원 설치. 선종 불교 융성으로 선종화가 그려지고, 13세기 후반부터 불교 회화가 가장 눈부시게 발전. 산수는 북송·남송 화풍의 영향을 두루 받음."],
+["고려 불화의 제작 배경","초기: 왕실 중심으로 나라의 번영과 안녕을 기원 → 대형 불화, 호국적 성격\n후기: 귀족이 가족과 개인의 호신·안녕을 위해 발원 → 소형화, 개인 호신적 성격"],
+["고려 불화의 구도와 조선 불화로의 변화","고려 불화는 주대종소에 따른 상하 2단 구도. 조선 불화에서는 원형 구도(군도 형식)로 바뀐다."],
+["고려 불화의 제작 방법","비단에 먼저 선을 뜨고, 뒷면에서 색을 칠하는 배채법을 쓴 뒤 금니로 문양을 입힌다. 섬세하고 정치한 표현이 특징."],
+["배채법의 효과","박락을 방지하고, 색이 은은하면서도 잘 드러난다."],
+["고려 불화와 조선 불화의 재료 차이","고려는 비단 바탕에 금니와 값비싼 채색을 썼고, 조선은 삼베·면 등 값싼 바탕에 그렸다."],
+["어제비장전은 그림 형식상 무엇에 속하나","판경화(목판으로 찍은 경화). 붓으로 그린 것은 사경화."],
+["경화를 달리 부르는 말","경전화, 변상도"],
+["어제비장전에서 부처가 깨달음을 얻은 보리수 아래를 표현한 것","보리도량"],
+["어제비장전에 나타난 이곽파의 영향","고원·평원·심원의 삼원법, 거비적 산수. 산을 비롯한 자연을 웅장하게, 인물은 작게 표현했다."],
+["조선 초기 화단의 특징","중국 화풍이 다양하게 유입됨: 곽희의 이곽파, 남송 마하파, 절파(일부), 미법산수. 그중 곽희 화풍을 받은 안견이 등장해 안견파가 화단을 주도한다."],
+["몽유도원도에 나타난 안견의 독자성","왼쪽 하단에서 오른쪽 상단으로 이야기가 진행되는 대각선 구도, 경물들이 전체적으로 유기적으로 연결된 점, 고원과 평원의 강한 대조, 중앙부 도원의 넓은 공간.\n※ ‘흩어진 경물들의 유기적 조화’는 몽유도원도의 특징이 아니라고 정정받음(사시팔경도 쪽)."],
+["몽유도원도에서 곽희의 영향을 받은 요소","조광 효과, 삼원법, 운두준"],
+["몽유도원도가 길고 큰 이유","안평대군의 발문과 당대 문사 21명의 찬시가 함께 붙어 있는 두루마리 형식이기 때문."],
+["몽유도원도에 반영된 사상","도가(도교) 사상"],
+["사시팔경도에 나타난 안견의 독자성","경물들의 유기적인 조합, 상하 2단 구도, 시원하게 트인 여백, 확대 지향적인 중경으로 오행감(깊이감)이 강조됨, 고원과 평원의 대조."],
+["강희안 고사관수도의 내용","선비가 바위에 팔을 괴고 엎드려 물에 비친 자신을 바라보며 사색에 잠긴 옛 고사를 그린 그림."],
+["고사관수도의 특징","절파 화풍의 영향. 강한 흑백 대비, 거친 필묵, 중경·원경의 생략, 부벽준, 인물 중심의 소경산수화.\n※ 한쪽으로 치우친 구도라는 설명은 교재에 없음."],
+["이상좌 송하보월도의 특징","일각 구도, 굴절된 소나무, 인물에 주어진 작지 않은 비중, 생략적인 원경 → 마하파의 영향."],
+["이암 화조구자도의 특징","중국에 비해 훨씬 해학적이고 단순하며 귀엽게 표현. 강아지와 까치는 몰골법, 나무는 구륵법으로 그렸다."],
+["몰골법이란","윤곽선 없이 먹이나 색을 묻힌 붓으로 형태를 직접 그리는 기법."],
+["조선 시대 초상화의 시기별 특징","초기: 황토빛·갈색으로 얼굴 채색, 옷과 얼굴 모두 선 위주 표현이라 입체감이 적음\n중기: 담묵빛 살결, 오악사상에 근거해 얼굴의 높낮이 표현, 옷은 여전히 간결한 선 위주\n후기: 짙은 갈색 채색, 서양 화법의 명암법 영향으로 선염·육리문을 써 입체감 구현, 공필법으로 세밀하게 그려 사실성과 전신사조를 함께 구현\n말기: 사진기 등장으로 사실적이지만 전신사조는 퇴색"],
+["조선 초기·중기에 주로 그려진 초상화 종류","초기: 어진, 공신상 / 중기: 공신상"],
+["조선 중기 화단의 시대적 배경","사색당쟁과 사대전란으로 나라가 내우외환에 시달림. 이것이 그림에 반영되어 은일사상, 은둔하고 싶은 마음을 담은 주제가 유행했다."],
+["조선 중기에 유행한 은일 관련 주제","문월도, 탁족도, 목우도 등"],
+["달을 감상하는 장면을 그린 그림 / 달과 문답하는 그림","완월도 / 문월도"],
+["조선 중기 화단의 특징","절파 화풍 일색에 안견파 화풍도 함께 유행. 고씨화보 유입으로 남종문인화가 소극적으로 전래. 화조화·영모화에서 서정적인 한국화가 꽃핌. 실경산수와 기록화 제작이 활발해짐."],
+["조선 중기 기록화의 두 종류","의궤도와 계회도. 의궤도는 국가의 행사를 그린 그림."],
+["김명국 설중기려도의 특징","절파, 특히 광태사학파의 영향. 주선을 뾰족하고 날카롭게 표현, 부벽준, 거친 필묵과 강한 흑백 대비, 원경을 생략·단순화, 근경 인물 강조."],
+["설중기려도의 내용","눈길에 나귀를 타고 떠나는 선비와 동자를 표현했다."],
+["억불정책으로 선종화가 침체된 시기에 김명국이 선종화를 그린 이유","통신사의 수행화원으로 일본에 다녀오면서, 일본에서 유행하던 선종화를 그리게 되었다."],
+["김명국 달마도의 특징","감필법과 단필 사용, 농묵과 담묵의 대조(절파 영향). 달마는 서역인의 모습으로 그려졌다."],
+["이명욱 어초문답도의 특징","얼굴과 수염은 공필법으로 섬세하게, 옷자락은 절로묘와 오대당풍이 섞인 묘법으로, 얼굴은 오악사상에 근거해 채색했다."],
+["어초문답도의 뜻","어부와 초부(나무꾼)가 문답을 주고받는 고사. 어부와 초부는 은둔 생활을 하는 선비를 비유한 것으로, 어부는 물을 좋아하는 어진 사람, 초부는 지혜로운 사람을 뜻한다."],
+["조선 중기 화조화의 특징","한국적 서정성이 담김. 여백이 많고 한국적 소재를 사용. 대표 화가는 조속으로, 명대 수묵 화조화 양식을 개척한 임량의 영향을 받았다."],
+["조속 노수서작도의 특징","넓은 여백과 잘 짜인 모자이크식 포치, 농묵으로 그린 고목, 몰골법으로 그린 까치, 삼각형 모양의 잎."],
+["까치의 상징 의미","좋은 소식, 기쁜 소식"],
+["조속 금궤도의 내용과 목적","김알지 탄생 신화를 그린 그림. 정통성이 부족했던 조선 왕실이 신비로움을 더해 정통성을 보완하려 한 것으로, 넓게 보면 왕권 강화가 목적."],
+["금궤도가 인조의 명이 있고 20년 후에야 제작된 이유","병자호란이 일어나 제작이 어려웠기 때문."],
+["김시 한림제설도의 안견파 요소와 절파 요소","안견파: 편파 3단 구도, 경물이 한쪽으로 쏠리고 반대쪽은 확 트인 구성, 경물들의 유기적 조화\n절파: 기울어진 주산, 흑백 대조가 심한 근경"],
+["김시 목우도의 특징","농묵으로 표현한 소뿔과 발굽, 초승달 모양의 뿔, X자 모양의 주둥이, 해학적인 눈매, 등에 점선으로 처리한 선적 표현."],
+["목우도의 상징 의미","혼란한 시대에 모든 것을 버리고 전원에서 유유자적하며 살고 싶은 선비의 마음."],
+["이정 한강조주도의 특징","원 사대가 예찬의 간결한 구도를 연상시키는 구성이면서도, 조선 중기 절파의 거친 필묵법을 고수하여 남종화를 부분적으로만 수용했음을 보여준다. 이정은 남종화풍을 소극적으로 들여오고 안견파·절파의 영향을 받았다."],
+["이정근 설경산수도의 특징","식빵 모양의 주산과 X자형 구도, 좌우로 안정적인 구도, 녹두색 설채, 변형된 수지법, 뚜렷한 오행감."],
+["소상팔경도: 멀리서 포구로 돌아오는 배 / 안개 낀 산사의 종소리 / 소상강의 밤비","원포귀범 / 연사모종 / 소상야우"],
+["신사임당 그림 속 상징","패랭이꽃은 청춘, 한 쌍의 나비는 부부 금슬, 고양이는 노년(장수)을 뜻한다."],
+["고극공의 미법산수와 미불(미가)의 미법산수 차이","고극공은 복고적 산수로 이사훈·이소도 부자의 청록산수 영향을 받아 청록색으로 설채하고 두드러진 대각선 구도를 쓴다. 미불의 선염과 미점은 수용했으나 반두점이 없다는 점이 다르다."],
+["윤두서 산수화가 예찬과 다른 점","예찬은 메마른 갈필을 썼지만 윤두서는 윤필과 선염으로 서정적으로 표현했다. 절대준을 쓰지 않고 선염 처리했으며, 중경의 여백을 예찬처럼 여백으로 두지 않고 수면으로 처리했다."],
+["윤두서 채애도(나물 캐기)의 특징과 의의","수묵의 관념적인 산수를 배경으로 정적인 상황을 묘사. 지식인의 눈으로 본 서민의 모습이지만, 서민을 주제로 한 속화를 직접 보고 그렸다는 점에 의의가 있다."]
+];
+function R(){
+const D=document,B=D.body;
+let W=new Set();try{W=new Set(JSON.parse(localStorage.getItem(KEY)||"[]"))}catch(e){}
+const SV=()=>{try{localStorage.setItem(KEY,JSON.stringify([...W]))}catch(e){}};
+B.innerHTML="<h1>"+KEY+"</h1><div id=bar><label><input type=checkbox id=f> 틀린 것만</label><button id=x>오답 내보내기</button><button id=c>번호 복사</button><span id=n></span></div><div id=l></div>";
+const L=D.getElementById("l"),F=D.getElementById("f"),N=D.getElementById("n");
+QA.forEach((q,i)=>{
+const d=D.createElement("details");
+d.innerHTML="<summary><b>"+(i+1)+".</b>"+q[0]+"</summary><p>"+q[1]+"</p><label class=w><input type=checkbox><span> 틀림</span></label>";
+const cb=d.querySelector(".w input");cb.checked=W.has(i);
+cb.onchange=()=>{cb.checked?W.add(i):W.delete(i);SV();U()};
+L.appendChild(d)});
+const U=()=>{[...L.children].forEach((d,i)=>d.hidden=F.checked&&!W.has(i));N.textContent="틀림 "+W.size+" / "+QA.length};
+F.onchange=U;U();
+D.getElementById("x").onclick=()=>{
+const w=QA.filter((_,i)=>W.has(i));if(!w.length)return alert("체크된 문항이 없습니다.");
+const h="<!doctype html><html lang=ko><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><title>"+KEY+"-wrong</title><style>"+D.querySelector("style").textContent+"</style></head><body><script>const KEY="+JSON.stringify(KEY+"-wrong")+";const QA="+JSON.stringify(w)+";"+R+";R()<\/script></body></html>";
+const a=D.createElement("a");a.href=URL.createObjectURL(new Blob([h],{type:"text/html"}));a.download=KEY+"-wrong.html";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1e3)};
+D.getElementById("c").onclick=()=>{
+const s=[...W].sort((a,b)=>a-b).map(i=>i+1).join(",");
+const fb=()=>{const t=D.createElement("textarea");t.value=s;B.appendChild(t);t.select();try{D.execCommand("copy")}catch(e){}t.remove();alert(s||"체크된 문항이 없습니다.")};
+navigator.clipboard?navigator.clipboard.writeText(s).then(()=>alert("복사됨: "+(s||"없음")),fb):fb()};
+}
+R();
+</script></body></html>

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>qa-20260827-중국미술사·교육심리</title>
+<style>
+body{font-family:system-ui,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;max-width:760px;margin:0 auto;padding:16px;line-height:1.6;color:#1a1a1a}
+h1{font-size:18px;margin:0 0 12px}
+#bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;position:sticky;top:0;background:#fff;padding:8px 0;border-bottom:1px solid #ddd;margin-bottom:12px}
+button{padding:6px 10px;font-size:14px;border:1px solid #999;border-radius:6px;background:#f7f7f7;cursor:pointer}
+.it{border:1px solid #e0e0e0;border-radius:8px;padding:8px 10px;margin-bottom:8px}
+.it.w{border-color:#e05252;background:#fff6f6}
+summary{cursor:pointer;font-weight:600}
+.a{margin-top:8px;padding-top:8px;border-top:1px dashed #ddd;white-space:pre-wrap}
+label{display:inline-block;margin-top:8px;font-size:13px;color:#666}
+body.only .it:not(.w){display:none}
+#cnt{font-size:13px;color:#666;margin-left:auto}
+</style>
+</head>
+<body>
+<script>
+const KEY="qa-20260827-중국미술사교육심리";
+const QA=[
+["도철문(饕餮文)이란?","탐욕스럽고 흉악한 짐승(괴수)의 얼굴을 형상화한 무늬. 탐욕에 대한 경계·권선징악의 의미를 담음."],
+["뇌문(雷文)이란?","번개 모양을 형상화한 무늬."],
+["병마용의 제작 기법과 조각 형식은?","테라코타 기법. 실제 사람과 비슷한 크기의 등신대 인물 조각."],
+["병마용의 기능은?","진시황릉의 부장품(명기). 계세사상에 근거해 내세에서도 병마를 거느리게 하려는 것이며, 무덤을 수호하는 역할도 함."],
+["위진남북조 금동불좌상(300년경)에 나타난 간다라 양식의 영향은?","이목구비가 뚜렷하고 콧대가 높음, 손을 위로 든 시무외인, 통견, 옷주름이 도드라진 사실적·입체적 표현, 사자좌."],
+["간다라 양식은 어디의 영향으로 등장했나?","헬레니즘(그리스) 미술. 사실적이고 섬세한 옷주름·신체 표현이 특징."],
+["돈황석굴의 특징은?","암질이 주로 자갈(역암)이라 섬세한 조각이 어려워 소조 불상에 채색한 상이 주로 제작됨. 교각상을 볼 수 있음."],
+["용문석굴의 특징은?","석질이 조각에 용이해 대규모 석불이 다수 제작됨. 초기에는 북위불 영향으로 수골청상·포의박대가 나타나고, 후기에는 남조불 영향으로 얼굴이 둥글고 이목구비가 부드러워지며 양감이 평평해지고 옷주름이 유려해짐."],
+["당삼채의 특징은?","백색·황색·녹색(자료에 따라 청색 포함) 세 가지 채색 유약을 사용한 도기. 저온에서 굽는 연유도기이며, 실사용이 아닌 무덤 부장용 명기로 제작됨."],
+["당삼채가 생산된 가마(窯)는?","월주요 (※기록 그대로 옮김, 교재 확인 필요)"],
+["형관파(형호·관동) 화북산수의 화면 구성 특징은?","화면에 거대한 주산을 배치하고, 그 양옆으로 높이가 낮은 산과 사이로 흐르는 강물을 그리며, 근경에는 큰 소나무를 배치. 추운 지방이라 나무는 주로 침엽수."],
+["동거파(동원·거연) 강남산수의 특징은?","근경에 넓은 수면이 펼쳐지고 그 뒤로 낮은 언덕들이 배치됨. 따뜻한 지방이라 활엽수를 그리며, 전체적으로 습윤하고 서정적·온화한 분위기."],
+["송대 회화의 전체적 배경은?","한림도화원 설립으로 화원 화가 중심의 원체화가 발달하고 화론이 정립됨. 과거제로 문인 사대부가 대거 배출되어 문인화가 등장. 황전의 구륵전채법이 성행해 아들 황거채와 휘종이 계승하며 화조화가 발달함."],
+["송대 회화의 유파별 화가 분류는?","북송 원체화: 이곽파(이성·곽희) / 남송 원체화: 마원·하규·이당·조백구·조백숙 / 문인화: 문동·소식·미불·미우인·이공린·양해·목계."],
+["송록산수(청록산수) 계열 화가들의 시대 정리는?","이사훈·이소도는 당나라 화가. 조백구·조백숙은 이를 계승해 남송에서 청록산수를 이어감. 문동·소식 등은 북송 문인화가."],
+["이성의 특징은?","이곽파의 창시자. 한림평원 산수를 그렸고 해조묘·운두준·우점준을 창안. 북송 원체화가로서 이상적 사실주의가 드러나며, 다른 화가들이 주로 고원구도를 쓴 것과 달리 평원구도를 사용한 점이 특징."],
+["범관의 특징은?","산을 거대한 비석처럼 화면에 꽉 차게 그려 '거비파 산수'라는 용어가 등장. 산 정상에 나무를 빽빽하게 채우고, 강하고 굳센 필선을 사용하며 우점준을 많이 씀."],
+["곽희의 특징은?","삼원법(고원·심원·평원)을 종합해 근경·중경·원경을 유기적으로 연결. 조광 효과를 사용하고 해조묘·운두준 등을 구사. 화론서 『임천고치』를 저술."],
+["곽희의 사상적 배경은?","도교에 심취. 자연 속에서 수행하고 이상적인 산수를 묘사하는 것을 지향함."],
+["곽희의 사법(四法)은?","분해법·소쇄법·체재법 등 (나머지 하나는 기록에서 미확인)."],
+["체재법이란?","완전한 산수 경관을 선별하여 수용하는 것으로, 높은 산과 낮은 산 고유의 특징을 구분하여 표현해야 한다는 것."],
+["마하파(마원·하규)의 특징은?","부벽준 사용, 변각구도, 근경의 굴곡진 소나무, 타지법, 중경·원경을 생략한 확장 지향적 공간, 잔산잉수식의 인물 중심 소경산수."],
+["대부벽준을 창시한 화가는?","이당."],
+["미법산수를 창시한 화가는?","미불(아들 미우인이 계승)."],
+["미법산수의 표현 기법은?","종이 전체를 맑은 물로 선염한 뒤 담묵에서 농묵으로 여러 번 덧칠해 그라데이션과 습윤한 분위기를 냄. 붓을 옆으로 뉘어 찍는 측필을 사용."],
+["미점준이란?","측필을 사용하여 옆으로 누운 점을 찍는 방법으로, 이 점을 이용해 산을 그리는 준법."],
+["미우인의 그림을 후대에 무엇이라 불렀으며 그 뜻은?","묵희(墨戱). 기법에 구애되지 않는, 놀이와 같은 자유로운 제작 태도를 뜻함. ('상법에 구애받지 않는다'는 주경현 『당조명화록』의 서술이므로 혼동 주의.)"],
+["양해 <발묵선인도>에 사용된 필법은?","발묵법과 감필체."],
+["<발묵선인도>는 어떤 그림 종류에 속하는가?","선종화, 그중에서도 도석인물화."],
+["정보처리이론에서 기억의 종류 세 가지는?","감각기억, 작업기억, 장기기억."],
+["작업기억의 특징은?","감각기억을 거친 정보가 5~9개 정도, 약 20초간 저장되는 일시적 저장소. 바로 꺼내 쓸 수 있지만 한 번에 담을 수 있는 용량이 제한적."],
+["작업기억의 한계 용량을 극복(정보 유지)하는 방법은?","청킹, 자동화, 이중처리(이중부호화 — 시각 정보와 청각 정보를 함께 활용)."],
+["절차적 지식이란?","무엇을 어떻게 하는가에 대해 아는 지식(knowing how)."],
+["선언적 지식이란?","사실·개념·원리 등 '무엇이 어떻다'는 것을 아는 지식(knowing what). 예: 해는 동쪽에서 떠서 서쪽으로 진다는 것을 아는 것."],
+["인지과정의 단계는?","주의 → 지각 → 시연 → 부호화 → 인출 (자료에 따라 망각까지 포함하기도 함). 인지과정은 저장된 정보를 다른 기억 체계로 전이시키기 위한 정신 과정."],
+["부호화란?","새로운 정보를 유의미하게 전환하여 장기기억 속에 파지하는 것."],
+["부호화 전략 네 가지는?","정교화, 조직화, 심상화, 맥락화."],
+["정교화란?","새로운 정보를 기존의 지식과 연결하는 전략. 배경지식이 많을수록 연결이 정교해져 도식이 더 정교해짐."],
+["맥락화란?","정보를 장소·사람·감정 등 물리적·정서적 맥락과 함께 학습하는 것."],
+["정서지능이란?","자신과 타인의 감정을 정확히 지각·인식하고 표현하며, 이해하고 공감할 수 있는 능력(샐로비와 메이어)."],
+["셀만의 사회적 조망수용능력이란? 왜 필요한가?","타인의 생각이나 감정을 이해할 수 있는 능력. 이 능력이 발달해야 사회적 문제를 처리하고 타인과 원만하게 지내는 성숙한 사회적 행동이 가능하며, 타인의 관점에서 자신의 행동을 인지할 수 있음."],
+["셀만 2단계 - 자기반성적 조망수용은?","타인의 입장에서 자신의 생각과 행동을 조망할 수 있음(8~10세). 예: 학교폭력 가해자가 피해자가 아프고 속상해하며 자신을 미워할 것임을 안다."],
+["셀만 3단계 - 제3자적 조망수용은?","객관적인 제3자의 입장에서 자신과 타인을 바라보며, 상호 동시적으로 자신과 타인의 조망을 각각 이해함."],
+["셀만 4단계 - 사회적 조망수용은?","사회 구성원이 갖는 일반화된 관점(사회 규범·법·도덕적 관점)을 이해함."],
+["콜버그 도덕성 발달의 세 수준은?","전인습 수준, 인습 수준, 후인습 수준."],
+["전인습 수준의 단계는?","처벌과 복종 지향, 개인적 욕구 충족 지향."],
+["인습 수준의 단계는?","대인관계 조화 지향, 법과 질서 지향."],
+["후인습 수준의 단계는?","사회계약 지향, 보편적 도덕원리 지향."],
+["'법과 질서 지향'의 판단 기준은?","법과 질서를 준수하고 유지하는 행위를 옳은 행위로 판단. 법을 따르면 착한 사람, 어기면 나쁜 사람으로 봄."],
+["'사회계약 지향'의 판단 기준은?","사회 전체가 합의한 기준에 따라 옳고 그름을 판단. 법질서를 준수하되 융통성 있게 해석함."],
+["콜버그 이론의 교육적 적용 방안은?","① 도덕적 인지갈등 유발: 한 단계 높은 수준의 도덕적 딜레마를 제시하고 토론을 통해 타인과 자신의 도덕적 사고를 비교하게 함 ② 역할극: 여러 인물의 입장이 되어 보게 하여 타인의 입장을 이해하고 더 높은 수준의 도덕적 추론을 하게 함 ③ 모델링: 모델을 활용해 도덕적 가치와 규범을 배우게 함."],
+["자기결정성 이론의 개념은?","인간은 자율적으로 무언가를 할 때 동기가 유발된다는 이론. 유능성·자율성·관계성 세 가지 욕구가 충족되어야 함."],
+["유능성 욕구를 충족·신장시키는 방법은?","적절한 수준의 도전적 과제를 제공해 성공 경험을 갖게 하고, 실패할 경우 노력 부족에 귀인하도록 하며, 구체적이고 즉각적인 피드백을 제공함."],
+["자율성 욕구를 충족·신장시키는 방법은?","과제를 선택할 기회를 주고, 학습 속도와 목표를 스스로 정하게 하며, 교실 규칙과 절차를 만드는 과정에 참여시키고, 학생 참여 수준이 높은 수업을 제공함."]
+];
+let st=[];try{st=JSON.parse(localStorage.getItem(KEY))||[]}catch(e){}
+const esc=s=>s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}};
+const marked=()=>QA.map((_,i)=>i).filter(i=>st[i]);
+document.write('<h1>'+KEY+' ('+QA.length+'문항)</h1><div id=bar><label><input type=checkbox id=f> 틀린 것만</label><button id=e>오답 내보내기</button><button id=c>번호 복사</button><span id=cnt></span></div>'+
+QA.map((x,i)=>'<div class="it'+(st[i]?' w':'')+'" id="i'+i+'"><details><summary>'+(i+1)+'. '+esc(x[0])+'</summary><div class=a>'+esc(x[1])+'</div></details><label><input type=checkbox data-i='+i+(st[i]?' checked':'')+'> 틀림</label></div>').join(''));
+const cnt=document.getElementById("cnt"),upd=()=>cnt.textContent="틀림 "+marked().length+"개";
+upd();
+document.addEventListener("change",ev=>{const t=ev.target;
+ if(t.id=="f"){document.body.classList.toggle("only",t.checked);return}
+ const i=t.dataset.i;if(i===undefined)return;
+ st[i]=t.checked?1:0;document.getElementById("i"+i).classList.toggle("w",t.checked);save();upd();});
+document.getElementById("e").onclick=()=>{
+ const w=marked().map(i=>QA[i]);
+ const h='<!doctype html><html lang=ko><head><meta charset="utf-8"><meta name=viewport content="width=device-width,initial-scale=1"><title>'+KEY+'-wrong</title>'+document.querySelector("style").outerHTML+'</head><body><h1>오답 '+w.length+'문항</h1>'+
+ w.map((x,i)=>'<div class="it w"><details><summary>'+(i+1)+'. '+esc(x[0])+'</summary><div class=a>'+esc(x[1])+'</div></details><label><input type=checkbox> 틀림</label></div>').join('')+'</body></html>';
+ const u=URL.createObjectURL(new Blob([h],{type:"text/html"})),a=document.createElement("a");
+ a.href=u;a.download=KEY+"-wrong.html";a.click();URL.revokeObjectURL(u);};
+document.getElementById("c").onclick=()=>{const s=marked().map(i=>i+1).join(",");
+ const fb=()=>{const t=document.createElement("textarea");t.value=s;document.body.appendChild(t);t.select();try{document.execCommand("copy")}catch(e){}t.remove();};
+ try{navigator.clipboard.writeText(s).catch(fb)}catch(e){fb()}
+ cnt.textContent="복사됨: "+(s||"없음");setTimeout(upd,1500);};
+</script>
+</body>
+</html>

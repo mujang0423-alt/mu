@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ko">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>qa-20260826 한국미술사·교육평가</title>
+<style>
+body{font-family:system-ui,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;max-width:780px;margin:24px auto;padding:0 14px;line-height:1.65;color:#222}
+h1{font-size:19px;margin:0 0 4px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;position:sticky;top:0;background:#fff;padding:10px 0;border-bottom:1px solid #eee;margin-bottom:12px}
+button{font:inherit;padding:6px 12px;border:1px solid #bbb;border-radius:8px;background:#f7f7f7;cursor:pointer}
+button:hover{background:#eee}
+.tg{display:flex;align-items:center;gap:5px;margin-right:auto;font-size:14px}
+details{border:1px solid #ddd;border-radius:10px;padding:10px 13px;margin:8px 0;background:#fff}
+details[open]{border-color:#999;background:#fcfcfc}
+summary{cursor:pointer;font-weight:600}
+details p{margin:10px 0 0;white-space:pre-wrap}
+.w{display:inline-flex;align-items:center;gap:5px;margin-top:10px;font-size:13px;color:#a33}
+.sec{margin:22px 0 6px;font-size:14px;font-weight:700;color:#666;border-left:3px solid #888;padding-left:8px}
+.cnt{font-size:13px;color:#777}
+</style>
+<h1>2026.08.26 복습 — 한국미술사 · 교육평가</h1>
+<p class="cnt" id="cnt"></p>
+<div class="bar">
+<label class="tg"><input type="checkbox" id="only"> 틀린 것만</label>
+<button id="ex">오답 내보내기</button>
+<button id="cp">번호 복사</button>
+</div>
+<div id="list"></div>
+<script>
+const KEY="qa-20260826-한국미술사-교육평가";
+const QA=[
+["[한국미술사] 조선 말기 화단의 배경과 전개는?","김정희 일파가 주도한 문인화 사상이 화단을 휩쓸어 남종화 일색이 되었다. 실학적 기풍에 바탕한 진경산수·풍속화 등 우리만의 전통 화풍은 쇠퇴했다. 여항문인화가들도 남종문인화를 받아들였고, 서양화풍의 영향을 받은 신감각파(이색화파)가 김수철·김창수·홍세섭을 중심으로 등장했다. 말기에는 장승업계(서울 화단)와 허련계(호남 화단)가 계보를 형성했다."],
+["[한국미술사] 김정희 <부작란도(불이선란도)>는 어떤 필법으로 그려졌나?","난초는 초서와 예서의 필법으로 그렸고, 제발(題跋)은 추사체로 썼다."],
+["[한국미술사] 서예의 필법으로 그림을 그리는 것은 중국 화론의 무엇에 해당하나?","서화동원(書畵同源) 사상. 구체적으로는 조맹부의 서화용필동법(書畵用筆同法)이다."],
+["[한국미술사] 조맹부의 서화용필동법은 그 이전 누구의 어떤 이론에서 영향을 받았나?","장언원의 서화동체론(書畵同體論)."],
+["[한국미술사] 신분상 중앙 관직에 나가지 못하고 자신들만의 문예 집단을 만들어 활동한 중인 계급 화가들을 무엇이라 하나?","여항문인화가."],
+["[한국미술사] 조선시대 초상화의 시대별 특징은?","초기: 선묘 위주의 평면적 표현, 얼굴빛이 누렇고 담담함.\n중기: 얼굴에 약간 붉은 기가 돌고 입체감이 생기지만 옷은 여전히 선적.\n후기: 훈염법과 육리문(태서법, 즉 서양화법) 사용으로 사실적·섬세해짐.\n말기: 오악 사상에 따라 하이라이트를 넣고, 사진술 도입으로 인물과 옷 묘사가 더욱 세밀·사실적."],
+["[한국미술사] 조선 후기에는 주로 어떤 초상화 형식이 많이 그려졌나?","사대부상과 어진."],
+["[한국미술사] 이색화파의 전체적인 특징은?","서양화법의 영향을 받아 부감시 구도나 화면을 꽉 채운 구도를 쓰고, 형태가 추상적·개성적으로 드러나며, 수채화 같은 파스텔톤의 담채를 사용한다."],
+["[한국미술사] 허련의 <방예운림죽수계정도>는 누구의 영향을 받았고 특징은?","예찬(倪瓚)의 영향. 갈필을 쓰고 형태를 간결하게 표현하며, 평원 이단 구도(일하양안 구도)의 정적인 화면을 이룬다."],
+["[한국미술사] 일하양안(一河兩岸) 구도란?","강 하나를 사이에 두고 양쪽에 두 개의 언덕을 배치하는 구도. 다른 말로 평원 이단 구도라고 한다."],
+["[한국미술사] 윤영기의 주도로 탄생한 우리나라 최초의 미술 교육기관은?","경성서화미술원."],
+["[한국미술사] 김관호의 <해질녘>의 의의는?","우리나라 최초의 누드화(서양화)."],
+["[교육평가] 규준참조평가(상대평가)란?","개인의 점수를 소속 집단의 규준에 비추어 해석하는 평가로, 집단 내에서 자신의 상대적 위치를 알 수 있다."],
+["[교육평가] 규준참조평가의 특징은?","정상분포를 가정하고, 선발적 교육관을 추구하며, 신뢰도를 중시한다."],
+["[교육평가] 규준참조평가의 장단점은?","장점: 경쟁심을 통해 외적 동기를 유발하고, 집단 내 자신의 수준을 정확히 파악할 수 있다.\n단점: 불필요한 경쟁으로 스트레스와 비인간화를 초래하고, 전인적 평가나 과정에 대한 평가가 어렵다."],
+["[교육평가] 성취평가제란?","국가 교육과정에 근거한 교과목별 성취기준을 토대로 교수·학습이 이루어지고, 그 성취기준에 따라 학생의 성취 수준을 평가하는 제도(준거참조평가)."],
+["[교육평가] 자기참조평가의 세 가지 종류는?","성장지향평가, 노력지향평가, 능력지향평가."],
+["[교육평가] 노력지향평가란? 장단점은?","학생이 얼마나 노력했는지, 그 노력의 정도를 기준으로 평가하는 것.\n장점: 실력이 부족한 학생도 노력하면 좋은 점수를 얻을 수 있어 학습 동기가 향상된다.\n단점: 노력을 측정하는 구체적이고 명확한 방법이 없어 기준이 모호하다."],
+["[교육평가] 스크리븐의 탈목표 평가란?","평가를 프로그램의 가치를 판단하는 과정으로 보고, 프로그램이 의도한 효과뿐 아니라 부수적(잠재적) 효과까지 포함한 실제적 효과를 판단하고자 하는 것."],
+["[교육평가] 스크리븐이 제시한 평가의 유형(구분)은?","목표중심평가 / 탈목표평가, 비교평가 / 비비교평가, 내재적 준거에 의한 평가 / 외재적 준거에 의한 평가, 형성평가 / 총괄평가, 그리고 평가 자체의 가치를 따지는 메타평가."],
+["[교육평가] 내재적 준거와 외재적 준거의 차이는?","내재적 준거: 목표, 내용 선정, 내용 조직 등 프로그램에 내재된 기본 속성.\n외재적 준거: 프로그램이 발휘하는 기능적 속성으로, 실제 운영 상황이나 프로그램의 효과 등."],
+["[교육평가] 탈목표 평가 모형의 장단점은?","장점: 잠재적 결과까지 포함한 교육의 실제 효과를 평가할 수 있다.\n단점: 그 판단의 타당성을 평가하는 방법이 없다."],
+["[교육평가] '지능지수가 높으면 창의성도 높다'고 보고 평가했다면 무슨 오류인가?","논리적 오류. 논리적으로 관련이 없는 두 가지 행동 특성을 관련 있는 것으로 판단하여 평가하는 오류."],
+["[교육평가] 극단적인 점수를 피하고 평가 결과가 중간에 모이는 경향은?","집중경향의 오류."],
+["[교육평가] 전반적으로 높은 점수를, 또는 낮은 점수를 주는 오류는?","높은 점수를 주는 경향은 관용의 오류, 낮은 점수를 주는 경향은 엄격의 오류."],
+["[교육평가] 평정의 오류를 최소화하는 방안 세 가지는?","① 평가자를 사전에 훈련시킨다. ② 루브릭 등 명확한 채점 기준표를 마련해 채점 기준을 구체화한다. ③ 학생 단위가 아니라 문항 단위로 채점한다."],
+["[교육평가] 교육평가관(검사관)에는 무엇이 있나?","측정관, 평가관, 총평관."],
+["[교육평가] 측정관의 정의·전제·관련 교육관·강조점은?","정의: 일정한 규칙에 따라 어떤 대상의 속성에 수치를 부여하는 것으로, 학습자의 특성을 양적으로 표현하는 과정.\n전제: 인간의 행동 특성은 불변하므로 어떤 현상이든 정확한 측정이 가능하다.\n관련 교육관: 선발적 교육관.\n강조점: 신뢰도와 객관도."],
+["[교육평가] 평가관의 정의·전제·관련 교육관은?","정의: 학습자의 변화, 즉 성취도를 알아보는 것.\n전제: 인간의 특성은 변하며 그 변화는 교육적으로 가치가 있다.\n관련 교육관: 발달적 교육관."],
+["[교육평가] 총평관의 정의·전제·관련 교육관은?","정의: 인간의 특성을 다양한 방법으로 종합적·전체적으로 평가하는 것.\n전제: 인간의 행동 특성은 환경과의 역동적인 상호작용을 통해 변화한다.\n관련 교육관: 인본주의적 교육관."],
+["[교육평가] 형성평가의 개념은?","수업 중 수시로 실시하여 학생이 학습 목표를 제대로 달성하고 있는지, 학습 내용을 얼마나 이해하고 있는지 점검하는 평가."],
+["[교육평가] 형성평가의 목적은?","학습 동기 유발, 학습자의 부족한 부분과 학습 정도 파악, 학습 활동 촉진, 교사의 교수 방법 점검 및 수정·보완, 피드백 제공, 진단과 교정."],
+["[교육평가] 형성평가에서 피드백은 어떻게 제공해야 하나?","구체적으로, 즉각적으로 제공하고, 학생 개인의 성격이나 태도가 아니라 수업 내용과 관련된 것에 한정해서 제공한다."],
+["[교육평가] 형성평가의 결과는 어떻게 처리해야 하나?","최종 성적에 반영하지 않는다."],
+["[교육평가] 총괄평가의 목적은?","학업 성적을 판정하고, 학습의 효과를 판단하며, 집단 간 학업 성적을 비교하고, 자격을 부여한다."],
+["[교육평가] 진단평가의 목적은?","학습자의 출발점 행동과 사전 성취 수준, 학습 곤란의 원인, 전반적 특성을 미리 파악하여 적합한 교수 전략을 제공하기 위함."],
+["[교육평가] 진단평가의 방법은?","쪽지 시험 등 다양한 평가 도구를 활용하고, 지적 영역뿐 아니라 정의적·심동적 영역까지 함께 평가하며, 면담이나 생활기록부 확인도 활용한다."],
+["[교육평가] 타당도란?","'무엇을 재고 있는가'의 문제로, 검사가 본래 재고자 하는 것을 얼마나 충실히 측정하고 있는가. 검사 대상의 충실성."],
+["[교육평가] 신뢰도란?","'어떻게 재고 있는가'의 문제로, 검사가 얼마나 오차 없이 정확하게 측정하고 있는가. 검사 점수의 일관성."],
+["[교육평가] 객관도란?","채점자가 주관적인 편견을 얼마나 배제하고 공정하게 채점하였는가."],
+["[교육평가] 타당도의 종류는?","내용타당도, 공인타당도, 예언타당도, 구인타당도, 결과타당도. (공인·예언은 준거타당도에 속한다)"],
+["[교육평가] 공인타당도란?","현 시점에서 관련된 두 검사의 일치 정도를 밝히는 것. 새로 제작된 검사 도구로 기존 검사 도구를 대체할 때 사용한다."],
+["[교육평가] '창의력은 유창성·민감성·융통성 등으로 이루어지며 이 하위 요소가 우수하면 창의력이 높다'고 볼 때의 타당도는?","구인타당도."],
+["[교육평가] 내용타당도를 높이는 방법은?","이원목표분류표를 활용해 교육 목표를 구체적으로 세분화하고, 전체 내용을 잘 대표하도록 문항을 표집하여 측정하고자 하는 내용을 골고루 측정한다."]
+];
+let S={};try{S=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const L=document.getElementById("list"),T=document.getElementById("only");
+const flt=()=>{[...L.children].forEach((d,i)=>d.style.display=T.checked&&!S[i]?"none":"")};
+QA.forEach((q,i)=>{
+  const d=document.createElement("details");
+  d.innerHTML="<summary>"+(i+1)+". "+q[0]+"</summary><p>"+q[1]+"</p>";
+  const l=document.createElement("label");l.className="w";
+  const c=document.createElement("input");c.type="checkbox";c.checked=!!S[i];
+  c.onchange=()=>{S[i]=c.checked;save();flt()};
+  l.append(c,"틀림");d.append(l);L.append(d);
+});
+T.onchange=flt;flt();
+document.getElementById("cnt").textContent="총 "+QA.length+"문항";
+const wrong=()=>QA.map((q,i)=>S[i]?[i+1,q]:0).filter(Boolean);
+document.getElementById("ex").onclick=()=>{
+  const w=wrong();if(!w.length)return alert("체크된 문항이 없습니다.");
+  const h='<!doctype html><html lang="ko"><meta charset="utf-8"><title>'+KEY+'-wrong</title><style>body{font-family:system-ui,"Apple SD Gothic Neo",sans-serif;max-width:780px;margin:24px auto;padding:0 14px;line-height:1.65}details{border:1px solid #ddd;border-radius:10px;padding:10px 13px;margin:8px 0}summary{cursor:pointer;font-weight:600}p{margin:10px 0 0;white-space:pre-wrap}</style><h1>오답 노트 — '+KEY+'</h1>'+w.map(([n,q])=>"<details><summary>"+n+". "+q[0]+"</summary><p>"+q[1]+"</p></details>").join("");
+  const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([h],{type:"text/html"}));a.download=KEY+"-wrong.html";a.click();URL.revokeObjectURL(a.href);
+};
+document.getElementById("cp").onclick=async()=>{
+  const s=wrong().map(([n])=>n).join(",");
+  try{await navigator.clipboard.writeText(s)}catch(e){const t=document.createElement("textarea");t.value=s;document.body.append(t);t.select();try{document.execCommand("copy")}catch(e2){}t.remove()}
+  alert(s?"복사됨: "+s:"체크된 문항이 없습니다.");
+};
+</script>
+</html>
