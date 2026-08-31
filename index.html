@@ -38,6 +38,8 @@ textarea{width:100%;height:200px;font:13px/1.6 ui-monospace,monospace;margin-top
 <button id=go>전체 오답 모아보기</button>
 <button id=rnd>랜덤 10문항</button>
 <button id=txt>오답 텍스트</button>
+<button id=sy>동기화</button>
+<button id=tk>토큰</button>
 <span id=msg>불러오는 중…</span>
 </div>
 
@@ -242,6 +244,70 @@ rnd.onclick=async()=>{
   busy(rnd,"랜덤 10문항",0);
 };
 
+/* ── 기기 간 동기화 ── */
+const API="https://api.github.com/repos/"+REPO+"/contents/";
+const LS=(k,v)=>{try{return v===undefined?localStorage.getItem(k):localStorage.setItem(k,v)}catch(e){return null}};
+const b64=s=>btoa(String.fromCharCode.apply(null,new TextEncoder().encode(s)));
+const ub64=s=>new TextDecoder().decode(Uint8Array.from(atob(s.replace(/\s/g,"")),c=>c.charCodeAt(0)));
+const norm=o=>{const r={};Object.keys(o||{}).forEach(i=>{if(o[i])r[i]=true});return r};
+const eq=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+
+function stateKeys(){
+  const s=new Set(Object.values(KEYS));
+  try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(/^qa-/.test(k))s.add(k)}}catch(e){}
+  return [...s];
+}
+function localState(){
+  const o={};stateKeys().forEach(k=>{try{const v=localStorage.getItem(k);if(v)o[k]=norm(JSON.parse(v))}catch(e){}});
+  o._visit=visits();return o;
+}
+function merge(base,loc,rem){
+  const out={}, ks=new Set([].concat(Object.keys(base),Object.keys(loc),Object.keys(rem)));
+  ks.forEach(k=>{
+    if(k==="_visit"){
+      const v=Object.assign({},base._visit,loc._visit);
+      Object.keys(rem._visit||{}).forEach(f=>{if(!v[f]||rem._visit[f]>v[f])v[f]=rem._visit[f]});
+      out._visit=v;return;
+    }
+    const b=norm(base[k]),l=norm(loc[k]),r=norm(rem[k]);
+    const lc=!eq(b,l), rc=!eq(b,r);
+    out[k]= (lc&&rc) ? Object.assign({},l,r) : lc ? l : rc ? r : l;
+  });
+  return out;
+}
+function setTok(){
+  const cur=LS("hub-token")||"";
+  const t=prompt("GitHub 토큰 붙여넣기 (비우고 확인하면 삭제)",cur);
+  if(t===null)return;
+  if(t.trim())LS("hub-token",t.trim());else try{localStorage.removeItem("hub-token")}catch(e){}
+  msg.textContent=t.trim()?"토큰 저장됨":"토큰 삭제됨";
+}
+async function sync(){
+  const T=LS("hub-token");
+  if(!T){setTok();return}
+  busy(sy,"동기화 중…",1);
+  try{
+    let rem={},sha=null;
+    const g=await fetch(API+"state.json?t="+Date.now(),{headers:{Authorization:"Bearer "+T}});
+    if(g.ok){const j=await g.json();sha=j.sha;try{rem=JSON.parse(ub64(j.content))}catch(e){}}
+    else if(g.status!==404)throw new Error("읽기 실패 "+g.status);
+    let base={};try{base=JSON.parse(LS("hub-base")||"{}")}catch(e){}
+    const m=merge(base,localState(),rem);
+    Object.keys(m).forEach(k=>{if(k!=="_visit")LS(k,JSON.stringify(m[k]))});
+    LS("hub-visit",JSON.stringify(m._visit||{}));
+    const body=JSON.stringify(m);
+    const p=await fetch(API+"state.json",{method:"PUT",
+      headers:{Authorization:"Bearer "+T,"Content-Type":"application/json"},
+      body:JSON.stringify(sha?{message:"sync",content:b64(body),sha:sha}:{message:"sync",content:b64(body)})});
+    if(!p.ok)throw new Error(((await p.json()).message)||("쓰기 실패 "+p.status));
+    LS("hub-base",body);
+    render();msg.textContent="동기화 완료 "+new Date().toLocaleTimeString("ko-KR",{hour:"2-digit",minute:"2-digit"});
+  }catch(e){msg.textContent="동기화 실패: "+e.message}
+  busy(sy,"동기화",0);
+}
+sy.onclick=sync;tk.onclick=setTok;
+
 [v0,v1,v2].forEach((b,i)=>b.onclick=()=>{view=i;out.innerHTML="";[v0,v1,v2].forEach((x,j)=>x.className=i===j?"on":"");render()});
-rl.onclick=()=>load(1);load();
+rl.onclick=()=>load(1);
+load().then(()=>{if(LS("hub-token"))sync()});
 </script>
