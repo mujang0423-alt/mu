@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>미교 - 교육과정 변천</title>
+<style>
+body{font-family:-apple-system,BlinkMacSystemFont,"Malgun Gothic",sans-serif;max-width:820px;margin:0 auto;padding:16px;line-height:1.6;background:#fafafa;color:#222}
+h1{font-size:19px;margin:0 0 12px}
+#bar{position:sticky;top:0;background:#fafafa;padding:8px 0;border-bottom:1px solid #ddd;margin-bottom:12px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+button{padding:6px 10px;font-size:13px;border:1px solid #bbb;border-radius:6px;background:#fff;cursor:pointer}
+label{font-size:13px;cursor:pointer}
+details{background:#fff;border:1px solid #ddd;border-radius:8px;padding:10px 12px;margin-bottom:8px}
+summary{cursor:pointer;font-weight:600;font-size:15px}
+.a{margin-top:8px;padding-top:8px;border-top:1px dashed #ddd;white-space:pre-wrap;font-size:14px;color:#333}
+.chk{margin-top:8px;font-size:13px;color:#c0392b}
+.num{color:#888;font-weight:400;margin-right:4px}
+.hide{display:none}
+#cnt{font-size:13px;color:#666;margin-left:auto}
+</style>
+</head>
+<body>
+<script>
+const KEY="0831-미교-교육과정변천";
+const QA=[
+["우리나라 화원(畵員)의 업무는?","국가에서 필요로 하는 그림 제작 — 단청, 도자기 문양, 어진(임금 초상) 제작 등"],
+["조선 후기 화원 시취(試取) 과목에 추가된 것은?","속화, 문방, 누각"],
+["조선시대 화원을 선발하던 기관은? 고려시대에는?","조선: 도화서 / 고려: 도화원"],
+["도화원 → 도화서로 명칭이 바뀐 의미는?","'서'가 '원'보다 격이 낮은 명칭. 화가를 낮게 보던 조선의 인식이 반영된 것"],
+["화원 선발 시험 과목을 이르는 말은?","시취(試取)"],
+["조선 초 시취 과목의 등급 순서는?","대나무(죽) > 산수 > 인물 > 영모 > 화초"],
+["도화서의 교육 방법은?","도제식 교육, 화본(개자원화전 등)을 통한 모사 중심"],
+["조선시대 사대부층의 미술 교육 특징은?","시·서·화 삼절주의. 모사 위주 학습 + 함께 감상하고 평을 나누는 감상·비평 활동"],
+["피바디 교육사절단이 한국 미술교육에 미친 영향 3가지는?","① 아동미술의 붐 형성 ② 창조주의(아동중심) 미술교육 보급 ③ 아동미술 관계자들의 인식 전환 (미술교사 연구회·전시 등을 통한 교사 교육)"],
+["1차 교육과정의 미술교육 성격은?","창의성 중심 미술교육"],
+["1차 목표 빈칸: 일상생활과 ( )에 필요한 조형예술과 기술에 대한 일반적인 이해","산업"],
+["1차 교육과정의 목표 제시 형태는?","일반 목표와 (학년) 목표로 나누어 제시"],
+["2차 교육과정에서 신설·추가된 것은?","학년 목표 신설, 지도상의 유의점 신설, 중학교 교사용 지도서 보급, 사범학교의 교육대학 승격 및 사범대학에 미술교육과 설치"],
+["2차 고등학교 미술과 목표 빈칸: 미술 이해와 ( )에 의한 교양과 인격 함양","미적 정서"],
+["3차 교육과정의 미술교육 성격은?","이해 중심 미술교육"],
+["3차의 배경으로 주류가 된 미술교육은?","민족 미술교육 — 전통 미술·서예 교육 활성화, 우리 미술품·문화재를 감상·보존·애호하는 태도 강조"],
+["4차 교육과정에서 강조된 교육관은?","인간 중심(전인 교육). 창의성 중심 → 이해 중심 → 인간 중심 흐름"],
+["4차 목표 빈칸: 표현을 통한 창의성 개발, 자율성·상상력·개방성·탐구적 태도 함양과 ( ) 강조","미적 정서"],
+["4차 지도상의 유의점에서 처음으로 포함된 항목은?","평가 (지도 및 평가상의 유의점)"],
+["4~5차 내용 체계의 영역 구성은?","표현, 감상 (5차까지 유지)"],
+["5차 교육과정에서 목표가 달라진 점은?","이전까지 중학교·고등학교 목표가 따로 제시되던 것을 학교급 구분 없이 하나의 단일 총괄 목표로 제시"],
+["6차 교육과정에 반영된 DBAE의 영역은?","미학"],
+["6차에서 신설된 과목은?","미술과 생활"],
+["6차에서 처음으로 제시된 항목은?","성격"],
+["6차에서 강조된 내용은?","미술과 생활 신설을 통한 미학 도입, 주변 환경에 대한 관심과 개선 의지 함양, 전통 미술 지도 강조"],
+["6차에서 감상 영역과 관련해 구체적으로 제시된 것은?","지도 및 평가 방법 (감상 영역에서 미술사·미술 비평 강조)"],
+["7차 교육과정의 배경은?","세계화·정보화의 심화. 그에 대한 반작용으로 민족(전통) 미술교육도 함께 강조. 미학이 전 영역으로 확대 적용"],
+["7차가 중심으로 삼아 학습 분량을 최적화하고 수준·범위를 적정화한 것은?","필수 학습 요소"],
+["7차 총괄 목표 빈칸: 미술 활동을 통하여 표현 및 감상 능력을 기르고 ( A )을 개발하며 심미적 태도를 함양한다","A = 창의성"],
+["7차 교육과정의 영역 구성은?","미적 체험, 표현, 감상"],
+["7차 표현 영역의 내용은?","주제 표현, 표현 방법, 조형 요소와 원리, 재료와 용구(재료 연구)"],
+["7차 감상 영역의 내용은?","미술품 감상, 미술 문화유산 이해"],
+["6차 → 7차로 가며 바뀐 용어: 정서 함양 → ?","심미적 태도"],
+["6차 → 7차로 가며 바뀐 용어: 조형 활동 → ?","미술 활동 (목표 진술에서)"],
+["07 개정 총괄 목표 빈칸: 미술의 다양한 활동을 통하여 ( ), 창의적 표현 능력, 비평 능력을 기르고 미술 문화를 향수할 수 있는 능력과 태도를 기른다","미적 감수성"],
+["07 개정 표현 영역의 구성은?","주제 표현, 조형 요소와 원리, 표현 방법, 표현 과정 (목표형 과정으로 새로 편성)"],
+["07 개정 미적 체험 영역의 구성은?","자연환경, 시각문화환경"],
+["07 개정 감상 영역의 구성은?","미술 작품, 미술 문화"],
+["09 개정 체험 영역의 구성은?","지각, 소통"],
+["09 개정 표현 영역의 구성은?","주제 표현, 표현 방법, 조형 요소와 원리 (표현 과정이 삭제됨)"],
+["09 개정 감상 영역의 구성은?","미술사, 미술 비평"],
+["09 개정에서 목표가 어떻게 바뀌었나?","학년(군)별 목표를 삭제하고 총괄 목표로 단일화. 성격에 있던 내용이 목표로 이동"],
+["09 개정 총괄 목표 빈칸: 미적 감수성과 직관으로 대상을 이해하고 삶을 창의적으로 향유하며 미술 문화를 계승·발전시킬 수 있는 ( )을 육성한다","전인적 인간"],
+["09 개정 교육과정의 체제 편성은?","공통 교육과정 + 선택 교육과정"],
+["2015 개정에서 체제 명칭은 어떻게 바뀌었나?","공통 교육과정 + 선택 중심 교육과정"],
+["2015 개정 선택 중심 교육과정의 구분은?","일반 선택 / 진로 선택"],
+["2015 개정 내용 체계의 구성 요소는?","영역, 핵심 개념, 일반화된 지식, 내용 요소, 기능"],
+["2015 개정 체험 영역에 새로 추가된 것은?","연결 (체험: 지각, 소통, 연결)"],
+["2015 개정에서 '연결'이 추가된 이유는?","① 체험·표현·감상 영역 간 괴리를 줄이고 유기적으로 연결된 통합 수업 도모 ② 타 교과와의 통합적 교육 ③ 미술과 생활(삶)의 연계 및 경험 확장"],
+["2015 개정 표현 영역의 구성은?","발상과 제작"],
+["2015 개정 교과 역량은?","미적 감수성, 시각적 소통 능력, 창의·융합 능력, 미술 문화 이해 능력, 자기 주도적 미술 학습 능력"],
+["2022 개정 교과 역량은?","심미적 감성, 창의·융합, 시각적 소통, 공동체, 정체성 (명칭이 '능력'에서 '역량'으로 변경)"],
+["2022 개정에서 목표 형태는 어떻게 바뀌었나?","총괄 목표를 생략하고 초·중학교 목표를 단일화. 고등학교는 미술 / 미술 창작 / 미술 감상과 비평으로 각각 제시"],
+["2022 개정 선택 중심 교육과정에 새로 생긴 것은?","융합 선택"],
+["2022 개정 영역 구성은?","미적 체험, 표현, 감상 (기존 '체험'이 '미적 체험'으로 명칭 변경)"],
+["2022 개정 내용 체계의 범주는?","지식·이해, 과정·기능, 가치·태도"],
+["'지식·이해'의 정의는?","교과(목) 및 학년군별로 해당 영역에서 알고 이해해야 할 내용"],
+["'과정·기능'의 정의는?","교과 고유의 사고 및 탐구 과정 또는 기능"],
+["'가치·태도'의 정의는?","교과 활동을 통해 기를 수 있는 고유한 가치와 태도"],
+["핵심 아이디어란?","핵심 개념과 일반화된 지식이 통합된 것. 영역을 아우르면서 해당 영역의 학습을 통해 일반화할 수 있는 내용을 핵심적으로 진술한 것으로, 해당 영역 학습에 초점을 부여하여 깊이 있는 학습을 가능하게 하는 토대가 됨"],
+["성취기준이란?","영역별 내용 요소를 학습한 결과 학생이 궁극적으로 할 수 있거나 할 수 있기를 기대하는 도달점"],
+["2022 개정 내용 체계 및 성취기준에서 새롭게 신설된 것은?","핵심 아이디어, 성취기준 해설, 성취기준 적용 시 고려 사항"],
+["2015 개정의 '교수·학습 방법 및 유의사항 / 평가 방법 및 유의사항'은 2022에서 어떻게 바뀌었나?","'교수·학습 및 평가'로 통합 제시 — 교수·학습의 방향과 방법, 평가의 방향과 방법"],
+["2022 개정 고등학교 융합 선택에 신설된 과목은?","미술과 매체"],
+["'미술과 매체'의 세부 영역은?","매체의 이해, 매체의 활용 (cf. 미술 창작 = 설계와 창작, 창작의 확장)"],
+["2022 중학교 교수·학습 방향 빈칸: ( ) 주제를 미술 수업에 도입하고 적용한다","범교과 학습"],
+["[12미비02-04] '사회적 이슈를 타 분야와 연계한 비평 활동으로 형성된 비판적 사고를 사회와 삶으로 확장할 수 있다' — 지도 시 유의점은?","하나의 시선·관점에 매몰되지 않도록 하고, 균형 있는 사고와 가치관을 갖도록 지도한다"],
+["역사적 사건이 작가의 일생에 미친 영향, 작가의 삶과 작품의 관련성을 맥락적으로 이해하게 하는 교수·학습 방법은?","내러티브 중심 학습"]
+];
+</script>
+<h1>미교 · 미술과 교육과정 변천</h1>
+<div id="bar">
+<label><input type="checkbox" id="only"> 틀린 것만</label>
+<button id="exp">오답 내보내기</button>
+<button id="cp">번호 복사</button>
+<span id="cnt"></span>
+</div>
+<div id="list"></div>
+<textarea id="pad" style="position:fixed;left:-9999px"></textarea>
+<script>
+const L=document.getElementById("list"),O=document.getElementById("only"),C=document.getElementById("cnt");
+let S={};
+try{S=JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const esc=s=>s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+QA.forEach((q,i)=>{
+ const d=document.createElement("details");
+ d.innerHTML='<summary><span class="num">'+(i+1)+'.</span>'+esc(q[0])+'</summary><div class="a">'+esc(q[1])+'</div><div class="chk"><label><input type="checkbox" data-i="'+i+'"'+(S[i]?" checked":"")+'> 틀림</label></div>';
+ d.querySelector("input").onchange=e=>{S[i]=e.target.checked;if(!S[i])delete S[i];save();render()};
+ L.appendChild(d);
+});
+function render(){
+ [...L.children].forEach((d,i)=>d.classList.toggle("hide",O.checked&&!S[i]));
+ C.textContent="틀림 "+Object.keys(S).length+" / "+QA.length;
+}
+O.onchange=render;render();
+document.getElementById("cp").onclick=()=>{
+ const t=Object.keys(S).map(i=>+i+1).sort((a,b)=>a-b).join(",");
+ const p=document.getElementById("pad");p.value=t;
+ try{navigator.clipboard.writeText(t)}catch(e){p.select();document.execCommand("copy")}
+ alert(t||"없음");
+};
+document.getElementById("exp").onclick=()=>{
+ const w=QA.filter((q,i)=>S[i]);
+ if(!w.length)return alert("체크된 문항이 없습니다.");
+ const h=document.documentElement.outerHTML
+  .replace(/const KEY="[^"]*"/,'const KEY="'+KEY+'-wrong"')
+  .replace(/const QA=\[[\s\S]*?\n\];/,"const QA="+JSON.stringify(w)+";");
+ const a=document.createElement("a");
+ a.href=URL.createObjectURL(new Blob([h],{type:"text/html"}));
+ a.download=KEY+"-wrong.html";a.click();
+};
+</script>
+</body>
+</html>
