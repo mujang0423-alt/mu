@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>미술과 교육과정 빈칸 인출 5종</title>
+<style>
+:root{
+  --ink:#182233; --sub:#5b6b82; --line:#d9e0ea; --paper:#fbfcfe;
+  --idea:#2f5fd0; --elem:#137a5c; --stan:#b8730d; --note:#a63a6b;
+  --chipbg:#e9eff7; --chipline:#8aa0bd; --ans:#1b3f8f;
+}
+*{box-sizing:border-box}
+body{margin:0;background:#eef1f5;color:var(--ink);
+  font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif;
+  font-size:14.5px;line-height:1.62;-webkit-text-size-adjust:100%}
+.wrap{max-width:900px;margin:0 auto;background:var(--paper);padding:26px 20px 80px}
+h1{font-size:23px;margin:0 0 4px;letter-spacing:-.02em}
+.lead{color:var(--sub);font-size:13px;margin:0 0 18px}
+.bar{position:sticky;top:0;z-index:20;background:rgba(251,252,254,.96);
+  backdrop-filter:blur(6px);border-bottom:1px solid var(--line);
+  padding:9px 0;margin:0 0 18px;display:flex;gap:7px;flex-wrap:wrap}
+button{font:inherit;font-size:12.5px;padding:6px 11px;border:1px solid var(--chipline);
+  background:#fff;color:var(--ink);border-radius:999px;cursor:pointer}
+button:hover{background:#eef3fa}
+button:focus-visible{outline:2px solid var(--idea);outline-offset:2px}
+h2{font-size:17px;margin:34px 0 10px;padding:9px 12px;background:#2b3a52;color:#fff;
+  border-radius:6px;letter-spacing:-.01em}
+h3{font-size:14.5px;margin:22px 0 7px;padding:6px 10px;background:#eaeef4;
+  border-left:4px solid #2b3a52;border-radius:0 4px 4px 0}
+.meta{font-size:12px;color:var(--sub);margin:-4px 0 12px;padding-left:2px}
+table{width:100%;border-collapse:collapse;margin:0 0 12px;table-layout:fixed}
+td{border:1px solid var(--line);padding:7px 9px;vertical-align:top}
+td.k{width:31%;background:#f4f7fa;font-weight:700;font-size:13.5px;word-break:keep-all}
+td.k.idea{color:var(--idea)} td.k.elem{color:var(--elem)}
+td.k.stan{color:var(--stan)} td.k.note{color:var(--note);background:#fdf3f7}
+td.v{word-break:keep-all}
+tr.idea td.v{background:#f7faff} tr.elem td.v{background:#f5fbf8}
+tr.stan td.v{background:#fffaf1} tr.note td.v{background:#fdf6f9;font-size:13.5px}
+.b{display:inline-block;min-width:2.6em;padding:0 5px;margin:0 1px;
+  background:var(--chipbg);border-bottom:1.6px solid var(--chipline);border-radius:3px;
+  color:transparent;cursor:pointer;user-select:none;transition:background .12s}
+.b:hover{background:#dbe6f5}
+.b.on{color:var(--ans);background:#e4ecfd;font-weight:700;border-bottom-color:var(--ans)}
+.tip{background:#fffbeb;border:1px solid #f0d99a;border-radius:6px;padding:11px 13px;
+  margin:14px 0 8px;font-size:13.5px}
+.tip b{color:#8a5a00}
+.self{background:#fff8e6;border:1.5px solid #e6bd5c;border-radius:8px;padding:12px 14px;margin:16px 0 6px}
+.self .t{font-weight:800;margin-bottom:6px}
+.self ol{margin:0;padding-left:20px}
+.hr{height:1px;background:var(--line);margin:30px 0}
+.foot{color:var(--sub);font-size:12px;margin-top:40px;text-align:center}
+@media print{
+  body{background:#fff;font-size:10.5pt}
+  .wrap{max-width:none;padding:0}
+  .bar{display:none}
+  .b{color:transparent!important;background:#fff!important;border-bottom:1px solid #666;min-width:3.4em}
+  h2{background:#2b3a52!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  h2{page-break-after:avoid} h3{page-break-after:avoid}
+  table{page-break-inside:auto} tr{page-break-inside:avoid}
+}
+
+/* --- 목차 --- */
+.toc{border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:0 0 22px;background:#f7f9fc}
+.toc>.t{font-weight:800;font-size:13px;color:var(--sub);letter-spacing:.04em;margin-bottom:8px}
+.toc details{border-top:1px solid var(--line);padding:6px 0}
+.toc details:first-of-type{border-top:0}
+.toc summary{cursor:pointer;font-weight:700;font-size:13.5px;list-style:none;display:flex;gap:8px;align-items:baseline}
+.toc summary::-webkit-details-marker{display:none}
+.toc summary::before{content:"▸";color:var(--sub);font-size:11px}
+.toc details[open] summary::before{content:"▾"}
+.toc .num{color:var(--idea);font-weight:800;font-variant-numeric:tabular-nums}
+.toc ul{margin:6px 0 4px;padding-left:22px;list-style:none}
+.toc li{margin:3px 0}
+.toc a{color:var(--sub);text-decoration:none;font-size:13px}
+.toc a:hover{color:var(--idea);text-decoration:underline}
+.up{float:right;font-size:11px;font-weight:400;opacity:.75;text-decoration:none;color:#fff}
+
+/* --- 틀린거 체크 --- */
+td.k{position:relative;padding-right:30px}
+.x{position:absolute;top:4px;right:4px;width:21px;height:21px;padding:0;line-height:1;
+   border-radius:50%;border:1px solid #d6dee9;background:#fff;color:#b9c4d2;font-size:11px}
+.x:hover{border-color:#e08aa5;color:#c04068}
+tr.wrong td{background:#fff2f5!important}
+tr.wrong td.k{box-shadow:inset 3px 0 0 #d94f78}
+tr.wrong .x{background:#d94f78;border-color:#d94f78;color:#fff;font-weight:700}
+body.onlywrong tr:not(.wrong){display:none}
+body.onlywrong .hide{display:none}
+#wc{font-size:12px;color:#c04068;font-weight:700}
+
+/* --- 메모노트 --- */
+.memo{border:1.5px dashed #b9c6d8;border-radius:8px;padding:10px 13px 12px;margin:18px 0 6px;background:#fcfdff}
+.memo .lb{font-size:12px;font-weight:800;color:var(--sub);letter-spacing:.03em;margin-bottom:6px}
+.memo .pad{min-height:88px;outline:none;font-size:13.5px;line-height:1.7;
+  background:repeating-linear-gradient(transparent,transparent 26px,#e7edf5 26px,#e7edf5 27px);}
+.memo .pad:empty:before{content:attr(data-ph);color:#a9b6c6}
+.memo .pad:focus{background:#fff}
+@media print{
+  .toc{display:none}
+  .x{display:none} td.k{padding-right:9px}
+  tr.wrong td{background:#fff!important} tr.wrong td.k{box-shadow:inset 3px 0 0 #666}
+  .memo{border:1px solid #999;page-break-inside:avoid}
+  .memo .pad{min-height:110px}
+}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>미술과 교육과정 · 빈칸 인출 5종</h1>
+<p class="lead">왼쪽 단서 열은 그대로, 오른쪽 내용 열의 핵심어만 빈칸 처리했습니다. 빈칸을 눌러 정답을 확인하세요. 인쇄하면 빈칸은 밑줄로 나옵니다.</p>
+
+<div class="bar">
+  <button onclick="all(true)">전체 정답 보기</button>
+  <button onclick="all(false)">전체 다시 숨기기</button>
+  <button onclick="window.print()">인쇄 / PDF 저장</button>
+  <button id="fw" onclick="onlyWrong()">틀린 것만 보기</button>
+  <button onclick="clearWrong()">체크 초기화</button>
+  <span id="wc"></span>
+  <span id="cnt" style="font-size:12px;color:var(--sub);align-self:center"></span>
+</div>
+
+<nav class="toc" id="toc"></nav>
+
+<h2>1. 미술과 공통 교육과정 (중학교)</h2>
+<p class="meta">코드 [9미] · 영역 3개(미적체험·표현·감상) · 핵심 아이디어 영역당 3문장 · 성취기준 4·5·4</p>
+
+<h3>1. 성격 — 핵심 키워드</h3>
+<table>
+<tr><td class="k">미술의 정의</td><td class="v">느낌·생각을 <span class="b">시각적으로 표현</span> → 세계와 <span class="b">소통</span> / 인류 <span class="b">보편의 언어</span></td></tr>
+<tr><td class="k">미술의 작용</td><td class="v"><span class="b">조형적 문제 해결</span> → 내면 통찰 / <span class="b">상상력·창의성</span> 발현</td></tr>
+<tr><td class="k">시공간성</td><td class="v">시대·문화 기록·반영 / 과거~동시대 <span class="b">시공간 가로질러 사유</span> / <span class="b">지속가능한 발전</span> 공헌</td></tr>
+<tr><td class="k">미술 교과 역할</td><td class="v">심미적 감성 함양 / 창의·융합 사고 / 시각적 소통 / <span class="b">정체성·공동체성</span> 확립 → <span class="b">전인적 성장</span></td></tr>
+<tr><td class="k">초·중학교 경험</td><td class="v">지각·반응(미적감각) / 매체로 <span class="b">물성 탐색</span> / <span class="b">창작의 역동성·예술적 성취</span> / 비판적 이해·시각적 소통</td></tr>
+<tr><td class="k">디지털 전환</td><td class="v">미래 불확실 → <span class="b">자기 이해</span> 중요 / <span class="b">가상공간</span>까지 확대 / 디지털 매체로 신체·사고·시공간 경험 확장</td></tr>
+<tr><td class="k">생태·시민</td><td class="v">사람·환경 공존 → <span class="b">생태 전환적 가치</span> 함양 → 공동체 발전 참여 시민</td></tr>
+<tr><td class="k">★ 교과 역량 5개</td><td class="v"><span class="b">심미적 감성</span> / <span class="b">창의·융합</span> / <span class="b">시각적 소통</span> / <span class="b">정체성</span> / <span class="b">공동체</span><br>암기: 심·창·시·정·공 / 미술과 시그니처 = <span class="b">시각적 소통</span></td></tr>
+</table>
+
+<h3>2. 목표 — 문장 통암기</h3>
+<table>
+<tr><td class="k">[총괄]</td><td class="v">대상과 현상에 대한 <span class="b">미적 체험</span>을 바탕으로 느낌과 생각을 표현하고 감상하는 활동을 통하여 자신과 세계를 이해하고 <span class="b">미술 문화 창조</span>에 <span class="b">주도적으로 참여</span>할 수 있다.</td></tr>
+<tr><td class="k">세부① 지각·감성</td><td class="v">대상과 현상을 <span class="b">감각적으로 지각</span>하고 반응하면서 <span class="b">심미적 감성</span>을 기른다.</td></tr>
+<tr><td class="k">세부② 표현·통합</td><td class="v">미술 활동을 통해 자신의 느낌과 생각을 <span class="b">창의적으로 표현</span>하며 경험과 사고를 유연하게 <span class="b">통합하고 확장</span>한다.</td></tr>
+<tr><td class="k">세부③ 시각문화·소통</td><td class="v">다양한 매체에 기반한 시각 문화를 <span class="b">비판적으로 이해</span>하고 활용하여 <span class="b">시각적으로 소통</span>한다.</td></tr>
+<tr><td class="k">세부④ 자기이해</td><td class="v">미술을 매개로 <span class="b">주도적으로 사고하고 행동</span>하며 세계와의 관계에서 <span class="b">자신을 이해</span>한다.</td></tr>
+<tr><td class="k">세부⑤ 공동체</td><td class="v">미술 문화의 <span class="b">다원적 가치를 존중</span>하며 <span class="b">협력적 의사소통</span>을 통해 공동체의 문화 발전에 참여한다.</td></tr>
+<tr><td class="k">흐름 요약</td><td class="v">①<span class="b">지각·감성</span> → ②<span class="b">표현·통합</span> → ③<span class="b">시각문화·소통</span> → ④<span class="b">자기이해</span> → ⑤<span class="b">공동체</span></td></tr>
+<tr><td class="k">영역별 핵심 동작 / 지향점</td><td class="v">미적 체험: 감각→지각→<span class="b">미적 인식</span> / <span class="b">미적 감수성·앎의 확장</span><br>표현: 발상→매체→<span class="b">시각화</span> / <span class="b">예술적 성취</span><br>감상: 만남→<span class="b">맥락 이해</span>→비평 / <span class="b">미적 판단·다원적 가치</span></td></tr>
+<tr><td class="k">내용 요소 3범주</td><td class="v"><span class="b">지식·이해</span> / <span class="b">과정·기능</span> / <span class="b">가치·태도</span></td></tr>
+<tr><td class="k">3영역 공통 연결어</td><td class="v">미적 체험 → 미술과 <span class="b">다양한 분야</span> 연결하기 / 표현 → 미술 표현 경험을 <span class="b">삶과 연결</span>하기 / 감상 → 미술 감상 경험을 <span class="b">삶과 연결</span>하기<br>2022 개정 핵심 키워드 = <span class="b">삶과의 연결</span>, <span class="b">깊이 있는 학습</span></td></tr>
+<tr><td class="k">2022 개정 시그니처</td><td class="v">디지털: 디지털 매체·디지털 소양·온오프라인 연계·<span class="b">메타버스</span>·<span class="b">실감형 콘텐츠</span>·<span class="b">LMS</span><br>생태: 생태 감수성·생태 <span class="b">전환적 가치</span>·<span class="b">지속가능성</span><br>주도성: 학습자 주도성·자기주도성·<span class="b">맞춤형</span>·개별화</td></tr>
+</table>
+
+<h3>3. 【영역 1】 미적 체험</h3>
+<table>
+<tr class="idea"><td class="k idea">핵심 아이디어 ①</td><td class="v">미적 체험은 감각을 깨워 <span class="b">미적 감수성</span>을 풍부하게 하며 <span class="b">미적 가치를 발견</span>하도록 한다.</td></tr>
+<tr class="idea"><td class="k idea">핵심 아이디어 ②</td><td class="v">대상과 현상을 <span class="b">관찰·지각</span>하는 경험은 <span class="b">앎을 확장</span>하고 자신을 <span class="b">성찰</span>하게 한다.</td></tr>
+<tr class="idea"><td class="k idea">핵심 아이디어 ③</td><td class="v">이미지에 대한 <span class="b">비판적 이해</span>는 <span class="b">시각적 소통</span>과 <span class="b">문화적 참여</span>의 토대가 된다.</td></tr>
+<tr class="elem"><td class="k elem">내용요소 지식·이해</td><td class="v">· 감각을 활용한 <span class="b">미적 인식</span><br>· 시각 문화의 <span class="b">의미와 역할</span><br>· <span class="b">삶과 미술의 관계</span></td></tr>
+<tr class="elem"><td class="k elem">내용요소 과정·기능</td><td class="v">· 이미지를 <span class="b">비판적으로 해석</span>하기<br>· 이미지를 활용하여 <span class="b">소통</span>하기<br>· 미술과 <span class="b">다양한 분야 연결</span>하기</td></tr>
+<tr class="elem"><td class="k elem">내용요소 가치·태도</td><td class="v">· 자신과 환경에 대한 <span class="b">감수성</span><br>· <span class="b">다양한 문화 존중과 참여</span></td></tr>
+<tr class="stan"><td class="k stan">[9미01-01] ★</td><td class="v"><span class="b">감각</span>을 활용하여 대상과 현상을 탐색하고 자신과 환경에 대한 <span class="b">감수성을 확장</span>할 수 있다.</td></tr>
+<tr class="stan"><td class="k stan">[9미01-02]</td><td class="v"><span class="b">시각 문화의 의미와 역할</span>을 알고 이미지를 <span class="b">비판적으로 해석</span>할 수 있다.</td></tr>
+<tr class="stan"><td class="k stan">[9미01-03]</td><td class="v">다양한 <span class="b">문화를 존중</span>하며 이미지를 활용하여 <span class="b">소통</span>할 수 있다.</td></tr>
+<tr class="stan"><td class="k stan">[9미01-04] ★</td><td class="v"><span class="b">삶과 미술의 관계</span>를 이해하고 <span class="b">다양한 분야와의 연결 방안</span>을 모색할 수 있다.</td></tr>
+<tr class="note"><td class="k note">유의점 키워드</td><td class="v">01-01: 감각→대상·현상 탐색→<span class="b">미적 인식</span>, <span class="b">생태·문화·사회 환경</span>까지 새롭게 보기<br>01-04: 삶 속 미술의 <span class="b">상호작용·중요성</span>, 인문·과학·공학 등 타 분야 연결, <span class="b">진로·자유학기제 연계</span><br>적용: <span class="b">정체성 발견</span> / <span class="b">시각적 문해력</span> / <span class="b">생태 감수성</span> / 타 문화 존중·공존</td></tr>
+</table>
+
+<h3>3. 【영역 2】 표현 <span style="font-size:12px;color:var(--sub)">★성취기준 유일하게 5개</span></h3>
+<table>
+<tr class="idea"><td class="k idea">핵심 아이디어 ①</td><td class="v">표현은 자신의 느낌과 생각을 시각화하는 <span class="b">창의적 사고와 성찰의 순환 과정</span>으로 이루어진다.</td></tr>
+<tr class="idea"><td class="k idea">핵심 아이디어 ②</td><td class="v"><span class="b">다양한 발상</span>은 아이디어와 주제를 발전시키고 <span class="b">표현의 토대</span>가 된다.</td></tr>
+<tr class="idea"><td class="k idea">핵심 아이디어 ③</td><td class="v">작품 제작은 표현 재료·방법, 조형 요소·원리 등을 선택·활용하여 <span class="b">창의적으로 문제를 해결</span>하는 과정을 통해 <span class="b">예술적 성취</span>를 경험하게 한다.</td></tr>
+<tr class="elem"><td class="k elem">내용요소 지식·이해</td><td class="v">· <span class="b">표현 주제와 의도</span><br>· 다양한 <span class="b">표현 재료와 방법</span><br>· <span class="b">조형 요소와 원리</span>의 효과</td></tr>
+<tr class="elem"><td class="k elem">내용요소 과정·기능</td><td class="v">· 주제에 적합한 <span class="b">표현 계획</span>하기<br>· 새로운 표현을 <span class="b">실험</span>하고 작품 제작하기<br>· 작품을 <span class="b">공유하고 소통</span>하기<br>· 미술 표현 경험을 <span class="b">삶과 연결</span>하기</td></tr>
+<tr class="elem"><td class="k elem">내용요소 가치·태도</td><td class="v">· 표현 과정에서의 <span class="b">주도성과 성찰</span><br>· <span class="b">자신과 타인의 작품 존중</span></td></tr>
+<tr class="stan"><td class="k stan">[9미02-01]</td><td class="v">주제를 탐구하고 <span class="b">의도를 반영</span>하여 적합한 표현을 <span class="b">계획</span>할 수 있다.</td></tr>
+<tr class="stan"><td class="k stan">[9미02-02] ★</td><td class="v"><span class="b">주도적이고 도전적인 태도</span>로 다양한 미술 표현을 <span class="b">실험</span>하고 작품에 적용할 수 있다.</td></tr>
+<tr class="stan"><td class="k stan">[9미02-03]</td><td class="v">조형 요소·원리, 표현 재료·방법, <span class="b">디지털 매체</span> 포함 다양한 매체를 활용하여 주제를 <span class="b">효과적으로 표현</span>할 수 있다.</td></tr>
+<tr class="stan"><td class="k stan">[9미02-04] ★</td><td class="v">자신과 타인의 작품을 <span class="b">존중</span>하며, 다양한 방법으로 <span class="b">공유하고 소통</span>할 수 있다.</td></tr>
+<tr class="stan"><td class="k stan">[9미02-05] ★</td><td class="v">미술 표현 과정에서의 경험을 <span class="b">성찰</span>하고 <span class="b">삶의 문제 해결</span>에 활용할 수 있다.</td></tr>
+<tr class="note"><td class="k note">유의점 키워드</td><td class="v">02-02: 도전·실험 태도, <span class="b">실패 두려워 않고</span> 익숙한 표현에 <span class="b">안주 X</span><br>02-04: 교실·복도·지역사회·<span class="b">온라인 공간</span>까지 확장 공유 (공유·발표·토론)<br>적용: <span class="b">맞춤형 학습</span> / 디지털 도구 / <span class="b">지속가능 환경</span> 주제 / 공동 작품·<span class="b">단체전 기획</span> → 협력·공동체 의식</td></tr>
+</table>
+
+<h3>3. 【영역 3】 감상</h3>
+<table>
+<tr class="idea"><td class="k idea">핵심 아이디어 ①</td><td class="v">감상은 다양한 삶과 문화가 반영된 미술과의 만남으로 <span class="b">자신과 공동체의 문화를 이해</span>하게 한다.</td></tr>
+<tr class="idea"><td class="k idea">핵심 아이디어 ②</td><td class="v">작품의 내용과 형식에 관한 <span class="b">맥락적 이해와 비평</span>은 <span class="b">미적 판단 능력</span>을 높인다.</td></tr>
+<tr class="idea"><td class="k idea">핵심 아이디어 ③</td><td class="v">감상은 서로 다른 <span class="b">관점을 이해</span>하여 삶에서 미술 문화의 <span class="b">다원적 가치를 존중</span>하도록 한다.</td></tr>
+<tr class="elem"><td class="k elem">내용요소 지식·이해</td><td class="v">· 미술의 <span class="b">시대적, 지역적, 사회적 맥락</span><br>· <span class="b">미술 용어와 지식</span><br>· 다양한 <span class="b">감상 방법과 관점</span></td></tr>
+<tr class="elem"><td class="k elem">내용요소 과정·기능</td><td class="v">· 미술 작품의 <span class="b">내용과 형식 분석</span>하고 설명하기<br>· 미술 작품을 <span class="b">해석</span>하기<br>· 미술 감상 경험을 <span class="b">삶과 연결</span>하기</td></tr>
+<tr class="elem"><td class="k elem">내용요소 가치·태도</td><td class="v">· 미술의 <span class="b">다원성 존중</span><br>· <span class="b">공동체 문화에 기여</span></td></tr>
+<tr class="stan"><td class="k stan">[9미03-01]</td><td class="v">미술의 <span class="b">시대적·지역적·사회적 맥락</span>을 이해하고 설명할 수 있다.</td></tr>
+<tr class="stan"><td class="k stan">[9미03-02]</td><td class="v">작품의 <span class="b">내용과 형식</span>을 분석하고 <span class="b">미술 용어와 지식</span>을 활용하여 설명할 수 있다.</td></tr>
+<tr class="stan"><td class="k stan">[9미03-03]</td><td class="v">다양한 <span class="b">감상 방법과 관점</span>을 활용하여 작품을 <span class="b">해석</span>할 수 있다.</td></tr>
+<tr class="stan"><td class="k stan">[9미03-04]</td><td class="v">미술의 <span class="b">다원성 존중</span>을 바탕으로 미술 감상 경험을 삶과 연결하고 <span class="b">공동체 문화에 기여</span>할 수 있다.</td></tr>
+<tr class="note"><td class="k note">유의점 키워드</td><td class="v">03-04: 다원성 존중 → 감상 지식·경험을 삶과 연결 <span class="b">통찰</span>, 더 나은 <span class="b">공동체 문화</span><br>적용: 학생 배경 고려 <span class="b">신중한 작품 선택</span>·<span class="b">개방적 분위기</span>, 디지털 매체 <span class="b">비판적 선택</span><br>적용: 지속가능성 미술가 → <span class="b">생태 감수성</span> / 사회 문제 미술가 → <span class="b">민주시민 자세</span></td></tr>
+</table>
+
+<h3>4. 교수·학습 — 방향 (6개 축)</h3>
+<table>
+<tr><td class="k">(가) 깊이 있는 학습</td><td class="v">성격·목표·내용체계·성취기준 고려, <span class="b">역량 5개 반영</span>, <span class="b">핵심 아이디어 중심</span>, <span class="b">3범주 연계</span></td></tr>
+<tr><td class="k">(나) 학습자 주도성</td><td class="v">삶과 연관 주제 + <span class="b">맞춤형</span>, 여건·지역차 고려 <span class="b">적정화</span>, <span class="b">과정 성찰</span></td></tr>
+<tr><td class="k">(다) 디지털 매체</td><td class="v"><span class="b">온·오프라인 연계</span>, <span class="b">디지털 소양</span>, 비대면 시 <span class="b">능동적 참여</span></td></tr>
+<tr><td class="k">(라) 진로 연계</td><td class="v"><span class="b">진로연계교육</span> 시 초·중·고 자연스러운 연계·심화</td></tr>
+<tr><td class="k">(마) 범교과 학습</td><td class="v">인성·인권·다문화·통일·독도·경제금융·<span class="b">디지털소양</span> / <span class="b">생명존중·기후위기</span> → <span class="b">생태 감수성</span></td></tr>
+<tr><td class="k">(바) 미술관·박물관</td><td class="v"><span class="b">관람 예절·안전 수칙</span> / 여건 어려우면 <span class="b">온라인 미술관</span> / <span class="b">일상 미술 향유</span></td></tr>
+</table>
+
+<h3>4. 교수·학습 — 방법 키워드</h3>
+<table>
+<tr><td class="k">활용 가능 방법</td><td class="v"><span class="b">귀납적 사고법</span> / <span class="b">창의적 문제해결법</span> / <span class="b">직접 교수법</span> / <span class="b">반응 중심 학습법</span> / <span class="b">프로젝트 학습</span> / 토의·토론 / 협동 학습</td></tr>
+<tr><td class="k">프로젝트 학습</td><td class="v">문제 <span class="b">심층 연구·해결</span> / 충분한 기간·<span class="b">단계적</span> / <span class="b">자기주도적</span></td></tr>
+<tr><td class="k">토의·토론</td><td class="v">규칙·단계 따라 의견 / <span class="b">의사결정·쟁점 중심</span> / <span class="b">다양한 관점 존중</span></td></tr>
+<tr><td class="k">협동 학습</td><td class="v"><span class="b">공동 문제 + 상호작용</span> / <span class="b">역할 분담</span> / 협동 작품·<span class="b">벽화·전시 기획</span></td></tr>
+<tr><td class="k">개별화·맞춤형</td><td class="v">흥미·문화 배경 / 부진·느린 학습자·<span class="b">장애 학생 환경 점검</span> / 다문화·소외 배려</td></tr>
+<tr><td class="k">서사(내러티브) 중심</td><td class="v"><span class="b">시각 요소 담은 신문·잡지·일기</span> 활용 → <span class="b">반성적 성찰</span></td></tr>
+<tr><td class="k">디지털</td><td class="v">온·오프 연계 / <span class="b">실감형 콘텐츠·메타버스·LMS</span></td></tr>
+</table>
+
+<h3>4. 평가 — 방향</h3>
+<table>
+<tr><td class="k">근거·기준</td><td class="v">목표·성취기준 근거, <span class="b">타당성·신뢰성</span>, 기준 <span class="b">사전 제시</span></td></tr>
+<tr><td class="k">범주 균형</td><td class="v">영역별 특성 고려 다양한 방법, <span class="b">3범주 균형 평가</span>(지식·이해/과정·기능/가치·태도)</td></tr>
+<tr><td class="k">일관성</td><td class="v">교수·학습과 평가의 <span class="b">일관성</span></td></tr>
+<tr><td class="k">과정 중시</td><td class="v">자기 성찰·보완, 다양한 산출물(계획서·스케치·보고서·작품·발표자료) → <span class="b">맞춤형 피드백</span></td></tr>
+<tr><td class="k">평가 주체</td><td class="v"><span class="b">자기 평가·동료 평가</span></td></tr>
+<tr><td class="k">원격수업</td><td class="v">디지털 도구·<span class="b">LMS</span> / <span class="b">실시간 피드백</span>·상호 평가</td></tr>
+<tr><td class="k">결과 활용</td><td class="v"><span class="b">현재↔도달 수준 차이</span> 피드백 / 상호 피드백 / <span class="b">진로 지도</span></td></tr>
+</table>
+
+<h3>4. 평가 — 방법 <span style="font-size:12px;color:var(--sub)">★빈칸 주의: 영역별 주 평가방법 매칭</span></h3>
+<table>
+<tr><td class="k">미적 체험</td><td class="v"><span class="b">관찰법</span> / 발표·토의·토론법 / <span class="b">연구보고서법</span></td></tr>
+<tr><td class="k">표현</td><td class="v">실기 평가 / <span class="b">포트폴리오법</span> / <span class="b">프로세스폴리오법</span> / 작품 계획서 / <span class="b">제작과정 체크리스트</span> / 자기·동료 평가</td></tr>
+<tr><td class="k">감상</td><td class="v"><span class="b">감상문</span> / 연구보고서법 / <span class="b">서술형·논술형</span> / 발표·토의·토론법</td></tr>
+<tr><td class="k">과정 중시 원칙</td><td class="v">계획서·스케치·과정보고서·발표·체크리스트 / <span class="b">결과 중심 일회성 평가 지양</span></td></tr>
+<tr><td class="k">포폴 vs 프로세스폴리오</td><td class="v">성찰·<span class="b">변화·성장</span> 파악</td></tr>
+<tr><td class="k">학습 격차 지원</td><td class="v">장애·다문화·탈북 → <span class="b">성취기준 재구조화</span> / <span class="b">최소 성취수준</span> 도달 지원</td></tr>
+</table>
+
+<div class="self"><div class="t">★ 자가점검 핵심 3줄</div>
+<ol>
+<li>코드 <span class="b">[9미]</span> / 영역 <span class="b">3개</span> / 핵심 아이디어 영역당 <span class="b">3문장</span></li>
+<li>성취기준 개수 <span class="b">4 · 5 · 4</span> (★<span class="b">표현</span>만 5개)</li>
+<li>역량 5개 = <span class="b">심·창·시·정·공</span> / 관통 키워드 = 디지털·생태·주도성·삶과 연결</li>
+</ol></div>
+
+<div class="hr"></div>
+<h2>2. 미술과 일반선택 「미술」 (고등학교)</h2>
+<p class="meta">코드 [12미] · 영역 3개(미적체험·표현·감상) · 핵심 아이디어 영역당 2문장 · 성취기준 4·4·4 · ★역량 위계 함정</p>
+
+<div class="tip"><b>과목 한 줄 핵심</b> — 일반선택 「미술」: 공통 '미술'의 미적체험·표현·감상을 <span class="b">심화·확장</span> / 진로선택 「미술 창작」: <span class="b">창작 설계</span>의 방법·과정, 창작 확장 / 진로선택 「미술 감상과 비평」: <span class="b">인문학적 소양 + 비판적 사고력</span> / 융합선택 「미술과 매체」: <span class="b">매체 변화 이해, 타 분야 융합, 고정관념 탈피</span></div>
+
+<h3>1. 성격 — 핵심 키워드 <span style="font-size:12px;color:var(--sub)">★역량 위계 함정 주의</span></h3>
+<table>
+<tr><td class="k">미술의 정의</td><td class="v">대상의 의미·가치를 <span class="b">미적으로 지각·표현·소통</span> / 인류 공용어로서 <span class="b">시각언어</span></td></tr>
+<tr><td class="k">미술의 작용</td><td class="v">대상·현상 새롭게 인식 → <span class="b">조형 언어</span>로 표현 / <span class="b">비판적 사고</span>로 문제 해결 → 창의성</td></tr>
+<tr><td class="k">시공간성</td><td class="v">시대·문화 기록·반영 / 과거~현재 연결 → <span class="b">동시대 문화 창조적 생성</span></td></tr>
+<tr><td class="k">고등 '미술' 특성</td><td class="v">감각 깨움·지각 / 발상·매체 활용 → <span class="b">창작 성취</span> / 맥락적 이해·비평 → 성찰 / <span class="b">새 관점 질문·대안</span></td></tr>
+<tr><td class="k">연계·확장</td><td class="v">공통 소양 바탕 다양한 분야 연결·소통 / <span class="b">가상공간</span>까지 확장 → <span class="b">창의·융합 표현</span></td></tr>
+<tr><td class="k">전통·생태</td><td class="v">전통 미술 <span class="b">발전적 계승</span> + 동시대 <span class="b">비판적 해석</span> / <span class="b">생태전환적 가치</span> → 공동체 발전 시민</td></tr>
+<tr><td class="k">학생 도달점</td><td class="v"><span class="b">미적 지각력·상상력</span> / 경계 넘나드는 <span class="b">유연한 태도</span> / 비판적 판단 / 심미적 감성 → <span class="b">정체성 확립</span></td></tr>
+<tr><td class="k">★ 역량 설정 방식</td><td class="v">총론 <span class="b">6대</span> 역량(자기관리·지식정보처리·창의적 사고·심미적 감성·협력적 소통·공동체) → 연계 → 미술과 역량 <span class="b">5개</span>(정체성·심미적 감성·창의융합·시각적 소통·공동체)<br>함정: '총론 6개'와 '미술과 5개' 구분 (미술과 5개는 <span class="b">공통과 동일</span>)</td></tr>
+<tr><td class="k">★ 학교급별 목표 위계</td><td class="v">초등(<span class="b">기초 능력</span>) → 중학교(<span class="b">효과적 활용→주도적 향유</span>) → 고등 선택(<span class="b">확장·심화</span>→삶 연계 깊이 있는 학습→<span class="b">지속가능한 미술 문화 창조·발전</span>)</td></tr>
+</table>
+
+<h3>2. 목표 — 문장 통암기</h3>
+<table>
+<tr><td class="k">[총괄]</td><td class="v">대상과 현상을 <span class="b">심미적으로 지각</span>하여 성찰하며 자신과 세계의 관계를 인식한다. 삶의 경험을 다양한 관점에서 <span class="b">비판적으로 사고</span>하고 미술 매체를 활용하며 창의적으로 표현한다. 나아가 삶과 연결된 미술 문화를 <span class="b">비판적으로 수용하며 향유</span>한다.</td></tr>
+<tr><td class="k">세부① 삶 연결·내면화</td><td class="v">대상과 현상에 대한 미적 경험을 자신의 <span class="b">삶과 환경에 연결</span>하여 <span class="b">심미적 가치를 내면화</span>한다.</td></tr>
+<tr><td class="k">세부② 융합 표현</td><td class="v">대상과 현상에서 발견한 미적 특징을 다양한 매체의 활용과 <span class="b">융합</span>을 통해 창의적으로 표현한다.</td></tr>
+<tr><td class="k">세부③ 비판적 분석·소통</td><td class="v">이미지와 정보를 <span class="b">비판적 사고로 분석·해석</span>하고 시각적으로 활용하여 소통한다.</td></tr>
+<tr><td class="k">세부④ 성찰·주도적 삶</td><td class="v">미술을 매개로 사고하고 행동하며 세계 속에서 자신을 성찰하고 <span class="b">주도적으로 삶을 살아간다</span>.</td></tr>
+<tr><td class="k">세부⑤ 공동체·지속가능</td><td class="v">다양한 미술 문화를 존중하고 공동체의 문제 해결에 참여하여 <span class="b">풍성하고 지속가능한 문화 발전</span>에 기여한다.</td></tr>
+</table>
+
+<h3>3. 【영역 1】 미적 체험</h3>
+<table>
+<tr class="idea"><td class="k idea">핵심 아이디어 ①</td><td class="v">미적 체험은 대상과 현상의 <span class="b">미적 가치를 발견</span>하게 하고 <span class="b">새로운 지각으로 확장</span>된다.</td></tr>
+<tr class="idea"><td class="k idea">핵심 아이디어 ②</td><td class="v">이미지의 관찰과 탐색은 <span class="b">미적 안목</span>을 형성하고 자신과 사회, 환경과의 <span class="b">소통</span>으로 이어진다.</td></tr>
+<tr class="elem"><td class="k elem">내용요소 지식·이해</td><td class="v">· 자신과 세계에 대한 <span class="b">미적 관점</span><br>· 시각 문화의 <span class="b">다양성과 의미 전달 방식</span><br>· <span class="b">삶과 연결된 미술</span></td></tr>
+<tr class="elem"><td class="k elem">내용요소 과정·기능</td><td class="v">· 대상과 현상의 <span class="b">미적 가치 분석</span>하기<br>· 이미지를 활용한 <span class="b">소통방식 탐구</span>하기<br>· 미술을 <span class="b">공동체와 생태환경</span>으로 확장하기</td></tr>
+<tr class="elem"><td class="k elem">내용요소 가치·태도</td><td class="v">· 시각 문화에 대한 <span class="b">비판적 수용과 향유</span><br>· 삶 속 미술의 의미에 대한 <span class="b">공감</span></td></tr>
+<tr class="stan"><td class="k stan">[12미01-01] ★</td><td class="v">자신과 세계를 지각하고 미적으로 인식하며, 대상과 현상의 <span class="b">미적 가치를 발견·분석</span>할 수 있다.</td></tr>
+<tr class="stan"><td class="k stan">[12미01-02]</td><td class="v"><span class="b">시각 문화의 다양성과 의미 전달 방식</span>을 이해하여 <span class="b">비판적으로 수용·향유</span>할 수 있다.</td></tr>
+<tr class="stan"><td class="k stan">[12미01-03]</td><td class="v">이미지를 활용한 <span class="b">소통방식</span>을 탐구하여 미술이 삶 속에서 가지는 의미에 <span class="b">공감</span>할 수 있다.</td></tr>
+<tr class="stan"><td class="k stan">[12미01-04]</td><td class="v">삶과 연결된 미술을 이해하여 <span class="b">공동체와 생태환경</span>으로 확장할 수 있다.</td></tr>
+<tr class="note"><td class="k note">유의점 키워드</td><td class="v">01-01: 감각 탐색·<span class="b">민감한 지각</span>, 다양한 방법 분석 → 새 시각, 개인→공동체→<span class="b">가상공간</span>까지 확대<br>적용: <span class="b">전통문화·지역 특색</span> 시각문화 → 자긍심·정체성 / 디지털 자료 → 다양성·공존·공동체성<br>적용: 느린·다문화·특수 <span class="b">맞춤형 수업</span> / <span class="b">협동 학습</span> → 자료 유목화·경청·근거 반론 → 상호 공감 소통</td></tr>
+</table>
+
+<h3>3. 【영역 2】 표현</h3>
+<table>
+<tr class="idea"><td class="k idea">핵심 아이디어 ①</td><td class="v">표현은 <span class="b">창의적 사고와 순환적인 성찰</span>의 과정을 포함한다.</td></tr>
+<tr class="idea"><td class="k idea">핵심 아이디어 ②</td><td class="v">작품 제작은 <span class="b">창의적 문제 해결 과정</span>으로 <span class="b">예술적 성취 경험</span>을 수반한다.</td></tr>
+<tr class="elem"><td class="k elem">내용요소 지식·이해</td><td class="v">· <span class="b">발상과 표현 주제 심화</span><br>· <span class="b">적용과 융합</span>을 위한 표현 방법<br>· 주제에 적합한 <span class="b">표현 매체</span></td></tr>
+<tr class="elem"><td class="k elem">내용요소 과정·기능</td><td class="v">· <span class="b">주제의 확장</span>을 통한 작품 계획하기<br>· 표현 매체와 방법을 <span class="b">실험하고 융합</span>하기<br>· <span class="b">새로운 표현 효과</span>를 적용하고 활용하기</td></tr>
+<tr class="elem"><td class="k elem">내용요소 가치·태도</td><td class="v">· 미술 활동에 대한 <span class="b">관심과 참여</span><br>· 표현 과정에서의 <span class="b">집중과 자기 성찰</span></td></tr>
+<tr class="stan"><td class="k stan">[12미02-01] ★</td><td class="v">다양한 발상으로 <span class="b">주제를 심화</span>하여 작품을 계획할 수 있다.</td></tr>
+<tr class="stan"><td class="k stan">[12미02-02]</td><td class="v">주제에 적합한 표현 매체와 방법을 <span class="b">실험하고 융합하는 과정에 집중</span>할 수 있다.</td></tr>
+<tr class="stan"><td class="k stan">[12미02-03]</td><td class="v">표현 과정을 성찰하고 <span class="b">새로운 표현 효과를 탐색</span>하여 <span class="b">다음 작품에 반영</span>할 수 있다.</td></tr>
+<tr class="stan"><td class="k stan">[12미02-04] ★</td><td class="v"><span class="b">주제를 확장</span>하기 위한 미술 활동에 관심을 가지고 참여할 수 있다.</td></tr>
+<tr class="note"><td class="k note">유의점 키워드</td><td class="v">02-01: 하나의 주제 <span class="b">깊이 있게 발전</span>, 발상 기법·자유 발상 시각화 → <span class="b">구현 과정 인식</span><br>02-04: <span class="b">전 지구적 이슈</span> → 미술 주제 확장, 지속가능·생태전환·<span class="b">시민성·디지털소양</span>, 정체성·공동체성<br>적용: 실험·융합 <span class="b">허용적 분위기</span>·도전 격려 / 디지털 매체 / 생태 참여 작가 → <span class="b">실천적 행동</span> / 맞춤형</td></tr>
+</table>
+
+<h3>3. 【영역 3】 감상</h3>
+<table>
+<tr class="idea"><td class="k idea">핵심 아이디어 ①</td><td class="v">감상은 다양한 삶과 문화가 반영된 미술과의 만남으로 자신과 공동체의 문화를 <span class="b">풍요롭게</span> 한다. <span style="font-size:12px;color:var(--sub)">(공통: 이해하게)</span></td></tr>
+<tr class="idea"><td class="k idea">핵심 아이디어 ②</td><td class="v">작품의 내용·형식에 대한 맥락적 이해와 비평은 미적 판단 능력을 높이고 <span class="b">미술 문화의 다원적 가치를 이해</span>하게 한다.</td></tr>
+<tr class="elem"><td class="k elem">내용요소 지식·이해</td><td class="v">· 미술의 시대적, 지역적, <span class="b">사회·문화적 변천</span><br>· 미술 감상과 비평을 위한 <span class="b">관점과 방법</span><br>· <span class="b">전시의 목적과 유형</span></td></tr>
+<tr class="elem"><td class="k elem">내용요소 과정·기능</td><td class="v">· 미술과 시대, 사회, 환경과의 <span class="b">상호 관련성 분석</span>하기<br>· 작품에 대한 자신의 견해와 <span class="b">가치 판단을 논리적으로 표현</span>하기<br>· <span class="b">전시를 기획하고 참여</span>하기</td></tr>
+<tr class="elem"><td class="k elem">내용요소 가치·태도</td><td class="v">· <span class="b">감상을 통한 소통</span><br>· 미술 문화의 <span class="b">다원적 가치 이해와 존중</span></td></tr>
+<tr class="stan"><td class="k stan">[12미03-01] ★</td><td class="v">미술의 <span class="b">시대적·지역적·사회문화적 변천 과정</span>을 이해하고 작품을 감상하며 자신의 견해를 <span class="b">논리적으로 표현</span>할 수 있다.</td></tr>
+<tr class="stan"><td class="k stan">[12미03-02]</td><td class="v"><span class="b">비평 방법</span>을 활용하여 미술과 시대·사회·환경의 상호 관련성을 분석하고 <span class="b">가치를 판단</span>할 수 있다.</td></tr>
+<tr class="stan"><td class="k stan">[12미03-03]</td><td class="v">미술 작품 감상·비평의 관점을 활용한 소통으로 미술 문화의 <span class="b">다원적 가치를 이해·존중</span>할 수 있다.</td></tr>
+<tr class="stan"><td class="k stan">[12미03-04] ★신설</td><td class="v"><span class="b">전시의 목적과 유형</span>을 이해하여 <span class="b">전시를 기획하고 참여</span>할 수 있다. <span style="font-size:12px;color:var(--sub)">★공통엔 없던 신설</span></td></tr>
+<tr class="note"><td class="k note">유의점 키워드</td><td class="v">03-01: 변천 과정↔작품 <span class="b">맥락적 이해</span>, 미술 용어 사용 <span class="b">논리적 글·말</span> 표현<br>적용: 특정 시대·지역 <span class="b">제한 X</span> / <span class="b">사회 참여적 미술</span> 가치(조형미로만 판단 X) / 비평 방법·의미 이해<br>적용: <span class="b">디지털 전시</span> → 감상 범위 확장 / 감상·비평 → <span class="b">생활화</span> / 생태 참여 작가 → 실천적 행동</td></tr>
+</table>
+
+<h3>4. 교수·학습 — 방향 (가~사)</h3>
+<table>
+<tr><td class="k">(가) 깊이 있는 학습</td><td class="v">목표·내용체계·성취기준 → <span class="b">깊이 있는 학습</span></td></tr>
+<tr><td class="k">(나) 유기적 통합</td><td class="v">삶 연계 주제 → 미적체험·표현·감상 <span class="b">유기적 통합</span> → <span class="b">자기주도적 학습</span></td></tr>
+<tr><td class="k">(다) 범교과</td><td class="v">타 교과 융합 → <span class="b">주제 중심 범교과 학습</span>을 <span class="b">학기 초</span> 계획</td></tr>
+<tr><td class="k">(라) 디지털·온라인 <span style="color:#b8730d">NEW</span></td><td class="v">디지털 매체 표현 / <span class="b">온라인 미술관</span> 감상·전시 → <span class="b">첨단 환경</span></td></tr>
+<tr><td class="k">(마) 지역 연계</td><td class="v"><span class="b">지역 미술관·작가</span> 활용 → 삶 연결·<span class="b">생활화</span> / 안전 수칙</td></tr>
+<tr><td class="k">(바) 디지털 시민성 <span style="color:#b8730d">NEW</span></td><td class="v">온라인 매체 <span class="b">댓글·SNS·저작권</span> 인식 / <span class="b">개인정보·사생활</span> 보호</td></tr>
+<tr><td class="k">(사) 최소 성취수준</td><td class="v"><span class="b">최소 성취수준 보장</span> 위한 방법·유의사항</td></tr>
+</table>
+
+<h3>4. 교수·학습 — 방법 매칭 <span style="font-size:12px;color:var(--sub)">★빈칸 주의: 방법 ↔ 활용 맥락</span></h3>
+<table>
+<tr><td class="k">창의·실천적 문제해결·프로젝트</td><td class="v">생태환경·지속가능·기후위기 등 <span class="b">전 지구적 문제</span></td></tr>
+<tr><td class="k">관찰 학습·지식 탐구·귀납적 사고법</td><td class="v">미술 <span class="b">양식·규칙 발견</span> → <span class="b">미술사적 개념</span> 이해</td></tr>
+<tr><td class="k">직접 교수법</td><td class="v"><span class="b">시범·재료 사용법·도구 활용</span> 안내</td></tr>
+<tr><td class="k">반응 중심 학습법·토의·토론</td><td class="v"><span class="b">형식·내용·의미 분석</span> → 감상·비평 관점</td></tr>
+<tr><td class="k">논쟁 문제 해결 방법</td><td class="v"><span class="b">사회적 쟁점·생태 문제</span> → 근거 든 <span class="b">논리적 반박</span></td></tr>
+<tr><td class="k">맞춤형 수업</td><td class="v"><span class="b">다문화·특수·느린 학생</span></td></tr>
+<tr><td class="k">협동 학습·동료 교수</td><td class="v"><span class="b">공동 작품</span> → 협력 문제 해결</td></tr>
+<tr><td class="k">디지털 포트폴리오·VR·메타버스</td><td class="v"><span class="b">온라인 전시</span> 등 전 영역 디지털 활용</td></tr>
+</table>
+
+<h3>4. 평가 — 방향 (가~바)</h3>
+<table>
+<tr><td class="k">(가) 다양한 방법</td><td class="v">영역 특성에 맞는 <span class="b">다양한 평가 방법</span></td></tr>
+<tr><td class="k">(나) 과정 중시</td><td class="v">결과뿐 아니라 <span class="b">성장·학습 과정 중시</span></td></tr>
+<tr><td class="k">(다) 범주 균형</td><td class="v"><span class="b">3범주 균형 평가</span>(지식·이해/과정·기능/가치·태도)</td></tr>
+<tr><td class="k">(라) 결과 활용</td><td class="v">결과 → <span class="b">성장·발달 지원</span> + <span class="b">교수·학습 개선</span></td></tr>
+<tr><td class="k">(마) 맞춤형</td><td class="v">소외·느린 학습자 → <span class="b">맞춤형 평가</span></td></tr>
+<tr><td class="k">(바) 최소 성취수준 보장</td><td class="v">학기 초 <span class="b">사전진단</span> + 학기 중 <span class="b">맞춤형 관리</span> → 최소 성취수준 보장 / 미달 시 <span class="b">온·오프 보충학습</span></td></tr>
+</table>
+
+<h3>4. 평가 — 방법 매칭 <span style="font-size:12px;color:var(--sub)">★빈칸 주의: 평가 방법 ↔ 적용</span></h3>
+<table>
+<tr><td class="k">연구보고서법·토의·토론법</td><td class="v">시각적 대상 <span class="b">유목화</span> / 시각 문화 <span class="b">미적 가치 토론</span></td></tr>
+<tr><td class="k">실기 평가</td><td class="v">자료 수집·통합·발상 → <span class="b">조형 요소·원리 적용 제작</span></td></tr>
+<tr><td class="k">관찰법(체크리스트)</td><td class="v">재료·용구·표현 방법 <span class="b">탐색 태도</span></td></tr>
+<tr><td class="k">프로세스폴리오법·포트폴리오법</td><td class="v"><span class="b">계획·제작·완성 과정</span> / <span class="b">완성 작품 체계적 정리</span></td></tr>
+<tr><td class="k">보고서법·발표법·자기/동료 평가</td><td class="v">감상+<span class="b">미술 용어</span> / 생각 종합 전달 / <span class="b">차이 존중</span></td></tr>
+<tr><td class="k">서술형 평가</td><td class="v"><span class="b">지식·의견 직접 서술</span></td></tr>
+<tr><td class="k">논술형 평가·자기 평가</td><td class="v"><span class="b">주장-이유-근거-반론-반박-재확인</span> 논리 작성 / <span class="b">참여 성찰</span></td></tr>
+</table>
+
+<div class="self"><div class="t">★ 자가점검 핵심 3줄</div>
+<ol>
+<li>코드 <span class="b">[12미]</span> / 영역 3개 / 핵심 아이디어 영역당 <span class="b">2문장</span> (공통은 3문장)</li>
+<li>성취기준 개수 <span class="b">4 · 4 · 4</span> (공통은 표현만 5개 → 고등은 균형)</li>
+<li>함정: 역량 = <span class="b">총론 6개→미술과 5개</span> / 감상 신설 = <span class="b">전시 기획·참여</span> / 선택 시그니처 = <span class="b">최소 성취수준 보장</span></li>
+</ol></div>
+
+<div class="hr"></div>
+<h2>3. 미술과 진로선택 「미술 창작」 (고등학교)</h2>
+<p class="meta">코드 [12미창] · 영역 2개(설계와 창작·창작의 확장) · 핵심 아이디어 영역당 1문장 · 성취기준 4·4</p>
+
+<h3>1. 성격 — 핵심 키워드</h3>
+<table>
+<tr><td class="k">과목 정의</td><td class="v">진로·관심 분야 + 미술 연결 / <span class="b">작품 제작으로 세계와 소통하는 방법 창조</span> (진로선택)</td></tr>
+<tr><td class="k">창작의 구성 (4단계)</td><td class="v"><span class="b">발상</span> → <span class="b">실험</span> → <span class="b">제작</span> → <span class="b">확장</span></td></tr>
+<tr><td class="k">설계 개념</td><td class="v">경험·인식 바탕 <span class="b">주제 발상</span> / 새 매체·표현 기법 탐구 → <span class="b">설계</span></td></tr>
+<tr><td class="k">확장</td><td class="v">표현 기술의 <span class="b">융합·확장</span> → 예술 창작 경험·성찰 / 자신·공동체·환경 주제 <span class="b">전시·소통</span></td></tr>
+<tr><td class="k">학생 도달</td><td class="v">진로를 <span class="b">지역사회·환경·문화</span>와 연결 주제 선택 / 설계 통해 문제 해결·<span class="b">몰입</span> / 심미적 감성·창의성</td></tr>
+<tr><td class="k">정체성</td><td class="v">창작 과정·결과 성찰 → 자신·<span class="b">문화적 정체성</span> 탐색 / 서로 다른 미적 인식 <span class="b">비판적 포용</span></td></tr>
+</table>
+
+<h3>2. 목표 — 문장 통암기</h3>
+<table>
+<tr><td class="k">[총괄]</td><td class="v">자신의 삶과 연결하여 선택한 주제 표현을 위해 다양한 <span class="b">표현 기법과 매체</span>를 탐구하고 적용하여 창작하고, 창작의 경험과 결과를 성찰하여 자신의 정체성과 <span class="b">문화적 정체성</span>을 형성하며 <span class="b">전시</span>를 통하여 다양한 작품에 대한 서로 다른 생각을 존중하고 <span class="b">비판적으로 수용</span>한다.</td></tr>
+<tr><td class="k">세부① 설계·미적 안목</td><td class="v">자신의 진로·관심 분야와 연결된 주제를 탐구하고 <span class="b">창작 과정을 설계</span>하며 <span class="b">미적 안목</span>을 높인다.</td></tr>
+<tr><td class="k">세부② 실험·융합 표현</td><td class="v">표현 기법과 매체를 <span class="b">실험·융합</span>하는 다양한 시도를 통해 창의적으로 표현하는 능력을 함양한다.</td></tr>
+<tr><td class="k">세부③ 정체성·전시 소통</td><td class="v">창작 과정에서 자신을 깊이 성찰하여 <span class="b">정체성을 발견</span>하고 다양한 가치가 공유되는 <span class="b">전시</span>를 통해 <span class="b">동시대 문화</span>에 참여·소통한다.</td></tr>
+</table>
+
+<h3>3. 【영역 1】 설계와 창작</h3>
+<table>
+<tr class="idea"><td class="k idea">핵심 아이디어</td><td class="v">창작은 삶과 관련된 주제를 탐색하고 매체를 탐구하는 <span class="b">과정을 설계</span>하며 자신의 <span class="b">미적 관심을 발견하고 창조</span>하게 한다.</td></tr>
+<tr class="elem"><td class="k elem">내용요소 지식·이해</td><td class="v">· 자신의 <span class="b">진로나 관심 분야와 연결된 주제</span><br>· <span class="b">아이디어를 발상하는 방법</span><br>· <span class="b">표현 기법과 매체의 종류</span></td></tr>
+<tr class="elem"><td class="k elem">내용요소 과정·기능</td><td class="v">· 정보 수집과 탐색으로 <span class="b">아이디어 시각화</span>하기<br>· <span class="b">표현 기법과 매체를 탐구</span>하기<br>· 표현 매체와 방법을 <span class="b">선정하여 창작</span>하기</td></tr>
+<tr class="elem"><td class="k elem">내용요소 가치·태도</td><td class="v">· 창작 과정에서의 <span class="b">몰입과 도전적 문제 해결 태도</span><br>· 창작의 과정과 결과에 대한 <span class="b">다양성 존중 및 비판적 수용</span></td></tr>
+<tr class="stan"><td class="k stan">[12미창01-01] ★</td><td class="v">다양한 정보를 수집하여 자신의 <span class="b">진로·관심 분야와 연결된 주제</span>를 탐색할 수 있다.</td></tr>
+<tr class="stan"><td class="k stan">[12미창01-02]</td><td class="v"><span class="b">창의적 발상 방법</span>을 알고 아이디어를 <span class="b">시각화</span>할 수 있다.</td></tr>
+<tr class="stan"><td class="k stan">[12미창01-03]</td><td class="v">표현 기법과 매체를 탐구·이해하여 <span class="b">발견된 문제를 해결</span>할 수 있다.</td></tr>
+<tr class="stan"><td class="k stan">[12미창01-04] ★</td><td class="v">주제에 적합한 표현 매체와 방법을 선정하고 <span class="b">몰입하여 작품을 창작</span>할 수 있다.</td></tr>
+<tr class="note"><td class="k note">유의점 키워드</td><td class="v">01-01: 진로·세계 관심 분야 면밀 탐색 → <span class="b">주제를 삶 속에서</span>, 지속가능·생태전환·시민성·<span class="b">문화다양성</span> 정보<br>01-04: <span class="b">몰입 = 창작 전체 설계를 스스로 조절·집중하는 상위 수준의 태도</span> (창작을 적극 즐김), <span class="b">창작 과정 자체가 곧 작품</span><br>적용: <span class="b">표현 기능 중심 탈피</span>·자유로운 환경 / 다양한 매체 → <span class="b">체계적 설계</span> / 동시대·지역 문제 → 실천적 행동 / 개별화</td></tr>
+</table>
+
+<h3>3. 【영역 2】 창작의 확장</h3>
+<table>
+<tr class="idea"><td class="k idea">핵심 아이디어</td><td class="v">창작은 매체의 실험과 융합, 소통과 성찰의 과정을 통해서 <span class="b">재개념화된 창조적 활동</span>으로 확장된다.</td></tr>
+<tr class="elem"><td class="k elem">내용요소 지식·이해</td><td class="v">· 표현 기법과 매체의 <span class="b">효과와 적용 방법</span><br>· 작품 <span class="b">내용과 형식의 심화</span><br>· <span class="b">전시 목적과 방법</span></td></tr>
+<tr class="elem"><td class="k elem">내용요소 과정·기능</td><td class="v">· 표현 기법과 매체를 <span class="b">실험하고 융합</span>하기<br>· <span class="b">전시를 기획하고 구성</span>하기<br>· 창작 과정과 결과를 <span class="b">성찰하고 확장</span>하기</td></tr>
+<tr class="elem"><td class="k elem">내용요소 가치·태도</td><td class="v">· 창작 과정에서의 <span class="b">몰입과 도전적 문제 해결 태도</span><br>· 창작의 과정과 결과에 대한 <span class="b">다양성 존중 및 비판적 수용</span><br>★ 가치·태도 2개는 <span class="b">설계와 창작 영역과 완전 동일</span></td></tr>
+<tr class="stan"><td class="k stan">[12미창02-01]</td><td class="v">표현 기법과 매체를 적극적으로 <span class="b">실험·융합</span>하여 <span class="b">효과를 발견</span>하고 작품에 적용할 수 있다.</td></tr>
+<tr class="stan"><td class="k stan">[12미창02-02] ★</td><td class="v"><span class="b">도전적 문제 해결 태도</span>로 주제·표현 기법·매체 등 작품의 <span class="b">내용과 형식을 심화</span>하여 창작할 수 있다.</td></tr>
+<tr class="stan"><td class="k stan">[12미창02-03]</td><td class="v"><span class="b">전시 목적과 방법</span>에 따라 전시를 기획·구성하면서 서로 다른 미적 인식을 <span class="b">비판적으로 수용</span>할 수 있다.</td></tr>
+<tr class="stan"><td class="k stan">[12미창02-04] ★</td><td class="v">창작의 과정과 결과의 <span class="b">연결성을 성찰</span>하고 다양성을 존중하여 그 결과를 <span class="b">확장</span>할 수 있다.</td></tr>
+<tr class="note"><td class="k note">유의점 키워드</td><td class="v">02-02: 주제·표현기법·매체 심화 → <span class="b">완성도</span>, 전시 전 <span class="b">의도 확인·문제 해결·부족한 부분 추가</span><br>02-04: <span class="b">발상·실험·제작·확장</span> 창작 과정 + 온·오프·학교·지역사회 확장 전시 → <span class="b">과정↔결과 연결</span><br>적용: 진로↔미술 연계 / 지역사회·온라인 미술관·<span class="b">메타버스</span> 전시로 공간 확장 / <span class="b">프로세스폴리오·디지털 포트폴리오</span> 기록 / 개별화</td></tr>
+</table>
+
+<h3>4. 교수·학습 — 방향 (가~자)</h3>
+<table>
+<tr><td class="k">(가) 핵심 아이디어 내면화</td><td class="v">핵심 아이디어 → 교수·학습 <span class="b">전 과정 내면화</span></td></tr>
+<tr><td class="k">(나) 3범주 연계</td><td class="v">영역 특성 + <span class="b">3범주 연계·통합</span></td></tr>
+<tr><td class="k">(다) 진로 맞춤형</td><td class="v"><span class="b">진로·적성 맞춤형</span>, 진로 연계 학습 → <span class="b">주도적 학습</span></td></tr>
+<tr><td class="k">(라) 첨단 환경</td><td class="v">시공간 제약 극복, <span class="b">현실↔가상공간 경계 허무는</span> 첨단 환경</td></tr>
+<tr><td class="k">(마) 데이터·윤리</td><td class="v"><span class="b">빅데이터 수집·분석</span> / 개인정보 보호·<span class="b">정보통신 윤리</span> / <span class="b">저작권</span></td></tr>
+<tr><td class="k">(바) 생태·친환경</td><td class="v">생태전환·지속가능성 → <span class="b">재료·용구 친환경</span> 계획</td></tr>
+<tr><td class="k">(사) 지역 자원</td><td class="v"><span class="b">지역사회 예술 자원</span> 연계 / 안전 수칙</td></tr>
+<tr><td class="k">(아) 맞춤형</td><td class="v">다문화·특수·느린 학생 맞춤형</td></tr>
+<tr><td class="k">(자) 최소 성취수준</td><td class="v"><span class="b">최소 성취수준 보장</span> 방법·유의사항</td></tr>
+</table>
+
+<h3>4. 교수·학습 — 방법 매칭 <span style="font-size:12px;color:var(--sub)">★빈칸 주의</span></h3>
+<table>
+<tr><td class="k">창의적 문제해결·프로젝트·문제 중심 학습</td><td class="v">개인·사회 당면 문제 / <span class="b">비구조화된 문제</span></td></tr>
+<tr><td class="k">관찰 학습·지식 탐구</td><td class="v">주제·표현기법·매체 개념 탐구 → <span class="b">내용·형식 심화</span></td></tr>
+<tr><td class="k">귀납적 학습</td><td class="v"><span class="b">매체 실험 결과 모아</span> 새로운 표현 방법 발견</td></tr>
+<tr><td class="k">가치 탐구 학습</td><td class="v">전시 → 작품 <span class="b">내재 가치 분석·재해석</span> → <span class="b">명료화·내면화</span></td></tr>
+<tr><td class="k">직접 교수법</td><td class="v">표현 재료·방법·<span class="b">안전상 주의점</span> 시범</td></tr>
+<tr><td class="k">토의·토론·논쟁 문제 해결</td><td class="v">대화·상호작용 → <span class="b">사고 과정</span></td></tr>
+<tr><td class="k">내러티브 중심 학습</td><td class="v"><span class="b">창작자 사고·제작 배경</span> 이해 → 작품 의도·과정 분석</td></tr>
+<tr><td class="k">협동 학습·동료 교수</td><td class="v"><span class="b">모둠별 공동 문제 해결</span></td></tr>
+<tr><td class="k">프로세스폴리오법</td><td class="v"><span class="b">미적 관심 발견·창작 과정 기록</span> → 성장</td></tr>
+<tr><td class="k">개별화 수업</td><td class="v"><span class="b">진로 연계</span> 깊이 있는 창작</td></tr>
+<tr><td class="k">디지털 포트폴리오·VR·메타버스</td><td class="v"><span class="b">확장된 표현·전시</span></td></tr>
+</table>
+
+<h3>4. 평가 — 방향 (가~마) / 방법 매칭</h3>
+<table>
+<tr><td class="k">(가) 과정 중시</td><td class="v">영역 특성 맞는 방법 → <span class="b">학습 과정 중시</span></td></tr>
+<tr><td class="k">(나) 범주 균형</td><td class="v"><span class="b">수행 과정 평가</span> + 3범주 균형</td></tr>
+<tr><td class="k">(다) 결과 활용</td><td class="v">결과 → 성장·발달 지원 + <span class="b">교수·학습 개선</span></td></tr>
+<tr><td class="k">(라) 맞춤형</td><td class="v">학습 부진·느린 학습자 → <span class="b">맞춤형 평가</span></td></tr>
+<tr><td class="k">(마) 최소 성취수준 보장</td><td class="v"><span class="b">사전진단</span> + 맞춤형 관리 → 최소 성취수준 보장 / 미달 시 <span class="b">온·오프 보충학습</span></td></tr>
+<tr><td class="k">서술형·논술형 평가</td><td class="v">발상 방법·표현기법·매체·<span class="b">전시 방법 논리적 작성</span></td></tr>
+<tr><td class="k">연구보고서법·실기 평가</td><td class="v">정보 탐색·분석 / <span class="b">아이디어 시각화</span> → 창작·완성</td></tr>
+<tr><td class="k">관찰법(체크리스트)</td><td class="v"><span class="b">발상·실험·제작·확장 태도</span></td></tr>
+<tr><td class="k">자기 평가·동료 평가</td><td class="v">창작 과정·결과 성찰 / <span class="b">참여도·협력도</span></td></tr>
+<tr><td class="k">프로세스폴리오법·포트폴리오법</td><td class="v"><span class="b">사고·탐구 추이</span> → 성장 / 완성 작품 체계적 정리</td></tr>
+<tr><td class="k">발표법·토의·토론법</td><td class="v"><span class="b">제작 의도 전달</span> / 다양한 관점·의견 소통</td></tr>
+</table>
+
+<div class="self"><div class="t">★ 자가점검 핵심 3줄</div>
+<ol>
+<li>코드 <span class="b">[12미창]</span> / 영역 2개(<span class="b">설계와 창작·창작의 확장</span>) / 핵심 아이디어 영역당 <span class="b">1문장</span></li>
+<li>성취기준 개수 <span class="b">4 · 4</span> / 창작 4단계 = <span class="b">발상·실험·제작·확장</span></li>
+<li>시그니처 = <span class="b">몰입(상위 수준 태도)</span> / 전용어 = <span class="b">설계·재개념화</span> / 선택 공통 = 최소 성취수준 보장</li>
+</ol></div>
+
+<div class="hr"></div>
+<h2>4. 미술과 진로선택 「미술 감상과 비평」 (고등학교)</h2>
+<p class="meta">코드 [12미감] (통일!) · 영역 2개(미술 감상·미술 비평) · 핵심 아이디어 영역당 1문장 · 성취기준 4·4</p>
+
+<h3>1. 성격 — 핵심 키워드 <span style="font-size:12px;color:var(--sub)">★코드 통일 함정</span></h3>
+<table>
+<tr><td class="k">과목 정의</td><td class="v">미적 의미 탐구 + <span class="b">해석·판단</span> → 미술 <span class="b">깊이 있게 학습</span> (진로선택)</td></tr>
+<tr><td class="k">다룸</td><td class="v"><span class="b">양식·주제·제작방식·표현기법</span> → 내용·형식·<span class="b">사회문화적 맥락</span> / 작가·시대·지역 <span class="b">차이 발견·해석·비평</span></td></tr>
+<tr><td class="k">미술 감상 (공감)</td><td class="v">전통·타문화 이해 바탕 / <span class="b">사회문화적 의의 발견</span> → <span class="b">동시대 확장</span> / <span class="b">공감·정체성 형성</span></td></tr>
+<tr><td class="k">미술 비평 (논리)</td><td class="v">비평적 관점 해석·평가 / <span class="b">미적 반응 명료화 + 논리적 표현</span></td></tr>
+<tr><td class="k">학생 도달</td><td class="v">미적 표현 차이 비판적 분석 / <span class="b">우리↔타 문화권</span> 특징·변천 비평 / <span class="b">온라인 미술관·플랫폼</span> 소통</td></tr>
+<tr><td class="k">★ 감상 vs 비평</td><td class="v">감상 = <span class="b">공감</span> / 비평 = <span class="b">논리</span> (대비 암기)</td></tr>
+</table>
+
+<h3>2. 목표 — 문장 통암기</h3>
+<table>
+<tr><td class="k">[총괄]</td><td class="v">미술 작가와 작품을 다양한 관점에서 <span class="b">맥락적으로 해석</span>하여 감상하고 비평함으로써 <span class="b">미술 문화유산의 가치</span>를 발견한다. 또한 미술 문화의 <span class="b">다양성과 차이</span>를 인정하고 동시대와 연결하여 자신과 공동체 문화를 이해한다.</td></tr>
+<tr><td class="k">세부① 맥락적 탐구</td><td class="v">미술 작가·작품을 시대·지역·사회·문화 등 <span class="b">맥락적으로 탐구</span>하며 <span class="b">미적 표현의 차이</span>를 이해한다.</td></tr>
+<tr><td class="k">세부② 전시 감상·정체성</td><td class="v"><span class="b">온·오프라인 전시 공간</span>에서 작품을 감상하며, 서로 다른 사고·시각을 <span class="b">포용·성찰</span>하여 정체성을 형성한다.</td></tr>
+<tr><td class="k">세부③ 비판적 판단·연결</td><td class="v">다양한 비평의 관점·방법을 통해 작품의 가치를 <span class="b">비판적으로 판단</span>하여 미술 문화의 의의를 발견하고 <span class="b">공동체 삶과 연결</span>한다.</td></tr>
+</table>
+
+<h3>3. 【영역 1】 미술 감상</h3>
+<table>
+<tr class="idea"><td class="k idea">핵심 아이디어</td><td class="v">미술 감상은 작품의 <span class="b">조형적·맥락적 다의성</span>을 발견하고 이해하여 <span class="b">미술과 삶을 연결</span>하게 한다.</td></tr>
+<tr class="elem"><td class="k elem">내용요소 지식·이해</td><td class="v">· 미술의 <span class="b">변천 과정과 미술사적 의의</span><br>· 작가와 작품의 <span class="b">특징과 맥락적 이해</span></td></tr>
+<tr class="elem"><td class="k elem">내용요소 과정·기능</td><td class="v">· <span class="b">미술사적 관점</span>을 활용한 작품의 <span class="b">역사·정치·경제·사회적 변천 과정</span>과 특징을 분석하기<br>· 자신의 <span class="b">삶과 관련된 작가와 작품</span>을 탐색하고 연결하기<br>· <span class="b">온오프라인 전시 공간</span>을 활용하여 작품 감상하기</td></tr>
+<tr class="elem"><td class="k elem">내용요소 가치·태도</td><td class="v">· 작품 이해와 해석에 대한 <span class="b">공감과 포용</span><br>· <span class="b">문화 다양성에 대한 수용과 공동체 의식</span></td></tr>
+<tr class="stan"><td class="k stan">[12미감01-01]</td><td class="v">미술의 <span class="b">역사·정치·경제·사회적 변천 과정과 특징</span>을 분석하여 작가와 작품의 <span class="b">미술사적 의의</span>를 이해할 수 있다.</td></tr>
+<tr class="stan"><td class="k stan">[12미감01-02]</td><td class="v">자신의 삶과 관련된 작가·작품을 탐색하여 <span class="b">공감하고 진로와 연결</span>할 수 있다.</td></tr>
+<tr class="stan"><td class="k stan">[12미감01-03]</td><td class="v"><span class="b">온오프라인 전시 공간</span>에서 작품을 감상·해석하며 <span class="b">서로의 의견을 포용</span>할 수 있다.</td></tr>
+<tr class="stan"><td class="k stan">[12미감01-04]</td><td class="v">작가·작품의 특징을 맥락적으로 이해하는 과정에서 <span class="b">문화 다양성을 수용</span>하고 <span class="b">공동체 의식</span>을 함양할 수 있다.</td></tr>
+<tr class="note"><td class="k note">유의점 키워드</td><td class="v">01-02: 관심·흥미·<span class="b">진로</span> 관련 작가 탐색·공감 → <span class="b">삶과 미술의 관련성</span> 이해·적용<br>적용: 자유로운 분위기·<span class="b">근거 든 반론</span> → 존중·포용 / <span class="b">특정 지역·정치성향·이슈 치우침 지양</span> → 다양성 존중<br>적용: 생태 참여 작가 → 실천적 행동 / 다문화·특수·느린 → <span class="b">흥미·발달 수준 맞춤</span> / <span class="b">최소 성취수준</span> 설정·안내</td></tr>
+</table>
+
+<h3>3. 【영역 2】 미술 비평</h3>
+<table>
+<tr class="idea"><td class="k idea">핵심 아이디어</td><td class="v">미술 비평은 미술 작품의 가치와 의미를 <span class="b">비판적으로 판단하고 소통</span>하여 <span class="b">사회와 삶으로 확장</span>하게 한다.</td></tr>
+<tr class="elem"><td class="k elem">내용요소 지식·이해</td><td class="v">· <span class="b">미술 작품의 의미</span><br>· <span class="b">비평 방법과 관점</span></td></tr>
+<tr class="elem"><td class="k elem">내용요소 과정·기능</td><td class="v">· 비평을 위한 <span class="b">다양한 분야의 자료 수집</span>하기<br>· 비평 방법을 활용하여 <span class="b">해석하고 평가</span>하기<br>· 다양한 비평 관점에 따라 <span class="b">가치 판단</span>하기</td></tr>
+<tr class="elem"><td class="k elem">내용요소 가치·태도</td><td class="v">· 미술 비평 관점을 <span class="b">사회와 삶으로 확장</span></td></tr>
+<tr class="stan"><td class="k stan">[12미감02-01]</td><td class="v">미술 작품의 특징·지식·정보 등의 <span class="b">근거를 바탕</span>으로 작품의 의미를 이해·설명할 수 있다.</td></tr>
+<tr class="stan"><td class="k stan">[12미감02-02]</td><td class="v">다양한 <span class="b">미술 비평 방법</span>을 이해·활용하여 작품을 <span class="b">해석·평가</span>할 수 있다.</td></tr>
+<tr class="stan"><td class="k stan">[12미감02-03]</td><td class="v">비평 관점에 따라 자신의 반응을 <span class="b">명료화</span>하고 작품의 가치를 판단하며 <span class="b">미술 용어를 활용하여 논리적으로 표현</span>할 수 있다.</td></tr>
+<tr class="stan"><td class="k stan">[12미감02-04]</td><td class="v">사회적 이슈·타 분야와 연계한 비평 활동으로 형성된 <span class="b">비판적 사고를 사회와 삶으로 확장</span>할 수 있다.</td></tr>
+<tr class="note"><td class="k note">유의점 키워드</td><td class="v">02-03: 다양한 비평 관점 → 의미·특징 <span class="b">논리적 말·글</span>, 미술 용어로 <span class="b">견해 전달·명료화</span><br>02-04: 비판적 사고 → <span class="b">삶 속 문제 해결</span>, 사회적 이슈·진로 연계 → <span class="b">가치 재창출</span><br>적용: 다양한 관점 비평 도전 / 삶 연계 비평 / 사회적 이슈 → <span class="b">균형 있는 사고·가치관</span> / 다문화·특수·느린 맞춤·최소 성취수준</td></tr>
+</table>
+
+<h3>4. 교수·학습 — 방향 (가~바)</h3>
+<table>
+<tr><td class="k">(가) 유기적 연계</td><td class="v">감상·비평 영역 <span class="b">유기적 연계</span></td></tr>
+<tr><td class="k">(나) 생활 속 작품</td><td class="v"><span class="b">광고·패션·잡지</span> 등 생활 속 작품 → <span class="b">친근하게 접근</span></td></tr>
+<tr><td class="k">(다) 비교 감상·토론</td><td class="v">서로 다른 <span class="b">가치관 작가 비교</span> 감상·토론·사례조사·발표·감상문·<span class="b">역할극</span> → <span class="b">미술사적 쟁점</span></td></tr>
+<tr><td class="k">(라) 지역 연계</td><td class="v"><span class="b">지역 미술관·전시장</span> → 삶 연결·생활화 / 안전 수칙</td></tr>
+<tr><td class="k">(마) 첨단 환경</td><td class="v">온라인 감상·전시 → <span class="b">가상공간 확장</span>, 시공간 제약 극복</td></tr>
+<tr><td class="k">(바) 최소 성취수준</td><td class="v"><span class="b">최소 성취수준 보장</span> 방법·유의사항</td></tr>
+</table>
+
+<h3>4. 교수·학습 — 방법 매칭 <span style="font-size:12px;color:var(--sub)">★빈칸 주의</span></h3>
+<table>
+<tr><td class="k">실천적 문제 해결 학습</td><td class="v">생태·환경·시각문화 문제 → <span class="b">합리적 해결·최선의 대안</span></td></tr>
+<tr><td class="k">귀납적 학습·지식 탐구</td><td class="v"><span class="b">미술 용어 개념</span>·비평 방법 <span class="b">절차·단계</span> 탐구</td></tr>
+<tr><td class="k">가치 탐구 학습법</td><td class="v">작품 <span class="b">미적 가치 발견·분석·재해석</span> → 견해 명료화</td></tr>
+<tr><td class="k">★ 내러티브 중심 인물학습</td><td class="v"><span class="b">역사적 사건이 작가 일생에 미친 영향</span> / <span class="b">작가 일생↔작품 연관</span> → 맥락적 이해 <span style="font-size:12px;color:var(--sub)">(이 과목 특유★)</span></td></tr>
+<tr><td class="k">논쟁 문제 해결 방법</td><td class="v">특정 <span class="b">작품·작가 예술 행위</span> → 근거 든 논리적 반박</td></tr>
+<tr><td class="k">협동 학습·동료 교수</td><td class="v"><span class="b">시대·양식·작가 모둠 조사</span> / 주제 중심 협업</td></tr>
+<tr><td class="k">개별화 수업</td><td class="v">다문화·특수·느린 학생 → <span class="b">감상 작품·제시 방법 달리</span></td></tr>
+<tr><td class="k">VR·메타버스·게임 기반</td><td class="v"><span class="b">가상 전시 감상·기획</span> / 작가·작품 탐구</td></tr>
+</table>
+
+<h3>4. 평가 — 방향 (가~사) / 방법 매칭</h3>
+<table>
+<tr><td class="k">(가) 과정 중시 맞춤형</td><td class="v">감상·비평 영역 특성 → 학습 과정 중시 <span class="b">개별 맞춤형</span></td></tr>
+<tr><td class="k">(나) 근거</td><td class="v">성격·목표·내용체계·성취기준 근거 + <span class="b">성취수준 고려</span></td></tr>
+<tr><td class="k">(다) 범주 균형</td><td class="v"><span class="b">결과물 + 수행 과정</span> / 3범주 균형</td></tr>
+<tr><td class="k">(라) 온오프 연계</td><td class="v">디지털 매체 → <span class="b">온라인 플랫폼 업로드</span> 온·오프라인 연계 평가</td></tr>
+<tr><td class="k">(마) 결과 활용</td><td class="v">결과 → 성장·발달 지원 + 교수·학습 개선</td></tr>
+<tr><td class="k">(바) 맞춤형</td><td class="v">소외·느린 학습자 → 맞춤형 평가</td></tr>
+<tr><td class="k">(사) 최소 성취수준 보장</td><td class="v"><span class="b">사전진단</span> + 맞춤형 관리 → 최소 성취수준 보장 / 미달 시 온·오프 보충학습</td></tr>
+<tr><td class="k">서술형·논술형 평가</td><td class="v">지식·의견 → <span class="b">분석력·판단력·비판적 사고</span></td></tr>
+<tr><td class="k">실기 평가</td><td class="v"><span class="b">작가 일생·작품 활용 심화활동</span></td></tr>
+<tr><td class="k">발표법·관찰법</td><td class="v">이해 정도·태도 — <span class="b">평정척도</span>를 이용한 관찰법</td></tr>
+<tr><td class="k">토의·토론법</td><td class="v"><span class="b">찬반 토론</span> / 논리적 근거 의견 (교수·학습과 통합)</td></tr>
+<tr><td class="k">자기 평가·동료 평가</td><td class="v"><span class="b">학습 과정·결과 성찰</span></td></tr>
+<tr><td class="k">연구보고서법</td><td class="v">작품·작가·<span class="b">미술사 주제</span> 자료 수집·분석·종합</td></tr>
+<tr><td class="k">포트폴리오법·프로세스폴리오법</td><td class="v"><span class="b">수행 과제물 누적</span> → 성장 과정 총체적 분석</td></tr>
+</table>
+
+<div class="self"><div class="t">★ 자가점검 핵심 3줄</div>
+<ol>
+<li>코드 <span class="b">[12미감]</span> (감상·비평 통일! 감상=<span class="b">01</span>, 비평=<span class="b">02</span>) / 영역 2개 / 핵심 아이디어 영역당 1문장</li>
+<li>성취기준 개수 <span class="b">4 · 4</span> / 감상=<span class="b">공감</span>, 비평=<span class="b">논리</span>(명료화·논리적 표현)</li>
+<li>판별어 = <span class="b">내러티브 중심 인물학습</span> / 비평 키워드 = <span class="b">사회·삶으로 확장</span> / 선택 공통 = 최소 성취수준 보장</li>
+</ol></div>
+
+<div class="hr"></div>
+<h2>5. 미술과 융합선택 「미술과 매체」 (고등학교)</h2>
+<p class="meta">코드 [12미매] · 영역 2개 ★매체의 이해·매체의 활용 · 핵심 아이디어 영역당 1문장 · 성취기준 4·4</p>
+
+<h3>1. 성격 — 핵심 키워드 <span style="font-size:12px;color:var(--sub)">★영역명 함정 주의</span></h3>
+<table>
+<tr><td class="k">과목 정의</td><td class="v">매체 이해 + <span class="b">활용 가능성 탐색</span> → 창의적 표현 (융합선택)</td></tr>
+<tr><td class="k">미술↔매체 관계</td><td class="v">미술은 매체 통해 표현 / <span class="b">매체 자체가 미술</span>이 되기도</td></tr>
+<tr><td class="k">★ 매체 이분법</td><td class="v">아날로그(손으로 그리고 만드는 <span class="b">물성적 경험</span>) ↔ 디지털(기술 발달로 <span class="b">탈물질화</span>된 표현 형식)</td></tr>
+<tr><td class="k">다룸</td><td class="v">과거~현대 매체 탐색·역할 이해 → <span class="b">다양성·융합 가능성</span> / 특성·표현원리·작품 → <span class="b">매체 변화 이해</span></td></tr>
+<tr><td class="k">표현·소통</td><td class="v"><span class="b">표현 정교화</span> / 미술↔타 분야 융합 창의적 표현 / <span class="b">메시지 담아 전시·소통</span></td></tr>
+<tr><td class="k">학생 도달</td><td class="v">매체로 표현된 작품 = <span class="b">시대 반영 결과물</span> / 타 분야 확장 / 사회문화·기술 발전 표현·소통 → <span class="b">공존·공동체</span></td></tr>
+<tr><td class="k">★ 핵심 대비어</td><td class="v"><span class="b">물성적</span> ↔ <span class="b">탈물질화</span></td></tr>
+</table>
+
+<h3>2. 목표 — 문장 통암기</h3>
+<table>
+<tr><td class="k">[총괄]</td><td class="v">아날로그 매체와 디지털 매체를 활용한 작품 속 <span class="b">미적 표현의 특징</span>을 이해하고 <span class="b">매체의 특성을 적용한 표현 과정</span>을 경험한다. 다양한 매체를 활용하여 창의적으로 표현된 작품을 <span class="b">보존하고 전시</span>함으로써 시각적으로 소통하고 다양성을 존중하며 포용한다.</td></tr>
+<tr><td class="k">세부① 표현 원리 탐구</td><td class="v">매체의 특성에 따른 <span class="b">표현 원리를 탐구</span>하여 발견된 <span class="b">미적 특징과 표현 가치</span>를 공유한다.</td></tr>
+<tr><td class="k">세부② 실험·융합 표현</td><td class="v">아날로그와 디지털 매체의 표현 방법을 <span class="b">실험하고 타 분야와 융합</span>하여 창의적으로 표현하는 능력을 함양한다.</td></tr>
+<tr><td class="k">세부③ 전시·개방적 태도</td><td class="v">다양한 매체의 표현 기술을 적용한 <span class="b">작품 전시</span>를 통하여 매체에 <span class="b">개방적 태도</span>와 서로의 생각 존중·소통 능력을 함양한다.</td></tr>
+</table>
+
+<h3>3. 【영역 1】 매체의 이해</h3>
+<table>
+<tr class="idea"><td class="k idea">핵심 아이디어</td><td class="v">미술에서 매체는 <span class="b">미적·물성적·기술적 특성</span>을 활용한 표현을 통해 <span class="b">미적 인식을 확장</span>하게 한다.</td></tr>
+<tr class="elem"><td class="k elem">내용요소 지식·이해</td><td class="v">· 아날로그와 디지털 매체의 <span class="b">개념과 종류</span><br>· <span class="b">시대별, 지역별 매체의 변화</span><br>· 매체의 <span class="b">특성과 표현 원리</span></td></tr>
+<tr class="elem"><td class="k elem">내용요소 과정·기능</td><td class="v">· 시대별, 지역별 <span class="b">미술과 매체 관련짓기</span><br>· 미술에서 매체의 <span class="b">역할과 의미 탐색</span>하기<br>· 매체의 <span class="b">표현 특성 실험</span>하기</td></tr>
+<tr class="elem"><td class="k elem">내용요소 가치·태도</td><td class="v">· 매체의 <span class="b">미적 가치 공유</span><br>· 매체의 <span class="b">효과에 반응하는 태도</span><br>· 매체에 대한 <span class="b">개방적 태도와 비판적 수용</span></td></tr>
+<tr class="stan"><td class="k stan">[12미매01-01]</td><td class="v"><span class="b">시대별·지역별 매체의 변화</span>를 비교하고 미술과 매체를 관련지을 수 있다.</td></tr>
+<tr class="stan"><td class="k stan">[12미매01-02] ★</td><td class="v">미술에서 매체의 <span class="b">역할과 의미를 탐색</span>하고 <span class="b">미적 가치를 발견</span>할 수 있다.</td></tr>
+<tr class="stan"><td class="k stan">[12미매01-03]</td><td class="v">아날로그와 디지털 매체의 <span class="b">개념과 종류</span>를 이해하고 <span class="b">개방적 태도</span>로 표현 매체를 선택할 수 있다.</td></tr>
+<tr class="stan"><td class="k stan">[12미매01-04] ★</td><td class="v">매체의 <span class="b">특성과 표현 원리를 실험</span>하고 작품에 반영할 수 있다.</td></tr>
+<tr class="note"><td class="k note">유의점 키워드</td><td class="v">01-02: 매체 = 작가 생각·감정·<span class="b">시대 인식 반영 결과물</span>, 내러티브·<span class="b">디지털혁명·기후위기·환경재난</span> → 미적 가치 발견<br>01-04: 아날로그(<span class="b">건식·습식</span>·유화·아크릴·사진·도자·유리·금속·나무) ↔ 디지털(<span class="b">디지털이미지·인터넷·VR</span>) 실험, <span class="b">새 매체 발견·적용</span><br>적용: 시대별·지역별 사건·인물 → 문화 다양성 / 그래픽·영상·VR·AR·<span class="b">AI</span>·소리·설치·<span class="b">퍼포먼스</span> → 개방적 태도 / <span class="b">물성적 특성 직접 체험</span>·최소 성취수준</td></tr>
+</table>
+
+<h3>3. 【영역 2】 매체의 활용</h3>
+<table>
+<tr class="idea"><td class="k idea">핵심 아이디어</td><td class="v">미술에서 매체의 활용은 <span class="b">융합적이고 창의적 시도로 문제를 해결</span>하고 매체의 가치를 <span class="b">새롭게 인식</span>하게 한다.</td></tr>
+<tr class="elem"><td class="k elem">내용요소 지식·이해</td><td class="v">· <span class="b">아날로그 매체</span><br>· <span class="b">디지털 매체</span><br>· 작품의 <span class="b">정교한 표현과 보존 방법</span></td></tr>
+<tr class="elem"><td class="k elem">내용요소 과정·기능</td><td class="v">· 표현 매체를 <span class="b">창의적으로 활용하여 표현</span>하기<br>· <span class="b">타 분야와 연결하여 융합</span>하기<br>· 다양한 매체로 <span class="b">표현하고 전시</span>하기</td></tr>
+<tr class="elem"><td class="k elem">내용요소 가치·태도</td><td class="v">· 매체의 미적 가치 공유 / · 매체의 효과에 반응하는 태도 / · 매체에 대한 개방적 태도와 비판적 수용<br>★ 가치·태도 3개는 <span class="b">매체의 이해 영역과 글자까지 완전 동일</span></td></tr>
+<tr class="stan"><td class="k stan">[12미매02-01]</td><td class="v">아날로그 매체와 디지털 매체를 <span class="b">창의적으로 활용하여 표현</span>할 수 있다.</td></tr>
+<tr class="stan"><td class="k stan">[12미매02-02]</td><td class="v">아날로그와 디지털 매체를 <span class="b">타 분야와 연결·융합</span>하며 매체의 <span class="b">가치를 공유</span>할 수 있다.</td></tr>
+<tr class="stan"><td class="k stan">[12미매02-03]</td><td class="v">작품의 <span class="b">정교한 표현과 보존 방법</span>을 이해하고 다양한 매체로 표현한 작품을 <span class="b">전시</span>할 수 있다.</td></tr>
+<tr class="stan"><td class="k stan">[12미매02-04]</td><td class="v">전시된 작품 속 매체의 효과에 <span class="b">반응·공감</span>하며 <span class="b">비판적으로 수용</span>할 수 있다.</td></tr>
+<tr class="note"><td class="k note">유의점 키워드</td><td class="v">02-02: 표현 기술·방법 타 분야 융합, <span class="b">아날로그+디지털 융합</span> → 새 매체 표현, <span class="b">일상 매체 재발견</span><br>02-03: <span class="b">보존 방법 차이</span> — 아날로그=<span class="b">화랑·미술관 보존·전시</span> / 디지털=보존·전시 차이 → 온·오프라인 활용<br>적용: 아날로그(드로잉·회화·판화·건축) + 디지털(VR·컴퓨터그래픽스·<span class="b">사이버네틱 조각</span>·<span class="b">상호작용 예술</span>) → 온·오프 전시 / 다문화·특수·느린 → 매체 다양 제시·최소 성취수준</td></tr>
+</table>
+
+<h3>4. 교수·학습 — 방향 (가~자)</h3>
+<table>
+<tr><td class="k">(가) 핵심 아이디어 내면화</td><td class="v">핵심 아이디어 → 교수·학습 <span class="b">전 과정 내면화</span></td></tr>
+<tr><td class="k">(나) 3범주 연계</td><td class="v">영역 특성 + <span class="b">3범주 연계·통합</span></td></tr>
+<tr><td class="k">(다) 첨단 환경</td><td class="v">시공간 제약 극복, <span class="b">현실↔가상공간 경계 허무는</span> 첨단 환경</td></tr>
+<tr><td class="k">(라) 데이터·윤리</td><td class="v"><span class="b">빅데이터 수집·분석</span> / 개인정보 보호 교육 → <span class="b">정보통신 윤리 의식</span> / <span class="b">저작권의 중요성</span></td></tr>
+<tr><td class="k">(마) 범교과</td><td class="v">타 교과 융합 → 주제 중심 범교과 학습 <span class="b">학기 초</span></td></tr>
+<tr><td class="k">(바) 생태·친환경</td><td class="v">생태전환·지속가능성 → <span class="b">재료·용구 친환경</span></td></tr>
+<tr><td class="k">(사) 지역 자원</td><td class="v">지역사회 예술 자원 연계 / <span class="b">예술가 융합적 사고·관점 전환</span> / 안전 수칙</td></tr>
+<tr><td class="k">(아) 맞춤형</td><td class="v">다문화·특수·느린 학생 맞춤형</td></tr>
+<tr><td class="k">(자) 최소 성취수준</td><td class="v"><span class="b">최소 성취수준 보장</span></td></tr>
+</table>
+
+<h3>4. 교수·학습 — 방법 매칭 <span style="font-size:12px;color:var(--sub)">★방법 유독 많음</span></h3>
+<table>
+<tr><td class="k">직접 교수법</td><td class="v"><span class="b">매체 특성·표현 원리 시범</span></td></tr>
+<tr><td class="k">개별화 수업</td><td class="v"><span class="b">관심사·특성 고려 주제·매체</span></td></tr>
+<tr><td class="k">창의적 문제해결·프로젝트·실천적 문제 해결</td><td class="v"><span class="b">매체 융합·적용</span> → 개인·사회 문제</td></tr>
+<tr><td class="k">경험 학습·프로세스폴리오법</td><td class="v"><span class="b">매체 실험·융합 기록</span> → 성장 과정</td></tr>
+<tr><td class="k">관찰 학습·지식 탐구·귀납적 학습</td><td class="v"><span class="b">물성적 특성 파악</span> / 새 표현 특성 실험 / <span class="b">미적 원리 추론</span></td></tr>
+<tr><td class="k">가치 탐구 학습법</td><td class="v">아날로그·디지털 <span class="b">미적 가치 발견·내면화</span></td></tr>
+<tr><td class="k">토의·토론·반응중심 학습</td><td class="v">전시 감상 → <span class="b">매체 효과 반응 명료화·공유</span></td></tr>
+<tr><td class="k">내러티브 중심 학습</td><td class="v"><span class="b">작가 작품 속 매체 역할·의미</span> 탐색·분석</td></tr>
+<tr><td class="k">협동 학습·동료 교수</td><td class="v">모둠 창작 → <span class="b">타 분야 지식 연결 협력</span></td></tr>
+<tr><td class="k">디지털 포트폴리오·VR·메타버스·게임 기반</td><td class="v">디지털 도구 적극 활용 (<span class="b">게임 기반</span> = 이 과목 전용★)</td></tr>
+</table>
+
+<h3>4. 평가 — 방향 (가~마) / 방법 매칭</h3>
+<table>
+<tr><td class="k">(가) 과정 중시</td><td class="v">영역 특성 → <span class="b">학습 과정 중시</span></td></tr>
+<tr><td class="k">(나) 범주 균형</td><td class="v"><span class="b">아날로그·디지털 이해</span> / <span class="b">타 분야 융합 과정</span> / <span class="b">개방적 태도</span> → 3범주 균형</td></tr>
+<tr><td class="k">(다) 결과 활용</td><td class="v">결과 → 성장·발달 지원 + 교수·학습 개선</td></tr>
+<tr><td class="k">(라) 맞춤형</td><td class="v">학습 부진·느린 학습자 → 맞춤형 평가</td></tr>
+<tr><td class="k">(마) 최소 성취수준 보장</td><td class="v"><span class="b">사전진단</span> + 맞춤형 관리 → 최소 성취수준 보장 / 미달 시 온·오프 보충학습</td></tr>
+<tr><td class="k">연구보고서법·서·논술형·발표법</td><td class="v"><span class="b">시대별·지역별 매체 변화 분석</span> / 매체 가치 논리적 작성 / 특성·표현원리 실험 효과 전달</td></tr>
+<tr><td class="k">실기 평가법·포트폴리오법·프로세스폴리오법</td><td class="v"><span class="b">아날로그+디지털 융합</span>·타 분야 활용 표현·완성 / <span class="b">작품 정리</span> / 이해·활용 과정 → <span class="b">성장</span></td></tr>
+<tr><td class="k">자기 평가·동료 평가</td><td class="v">매체 융합 표현 <span class="b">참여·수준 성찰</span> / 온·오프 전시 매체 효과 이해·존중</td></tr>
+<tr><td class="k">연구보고서법·토의·토론법</td><td class="v"><span class="b">매체별 전시 방법 작성</span> / 제작 의도·미적 가치 토론</td></tr>
+<tr><td class="k">관찰법(관찰일지·체크리스트)</td><td class="v">타 분야 융합 표현 과정 → <span class="b">개방적 태도·적극성</span></td></tr>
+</table>
+
+<div class="self"><div class="t">★ 자가점검 핵심 3줄</div>
+<ol>
+<li>코드 <span class="b">[12미매]</span> / 영역 2개(<span class="b">매체의 이해·매체의 활용</span>) / 핵심 아이디어 영역당 1문장</li>
+<li>성취기준 개수 <span class="b">4 · 4</span> / 매체 이분법 = 아날로그(<span class="b">물성적</span>) ↔ 디지털(<span class="b">탈물질화</span>)</li>
+<li>판별어 = <span class="b">게임 기반 학습법</span> / 시그니처 = <span class="b">아날로그↔디지털 보존·전시 차이</span> / 선택 공통 = 최소 성취수준 보장</li>
+</ol></div>
+
+<div class="hr"></div>
+<h2>6. 5과목 가로 비교 (마지막 총점검)</h2>
+<table>
+<tr><td class="k">미술 (공통·중) — 공통</td><td class="v">코드 <span class="b">[9미]</span> / 미적체험·표현·감상 (<span class="b">3</span>개) / 성취기준 <span class="b">4·5·4</span></td></tr>
+<tr><td class="k">미술 (일반선택·고) — 일반</td><td class="v">코드 <span class="b">[12미]</span> / 미적체험·표현·감상 (<span class="b">3</span>개) / 성취기준 <span class="b">4·4·4</span></td></tr>
+<tr><td class="k">미술 창작 — 진로</td><td class="v">코드 <span class="b">[12미창]</span> / <span class="b">설계와 창작·창작의 확장</span> (2개)</td></tr>
+<tr><td class="k">미술 감상과 비평 — 진로</td><td class="v">코드 <span class="b">[12미감]</span> / <span class="b">미술 감상·미술 비평</span> (2개) <span style="font-size:12px;color:var(--sub)">('비평'인데 코드는 '감' — 둘 다 미감으로 묶임)</span></td></tr>
+<tr><td class="k">미술과 매체 — 융합</td><td class="v">코드 <span class="b">[12미매]</span> / <span class="b">매체의 이해·매체의 활용</span> (2개)</td></tr>
+<tr><td class="k">핵심 아이디어 문장 수 위계</td><td class="v">공통 <span class="b">3</span>문장 → 일반선택 <span class="b">2</span>문장 → 진로·융합선택 <span class="b">1</span>문장</td></tr>
+<tr><td class="k">과목별 전용 키워드</td><td class="v">미술 창작: 발상·실험·제작·확장 / <span class="b">몰입(상위태도)</span> / 설계<br>미술 감상과 비평: 감상=공감, 비평=논리 / <span class="b">내러티브 인물학습</span> / 다의성<br>미술과 매체: 아날로그↔디지털 / 물성적↔탈물질화 / <span class="b">게임 기반 학습법</span> / 보존·전시 차이</td></tr>
+<tr><td class="k">5과목 관통 공통점</td><td class="v">디지털: 메타버스·VR·온라인미술관·<span class="b">디지털포트폴리오</span><br>생태: 생태전환·지속가능성·기후위기<br>삶과 연결 / 주도성 / 맞춤형<br>(선택과목 전용) <span class="b">최소 성취수준 보장</span> = 사전진단→맞춤형 관리→온오프라인 보충학습</td></tr>
+<tr><td class="k">대상 학생 위계</td><td class="v">기초 → 심화에 따른 <span class="b">진술 밀도 차이</span> / 과목 범위(전 영역 vs 특정 주제 심화)에 따른 <span class="b">초점 차이</span></td></tr>
+</table>
+
+<p class="foot">빈칸을 누르면 정답이 보입니다 · 인쇄하면 빈칸은 밑줄로 출력됩니다</p>
+</div>
+
+<script>
+/* ---------- 빈칸 ---------- */
+var blanks=[].slice.call(document.querySelectorAll('.b'));
+document.getElementById('cnt').textContent='빈칸 '+blanks.length+'개';
+blanks.forEach(function(el){
+  el.setAttribute('tabindex','0'); el.setAttribute('role','button');
+  el.addEventListener('click',function(){el.classList.toggle('on');});
+  el.addEventListener('keydown',function(e){
+    if(e.key==='Enter'||e.key===' '){e.preventDefault();el.classList.toggle('on');}
+  });
+});
+function all(on){blanks.forEach(function(el){el.classList.toggle('on',on);});}
+
+/* ---------- 저장 (브라우저에서 파일로 열면 유지, 아니면 세션 한정) ---------- */
+function load(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch(e){return d;}}
+function save(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+
+/* ---------- 목차 ---------- */
+var subjects=[].slice.call(document.querySelectorAll('h2'));
+var toc=document.getElementById('toc');
+var html='<div class="t">목차</div>';
+subjects.forEach(function(h2,i){
+  var id='s'+i; h2.id=id;
+  var m=h2.textContent.match(/^(\d+)\.\s*(.*)$/);
+  var num=m?m[1]:(i+1), name=m?m[2]:h2.textContent;
+  h2.innerHTML=h2.innerHTML+'<a class="up" href="#toc">목차 ↑</a>';
+  var subs=[],n=h2.nextElementSibling,j=0;
+  while(n&&n.tagName!=='H2'){
+    if(n.tagName==='H3'){var sid=id+'_'+(j++); n.id=sid; subs.push([sid,n.textContent.replace(/★.*$/,'').trim()]);}
+    n=n.nextElementSibling;
+  }
+  html+='<details'+(i===0?' open':'')+'><summary><span class="num">'+num+'</span> '+name+'</summary><ul>'
+     + subs.map(function(x){return '<li><a href="#'+x[0]+'">'+x[1]+'</a></li>';}).join('')
+     + '</ul></details>';
+});
+toc.innerHTML=html;
+
+/* ---------- 틀린거 체크 ---------- */
+var rows=[].slice.call(document.querySelectorAll('tr')).filter(function(r){return r.querySelector('td.k');});
+var wrong=load('mi-wrong-v1',{});
+rows.forEach(function(r,i){
+  var key='r'+i; r.dataset.k=key;
+  var b=document.createElement('button');
+  b.className='x'; b.type='button'; b.textContent='✕';
+  b.title='틀림 표시'; b.setAttribute('aria-label','틀림 표시');
+  b.onclick=function(ev){ev.stopPropagation();toggleWrong(r);};
+  r.querySelector('td.k').appendChild(b);
+  if(wrong[key]) r.classList.add('wrong');
+});
+function toggleWrong(r){
+  r.classList.toggle('wrong');
+  if(r.classList.contains('wrong')) wrong[r.dataset.k]=1; else delete wrong[r.dataset.k];
+  save('mi-wrong-v1',wrong); count();
+}
+function count(){
+  var n=document.querySelectorAll('tr.wrong').length;
+  document.getElementById('wc').textContent=n?('틀림 '+n+'개'):'';
+}
+function clearWrong(){
+  document.querySelectorAll('tr.wrong').forEach(function(r){r.classList.remove('wrong');});
+  wrong={}; save('mi-wrong-v1',wrong); count();
+  if(document.body.classList.contains('onlywrong')) onlyWrong();
+}
+function onlyWrong(){
+  var on=document.body.classList.toggle('onlywrong');
+  document.getElementById('fw').textContent=on?'전체 보기로 돌아가기':'틀린 것만 보기';
+  document.querySelectorAll('table').forEach(function(t){
+    var has=t.querySelector('tr.wrong');
+    t.classList.toggle('hide',on&&!has);
+    var prev=t.previousElementSibling;
+    if(prev&&prev.tagName==='H3'){
+      var sib=prev.nextElementSibling,any=false;
+      while(sib&&sib.tagName!=='H3'&&sib.tagName!=='H2'){
+        if(sib.querySelector&&sib.querySelector('tr.wrong')) any=true;
+        sib=sib.nextElementSibling;
+      }
+      prev.classList.toggle('hide',on&&!any);
+    }
+  });
+  document.querySelectorAll('.self,.tip,.memo,.meta,.toc').forEach(function(e){e.classList.toggle('hide',on);});
+}
+count();
+
+/* ---------- 과목별 메모노트 ---------- */
+var memos=load('mi-memo-v1',{});
+subjects.forEach(function(h2,i){
+  var d=document.createElement('div'); d.className='memo';
+  var title=h2.textContent.replace('목차 ↑','').trim();
+  d.innerHTML='<div class="lb">메모노트 — '+title+'</div>'
+    +'<div class="pad" contenteditable="true" data-ph="자주 틀리는 것, 헷갈리는 짝, 나만의 암기법을 여기에"></div>';
+  var pad=d.querySelector('.pad');
+  pad.textContent=memos['m'+i]||'';
+  pad.addEventListener('input',function(){memos['m'+i]=pad.textContent;save('mi-memo-v1',memos);});
+  var n=h2.nextElementSibling,last=h2;
+  while(n&&n.tagName!=='H2'){last=n;n=n.nextElementSibling;}
+  last.parentNode.insertBefore(d,last.nextSibling);
+});
+</script>
+</body>
+</html>
