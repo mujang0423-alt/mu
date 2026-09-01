@@ -1,0 +1,86 @@
+<!doctype html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>260901-한미-탑</title>
+<style>
+body{font:16px/1.6 system-ui,sans-serif;margin:0;padding:12px;max-width:760px;background:#fafafa;color:#222}
+#bar{position:sticky;top:0;background:#fafafa;padding:8px 0;border-bottom:1px solid #ddd;display:flex;gap:8px;flex-wrap:wrap;align-items:center;z-index:1}
+button{padding:6px 10px;border:1px solid #bbb;border-radius:6px;background:#fff;font:inherit}
+#cnt{margin-left:auto;color:#888;font-size:14px}
+details{background:#fff;border:1px solid #e0e0e0;border-radius:8px;margin:8px 0;padding:10px 12px}
+details.w{border-color:#e57373;background:#fff6f6}
+summary{cursor:pointer;font-weight:600}
+details p{margin:10px 0 6px;white-space:pre-wrap}
+details label{font-size:14px;color:#666}
+</style>
+<body>
+<script>
+const KEY="0901-한미-탑";
+const QA=[
+["정림사지 석탑의 의의는?","백제탑의 전형이자 백제 석탑의 완성."],
+["정림사지 석탑에 나타난 목탑 양식의 영향은?","가구식 기단, 민흘림·안쏠림 기둥, 우동마루 끝 전각의 반전, 여러 개의 석재를 조립해 세운 점."],
+["정림사지 석탑의 기단 형식은?","가구식 기단."],
+["가구식 기단의 조립 순서는?","지대석 → 우주(모서리 기둥) → 탱주 → 그 사이에 면석 끼움 → 위에 갑석."],
+["분황사 모전석탑의 재료는?","흑회색 안산암."],
+["분황사 모전석탑의 의의는?","현존 신라 탑 중 가장 오래된 탑. 감실 입구의 인왕상, 기단 네 모서리의 사자상(화강석)."],
+["분황사 모전석탑에서 중국(전탑)의 영향을 받은 부분은?","전탑 형식을 모방한 점. 특히 층단형(계단식) 옥개 처리."],
+["의성 탑리리 5층 석탑의 특징은?","백제탑과 신라탑의 절충. 정면에만 감실, 가구식 기단, 넓은 기단.\n목탑계: 엔타시스식 기둥, 창방·평방, 전각의 반전, 독립 석재 다수.\n전탑계: 감실 1개, 층단형 옥개받침."],
+["다보탑은 어느 경전의 다보불에서 영향을 받았나?","법화경 견보탑품."],
+["탑의 전체 구성은?","기단부 · 탑신부 · 상륜부."],
+["상륜부의 구성 순서는?","아래에서부터 노반 - 복발 - 앙화 - 보륜 - 보개 - 수연 - 용차 - 보주, 이를 꿰는 찰주."],
+["연꽃·물안개 모양을 뜻하는 상륜부 부재는?","수연."],
+["하르미카를 형상화한 부재는?","앙화."],
+["차트라를 형상화한 것으로 33천 또는 진리의 바퀴(법륜)를 상징하는 부재는?","보륜."],
+["보배로운 구슬을 뜻하며 용이 지키는 여의를 상징하는 부재는?","보주."],
+["승려의 사리를 담는 석조 소탑을 무엇이라 하나?","부도(승탑). 답안에는 보통 부도로 표기."],
+["부도의 형식은 시대에 따라 어떻게 변했나?","신라: 팔각원당형이 기본 → 고려: 석종형 등장 → 조선: 방형탑도 나타남."],
+["석탑에서 기단부의 역할은?","땅의 습기와 빗물로부터 탑을 보호하고, 탑의 높이를 높여 권위를 부여함."],
+["시대별 가람배치는?","고구려 1탑 3금당 / 신라 1탑 3금당 / 백제 1탑 1금당 / 통일신라 쌍탑 1금당."],
+["도성과 가까운 평지에 조성해 왕실 원당·국찰 기능을 하고 불교 대중화에 기여한 가람 유형은?","평지형 가람."],
+["정혜사지 13층 석탑은 어떤 형식의 탑인가?","밀첨식."],
+["월정사 팔각 구층석탑은 어디에서 영향을 받았나?","송나라의 다각다층탑."],
+["월정사 팔각 구층석탑의 옥개받침 형식은?","각형·호형이 반복되는 3단 받침."],
+["월정사 팔각 구층석탑 하층기단 갑석의 문양은?","연화문."],
+["원각사지 10층 석탑의 재료는?","대리석."],
+["원각사지 10층 석탑이 모방한 탑은?","경천사지 10층 석탑."],
+["안동 법흥사지 7층 전탑에 새겨진 조각은?","팔부신중과 사천왕상."],
+["안동 법흥사지 7층 전탑의 의의는?","현존하는 전탑 중 가장 크고 오래된 탑."],
+["공주 마곡사 5층 석탑 상륜부의 특징과 그 배경은?","금동 라마탑형 상륜(풍마동)이 올려져 있음. 원나라 라마교의 영향."],
+["마곡사 5층 석탑 옥개석에 달려 있는 것은?","풍경."],
+["장항리 서 5층 석탑에 새겨진 조각과 의의는?","인왕상(금강역사상). 1층 탑신에 인왕상이 등장한 최초의 사례."],
+["통일신라 초기 탑의 특징은?","탑 규모가 장대해지고 기단이 건축적으로 넓어지며 기단 층수가 높아짐. 탑신 층수는 이전보다 줄어듦."],
+["탑신부에서 물이 흘러내리도록 만든 면을 무엇이라 하나?","낙수면."],
+["미륵사지 석탑의 특징은?","목탑 양식을 그대로 옮긴 석탑. 창방·평방, 감실, 얇고 긴 옥개석(완만한 낙수면), 전각 끝의 반전, 민흘림 기둥, 가구식 기단, 다수의 석재 사용으로 장식적이고 화려함."],
+["우동이란?","옥개석 낙수면의 모서리(내림마루) 부분. 목조 건축에서 내림마루를 만들기 위해 기와를 여러 겹 쌓은 부분에서 온 말."],
+["미륵사지 석탑의 건립 목적은?","왕권 강화. 감실 안 청동합의 사리봉영기에 기록됨."],
+["결구식이란?","돌을 목탑의 부재처럼 다듬어 짜맞추어 결합하는 방식. 우리나라에서 창안한 독특한 형태."],
+["돌을 사각으로 다듬어 쌓아 올리는 방식은?","적석식(조적식)."],
+["통일신라 중기(전성기) 탑의 특징은?","이중기단 + 3층 탑신 + 5단 옥개받침의 탑 전용 양식 확립. 기단 크기가 줄어 안정적 비례와 이상적 체감률. 석재 수 감소(기둥은 단일석에 모각). 다보탑 같은 이형탑 등장."],
+["불탑과 부도의 차이는?","불탑은 석가모니의 진신사리·법신사리를 봉안한 탑, 부도(승탑)는 승려의 사리를 봉안한 탑."],
+["땅의 기운이 지나치거나 부족한 곳에 절이나 탑을 세워 국가와 국민이 보호받는다는 사상은?","비보사탑설."],
+["감은사지 동서 3층 석탑의 특징은?","통일신라 초기 탑. 기단부가 크고 웅장하며 쌍탑 구성. 상륜부에 쇠 찰주가 남아 있음. 여러 석재를 짜맞춤, 가구식 기단, 전각 끝의 반전 등 목탑 형식이 남음."],
+["백제탑과 신라탑을 비교하면?","기단: 백제는 단층 가구식, 신라는 2층.\n탑신: 백제 5층 이상으로 크고, 신라는 3층.\n옥개석: 백제는 얇고 길어 낙수면이 완만하고 우동마루 끝이 살짝 올라감, 신라는 두껍고 짧아 급경사이며 층단형 옥개받침이 크고 단순.\n석재: 백제는 독립된 석재를 많이 사용, 신라는 단일석에 모각."],
+["경천사지 10층 석탑을 설명하면?","고려 후기, 원나라 라마교의 영향. 대리석으로 원나라 기술자가 직접 제작. 다포 양식 공포와 팔작지붕, 다각다층탑. 아자형 기단 3층 + 아자형 탑신 3층 + 방형 7층 구성. 최초의 대리석탑."],
+["경천사지 10층 석탑에 새겨진 무늬는?","법화 불교와 밀교의 영향을 받은 무늬가 새겨짐."],
+["현화사 7층 석탑의 특징은?","고려 초기 왕실의 후원으로 세워진 석탑. 교종 기반. 기단은 모전석. 날렵한 옥개 지붕, 호화로운 장식, 탑신에 불보살 조각."],
+["보현사 팔각 13층 석탑, 월정사 팔각 구층석탑 계열의 종교적 기반은?","선종."],
+["정토사 홍법국사 실상탑의 재료와 형식은?","대리석. 팔각원당형이지만 탑신이 공 모양(구형)으로 변형된 형태."],
+["무덤이나 부도 앞에 세우는 등을 무엇이라 하며 그 의미는?","장명등. 부처의 광명이 널리 퍼진다는 뜻. 벽사와 장생·발복의 기능도 있음."],
+["석가탑과 다보탑은 각각 어떤 부처를 상징하나?","석가탑은 현재불인 석가불, 다보탑은 과거불인 다보불."],
+["석가불·다보불이 나란히 앉은 도상과 그 출전은?","이불병좌상. 법화경 견보탑품에서 유래하며, 석가모니 설법 때 다보불이 탑 속에서 나타나 자리를 나눠 앉은 장면."],
+["삼국~조선의 불탑 평면 형태 변화는?","고구려 팔각형 / 백제·신라·통일신라 방형(사각형) / 고려는 국가 주도의 대형 석탑, 다각다층탑 등장 / 조선은 축소·단순화."]
+];
+const SRC=document.currentScript.textContent;
+/*R*/
+let st={};try{st=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){}
+const sv=()=>{try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}};
+const BAR='<label><input type=checkbox id=only> 틀린 것만</label><button id=exp>오답 내보내기</button><button id=cp>번호 복사</button><span id=cnt></span>';
+document.body.innerHTML='<div id=bar>'+BAR+'</div><div id=list></div>';
+const L=list,ws=()=>QA.map((q,i)=>st[i]?i+1:0).filter(Boolean);
+L.innerHTML=QA.map((q,i)=>'<details'+(st[i]?' class=w':'')+'><summary>'+(i+1)+'. '+q[0]+'</summary><p>'+q[1]+'</p><label><input type=checkbox data-c='+i+(st[i]?' checked':'')+'> 틀림</label></details>').join('');
+const flt=()=>{[...L.children].forEach((d,i)=>d.hidden=only.checked&&!st[i]);cnt.textContent='틀림 '+ws().length+' / '+QA.length};
+L.onchange=e=>{const i=e.target.dataset.c;if(i==null)return;st[i]=e.target.checked;sv();e.target.closest('details').className=st[i]?'w':'';flt()};
+only.onchange=flt;flt();
+exp.onclick=()=>{const w=QA.filter((q,i)=>st[i]);
+const h='<!doctype html><html lang=ko><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>'+KEY+'-wrong</title><style>'+document.querySelector('style').textContent+'</style><body><script>const KEY="'+KEY+'-wrong";const QA='+JSON.stringify(w)+';const SRC='+JSON.stringify(SRC)+';'+SRC.slice(SRC.indexOf('/*R*/'))+'<\/script>';
+const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([h],{type:'text/html'}));a.download=KEY+'-wrong.html';a.click()};
+cp.onclick=()=>{const t=ws().join(',');navigator.clipboard?.writeText(t).catch(()=>0)||0;const x=document.createElement('textarea');x.value=t;document.body.append(x);x.select();try{document.execCommand('copy')}catch(e){}x.remove();cp.textContent='복사됨';setTimeout(()=>cp.textContent='번호 복사',900)};
+</script>
+</html>
