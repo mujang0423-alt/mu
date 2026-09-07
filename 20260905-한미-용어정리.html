@@ -1,0 +1,40 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8">
+<script>const KEY="0905-한미-용어정리";</script>
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>한국미술사 용어 정리 (0905)</title>
+<style>
+body{font:16px/1.6 system-ui,-apple-system,sans-serif;margin:0;padding:14px;max-width:820px}
+h1{font-size:18px;margin:4px 0 10px}
+#b{position:sticky;top:0;background:#fff;padding:8px 0;display:flex;gap:8px;flex-wrap:wrap;align-items:center;border-bottom:1px solid #ddd;z-index:1}
+button{padding:6px 10px;font-size:14px;cursor:pointer}
+details{border:1px solid #ddd;border-radius:6px;padding:8px 10px;margin:8px 0}
+summary{cursor:pointer;font-weight:600}
+.a{margin:8px 0 4px;color:#222}
+.w{font-size:14px;color:#c00;user-select:none}
+details.x{background:#fff2f2;border-color:#e99}
+</style></head><body>
+<h1>한국미술사 용어 정리 (0905)</h1>
+<div id="b"><label><input type="checkbox" id="o"> 틀린 것만</label><button id="e">오답 내보내기</button><button id="c">번호 복사</button></div>
+<div id="l"></div>
+<script id="d">const QA=[["한국 전통 목조 건축물에서 창방 위 평벽 중간에 얹어 장여를 받치기 위해, 화분·연꽃·사자 등을 그려 끼우는 널조각은?", "화반."], ["화반 중 아래쪽이 넓고 위쪽이 좁은 모양을 무엇이라 하는가?", "복화반."], ["흉중구학(胸中丘壑)의 뜻은?", "마음속에 언덕과 골짜기의 심상이 있다는 용어. 산수를 심상으로 구성하고 파악함으로써 참다운 산수화를 그려낼 수 있다는 것. 예술관에 입각해 자연을 미화시키는 이상화를 중요시함."]];</script>
+<script id="s">
+const L=document.getElementById('l'),O=document.getElementById('o');
+let W={};try{W=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){}
+const sv=()=>{try{localStorage.setItem(KEY,JSON.stringify(W))}catch(e){}};
+const ft=()=>[...L.children].forEach((d,i)=>d.hidden=O.checked&&!W[i]);
+const N=()=>Object.keys(W).map(Number).sort((a,b)=>a-b);
+QA.forEach((q,i)=>{
+ const d=document.createElement('details');
+ d.innerHTML='<summary>'+(i+1)+'. '+q[0]+'</summary><div class="a">'+q[1]+'</div><label class="w"><input type="checkbox"> 틀림</label>';
+ const c=d.querySelector('input');c.checked=!!W[i];d.classList.toggle('x',!!W[i]);
+ c.onchange=()=>{c.checked?(W[i]=1):(delete W[i]);d.classList.toggle('x',c.checked);sv();ft()};
+ L.appendChild(d);
+});
+O.onchange=ft;ft();
+const fb=t=>{const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(e){}a.remove();alert('복사: '+t)};
+document.getElementById('c').onclick=()=>{const t=N().map(i=>i+1).join(',');try{navigator.clipboard.writeText(t).then(()=>alert('복사: '+t),()=>fb(t))}catch(e){fb(t)}};
+document.getElementById('e').onclick=()=>{
+ const s=N().map(i=>QA[i]);if(!s.length)return alert('체크된 문항이 없습니다.');
+ const h='<!doctype html><meta charset="utf-8"><script>const KEY="'+KEY+'-wrong";<\/script><title>'+document.title+' 오답</title>'+document.querySelector('style').outerHTML+'<h1>'+document.querySelector('h1').textContent+' — 오답</h1>'+document.getElementById('b').outerHTML+'<div id="l"></div><script>const QA='+JSON.stringify(s)+';<\/script><script>'+document.getElementById('s').textContent+'<\/script>';
+ const u=URL.createObjectURL(new Blob([h],{type:'text/html'})),a=document.createElement('a');a.href=u;a.download=KEY+'-wrong.html';a.click();URL.revokeObjectURL(u);
+};
+</script></body></html>
