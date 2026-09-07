@@ -1,0 +1,36 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><script>const KEY="0903-교육학-교육심리";</script>
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>교육학 · 교육심리</title>
+<style>
+body{margin:0;padding:14px;font:16px/1.6 -apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif;background:#faf9f7;color:#1a1a1a}
+h1{font-size:19px;margin:0 0 10px}
+#bar{position:sticky;top:0;background:#faf9f7;padding:8px 0;border-bottom:1px solid #ddd;display:flex;gap:8px;align-items:center;flex-wrap:wrap;z-index:1}
+button{font:inherit;font-size:14px;padding:5px 10px;border:1px solid #bbb;border-radius:7px;background:#fff}
+#cnt{font-size:13px;color:#777;margin-left:auto}
+details{border-bottom:1px solid #e5e3df;padding:9px 2px}
+summary{cursor:pointer;font-weight:600}
+details p{margin:8px 0 6px;padding-left:10px;border-left:3px solid #c9c5bd;color:#333;white-space:pre-wrap}
+details.x{background:#fdecec;border-radius:6px;padding-left:6px}
+label.w{font-size:13px;color:#a33;cursor:pointer;user-select:none}
+</style></head><body>
+<h1>교육학 · 교육심리</h1>
+<div id="bar"><label><input type="checkbox" id="only"> 틀린 것만</label>
+<button id="ex">오답 내보내기</button><button id="cp">번호 복사</button><span id="cnt"></span></div>
+<div id="list"></div>
+<script>
+const QA=[["사회인지이론이란?", "인간은 주변 사람의 행동을 관찰하고 모델링함으로써 학습하고 동기화된다는 이론"], ["모델링(관찰학습)의 과정은?", "주의집중 - 파지 - 재생산 - 동기화"], ["모델링 과정에서 주의집중·파지·재생산·동기화는 각각 무엇인가?", "주의집중은 모델의 행동에 주의를 기울이는 것, 파지는 그 정보를 기억 속에 저장하는 것, 재생산은 파지한 행동을 실제로 수행하는 것, 동기화는 그에 대한 강화를 받는 것"], ["자기효능감 증진 방안은?", "달성 가능한 목표·도전적 과제·코칭과 스캐폴딩을 통한 성공 경험 제공, 자신과 비슷한 타인의 성취를 관찰하는 성공 경험의 모델링, 협동학습을 통한 성공 경험, 교사의 긍정적 피드백, 실패 시 노력·전략 귀인으로 유도"], ["스턴버그 지능 삼원론의 기본 관점은?", "지능은 단일 요인이 아니라 세 가지 하위 지능으로 구성된다고 봄"], ["지능 삼원론의 세 가지 지능은?", "분석적 지능, 경험적 지능, 실제적(실천적) 지능"], ["분석적 지능의 하위 요소는?", "메타요소, 수행요소, 지식습득요소"], ["경험적 지능의 하위 요소는?", "신기성(통찰력)과 자동화"], ["통찰의 세 가지 요소는?", "선택적 부호화, 선택적 결합, 선택적 비교"], ["실제적 지능이란?", "실제 생활에서 환경에 잘 적응하고, 필요한 경우 환경을 변화시키거나 더 나은 새로운 환경을 선택하는 능력"]];
+const $=s=>document.querySelector(s),L=$("#list");let st={};
+try{st=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}};
+const wr=()=>QA.map((q,i)=>i).filter(i=>st[i]);
+const flt=()=>{const o=$("#only").checked;[...L.children].forEach((d,i)=>d.hidden=o&&!st[i]);$("#cnt").textContent="오답 "+wr().length+" / "+QA.length};
+QA.forEach((q,i)=>{const d=document.createElement("details");
+d.innerHTML="<summary>"+(i+1)+". "+q[0]+"</summary><p>"+q[1]+"</p><label class=w><input type=checkbox> 틀림</label>";
+const c=d.querySelector("input");c.checked=!!st[i];if(c.checked)d.className="x";
+c.onchange=()=>{st[i]=c.checked;d.className=c.checked?"x":"";save();flt()};L.appendChild(d)});
+$("#only").onchange=flt;flt();
+$("#ex").onclick=()=>{const w=wr().map(i=>QA[i]);
+const h="<!doctype html>"+document.documentElement.outerHTML.replace(/const QA=\[[\s\S]*?\];/,()=>"const QA="+JSON.stringify(w)+";").replace(/const KEY="[^"]*"/,()=>'const KEY="'+KEY+'-wrong"');
+const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([h],{type:"text/html"}));a.download=KEY+"-wrong.html";a.click()};
+const fb=t=>{const x=document.createElement("textarea");x.value=t;document.body.appendChild(x);x.select();try{document.execCommand("copy")}catch(e){}x.remove()};
+$("#cp").onclick=()=>{const t=wr().map(i=>i+1).join(",");try{navigator.clipboard.writeText(t).catch(()=>fb(t))}catch(e){fb(t)}};
+</script></body></html>
