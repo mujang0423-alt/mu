@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>0903 표현 · 디자인사와 색채</title>
+<style>
+body{font:16px/1.65 system-ui,-apple-system,sans-serif;max-width:820px;margin:0 auto;padding:14px;background:#fafafa;color:#222}
+h1{font-size:18px;margin:6px 0}
+#bar{position:sticky;top:0;background:#fafafa;padding:8px 0;margin-bottom:6px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;border-bottom:1px solid #ddd;font-size:14px}
+button{padding:6px 10px;border:1px solid #bbb;border-radius:6px;background:#fff;font-size:14px;cursor:pointer}
+details{background:#fff;border:1px solid #e2e2e2;border-radius:8px;padding:10px 12px;margin:8px 0}
+summary{cursor:pointer;font-weight:600;list-style:none}
+summary::-webkit-details-marker{display:none}
+.a{margin-top:8px;padding-top:8px;border-top:1px dashed #ddd}
+.wrong{background:#fff2f2;border-color:#e59a9a}
+.w{float:right;font-size:13px;font-weight:400;color:#c33;margin-left:8px}
+.n{color:#999;margin-right:5px}
+#cnt{color:#666}
+</style></head><body>
+<h1>0903 표현 · 디자인사와 색채</h1>
+<div id="bar"><label><input type="checkbox" id="only"> 틀린 것만</label><button id="exp">오답 내보내기</button><button id="cpy">번호 복사</button><span id="cnt"></span></div>
+<div id="list"></div>
+<script>
+const KEY="0903-표현-디자인사색채";
+const QA=[["디자인의 조건 4가지", "합목적성(기능성), 심미성, 경제성, 독창성"], ["미술공예운동의 배경", "산업혁명의 기계 생산으로 제품의 미적 품질이 저하되고, 빈부격차 심화·자연미 파괴 등 사회 문제가 대두됨. 또한 수공예 노동자의 지위 불안과 노동에 대한 진정한 기쁨을 추구하며 등장."], ["미술공예운동의 성과", "최초의 디자인 품질 회복 운동으로 디자인의 기본 이념을 마련하는 기틀이 됨. 기능성과 심미성의 조화는 아르누보에 영향. 미술과 수공예를 결합해 공예의 지위를 순수미술 수준으로 격상시킴."], ["윌리엄 모리스의 업적", "사회주의 개척자로서의 정치적 기여와 연설, 중세 고딕 복고 운동의 주요 지지자, 모리스·마셜·포크너 상회 설립, 만국박람회 전시, 레드 하우스 건축."], ["고딕 복고 디자인의 두 가지 규칙", "① 편의·용도·구조에 있어 군더더기가 없어야 한다.<br>② 모든 장식은 건물의 기본 구조에 한정되어야 한다."], ["빈 분리파의 특징", "순수미술과 응용미술을 결합해 총체예술을 추구. 초기 아르누보의 영향에서 곡선을 배제하고 직선적·기하학적·반복적 디자인으로 전환. 재료 자체의 특성을 살림. 재정적 뒷받침을 위해 빈 공방을 운영하고 소속 작가들의 협업 체제로 총체예술을 실현."], ["독일공작연맹의 성과", "표준화·규격화 운동을 최초로 시행해 바우하우스에 영향을 줌. 예술과 공업의 결합으로 예술의 대중화를 추구. 현대 디자인의 기초와 바우하우스 실천적 교육의 기틀을 마련."], ["독일공작연맹의 한계", "장식성을 지나치게 배제하고 기능성만 강조해 차갑고 기계적인 디자인에 머물렀다."], ["바우하우스의 성과", "기계 시대의 논리를 디자인 논리에 반영해 기능주의 디자인을 확립하고, 종합예술을 추구해 미술의 대중화에 기여."], ["바우하우스의 시대별 특징", "바이마르: 이텐이 영성과 창조력을 고취<br>데사우: 하네스 마이어, \"형태는 기능과 비용을 따른다\"<br>베를린: 건축 교육에 중점"], ["유럽 기능주의 디자인의 특징", "직육면체 구성, 장식 없는 벽면, 큰 유리창, 강철로 된 상자 모양의 형태. 몰개성적·국제적 디자인을 추구했고 철·유리·콘크리트 등 산업 재료를 사용."], ["미국 기능주의 디자인의 특징", "1929년 경제대공황 이후 디자인을 통한 상업적 목적을 추구. 유선형 디자인과 리디자인을 통해 디자인의 상업성을 모색."], ["리디자인이란?", "기능은 그대로 두고 겉모습(외형)만 바꾸는 것."], ["스칸디나비아 모던 디자인의 특징", "간결한 형태, 조각 같은 흐르는 형태, 깨끗한 목재. 너도밤나무·티크 등 자연 소재와 인공 소재를 함께 사용."], ["유기적 건축의 특징", "모서리 창문, 캔틸레버 구조, 원형 기둥을 사용해 내·외부가 유기적으로 연결되는 공간을 추구. 건물이 세워질 대지의 속성을 그대로 살리고, 재료를 가공하지 않고 특성을 살림. 토털 디자인 추구."], ["유기적 건축의 성과", "스칸디나비아 모던 디자인과 오르가닉 디자인에 영향. 주창자인 프랭크 로이드 라이트가 미국인이어서 세계 건축의 중심이 유럽에서 미국으로 옮겨오는 계기가 됨. 저서 『건축을 위하여』."], ["이탈리아 벨 디자인", "굿 디자인 개념에 반발하며 등장(1960년대 네오모더니즘·상업적 모더니즘에 대한 반발). 기능성 대신 사물을 아름다운 오브제로 인식하고, 감성을 자극하는 예술적 오브제로서 디자인. 아이러니·키치, 선명한 색상 사용."], ["멤피스 그룹의 이념과 조형적 특징", "기능주의에 반발했으나 기계 생산은 염두에 둠. 화려한 색상, 불규칙성, 과거 이미지의 차용, 키치·아이러니. 플라스틱 라미네이트·네온관 등 신재료 사용. 대중과의 관계를 고려하고 소비자 경험을 증대, 차용과 혼성 모방을 활용."], ["포스트모더니즘 디자인의 특징", "자유롭고 다양한 형태, 화려한 원색, 기능성보다 아름다움 중시, 플라스틱·합성수지 등 다양한 재료, 장식적·키치·아이러니. 제품 자체보다 제품이 인간에게 주는 심리적 영향과 사회적 논의에 초점을 맞춰 사회적 가치를 중시. 다양한 상징 도입, 지난 스타일과의 융합, 이미지 중첩·콜라주·포토몽타주 활용."], ["캘리포니아 뉴웨이브란?", "이탈리아·미국·영국 문화를 기반으로 확장된 포스트모더니즘 그래픽 디자인 운동. 잡지 『에미그레』 창간으로 성장. 메시지가 레이어를 통해 해체되는 효과를 얻기 위해 화면의 자유롭고 다층적인 구성을 추구."], ["컨템포러리 스타일이 일어난 나라는?", "영국"], ["단순·소박하며 목재료를 사용하는 독일 양식은?", "비더마이어 양식"], ["색채의 3요소", "색상, 명도, 채도"], ["색채 대비의 크게 두 종류", "계시대비(계속대비), 동시대비"], ["계시대비란?", "먼저 본 색의 영향으로 나중에 본 색이 다르게 보이는 현상. 유채색은 앞서 본 색의 보색 잔상이 더해져 보이고, 무채색은 명암이 반대로 보인다."], ["정의 잔상과 부의 잔상의 차이", "정의 잔상: 원자극과 같은 색상·명도의 자극이 그대로 남는 잔상.<br>부의 잔상: 원자극과 반대되는 보색 잔상이 남는 현상."], ["오스트발트 색상환을 만드는 방법", "빨강·노랑·초록·파랑을 배치하고 그 사이에 주황·연두·청록·보라를 끼워 넣어 8색을 만든 뒤, 각각을 3등분해 총 24색상을 만든다."], ["오스트발트 표색계의 순도", "백색량(W) + 흑색량(B) + 순색량(C) = 100이 되며, 순도는 순색량의 비율로 나타낸다."], ["슈브뢸 색채조화론의 조화 종류", "등간격 3색 조화, 주조색의 조화(도미넌트 배색), 인접색 조화, 근접 보색 조화"], ["비렌 색채조화론의 7요소", "흰색, 회색, 검정, 순색, 밝은 색조(틴트), 어두운 색조(셰이드), 톤"], ["저드의 색채조화 4원리", "질서의 원리, 친근성의 원리, 유사성(공통성)의 원리, 명료성의 원리"], ["베졸트 효과(동화 효과)란?", "굵기가 가늘고 간격이 좁을수록, 명도나 색상 차가 적을수록 주변 색과 유사하게 동화되어 보이는 현상."], ["가산혼합과 감산혼합의 3원색", "가산혼합: RGB (각각 255로 모두 더하면 백색광)<br>감산혼합: CMY"], ["먼셀 표색계의 명도·채도 단계", "명도: 0~10의 11단계<br>채도: 1~14단계"], ["채도가 가장 높은 색", "빨강, 노랑"], ["헥스 코드란?", "RGB의 각 색상마다 코드를 부여한 표기 방식. 여섯 자리의 영문·숫자로 표기하며 FFFFFF는 흰색."], ["오방색: 황색과 흑색의 간색", "유황색"], ["오방색: 적색과 흑색의 간색", "자색(자주색)"], ["오방색: 백색과 적색의 간색", "홍색"], ["오방색: 백색(또는 청색)과 청색의 간색", "벽색"], ["흑색이 상징하는 수호신과 오행", "수호신: 현무 / 오행: 수(水)"], ["청색의 오행", "목(木)"], ["푸르키니에 현상이란? 각각 어떤 시세포가 작용하는가?", "어두울 때는 푸른색을, 밝을 때는 붉은색을 더 잘 인식하는 현상. 암순응 시에는 간상체, 명순응 시에는 추상체가 작용한다."], ["헤르만 그리드 현상이란?", "흰 배경에 검정 사각형이 배열되어 있을 때 교차점에 회색 잔상 점이 보이는 현상. 연변대비와 명도대비 때문에 일어난다."]];
+let S=[];try{S=JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){}
+const L=document.getElementById("list"),O=document.getElementById("only");
+QA.forEach((q,i)=>{const n=i+1,d=document.createElement("details");
+d.innerHTML='<summary><label class="w"><input type="checkbox"> 틀림</label><span class="n">'+n+'.</span>'+q[0]+'</summary><div class="a">'+q[1]+'</div>';
+const c=d.querySelector("input");c.checked=S.includes(n);if(c.checked)d.classList.add("wrong");
+c.onclick=e=>{e.stopPropagation();S=S.filter(x=>x!=n);if(c.checked)S.push(n);S.sort((a,b)=>a-b);d.classList.toggle("wrong",c.checked);save();flt()};
+L.appendChild(d)});
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function flt(){[...L.children].forEach((d,i)=>d.style.display=O.checked&&!S.includes(i+1)?"none":"");cnt.textContent="오답 "+S.length+" / "+QA.length}
+O.onchange=flt;flt();
+function fb(t){const a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();try{document.execCommand("copy")}catch(e){}a.remove()}
+cpy.onclick=()=>{const t=S.join(",");try{navigator.clipboard.writeText(t).catch(()=>fb(t))}catch(e){fb(t)}};
+exp.onclick=()=>{const src=document.querySelector("script").textContent.replace(/const QA=\[[\s\S]*?\];/,"const QA="+JSON.stringify(QA.filter((_,i)=>S.includes(i+1)))+";").replace('const KEY="'+KEY+'"','const KEY="'+KEY+'-wrong"');
+const h='<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+KEY+'-wrong<\/title>'+document.querySelector("style").outerHTML+'<\/head><body><h1>'+KEY+' 오답<\/h1>'+document.getElementById("bar").outerHTML+'<div id="list"><\/div><script>'+src+'<\/script><\/body><\/html>';
+const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([h],{type:"text/html"}));a.download=KEY+"-wrong.html";a.click();URL.revokeObjectURL(a.href)};
+</script></body></html>

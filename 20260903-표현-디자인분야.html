@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>0903 표현 · 디자인 분야(시각·환경·사진영상)</title>
+<style>
+body{font:16px/1.65 system-ui,-apple-system,sans-serif;max-width:820px;margin:0 auto;padding:14px;background:#fafafa;color:#222}
+h1{font-size:18px;margin:6px 0}
+#bar{position:sticky;top:0;background:#fafafa;padding:8px 0;margin-bottom:6px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;border-bottom:1px solid #ddd;font-size:14px}
+button{padding:6px 10px;border:1px solid #bbb;border-radius:6px;background:#fff;font-size:14px;cursor:pointer}
+details{background:#fff;border:1px solid #e2e2e2;border-radius:8px;padding:10px 12px;margin:8px 0}
+summary{cursor:pointer;font-weight:600;list-style:none}
+summary::-webkit-details-marker{display:none}
+.a{margin-top:8px;padding-top:8px;border-top:1px dashed #ddd}
+.wrong{background:#fff2f2;border-color:#e59a9a}
+.w{float:right;font-size:13px;font-weight:400;color:#c33;margin-left:8px}
+.n{color:#999;margin-right:5px}
+#cnt{color:#666}
+</style></head><body>
+<h1>0903 표현 · 디자인 분야(시각·환경·사진영상)</h1>
+<div id="bar"><label><input type="checkbox" id="only"> 틀린 것만</label><button id="exp">오답 내보내기</button><button id="cpy">번호 복사</button><span id="cnt"></span></div>
+<div id="list"></div>
+<script>
+const KEY="0903-표현-디자인분야";
+const QA=[["픽토그램이란?", "문자나 뜻을 상징적인 그림으로 시각화한 것. 그림으로 문자의 역할을 대신하여 언어의 장벽을 넘는 수단으로 사용된다."], ["픽토그램의 조건 3가지", "주목성, 가독성, 심미성"], ["심벌마크란?", "단체·기업·행사 등의 특성이나 이미지를 시각적으로 표현한 그림이나 기호."], ["로고타이프란?", "단체·기업·상품 등의 명칭을 독창적으로 디자인한 것."], ["시그니처는 무엇과 무엇이 결합한 것인가?", "심벌마크 + 로고타이프"], ["캐릭터의 조건", "특징, 생명력, 성격, 어필(부각). 형태·색채 등은 '특징'에 포함된다."], ["CIP란?", "기업이 가진 시각 이미지를 일관성 있게 통일하기 위한 전략. 다양한 디자인을 하나의 컨셉으로 통일시켜 기업 이미지를 확실히 인식시킨다."], ["CIP의 3요소", "MI(마인드 아이덴티티), BI(행동 아이덴티티), VI(시각 아이덴티티)"], ["VI(시각 아이덴티티)란?", "로고, 심벌마크, 캐릭터, 색채 등 시각적 요소를 활용해 기업 이념을 일관성 있게 표현하는 과정."], ["인포그래픽과 다이어그램의 차이", "인포그래픽: 차트·그래픽 등을 축약해 그린 그림으로, 복잡한 정보를 빠르게 전달한다.<br>다이어그램: 막대·기호·선·점 등으로 어떤 현상의 상호관계나 구조를 설명한다. 인포그래픽의 한 종류."], ["DM 광고의 장점", "제작 비용이 저렴하고, 타 광고의 간섭 없이 독자적인 광고가 가능하며, 특정 고객을 겨냥해 광고할 수 있어 친근감을 유발한다."], ["DM 광고의 단점", "명단·주소의 수집 및 관리가 어렵고, 무시·거부·유실에 의한 광고지 손실이 있으며, 일방적 전달로 신뢰도가 하락할 수 있다."], ["DM의 종류 3가지", "카탈로그, 팸플릿, 리플릿"], ["리플릿이란?", "낱장으로 된 인쇄 광고."], ["카탈로그란?", "견본 책자로서 상품을 비교적 상세하게 소개한 것."], ["인쇄 광고 매체의 조형 요소", "일러스트레이션, 심벌마크, 로고타이프, 시그니처, 보더라인"], ["인쇄 광고 매체의 내용 요소", "헤드라인, 서브헤드라인, 바디카피"], ["POP 광고의 장점", "상품·브랜드에 대한 주목성을 높이고, 소비자에게 상품 정보를 알려 쇼핑을 편하게 하며, 충동구매를 유도하고, 상점을 장식하는 효과가 있다."], ["전시할 때 고려사항 3가지", "눈높이, 동선, 조명"], ["동선의 3요소", "빈도, 속도, 하중"], ["쇼룸이란?", "특정 테마를 가지고 상품들을 구성해 놓은 공간."], ["쇼케이스란?", "고가품이나 작은 상품, 외부 차단이 요구되는 제품을 유리로 진열하는 방법."], ["카톤 디스플레이란?", "두꺼운 종이(골판지) 등으로 만든 상자에 상품을 넣어 열어 놓고 진열하는 방법. 예) 신발 상자에 신발을 넣어 진열."], ["디오라마란?", "하나의 사건이나 한 장면을 현장감과 입체감을 살려 연출하는 것. 축소형으로 만들기도 하고 실물과 같은 크기로 만들기도 한다."], ["멀티미디어 디자인이란?", "멀티미디어 콘텐츠 기획, 인터넷 사이트, 방송, 디지털 영상 제작·편집, 영상 특수효과 등 디지털 매체를 이용해 디자인하는 분야."], ["멀티미디어의 구성 요소", "문자, 그래픽, 사운드, 애니메이션, 비디오"], ["멀티미디어 디자인의 특징", "쌍방향 커뮤니케이션, 상호작용성, 사용자 중심, 사용자 인터페이스"], ["애니메이션의 원리", "정지된 이미지를 연속적으로 보여줌으로써 시각적 잔상 효과에 의해 움직이는 효과를 만들어 내는 것."], ["풀 애니메이션과 리미티드 애니메이션의 차이", "풀: 초당 24프레임. 물 흐르듯 자연스러운 움직임.<br>리미티드: 초당 8~16프레임. 상대적으로 끊기는 느낌."], ["로토스코핑이란?", "실사의 움직임을 먼저 촬영해 동화상을 만든 후 애니메이션 이미지를 합성하는 기법. 셀을 그린 뒤 애니메이션 필름과 동화상 필름을 하나로 만든다."], ["제로그라피란?", "잡지나 사진 등을 복사기를 사용해 편집한 후 애니메이션을 제작하는 기법. 다양한 심리적 효과와 함께 비교적 쉽고 빠르게 제작할 수 있다."], ["셀 애니메이션 제작 과정에서 각 동작의 포인트가 되는 그림", "원화"], ["스트리트 퍼니처란?", "거리에 설치되는 공공 시설물."], ["스트리트 퍼니처의 종류", "볼라드, 신호등, 키오스크, 가로등, 벤치 등"], ["피사계 심도에 영향을 미치는 요소", "조리개, 초점거리, 피사체와 카메라의 거리"], ["피사계 심도가 깊어지는 조건", "조리개를 조이고, 초점거리가 짧고, 피사체와 카메라의 거리가 멀 때."], ["피사계 심도가 얕아지는 조건", "조리개를 열고, 초점거리가 길고, 피사체와 카메라의 거리가 가까울 때."], ["펜듈럼이란?", "움직이는 피사체의 궤적(동선)이 드러나도록 촬영하는 기법."], ["패닝이란?", "움직이는 피사체를 추적하면서 촬영하는 기법."], ["주밍이란?", "줌 렌즈로 초점거리를 다르게 하면서 촬영하는 방법."], ["표준 렌즈보다 화각이 넓은 렌즈는?", "광각 렌즈"], ["포토제닉 드로잉이란?", "염화은 용액에 담갔다 건조시킨 종이 위에 물체를 올려놓고 빛에 직접 노출시켜 영상을 얻어내는 기법."], ["다게레오타입 / 칼로타입·포토제닉 드로잉의 발명자", "다게레오타입: 다게르<br>칼로타입·포토제닉 드로잉: 탤벗"], ["스테디캠이란?", "카메라를 들고 촬영할 때 흔들림을 방지해 주는 받침대."], ["영문체의 큰 두 분류", "로만체(세리프체), 산세리프체"], ["한글체의 큰 두 분류", "명조체, 고딕체. 고딕은 판본체에, 명조는 궁체에 가깝다."], ["착시 교정에서 시각 중심이란?", "교차점이 생기는 문자를 디자인할 때 맞춰야 하는 중심으로, 측량 중심보다 왼쪽·위쪽으로 올라간 지점."], ["사례 아이콘이란? 어떤 개념 전달에 효과적인가?", "개념을 연상시키거나 대표할 수 있는 사례를 이미지로 활용한 아이콘. 복잡한 개념을 전달할 때 효과적이다."], ["그린 디자인의 개념", "자연 생태계에 피해를 주지 않으면서 자연 친화적으로 디자인하는 것."], ["그린 디자인 5원칙", "재활용, 재사용, 절감, 재충전, 재생"], ["그린 디자인 8원칙에서 5원칙 외에 추가되는 항목", "제품 수명 연장을 위한 디자인, 미생물 분해를 위한 디자인, 에너지 효율성 중심의 디자인 (3R = 재활용·재사용·절감)"], ["유니버설 디자인의 7원칙", "① 누구나 공평하게 사용할 수 있을 것 ② 사용상의 융통성 ③ 간단하고 직관적인 사용 ④ 쉽게 인지할 수 있는 정보 ⑤ 오류에 대한 포용력 ⑥ 적은 물리적 노력 ⑦ 접근과 사용을 위한 충분한 공간 (⑦은 2023년 기출)"]];
+let S=[];try{S=JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){}
+const L=document.getElementById("list"),O=document.getElementById("only");
+QA.forEach((q,i)=>{const n=i+1,d=document.createElement("details");
+d.innerHTML='<summary><label class="w"><input type="checkbox"> 틀림</label><span class="n">'+n+'.</span>'+q[0]+'</summary><div class="a">'+q[1]+'</div>';
+const c=d.querySelector("input");c.checked=S.includes(n);if(c.checked)d.classList.add("wrong");
+c.onclick=e=>{e.stopPropagation();S=S.filter(x=>x!=n);if(c.checked)S.push(n);S.sort((a,b)=>a-b);d.classList.toggle("wrong",c.checked);save();flt()};
+L.appendChild(d)});
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function flt(){[...L.children].forEach((d,i)=>d.style.display=O.checked&&!S.includes(i+1)?"none":"");cnt.textContent="오답 "+S.length+" / "+QA.length}
+O.onchange=flt;flt();
+function fb(t){const a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();try{document.execCommand("copy")}catch(e){}a.remove()}
+cpy.onclick=()=>{const t=S.join(",");try{navigator.clipboard.writeText(t).catch(()=>fb(t))}catch(e){fb(t)}};
+exp.onclick=()=>{const src=document.querySelector("script").textContent.replace(/const QA=\[[\s\S]*?\];/,"const QA="+JSON.stringify(QA.filter((_,i)=>S.includes(i+1)))+";").replace('const KEY="'+KEY+'"','const KEY="'+KEY+'-wrong"');
+const h='<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+KEY+'-wrong<\/title>'+document.querySelector("style").outerHTML+'<\/head><body><h1>'+KEY+' 오답<\/h1>'+document.getElementById("bar").outerHTML+'<div id="list"><\/div><script>'+src+'<\/script><\/body><\/html>';
+const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([h],{type:"text/html"}));a.download=KEY+"-wrong.html";a.click();URL.revokeObjectURL(a.href)};
+</script></body></html>
