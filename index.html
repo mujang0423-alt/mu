@@ -36,7 +36,7 @@ textarea{width:100%;height:200px;font:13px/1.6 ui-monospace,monospace;margin-top
 </div>
 <div class=bar>
 <button id=go>전체 오답 모아보기</button>
-<button id=rnd>랜덤 10문항</button>
+<button id=rnd>랜덤 오답 10문항</button>
 <button id=txt>오답 텍스트</button>
 <button id=sy>동기화</button>
 <button id=tk>토큰</button>
@@ -51,6 +51,7 @@ const REPO="mujang0423-alt/mu", EXAM=[2026,11,28], DOFF=0;
 
 /* ── 자동 인식 안 되는 파일 보정: "파일명(확장자 제외)":["과목","MMDD"] ──
    과목은 서미/한미/중미/미교/교육학 중 하나. 날짜 없으면 "" 로 두면 됨.
+   날짜는 0901 / 260901 / 20260901 / 2026-09-01 다 됨.
    앞으로는 파일명을 0901-서미-바로크.html 처럼 만들면 여기 안 적어도 됨. */
 const FIX={
  "원명청":["중미","0828"],
@@ -71,24 +72,42 @@ const SUBJ=[["서미",["서미","서양미술사"]],
             ["교육학",["교육학","교육과정","교육평가","교육심리","교육사회","교육행정","교육"]]];
 const esc=s=>String(s).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
 const key=n=>n.replace(/\.html$/,"");
-function mmdd(s){
-  const m=s.match(/(\d{2})(\d{2})/);if(!m)return null;
-  const y=new Date().getFullYear(), d=new Date(y,+m[1]-1,+m[2]);
-  if(d-new Date()>60*864e5)d.setFullYear(y-1);
+/* 날짜 인식: 0901(MMDD) / 260901(YYMMDD) / 20260901(YYYYMMDD)
+   및 2026-09-01, 26.09.01 처럼 구분자가 있는 형태까지 모두 지원 */
+function toDate(y,mo,dy){
+  if(mo<1||mo>12||dy<1||dy>31)return null;
+  const d=new Date(y,mo-1,dy);
+  return (d.getMonth()===mo-1&&d.getDate()===dy)?d:null;
+}
+function noYear(mo,dy){            // 연도 없는 MMDD: 60일 이상 미래면 작년으로
+  const y=new Date().getFullYear();
+  let d=toDate(y,mo,dy);
+  if(d&&d-Date.now()>60*864e5)d=toDate(y-1,mo,dy);
   return d;
+}
+function fromDigits(g){            // 숫자 덩어리 하나를 날짜로
+  if(g.length===8)return toDate(+g.slice(0,4),+g.slice(4,6),+g.slice(6,8));
+  if(g.length===6)return toDate(2000+ +g.slice(0,2),+g.slice(2,4),+g.slice(4,6));
+  if(g.length===4)return noYear(+g.slice(0,2),+g.slice(2,4));
+  return null;
+}
+function parseDate(s){
+  if(!s)return null;
+  const t=String(s);
+  const m=t.match(/(\d{4}|\d{2})[-._/ ](\d{1,2})[-._/ ](\d{1,2})(?!\d)/);
+  if(m){const y=m[1].length===4?+m[1]:2000+ +m[1];
+        const d=toDate(y,+m[2],+m[3]);if(d)return d;}
+  for(const g of (t.match(/\d+/g)||[])){const d=fromDigits(g);if(d)return d;}
+  return null;
 }
 function dateOf(n){
   const k=key(n), f=FIX[k];
-  if(f&&f[1])return mmdd(f[1]);
-  const m=k.match(/(\d{4})(\d{2})(\d{2})/);
-  if(m)return new Date(+m[1],+m[2]-1,+m[3]);
-  const s=k.match(/(?:^|[^\d])(\d{4})(?:[^\d]|$)/);
-  return s?mmdd(s[1]):null;
+  return (f&&f[1]) ? parseDate(f[1]) : parseDate(k);
 }
 function subjOf(n){
   const k=key(n), f=FIX[k];
   if(f&&f[0])return f[0];
-  const t=k.replace(/^qa-/,"").replace(/\d{4,8}/,"");
+  const t=k.replace(/^qa-/,"").replace(/\d+/g,"");
   for(const[s,al]of SUBJ)if(al.some(a=>t.includes(a)))return s;
   return "기타";
 }
@@ -233,15 +252,18 @@ txt.onclick=async()=>{
 rnd.onclick=async()=>{
   busy(rnd,"뽑는 중…",1);
   const pool=[];
-  for(const n of files){let qa=[];try{qa=await parse(n)}catch(e){continue}
-    qa.forEach((x,i)=>pool.push([key(n),i+1,x[0],x[1],subjOf(n)]))}
-  pool.sort(()=>Math.random()-.5);
+  for(const n of files){
+    const w=wrongOf(n);if(!w.length)continue;
+    let qa=[];try{qa=await parse(n)}catch(e){continue}
+    w.forEach(i=>{if(qa[i])pool.push([key(n),i+1,qa[i][0],qa[i][1],subjOf(n)])});
+  }
+  for(let i=pool.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));const t=pool[i];pool[i]=pool[j];pool[j]=t}
   const p=pool.slice(0,10);
-  showOut(p.length?"<h2>랜덤 "+p.length+"문항</h2>"+p.map(q=>
+  showOut(p.length?"<h2>랜덤 오답 "+p.length+"문항 <span class=n>(전체 오답 "+pool.length+")</span></h2>"+p.map(q=>
     "<details><summary>"+esc(q[2])+"</summary><div class=a>"+esc(q[3])
     +"</div><div class=src>"+q[4]+" | "+esc(q[0])+" · "+q[1]+"번</div></details>").join("")
-    :"<p id=msg>문항이 없어요.</p>");
-  busy(rnd,"랜덤 10문항",0);
+    :"<p id=msg>체크된 오답이 없어요. 각 파일에서 '틀림'을 체크한 뒤 다시 눌러주세요.</p>");
+  busy(rnd,"랜덤 오답 10문항",0);
 };
 
 /* ── 기기 간 동기화 ── */
