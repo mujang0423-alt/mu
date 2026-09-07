@@ -1,0 +1,74 @@
+<!doctype html><html lang="ko"><meta charset="utf-8">
+<script>const KEY="0907-한미-조선후기말기";</script>
+<title>0907 한미 · 조선 후기~말기</title>
+<style>
+body{font:16px/1.6 system-ui,-apple-system,sans-serif;max-width:760px;margin:0 auto;padding:16px;color:#222}
+h1{font-size:18px;margin:0 0 10px}
+#bar{position:sticky;top:0;background:#fff;padding:8px 0;border-bottom:1px solid #ddd;display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:14px}
+button{padding:5px 10px;font-size:14px;cursor:pointer}
+.it{border-bottom:1px solid #eee;padding:8px 0}
+.it.bad{background:#ffecec;border-left:4px solid #e33;padding-left:8px}
+summary{cursor:pointer;font-weight:600}
+details p{margin:8px 0 0;white-space:pre-wrap}
+.w{font-size:13px;color:#a00;margin-left:4px;cursor:pointer}
+.hide{display:none}
+#cnt{color:#666;margin-left:auto}
+</style>
+<h1>한국미술사 — 조선 후기·말기 (0907)</h1>
+<div id="bar">
+<label><input type="checkbox" id="only"> 틀린 것만</label>
+<button id="exp">오답 내보내기</button><button id="cp">번호 복사</button>
+<span id="cnt"></span>
+</div>
+<div id="list"></div>
+<script id="d">const QA=[
+["김홍도와 신윤복 비교","· 김홍도: 서민의 일상 풍속, 절로묘(굵고 변화 있는 선), 원형·X자형 구도, 배경 생략\n· 신윤복: 양반의 은밀한 사생활, 철선묘(가늘고 일정한 선), 수직·수평의 정적 구도, 배경 묘사"],
+["풍속화에서 배경을 그린 사람은?","신윤복. 김홍도는 배경을 생략했다."],
+["윤두서","조선 후기 풍속화의 개척을 알린 인물. 자화상으로 유명. 그가 그린 풍속화는 배경이 관념산수이고 인물도 정적이어서, 지식인의 눈으로 본 당대 사회의 모습이 드러난다."],
+["조선 후기 회화의 시대적 배경","· 명 멸망 이후 민족 자주의식 회복 → 명의 화보를 베끼기보다 우리 산천을 그리자는 의식(진경산수)\n· 기행 지도 제작·여행 풍조 → 기행문학과 실제 유람 후 그리는 그림 유행\n· 상공업 발달로 중산 계급 증가 → 그림 수요층이 평민까지 확대, 길상적 상징을 담은 그림 유행"],
+["강세황 <자화상>","얼굴은 공필법·훈염법으로 세밀하게, 옷은 상대적으로 단순하게 그렸다. 관모(오사모)에 야복(평상복)을 입은 부조화가 특징이며, 자화자찬(제찬)을 써서 '몸은 조정에 있으나 마음은 산림에 있다'는 뜻을 표현했다. 얼굴에 육리문을 사용했다."],
+["심사정 <연지쌍압도>","오리(鴨) 두 마리 = 소과·대과 모두 갑(1등)으로 합격하라는 뜻. 연꽃(蓮) = '연달아' 합격하라는 뜻."],
+["여항문인화가란?","신분상 중앙 관직에 나가지 못하고 마을에 모여 자신들만의 문화 집단을 만들어 활동한 중인 계급의 화가."],
+["조선 말기 회화의 특징","김정희를 필두로 한 사의(寫意) 사상 대두로 남종화 일색이 됨. 후기에 유행한 풍속화·진경산수 등 한국적인 미는 퇴색. 후반에는 서양화법이 유입되고, 구도·주제·배치가 파격적인 신감각파가 등장."],
+["이인상 <설송도>","곧게 선 가지는 선비의 지조, 휘어진 가지는 나라를 걱정하는 마음. 유백법(처음부터 흰 부분을 남김)과 분지법(백반 푼 물에 담근 종이 사용)을 썼다.\n상징: 늙은 소나무=지조와 절개, 드러난 뿌리=뿌리 뽑힌 지식인, 각진 바위=신분적 제약 / 단단한 마음·굳은 의지"],
+["조선시대 초상화의 흐름(전기→말기)","· 전기: 홍토색(황토빛) 얼굴, 얼굴·옷 모두 경직\n· 중기: 옷은 여전히 딱딱하나 얼굴에 담색(살구빛)이 돌고 훈염법·공필법 발달\n· 후기: 육리문 등 사실적 묘사 심화\n· 말기: 서양화법 수용으로 얼굴에 하이라이트·명암, 사진의 영향"],
+["조희룡","여항문인화가. <매화서옥도>가 대표작. 전기(田琦)와 비슷한 주제를 다뤘으나 화면이 더 세로로 길다. 임포 고사를 소재로 삼았고, 준법을 쓰지 않으며 여백 없이 화면을 가득 채우고 제발을 사용한 점이 독자적이다."],
+["분청사기 기법의 두 계열","· 상감 분청계: 상감, 인화\n· 백토 분청계: 박지, 조화, 철화, 귀얄, 덤벙"],
+["표면을 긁어 청자 바탕을 노출시켜 문양을 도드라지게 하는 기법은?","박지(剝地) 기법. 배경을 긁어낸다."],
+["백자의 제작 방법","고령토로 성형한 뒤 장석질 유약을 발라 1300~1350℃ 환원염으로 구워낸 반투명 자기."],
+["백자의 종류","순백자, 상감백자, 청화백자, 철화백자, 동화(진사)백자."],
+["허련(소치)","김정희의 제자로 조선 말기 남종문인화가. 호남 화단(허련파)을 형성. 갈필법과 독필(禿筆)을 사용했고, 예찬의 영향을 받았으면서도 예찬의 절대준은 쓰지 않는 것이 특징."],
+["김정희 <부작란도>","추사체가 드러나며 옹방강의 영향, 문자향 서권기, 사의를 추구. 기존의 난과 달리 글씨처럼 표현했으며 초예기자지법(草隸奇字之法, 초서·예서의 필법)을 사용. 제발은 추사체."],
+["난을 칠 때 쓴 필법은?","예서(隸書)의 필법."],
+["새우가 상징하는 것은?","해로(偕老). 등이 굽어 '바다의 늙은이'로 보아, 부부가 한평생 함께 늙는다는 뜻."],
+["김두량 <흑구도>","개를 그린 그림. 절파의 영향과 서양화의 영향을 함께 받아 명암법(태서법)을 사용하고 세필로 매우 사실적으로 묘사했다. 개는 벽사의 상징으로, 새해에 모든 것을 깨끗이 하여 도둑을 막자는 의미를 담는다."],
+["김홍도 <기로세련계도>의 화면 구성","· 맨 위: 계회의 내력을 설명하는 제발\n· 그 아래: 예서로 쓴 표제\n· 윗부분: 진경산수 (김홍도 특유의 각진 하엽준)\n· 아랫부분: 풍속화·기록화 양식 (평행 투시도법)\n· 맨 아래: 좌목 → 기록화임을 알 수 있음"],
+["이인문","남종화와 북종화를 절충하여 국제적 감각의 산수화를 나타냄. 지방색을 없애고 조선의 수준 높은 산수화·풍속화를 드러내고자 했다. 계화법을 쓰고 절대준·피마준·미점준 등 다양한 준법이 나타나며, 좌우 대칭 구도가 독자적 특징. 서양화법도 부분적으로 절충."],
+["강세황 <벽오청서도>","심주의 <벽오청서도>를 방작한 작품. 남종화의 주제 영향으로 마당을 바라보는 선비와 마당을 쓰는 동자가 모티브. 태점, 피마준 등이 드러난다."],
+["강세황 <벽오청서도>가 심주의 원작과 다른 점","심주의 구도를 자유롭게 해석해 정사각형에 가까운 화면으로 바꾸고, 넉넉한 여백과 청명하고 세련된 수채화 같은 담채, 활달한 필치로 독자적 양식으로 발전시켰다."]
+];</script>
+<script id="r">
+const $=id=>document.getElementById(id),L=$('list'),B=[];
+let S=[];try{S=JSON.parse(localStorage.getItem(KEY))||[]}catch(e){}
+QA.forEach((q,i)=>{
+const w=document.createElement('div');w.className='it';
+const d=document.createElement('details');
+d.innerHTML='<summary>'+(i+1)+'. '+q[0]+'</summary><p>'+q[1]+'</p>';
+const l=document.createElement('label');l.className='w';
+const c=document.createElement('input');c.type='checkbox';c.checked=S.indexOf(i)>-1;
+l.append(c,document.createTextNode(' 틀림'));w.append(d,l);
+w.classList.toggle('bad',c.checked);L.append(w);B.push({c:c,w:w});
+c.onchange=function(){w.classList.toggle('bad',c.checked);save();flt()};
+});
+const wr=()=>B.map((b,i)=>b.c.checked?i:-1).filter(i=>i>=0);
+function save(){try{localStorage.setItem(KEY,JSON.stringify(wr()))}catch(e){}}
+function flt(){const o=$('only').checked;B.forEach(b=>b.w.classList.toggle('hide',o&&!b.c.checked));$('cnt').textContent='오답 '+wr().length+' / '+QA.length}
+$('only').onchange=flt;flt();
+$('exp').onclick=function(){
+const h='<!doctype html><html lang="ko"><meta charset="utf-8"><script>const KEY="'+KEY+'-wrong";<\/script><title>'+KEY+'-wrong<\/title>'+document.querySelector('style').outerHTML+'<h1>'+KEY+'-wrong<\/h1>'+$('bar').outerHTML+'<div id="list"><\/div><script>const QA='+JSON.stringify(wr().map(i=>QA[i]))+';<\/script><script>'+$('r').textContent+'<\/script>';
+const a=document.createElement('a'),u=URL.createObjectURL(new Blob([h],{type:'text/html'}));
+a.href=u;a.download=KEY+'-wrong.html';a.click();setTimeout(()=>URL.revokeObjectURL(u),1e3)};
+function fb(t){const x=document.createElement('textarea');x.value=t;document.body.append(x);x.select();try{document.execCommand('copy')}catch(e){}x.remove()}
+$('cp').onclick=function(){const t=wr().map(i=>i+1).join(',');
+try{navigator.clipboard.writeText(t).catch(()=>fb(t))}catch(e){fb(t)}};
+</script>
