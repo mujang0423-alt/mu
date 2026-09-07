@@ -1,0 +1,59 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>260902 교육학 교육평가</title>
+<script>const KEY="0902-교육학-교육평가";</script>
+<style>
+body{font:16px/1.6 system-ui,-apple-system,sans-serif;margin:0;padding:14px;max-width:820px;background:#fafaf8;color:#222}
+h1{font-size:17px;margin:0 0 10px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 12px}
+button{padding:7px 12px;border:1px solid #bbb;border-radius:7px;background:#fff;font-size:14px}
+label.t{font-size:14px;display:flex;gap:5px;align-items:center}
+details{border:1px solid #e0ded8;border-left:4px solid #d8d5cd;border-radius:8px;background:#fff;padding:9px 12px;margin:0 0 8px}
+details.w{border-left-color:#e05252}
+summary{cursor:pointer;font-weight:600}
+.a{margin-top:8px;padding-top:8px;border-top:1px dashed #e0ded8;white-space:pre-line}
+.c{display:inline-flex;gap:5px;align-items:center;margin-top:8px;font-size:13px;color:#a33}
+</style></head><body>
+<h1>교육학 · 교육평가 (260902)</h1>
+<div class="bar"><label class="t"><input type="checkbox" id="o"> 틀린 것만</label><button id="e">오답 내보내기</button><button id="n">번호 복사</button></div>
+<div id="l"></div>
+<script>
+const QA=[
+["CIPP 모형에서 평가란?","의사결정자에게 의사결정에 유용한 정보를 제공하는 활동."],
+["CIPP의 평가 유형과 대응하는 의사결정은?","계획 의사결정 - 상황평가\n구조화 의사결정 - 투입평가\n실행 의사결정 - 과정평가\n재순환 의사결정 - 산출평가"],
+["CIPP 모형의 장점은?","각 단계마다 평가를 실시할 수 있어 역동적이며, 필요한 단계에서 선택적으로 평가를 수행할 수 있다."],
+["CIPP 모형의 단점은?","현실적으로 적용하기 어렵고 모든 단계를 평가하려면 비용이 많이 든다. 의사결정 과정과 방법이 명확하지 않고, 평가 대상 자체의 가치를 평가하지는 못한다."],
+["CIPP의 과정평가에서 하는 일은?","프로그램이 계획대로 제대로 실행되고 있는지 점검하고, 그에 관한 정보를 수집해 제공한다."],
+["CIPP의 산출평가에서 하는 일은?","프로그램의 효과성·효율성을 점검해 프로그램을 지속할지, 수정할지, 폐기할지 결정하는 데 필요한 정보를 제공한다."],
+["타일러의 목표중심평가에서 평가란?","교육목표를 달성한 정도를 확인하는 것."],
+["타일러 모형의 특징은?","교육목표가 평가의 핵심적 역할을 하며, 목표를 행동 용어로 진술해 측정과 평가가 용이하다. 목표와 성취 결과의 일치 여부를 검증할 수 있다."],
+["타일러 모형의 장점은?","평가 기준이 명확하게 제시되어 있어 목표 달성 정도를 파악하기 쉽다."],
+["타일러 모형의 단점은?","부수적·잠재적·정의적 성과는 평가하지 못한다. 사전에 행동목표를 설정해야 하므로 수업 중 발생하는 부수적 효과를 측정할 수 없다."],
+["진단·형성·총괄평가의 개념은?","진단평가: 수업 전에 실시하며 선수학습 정도와 학습자 특성을 파악.\n형성평가: 수업 도중 수시로 실시하며 목표 도달도와 내용 이해도를 점검.\n총괄평가: 수업이나 학기가 끝난 후 실시하며 성적 판정과 프로그램 효과를 확인."],
+["총괄평가로 할 수 있는 것은? (목표 도달 확인 외)","학생의 성적 판정, 미래 성적 예측, 집단 내 상대적 위치 파악, 집단 간 학업성적 비교."],
+["진단평가의 목적을 여러 개 말하면?","선수학습 능력과 출발점 행동 확인, 학습 부진의 외적 원인 진단과 처방, 학습자의 전반적 특성을 파악해 적합한 교수전략 제공, 특정 교과에 대한 사전 지식 수준 확인."],
+["진단평가의 형식적·비형식적 방법은?","형식적: 교사 제작 검사, 기초학력평가, 퀴즈, 체크리스트.\n비형식적: 면담, 관찰."],
+["준거지향평가와 규준지향평가의 개념은?","준거지향평가: 설정된 성취 기준(목표)에 도달했는가를 기준으로 평가하며 발달적 교육관에 기반.\n규준지향평가: 집단 내 상대적 위치를 기준으로 평가하며 선발적 교육관에 기반."],
+["각각 중시하는 검사 양호도는?","규준지향평가는 신뢰도(객관도), 준거지향평가는 타당도(내용타당도)."],
+["준거지향평가의 장단점은?","장점: 교사의 교수 개선에 도움이 되고 협동학습이 가능하다.\n단점: 개인차 변별이 어렵고 준거 설정이 어렵다."],
+["규준지향평가의 장단점은?","장점: 개인차 변별이 가능하고 경쟁을 통한 외재적 동기 유발이 가능하다.\n단점: 교수·학습 개선이 곤란하고 경쟁으로 인한 비인간화를 초래한다."],
+["수행평가란?","학생의 지식·기능·태도를 직접 산출하거나 행동으로 나타내게 하여, 실제 상황에서 수행할 수 있는지를 평가하는 방식."],
+["수행평가 과제의 조건은?","실제성(실생활 맥락), 하나의 과제로 다양한 지식·기능을 확인할 수 있는 통합성, 채점 가능성, 공정성."],
+["수행평가의 장점 2가지는?","학생의 실제적 수행 능력을 평가할 수 있고, 인지적 영역뿐 아니라 정의적 특성과 고등사고능력까지 다양하게 평가하며 흥미를 유발할 수 있다."],
+["수행평가의 단점 2가지는?","문항 개발과 시행에 비용과 시간이 많이 든다. 평가자의 주관이 개입되어 신뢰도와 객관도가 떨어질 수 있다."],
+["수행평가의 신뢰도 향상 방안은?","루브릭 등 명확한 채점 기준표를 마련해 그에 근거해 채점하고, 학생 단위가 아닌 문항(과제) 단위로 채점한다. 여러 교사가 함께 채점하고, 교과협의회에서 채점 기준을 공유·합의한다. 동료평가·자기평가를 활용해 학생을 평가자로 투입한다."]
+];
+const $=s=>document.querySelector(s),L=$("#l");
+let C=[];try{C=JSON.parse(localStorage.getItem(KEY))||[]}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(C))}catch(e){}};
+const flt=()=>{const o=$("#o").checked;[...L.children].forEach((d,i)=>d.hidden=o&&!C[i])};
+function render(){L.innerHTML="";QA.forEach((q,i)=>{const d=document.createElement("details");d.className=C[i]?"w":"";
+d.innerHTML="<summary>"+(i+1)+". "+q[0]+"</summary><div class='a'>"+q[1]+"</div><label class='c'><input type='checkbox'"+(C[i]?" checked":"")+"> 틀림</label>";
+d.querySelector("input").onchange=e=>{C[i]=e.target.checked;d.className=C[i]?"w":"";save();flt()};L.appendChild(d)});flt()}
+$("#o").onchange=flt;
+$("#e").onclick=()=>{const w=QA.filter((_,i)=>C[i]);if(!w.length)return alert("체크된 문항이 없습니다.");
+const h="<!doctype html>"+document.documentElement.outerHTML.replace(/const KEY="[^"]*"/,'const KEY="'+KEY+'-wrong"').replace(/const QA=\[[\s\S]*?\];/,"const QA="+JSON.stringify(w)+";");
+const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([h],{type:"text/html"}));a.download=KEY+"-wrong.html";a.click();URL.revokeObjectURL(a.href)};
+const fb=t=>{const a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();try{document.execCommand("copy")}catch(e){}a.remove();alert(t||"없음")};
+$("#n").onclick=()=>{const t=QA.map((_,i)=>C[i]?i+1:0).filter(Boolean).join(",");
+try{navigator.clipboard.writeText(t).then(()=>alert(t||"없음"),()=>fb(t))}catch(e){fb(t)}};
+render();
+</script></body></html>
