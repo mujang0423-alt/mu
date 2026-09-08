@@ -1,0 +1,75 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<script>const KEY="0908-미교-다문화미술교육";</script>
+<title>0908 미교 - 다문화 미술교육</title>
+<style>
+body{font:16px/1.65 system-ui,-apple-system,sans-serif;margin:0 auto;padding:12px;max-width:820px;background:#fafafa;color:#222}
+h1{font-size:17px;margin:6px 0}
+#bar{position:sticky;top:0;background:#fafafa;padding:8px 0;display:flex;gap:8px;align-items:center;flex-wrap:wrap;border-bottom:1px solid #ddd;z-index:1}
+button{padding:6px 10px;font-size:14px;border:1px solid #bbb;border-radius:6px;background:#fff}
+label{font-size:14px}
+.card{border:1px solid #ddd;border-radius:8px;background:#fff;margin:8px 0;padding:8px 10px}
+.card.wrong{border-color:#e33;background:#fff5f5}
+summary{cursor:pointer;font-weight:600}
+.a{margin-top:8px;padding-top:8px;border-top:1px dashed #ddd;white-space:pre-wrap}
+.wg{display:block;margin-top:6px;color:#c00}
+body.only .card:not(.wrong){display:none}
+#cnt{font-size:13px;color:#666}
+</style></head><body>
+<h1>다문화 미술교육 (2026.09.08)</h1>
+<div id="bar"><label><input type="checkbox" id="only"> 틀린 것만</label><button onclick="exp()">오답 내보내기</button><button onclick="cp()">번호 복사</button><span id="cnt"></span></div>
+<div id="list"></div>
+<script>
+const QA=[
+["다문화 미술교육의 배경은?","· 미국의 용광로 정책에서 샐러드볼 정책으로의 전환\n· 국제화·세계화의 흐름\n· 포스트모더니즘\n· 사회재건주의 교육철학"],
+["다문화 미술교육의 목적은?","다양한 미술 문화의 교육을 통해 문화적 가치를 존중하고, 문화적으로 다양한 사회 안에서 효과적으로 살아갈 수 있는 인간 육성"],
+["뱅크스의 세 가지 접근 방식은?","교육과정 개혁 접근 방식, 성취 접근 방식, 그룹 간 교육 접근 방식"],
+["그룹 간 교육 접근 방식이란?","모든 학생들로 하여금 다른 인종·문화·성 그룹의 구성원들에게 긍정적인 태도를 가지도록 하고, 소외된 구성원들도 스스로에 대한 긍정적 느낌과 자부심을 가지도록 하는 것"],
+["뱅크스의 교육과정 개혁 접근 방식 4단계는?","기여 접근 → 부가 접근 → 전환 접근 → 사회적 행동 접근"],
+["기여 접근이란?","다문화 이미지는 포함하지만 기존 교육과정의 내용과 체계는 전통적으로 유지하는 것. 설명 중에 곁들이는 정도"],
+["전환 접근이란? 그 방법은?","기존에 가지고 있던 가치관을 전환시키고 새로운 사실을 인식시키는 것.\n방법: 다른 관점에서 접근하기, 변증법적 방법\n예) 인상주의가 우키요에의 영향을 받았다고 가르치는 대신, 우키요에가 서양 인상주의에 어떤 영향을 미쳤는지의 관점으로 가르치기"],
+["탐 헤이브의 다문화 교육 단계는?","문화적 동화 → 문화적 분리 → 두 문화 교육 → 다원문화 교육 이념 → 문화 이해형 → 사회 개조형"],
+["문화적 동화란?","비주류 학생을 주류로 끌어들이는 것으로, 비주류 학생들이 주류 문화를 배워야 한다는 입장"],
+["다원문화 교육 이념이란?","복수의 다른 두 문화 교육 개념을 발전시켜 복수의 다른 문화에 대응할 수 있도록 하는 것. 자신의 문화와 다른 문화의 미술 활동에 관여함으로써 다른 문화를 더 깊게 이해하도록 하는 것이 목표"],
+["문화 이해형이란?","다문화 교육 이념이 실제 교실에 적용되어 더 실천적인 형태로 발전한 것"],
+["빌링즈의 두 가지 접근 방식은?","이슈 지향적 접근, 주제적 접근"],
+["주제적 접근이란?","다양한 미술 문화의 전통을 인식하고 수용하게 하는 것이 궁극적인 목적. 시각적 이미지를 통해 특정 문화 집단의 아이디어나 주제를 탐색해 보게 하는 활동을 포함"],
+["주제적 접근에서 교사의 역할은?","학생들의 토론을 이끌고, 다양한 미술가들의 작품을 통해 미술가와 학생 간의 교류와 대화를 촉진시키는 역할"],
+["맥피의 배경은?","포스트모더니즘, 사회재건주의"],
+["맥피의 목적은?","· 내용적 목적: 미술의 언어적 기능(사회에서 미술이 어떤 기능을 하는가), 환경 개선(환경 속에서 미술의 범위를 알도록 함)\n· 조작적 목적: 창의적 표현(창의적 제작), 비판적 사고"],
+["맥피의 교육 방법 세 가지는?","· 문화에서 미술적 요소 학습\n· 문화 상대주의에 의한 미술 감상과 미술사 학습\n· 환경 디자인 교육"],
+["맥피의 교육 내용은?","디자인, 다문화, 대중매체(대중문화)"],
+["맥피가 제시한, 시지각이 미술 활동에 영향을 끼치는 네 가지 요인은?","· 매체를 다루는 능력\n· 형태의 특성을 구성하고 묘사하는 능력\n· 도움과 억압, 처벌과 보상의 정도\n· 작업 환경"],
+["바바넬의 두 가지 관점은?","전통주의적 접근, 다원주의적 접근"],
+["스터의 다문화 미술교육 탐구 지침은?","① 인종·계층·젠더 등 사회적 이슈를 찾고 이와 관련된 다양한 자료를 수집할 것\n② 이전에 가지고 있던 가치를 명료화하고 도전할 것\n③ 성찰적인 결정을 내릴 것\n④ 자신의 결정을 실현하기 위해 행동할 것"],
+["여섯 가지 다문화적 입장 중 - 우리는 교수를 (   ) 개입으로 생각한다. 따라서 모든 교육적 노력에서 교사는 자신의 문화적·사회적 편견과 마주할 뿐만 아니라 그것에 대해 반드시 알아야 한다.","사회문화적"],
+["다문화 미술교육의 평가 방식은?","종합적·전체적인 참평가(수행평가, 정성 평가)"],
+["다문화 미술교육의 성과는?","· 미술을 통한 문화적 정체성 함양과 세계화 교육 활성화\n· 사회 문제 해결 방안 모색\n· 비주류 미술을 미술교육의 핵심으로 옮겨 놓음\n· 자국 전통 미술 문화의 특성과 가치를 발견하고 애호하는 태도 함양\n· 맥락을 이해하기 위한 인류학적·사회학적 방법의 통합적 사용\n· 다양한 미술 작품에 대한 조사·토론 활동을 통한 비판적 사고력 신장"],
+["다문화 미술교육의 한계점은?","· 교사가 철학적 접근 없이 수업하면 단순한 관광식 수업으로 흐를 수 있음\n· 지도하는 교사나 참여하는 학생의 배경에 따라 수업의 질이 좌우됨\n· 사회적 이슈를 다루다 보니 미술 교과가 다른 교과의 보조 수단으로 전락할 수 있음"]
+];
+const L=document.getElementById('list'),W=new Set();
+try{(JSON.parse(localStorage.getItem(KEY))||[]).forEach(i=>W.add(i))}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify([...W]))}catch(e){}};
+const cnt=()=>document.getElementById('cnt').textContent=`틀림 ${W.size} / ${QA.length}`;
+QA.forEach(([q,a],i)=>{
+  const c=document.createElement('div');c.className='card'+(W.has(i)?' wrong':'');
+  c.innerHTML=`<details><summary>${i+1}. ${q}</summary><div class="a">${a}</div></details><label class="wg"><input type="checkbox"> 틀림</label>`;
+  const b=c.querySelector('input');b.checked=W.has(i);
+  b.onchange=()=>{b.checked?W.add(i):W.delete(i);c.classList.toggle('wrong',b.checked);save();cnt()};
+  L.appendChild(c);
+});
+cnt();
+document.getElementById('only').onchange=e=>document.body.classList.toggle('only',e.target.checked);
+function exp(){
+  const qa=QA.filter((_,i)=>W.has(i));if(!qa.length)return alert('체크된 문항이 없습니다.');
+  const d=document.documentElement.cloneNode(true);
+  d.querySelector('#list').innerHTML='';d.querySelector('body').classList.remove('only');
+  const h='<!doctype html>'+d.outerHTML.replace(/const KEY="[^"]*"/,`const KEY="${KEY}-wrong"`).replace(/const QA=\[[\s\S]*?\];/,'const QA='+JSON.stringify(qa)+';');
+  const u=URL.createObjectURL(new Blob([h],{type:'text/html'})),a=document.createElement('a');
+  a.href=u;a.download=KEY+'-wrong.html';a.click();URL.revokeObjectURL(u);
+}
+function cp(){
+  const t=[...W].sort((x,y)=>x-y).map(i=>i+1).join(',')||'(없음)';
+  const fb=()=>{const e=document.createElement('textarea');e.value=t;document.body.appendChild(e);e.select();document.execCommand('copy');e.remove();alert('복사: '+t)};
+  navigator.clipboard?navigator.clipboard.writeText(t).then(()=>alert('복사: '+t),fb):fb();
+}
+</script></body></html>

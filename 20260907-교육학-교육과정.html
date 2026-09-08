@@ -1,0 +1,77 @@
+<!doctype html><meta charset="utf-8"><title>20260907-교육학-교육과정</title>
+<script>
+const KEY="0907-교육학-교육과정";
+const QA=[
+["아이즈너 - 문제 해결 목표","주어진 조건을 충족하여 문제를 해결해야 하는 목표. 정답이 정해져 있지 않아 여러 가지 해결책을 제시할 수 있음."],
+["아이즈너 - 표현적 결과","미리 정하지 않고 활동 도중이나 끝난 후에 얻게 되는, 교육적으로 바람직한 결과."],
+["아이즈너 - 내용 선정 시 고려 사항","학습자, 사회, 교과의 특성을 고려하고 영교육과정도 함께 고려."],
+["아이즈너 - 학습 기회 유형 단계","교육적 상상력을 발휘하는 단계. 만족스럽고 다양한 학습 기회를 제공할 수 있도록 교육 목표와 교육 내용을 학생에게 적합한 형태로 변형하는 능력."],
+["아이즈너 - 학습 기회 조직 단계","거미줄 모형처럼 비선형적으로 조직하여 다양한 학습 결과를 유도."],
+["참평가","실제적 과제를 중심으로 실생활의 문제 해결 능력을 평가. 아이즈너는 교육적 감식안과 교육 비평을 활용해 참평가를 해야 한다고 봄."],
+["파이너의 실존적 재개념화가 만들어진 목적","앎과 삶이 분리된 무의미한 교육을 문제 삼아, 인간의 실존적 해방을 교육과정의 목적에 두고 개인의 개별적 경험의 특수성을 강조."],
+["자서전적 방법","교수·학습 장면에서 학습자의 교육 경험을 분석하여 교육 상황에 대한 이해와 자아 성찰을 촉진하는 방법."],
+["쿠레레를 하는 이유","자신이 겪은 교육 경험의 본질을 분석하여 실존적 의미를 찾기 위해. 체험을 자신의 존재 의미와 관련지어 해석하고 자기 반성적인 삶을 살아가도록 함."],
+["쿠레레 방법론의 4단계","회귀 → 전진 → 분석 → 종합"],
+["쿠레레 - 회귀","과거에 받아온 교육 경험을 모두 떠올려 보는 단계."],
+["쿠레레 - 전진","미래의 모습을 상상해 보는 단계."],
+["쿠레레 - 분석","회귀와 전진을 거친 후 현재로 돌아와 과거·미래·현재 세 장면을 놓고 이들 간의 복잡한 관계를 분석하는 단계."],
+["쿠레레 - 종합","다시 현실로 돌아가 내면의 목소리에 귀 기울이고 자신에게 주어진 현재의 의미를 자문하는 단계."],
+["쿠레레에서 교사의 역할","단순 전달자가 아니라 '교육과정 여행의 가이드'. 학생들의 경험을 중시하고 그것을 드러내고 공유하도록 도와야 함. 또한 교사 스스로 쿠레레 방법의 모범자가 되어야 함."],
+["교육과정 실행의 세 가지 관점","충실도 관점, 상호 적응 관점, 생성 관점."],
+["충실도 관점","외부에서 개발된 교육과정을 교사가 그대로 충실히 이행하는 관점."],
+["충실도 관점의 장단점","장점: 교사의 역량 차이에 영향을 덜 받아 학생들의 학습 수준을 고르게 맞출 수 있음. 단점: 교사 배제적이어서 교사의 전문성과 자율성을 살리지 못하고 교사의 역할을 수동적으로 만듦."],
+["상호 적응 관점","개발자와 실행자 간의 상호작용을 통해 교육과정이 조정·변화되는 과정에 중점. 교사는 학교가 처한 상황, 환경적 맥락, 개인적 특성에 따라 계획된 교육과정을 조정하는 '교육과정 재구성자'."],
+["생성 관점에서 교사의 역할","교사와 학생이 상호작용하며 교육과정을 함께 만들어 감. 교사는 교육과정 개발자."],
+["블룸의 교육목표 분류 - 세 영역","인지적 영역, 정의적 영역, 심동적 영역."],
+["인지적 영역과 정의적 영역의 분류 원리","인지적 영역은 복잡성, 정의적 영역은 내면화."],
+["인지적 영역의 위계","지식 - 이해 - 적용 - 분석 - 종합 - 평가"],
+["정의적 영역의 위계","감수 - 반응 - 가치화 - 조직화 - 인격화"],
+["감수","주의를 기울이고 기꺼이 수용하는 단계."],
+["반응","자극이나 활동에 직접 참여하고 만족감을 느끼는 단계."],
+["가치화","특정 대상이나 활동에 대한 가치를 직접 추구하고 행동으로 나타내는 단계. 예) 친구들에게 모차르트 음악을 듣도록 열렬히 권한다, 한반도 비핵화에 관한 의견을 제시할 수 있다."],
+["조직화","여러 가치를 비교하고 종합하여 일관된 가치 체계를 형성하는 단계."],
+["인격화","가치 체계가 일관성 있게 내면화되어 인격의 일부가 된 상태."],
+["역량 중심 교육과정","사회적 삶에서 필요한 역량을 강화하는 것을 중심으로 교육과정을 구성하는 것."],
+["역량 중심 교육과정의 설계 방식","역량을 우선적으로 고려하고, 교과 지식과 내용 조직에서 교사의 자율성을 보장. 백워드 설계를 활용."],
+["역량 중심 교육과정의 평가","과정 중심의 수행 평가와 자기·동료 평가를 통한 학생 참여 중심 평가."],
+["역량 중심 교육과정의 장점","변화하는 사회의 요구와 필요를 반영한 교육과정 설계가 가능. 교사가 교육과정을 재구성하므로 교사의 역할이 강화됨."],
+["역량 중심 교육과정의 단점","무엇이 중요한 역량인지 모호함. 전통적 교과가 가진 지식 자체의 가치를 경시하고, 교과 내용 및 교수·학습 방법에 대한 구체적 대안 제시가 부족."],
+["타일러 - 교육 내용 선정의 다섯 원리","기회의 원리, 만족의 원리, 학습 가능성의 원리, 일목표 다경험의 원리, 일경험 다성과의 원리."],
+["기회의 원리","교육 목표 달성에 필요한 경험을 할 수 있는 기회를 제공해야 한다는 원리."],
+["학습 가능성의 원리","학생들의 현재 발달 수준에서 학습이 가능한 내용을 선정해야 한다는 원리. 너무 어려워도 너무 쉬워도 안 됨."],
+["드레이크의 통합 유형","다학문적 통합, 간학문적 통합, 탈학문적 통합."],
+["간학문적 통합","여러 교과에서 공통된 지식·원리·개념을 추출하여 그것을 중심으로 통합해 새로운 과목을 구성. 교과 간 경계가 없음."],
+["간학문적 통합의 장점","하나의 주제를 여러 관점에서 볼 수 있고, 내용의 중복이나 누락으로 인한 시간 낭비를 줄임. 학생의 흥미를 유발할 수 있음."],
+["간학문적 통합의 단점","각 학문의 개별적 성격이 약화되고, 교과별 지식을 체계적으로 학습하는 데 장애 요인이 되어 기초 교육을 저해. 맥락이 빠져 피상적인 수업이 될 수 있음."]
+];
+</script>
+<style>
+body{font-family:system-ui,sans-serif;max-width:760px;margin:0 auto;padding:14px;line-height:1.6;color:#1c1c1c}
+h1{font-size:17px;margin:0 0 10px}
+#bar{position:sticky;top:0;background:#fff;padding:8px 0;border-bottom:1px solid #ddd;display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:14px}
+button{padding:5px 10px;font-size:14px;border:1px solid #bbb;border-radius:6px;background:#f6f6f6;cursor:pointer}
+details{border:1px solid #e0e0e0;border-radius:8px;padding:9px 11px;margin:7px 0}
+details.w{border-color:#e05252;background:#fff5f5}
+summary{cursor:pointer;font-weight:600}
+details p{margin:9px 0 6px;white-space:pre-wrap}
+details label{font-size:13px;color:#666}
+</style>
+<h1>20260907 교육학 · 교육과정</h1>
+<div id="bar">
+<label><input type="checkbox" id="o"> 틀린 것만</label>
+<button id="ex">오답 내보내기</button><button id="cp">번호 복사</button>
+<span id="n"></span>
+</div>
+<div id="L"></div>
+<script id="js">
+const L=document.getElementById('L'),C=[];
+try{JSON.parse(localStorage.getItem(KEY)||'[]').forEach((v,i)=>C[i]=v)}catch(e){}
+const sv=()=>{try{localStorage.setItem(KEY,JSON.stringify(QA.map((_,i)=>!!C[i])))}catch(e){}};
+const E=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'})[c]);
+L.innerHTML=QA.map((p,i)=>`<details data-i="${i}"${C[i]?' class="w"':''}><summary>${i+1}. ${E(p[0])}</summary><p>${E(p[1])}</p><label><input type="checkbox"${C[i]?' checked':''}> 틀림</label></details>`).join('');
+const ft=()=>{const o=document.getElementById('o').checked;L.querySelectorAll('details').forEach((d,i)=>d.style.display=o&&!C[i]?'none':'');document.getElementById('n').textContent=QA.filter((_,i)=>C[i]).length+'/'+QA.length};
+L.onchange=e=>{const d=e.target.closest('details'),i=+d.dataset.i;C[i]=e.target.checked;d.className=C[i]?'w':'';sv();ft()};
+document.getElementById('o').onchange=ft;ft();
+document.getElementById('ex').onclick=()=>{const w=QA.filter((_,i)=>C[i]);const h='<!doctype html><meta charset="utf-8"><title>'+KEY+'-wrong</title><script>const KEY="'+KEY+'-wrong";const QA='+JSON.stringify(w)+';<\/script>'+document.querySelector('style').outerHTML+'<h1>'+KEY+' 오답<\/h1>'+document.getElementById('bar').outerHTML+'<div id="L"></div>'+document.getElementById('js').outerHTML;const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([h],{type:'text/html'}));a.download=KEY+'-wrong.html';a.click()};
+document.getElementById('cp').onclick=()=>{const t=QA.map((_,i)=>C[i]?i+1:0).filter(Boolean).join(','),f=()=>{const x=document.createElement('textarea');x.value=t;document.body.appendChild(x);x.select();document.execCommand('copy');x.remove()};try{navigator.clipboard.writeText(t).catch(f)}catch(e){f()}};
+</script>

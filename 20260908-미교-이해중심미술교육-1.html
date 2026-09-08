@@ -1,0 +1,81 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<script>const KEY="0908-미교-이해중심미술교육";</script>
+<title>0908 미교 - 이해중심 미술교육</title>
+<style>
+body{font:16px/1.65 system-ui,-apple-system,sans-serif;margin:0 auto;padding:12px;max-width:820px;background:#fafafa;color:#222}
+h1{font-size:17px;margin:6px 0}
+#bar{position:sticky;top:0;background:#fafafa;padding:8px 0;display:flex;gap:8px;align-items:center;flex-wrap:wrap;border-bottom:1px solid #ddd;z-index:1}
+button{padding:6px 10px;font-size:14px;border:1px solid #bbb;border-radius:6px;background:#fff}
+label{font-size:14px}
+.card{border:1px solid #ddd;border-radius:8px;background:#fff;margin:8px 0;padding:8px 10px}
+.card.wrong{border-color:#e33;background:#fff5f5}
+summary{cursor:pointer;font-weight:600}
+.a{margin-top:8px;padding-top:8px;border-top:1px dashed #ddd;white-space:pre-wrap}
+.wg{display:block;margin-top:6px;color:#c00}
+body.only .card:not(.wrong){display:none}
+#cnt{font-size:13px;color:#666}
+</style></head><body>
+<h1>이해중심 미술교육 (2026.09.08)</h1>
+<div id="bar"><label><input type="checkbox" id="only"> 틀린 것만</label><button onclick="exp()">오답 내보내기</button><button onclick="cp()">번호 복사</button><span id="cnt"></span></div>
+<div id="list"></div>
+<script>
+const QA=[
+["이해중심 미술교육에서 바람직한 수업 방법은?","· 표현 활동 전에 반드시 동기 유발을 위한 생생하고 감각적인 참고 작품을 제공\n· 교사의 언어는 부드러우면서도 적극적이어야 함\n· 교사는 분명한 지도 목표를 가지되 다양하고 유동적으로 지도\n· 주변의 다양한 재료를 활용하거나 노작 활동을 통해 아동이 자발적으로 아이디어를 산출하여 표현하도록 함\n· 다른 교과의 학습 경험과 유기적인 관계를 맺음"],
+["아이스너가 제시한 수업 내용(영역)은?","미술 제작, 미술 비평, 미술사 (DBAE는 여기에 미학을 포함한 4영역)"],
+["비평 영역에서 중요한 기능(6가지 차원)은?","경험적 차원, 형식적 차원, 상징적 차원, 주제적 차원, 재료적 차원, 맥락적 차원"],
+["비평의 재료적 차원이란?","재료가 작품에 주는 시각적 경험에 기여하는 바가 무엇인지 알아보는 것"],
+["케터링 프로젝트의 네 가지 전제 조건은?","① 어린이의 자연스러운 성장을 바라지 않는다(미술은 학습되어야 함)\n② 미술이 다양한 목적을 성취하기 위한 수단으로 이용되더라도 미술만이 제공할 수 있는 고유한 공헌이 있다\n③ 학생의 시각적 지각 능력을 키워 주려면 학습 목표와 교육 내용을 잘 갖춘 교육과정이 필요하다\n④ 미술 학습에서 평가는 형식적이든 비형식적이든 필요하며, 교수·학습 내용과 성취도를 이해하는 데 도움이 된다"],
+["표상 형식이란?","개인이 가지고 있는 내면의 추상적인 개념을 다른 사람도 알아볼 수 있는 상징적 형태(공적 개념)로 나타내는 것"],
+["표현 방식의 세 가지 유형은?","미메시스(모방), 감정 표현, 인습적 기호의 사용"],
+["인습적 기호의 사용이란?","사회적으로 합의된 상징을 사용하는 것. 상징적 의미가 내포된 도상을 작품에 활용"],
+["감정 표현은 어떤 형태로 나타나는가?","추상적인 형태로 표현됨"],
+["DBAE에서 미술사 영역이란?","역사적·문화적 맥락에서 작품을 감상하고 이해하도록 하는 것. 과거의 미술 표현 양식과 미술 문화재를 통해 다양한 미술 및 문화 간의 상호작용과 작품에 대한 깊이 있는 이해에 도달"],
+["아트프로펠은 누구의 영향을 받아 등장했는가?","가드너의 다중지능이론(하버드 프로젝트 제로). 굿맨과 함께 시작한 하버드 프로젝트 제로에서 출발"],
+["아트프로펠의 진행 단계는?","주제 인식과 제1제작 → 관련 자료 탐색 → 탐색 내용을 반영한 제2제작 → 1·2 작품 비교, 반성 및 평가"],
+["아트프로펠의 목적은?","· 초등학교 고학년과 중·고등학생의 예술적 지능을 진단하는 평가 도구 개발\n· DBAE를 대체할 수 있는 예술 교육과정 개발"],
+["아트프로펠의 학습 과정 세 가지와 각 내용은?","· 제작: 선행 학습이 없는 상태에서의 1차적인 표현\n· 지각: 관련 예술 작품의 감상과 연구를 통해 미적 요소와 자신의 작품과의 관련성 파악\n· 반성: 제작·지각 활동에 대한 비판적 분석을 통해 새롭게 작품을 제작"],
+["아트프로펠 제작 단계의 평가 요소 4가지는?","창의성, 표현, 활용(다양한 상징을 사용하고 이를 변형하여 사용하는 능력), 숙련"],
+["아트프로펠의 평가 방법은?","프로세스폴리오"],
+["브라우디 미적 교육의 목적은?","· 미적 지각의 발달\n· 각성된 애호 상태에 도달하도록 함"],
+["미적 지각이란?","이미지 속에 담긴 감각적 내용을 파악할 수 있는 능력"],
+["각성된 애호란?","대상에 대한 좋음을 표현할 때 그것에 대한 판단 근거를 제시할 수 있는 비판적 사고 상태"],
+["브라우디의 저서는?","각성된 애호"],
+["브라우디의 미적 교육은 어떤 이념을 바탕으로 한 교육 운동인가?","교육을 통해 주변 현상을 미적으로 인식하는 능력을 기름으로써 사람들의 정서적 반응을 풍부하게 하여 각종 사회 갈등을 치유할 수 있다는 이념"],
+["브라우디의 지각적 접근법은?","· 학생이 전문가가 사고하는 방식으로 사고할 수 있게 함\n· 미적 문해력을 초등학생 시기부터 길러 줌\n· 감상 수업에서 비평과 반성적 사고를 통해 미적 지각 능력을 기름"],
+["아이스너가 제시한 창의성의 네 가지 유형은?","한계(경계) 확장하기, 발명하기, 한계 깨뜨리기, 미적으로 조직하기"],
+["미적으로 조직하기란?","요소의 배치나 결합을 통해 질적인 창의성을 드러내는 것. 앞의 세 유형은 참신함을 전제로 하지만 이것은 자동적으로 충족되는 것"],
+["케터링 교육과정의 학습 영역은?","미술 제작, 미술 비평, 미술사"],
+["케터링 교육과정의 구성 요소 및 개발 절차는?","영역 → 개념 또는 표현 양식 → 원리 또는 매체 → 이론적 근거 → 목표 → 동기 부여 활동 → 학습 활동 → 수업 보조 매체 → 평가 절차"],
+["제작 영역에서 중요한 기능은?","· 재료 다루기\n· 형태 지각하기\n· 주어진 재료의 한계 안에서 제작자를 만족시키는 형태 제작하기\n· 미적 질서·공간 질서·표현 질서 창조하기"],
+["네오DBAE의 배경은?","· 시대 경향의 변화에 따른 다문화 미술교육 경향의 영향(포스트모더니즘)\n· 구성주의와 홀리스틱 교육과정의 대두\n· 게티센터 지원 RIG 프로그램을 통해 실제 수업 현장에서 DBAE 이론을 적용할 수 있는 방안 모색"],
+["네오DBAE의 교육 방법은?","· 통합적 접근(제작을 중심으로 나머지를 통합, 교사가 비중을 조절하여 지도)\n· 네 개 학문 영역의 중첩과 선택적 적용\n· 교육 내용을 다문화·소수문화·대중매체까지 확장\n· 과정 평가 중시"],
+["DBAE의 한계점은?","· 결과를 지나치게 강조하여 학생의 부담 가중\n· 네 영역의 학문적 내용이 많고 어려워 교사에게도 부담\n· 단순 암기식·지식 전달식 수업으로 흐를 위험성\n· 순수 미술·남성 중심·서구 미술을 강조하는 엘리트주의\n· 구조화할 수 없는 미술 교육까지 구조화하여 가르치려 함"],
+["이해중심 미술교육의 성과는?","· 교사의 적극적인 지도와 체계적인 교육과정의 중요성 인식\n· 미술의 독자성과 본질적 가치를 강조하여 학문으로서 미술교육의 기초 마련\n· 표현뿐만 아니라 이해와 감상 교육을 강조하는 계기 마련\n· 다양한 시각문화에 대한 능동적 대처 준비"]
+];
+const L=document.getElementById('list'),W=new Set();
+try{(JSON.parse(localStorage.getItem(KEY))||[]).forEach(i=>W.add(i))}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify([...W]))}catch(e){}};
+const cnt=()=>document.getElementById('cnt').textContent=`틀림 ${W.size} / ${QA.length}`;
+QA.forEach(([q,a],i)=>{
+  const c=document.createElement('div');c.className='card'+(W.has(i)?' wrong':'');
+  c.innerHTML=`<details><summary>${i+1}. ${q}</summary><div class="a">${a}</div></details><label class="wg"><input type="checkbox"> 틀림</label>`;
+  const b=c.querySelector('input');b.checked=W.has(i);
+  b.onchange=()=>{b.checked?W.add(i):W.delete(i);c.classList.toggle('wrong',b.checked);save();cnt()};
+  L.appendChild(c);
+});
+cnt();
+document.getElementById('only').onchange=e=>document.body.classList.toggle('only',e.target.checked);
+function exp(){
+  const qa=QA.filter((_,i)=>W.has(i));if(!qa.length)return alert('체크된 문항이 없습니다.');
+  const d=document.documentElement.cloneNode(true);
+  d.querySelector('#list').innerHTML='';d.querySelector('body').classList.remove('only');
+  const h='<!doctype html>'+d.outerHTML.replace(/const KEY="[^"]*"/,`const KEY="${KEY}-wrong"`).replace(/const QA=\[[\s\S]*?\];/,'const QA='+JSON.stringify(qa)+';');
+  const u=URL.createObjectURL(new Blob([h],{type:'text/html'})),a=document.createElement('a');
+  a.href=u;a.download=KEY+'-wrong.html';a.click();URL.revokeObjectURL(u);
+}
+function cp(){
+  const t=[...W].sort((x,y)=>x-y).map(i=>i+1).join(',')||'(없음)';
+  const fb=()=>{const e=document.createElement('textarea');e.value=t;document.body.appendChild(e);e.select();document.execCommand('copy');e.remove();alert('복사: '+t)};
+  navigator.clipboard?navigator.clipboard.writeText(t).then(()=>alert('복사: '+t),fb):fb();
+}
+</script></body></html>

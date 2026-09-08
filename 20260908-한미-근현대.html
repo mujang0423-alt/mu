@@ -1,0 +1,75 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<script>const KEY="0908-한미-근현대";</script>
+<title>0908 한미 - 근현대</title>
+<style>
+body{font:16px/1.65 system-ui,-apple-system,sans-serif;margin:0 auto;padding:12px;max-width:820px;background:#fafafa;color:#222}
+h1{font-size:17px;margin:6px 0}
+#bar{position:sticky;top:0;background:#fafafa;padding:8px 0;display:flex;gap:8px;align-items:center;flex-wrap:wrap;border-bottom:1px solid #ddd;z-index:1}
+button{padding:6px 10px;font-size:14px;border:1px solid #bbb;border-radius:6px;background:#fff}
+label{font-size:14px}
+.card{border:1px solid #ddd;border-radius:8px;background:#fff;margin:8px 0;padding:8px 10px}
+.card.wrong{border-color:#e33;background:#fff5f5}
+summary{cursor:pointer;font-weight:600}
+.a{margin-top:8px;padding-top:8px;border-top:1px dashed #ddd;white-space:pre-wrap}
+.wg{display:block;margin-top:6px;color:#c00}
+body.only .card:not(.wrong){display:none}
+#cnt{font-size:13px;color:#666}
+</style></head><body>
+<h1>한국 근현대 미술 (2026.09.08)</h1>
+<div id="bar"><label><input type="checkbox" id="only"> 틀린 것만</label><button onclick="exp()">오답 내보내기</button><button onclick="cp()">번호 복사</button><span id="cnt"></span></div>
+<div id="list"></div>
+<script>
+const QA=[
+["향토색의 두 가지 유형은?","① 조선의 전근대적 생활상을 드러내는 향토색\n② 조선의 맑고 청명한 공기 등 조선만이 가진 고유한 특징을 살린 향토색"],
+["오지호","우리나라 고유의 맑고 경쾌한 색채를 연구하여 한국 자연의 생명감을 포착하는 데 기여"],
+["동경 유학에서 돌아온 김주경·장석표·박광진 등이 활동하였고, 향토적 소재에 대한 관심을 확대시키는 촉매 역할을 한 단체는?","녹향회"],
+["오지호와 김주경이 세운 단체로, 조선미술전람회(선전) 출품을 거부하고 한국의 자연환경을 토대로 인상주의 토착화에 기여, 생명주의 회화를 주장하며 동양적 자연관과 자연을 통한 생명력을 표현한 단체는?","녹향회"],
+["김환기의 시기별 경향","· 서울 시대: 신사실파 활동, 매화·달항아리 등 우리 고유의 모티브를 사용한 절충적 추상 양식\n· 파리 시대: 한국적 소재를 유지한 채 서구 조형(입체파) 수용\n· 뉴욕 시대: 절충적 요소를 탈피한 순수 추상 탐구, 점화(點畵)"],
+["1920년대의 최초 한국화 동인회로, 사경 산수 화풍의 계기를 마련하였고 이용우·이상범·변관식·노수현이 참여한 단체는?","동연사"],
+["조석진·안중식이 이끌었고 형식주의적 관념 산수를 지향, 도화서 폐지 이후 최초의 근대 미술 교육 기관이며 두 사람의 타계로 해체된 단체는?","서화미술회(경성서화미술원)"],
+["현대미술가협회와 60년미술가협회의 연합으로 결성된 단체로 박서보·윤명로 등이 참여한 단체는?","악뛰엘"],
+["김복진","최초로 서양 조각 기법을 도입. 사실주의 기법을 바탕으로 고전 조각의 구조와 절제미를 나타냄"],
+["김종영","한국에서 최초로 철조(용접) 조각을 시도한 작가 중 한 명. 순수 조형적 공간을 탐구하고 불각(不刻)의 미를 추구"],
+["1950~60년대 조각의 배경","· 모뉴먼트 조각 유행\n· 철조·용접 조각의 등장, 새로운 산업 재료의 사용\n· 조각가 그룹(단체) 형성\n· 추상 조각의 전개"],
+["모노하(物派)","이우환을 중심으로 전개된 동양 최초의 현대 미술 운동. 작가가 최소한의 작업만을 가해 물체를 어떤 장소에 제시하면, 작품은 작가와 세계가 만날 수 있도록 연결하는 매개 역할을 함"],
+["민중미술의 배경","· 군부 독재의 폭력성을 민중에게 고발하고 저항하려는 정신\n· 유희적·권위적·엘리트적인 모노크롬 경향에 대한 반발"],
+["박생광","무속(무당·샤머니즘)과 불교 등 한국적 소재를 사용하고, 오방색을 활용해 화려하고 강렬하게 표현"],
+["권진규","서양 조각 기법의 영향을 받아 사실적이면서도 내면과 정신성을 드러냄. 종교적 소재와 명상적 인물상을 다루었고, 표면이 거친 테라코타 기법과 건칠 기법을 사용"],
+["하종현이 사용한, 누런 마대 캔버스 뒷면에서 물감을 밀어내어 화면에 배어 나오게 하고 밀려나온 물감을 다시 밀어내거나 훑어내는 기법은?","배압법"],
+["1980년대 이후 수묵화 운동의 특징","국전 이후 퇴색된 한국화의 정신을 수묵이라는 매체를 통해 회복하고자 함. 한국화가 다시 활기를 띠었으나 매체가 제한되어 매체의 확대가 어려웠음"],
+["이상범과 변관식의 비교","· 이상범: 일상에서 볼 수 있는 실경(사경 산수), 단일 시점, 갈필법·점묘, 두루마리가 아닌 액자형(가로로 긴 직사각형) 화면, 한국적 재료에 서양 기법을 절충\n· 변관식: 금강산 등 명승을 소재로 함, 산점투시·삼원법, 적묵법·파선법"],
+["1920~40년대 전통 화단의 특징","· 전통 기법의 관념 산수 감소\n· 개성적 사경 산수의 전개\n· 일본의 영향을 받은 신감각적 채색화 유행"],
+["권영우","모노크롬 계열. 여러 겹으로 바른 화선지를 다시 손으로 긁어내거나, 녹색 색지 위에 바른 화선지를 뚫어내어 흑백의 대비를 유도. 무심한 동작의 반복을 통해 화선지의 물성을 극대화함과 동시에 정신의 해방과 자연 상태로의 회귀라는 동양적 접근법을 모색"],
+["1950~70년대 서양 화단의 특징","· 1950년 50년미술협회를 설립하여 국전에 저항\n· 앵포르멜 확산, 1957년 현대미술가협회를 중심으로 전쟁의 공포와 불안한 심리를 표출\n· 1975년 모노크롬(단색화) 등장"],
+["1920~30년대 서양 화단의 특징","일본을 통해 들어온 인상주의를 극복하기 위한 절충적 인상주의, 인상주의의 토착화"],
+["오지호의 인상주의는 프랑스 인상주의와 어떻게 다른가?","프랑스 인상주의는 소재보다 빛 자체에 관심을 두었으나, 오지호는 한국적 소재에 관심을 두었고 윤곽선이 남아 있음"],
+["멕시코 벽화의 영향을 받은 민중미술 1세대 단체와 2세대 단체는?","· 1세대: 현실과 발언\n· 2세대: 두렁"],
+["일본식 진채 채색화를 그린 김기창·박래현이 속한 단체는?","후소회"]
+];
+const L=document.getElementById('list'),W=new Set();
+try{(JSON.parse(localStorage.getItem(KEY))||[]).forEach(i=>W.add(i))}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify([...W]))}catch(e){}};
+const cnt=()=>document.getElementById('cnt').textContent=`틀림 ${W.size} / ${QA.length}`;
+QA.forEach(([q,a],i)=>{
+  const c=document.createElement('div');c.className='card'+(W.has(i)?' wrong':'');
+  c.innerHTML=`<details><summary>${i+1}. ${q}</summary><div class="a">${a}</div></details><label class="wg"><input type="checkbox"> 틀림</label>`;
+  const b=c.querySelector('input');b.checked=W.has(i);
+  b.onchange=()=>{b.checked?W.add(i):W.delete(i);c.classList.toggle('wrong',b.checked);save();cnt()};
+  L.appendChild(c);
+});
+cnt();
+document.getElementById('only').onchange=e=>document.body.classList.toggle('only',e.target.checked);
+function exp(){
+  const qa=QA.filter((_,i)=>W.has(i));if(!qa.length)return alert('체크된 문항이 없습니다.');
+  const d=document.documentElement.cloneNode(true);
+  d.querySelector('#list').innerHTML='';d.querySelector('body').classList.remove('only');
+  const h='<!doctype html>'+d.outerHTML.replace(/const KEY="[^"]*"/,`const KEY="${KEY}-wrong"`).replace(/const QA=\[[\s\S]*?\];/,'const QA='+JSON.stringify(qa)+';');
+  const u=URL.createObjectURL(new Blob([h],{type:'text/html'})),a=document.createElement('a');
+  a.href=u;a.download=KEY+'-wrong.html';a.click();URL.revokeObjectURL(u);
+}
+function cp(){
+  const t=[...W].sort((x,y)=>x-y).map(i=>i+1).join(',')||'(없음)';
+  const fb=()=>{const e=document.createElement('textarea');e.value=t;document.body.appendChild(e);e.select();document.execCommand('copy');e.remove();alert('복사: '+t)};
+  navigator.clipboard?navigator.clipboard.writeText(t).then(()=>alert('복사: '+t),fb):fb();
+}
+</script></body></html>
