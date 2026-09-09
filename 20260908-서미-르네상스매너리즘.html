@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>20260908-서미-르네상스매너리즘</title>
+<script>const KEY="0908-서미-르네상스매너리즘";</script>
+<style>
+body{font-family:-apple-system,BlinkMacSystemFont,"Malgun Gothic",sans-serif;max-width:820px;margin:0 auto;padding:16px;line-height:1.7;color:#222;background:#fafafa}
+h1{font-size:18px;margin:0 0 12px}
+#bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;position:sticky;top:0;background:#fafafa;padding:8px 0;border-bottom:1px solid #ddd;margin-bottom:12px}
+button{padding:6px 12px;font-size:14px;border:1px solid #bbb;border-radius:6px;background:#fff;cursor:pointer}
+label{font-size:14px;cursor:pointer}
+.item{background:#fff;border:1px solid #ddd;border-radius:8px;margin-bottom:8px;padding:8px 12px}
+.item.w{background:#fff1f1;border-color:#e57373}
+summary{cursor:pointer;font-weight:600;font-size:15px}
+.a{margin-top:8px;padding-top:8px;border-top:1px dashed #ddd;white-space:pre-wrap;font-size:14px}
+.chk{margin-top:6px;font-size:13px;color:#c62828}
+.hide{display:none}
+#cnt{font-size:13px;color:#666;margin-left:auto}
+</style>
+</head>
+<body>
+<h1>서양미술사 · 르네상스/매너리즘 (2026-09-08)</h1>
+<div id="bar">
+<label><input type="checkbox" id="only"> 틀린 것만</label>
+<button id="exp">오답 내보내기</button>
+<button id="cp">번호 복사</button>
+<span id="cnt"></span>
+</div>
+<div id="list"></div>
+<script>
+const QA=[
+["르네상스의 등장 배경은?","· 인문주의 부활 → 신 중심에서 인간 중심 사고로 전환\n· 상공업·도시 발달로 부를 축적한 시민 계층(메디치가 등) 형성 → 후원자 역할\n· 자연과학 발달로 인체와 자연에 대한 과학적 탐구 활발(원근법·비례)\n· 고전 유물 연구 활발 → 지역마다 다양한 학파 형성\n· 길드 형성, 십자군 원정 등\n※ 종교개혁(1517)은 16세기이므로 매너리즘의 배경"],
+["초기 북유럽 르네상스의 특징은?","· 보고 배울 고전이 없어 자연을 세밀하게 관찰·묘사하는 데 초점\n· 유화의 발달로 세밀하고 사실적인 표현 가능\n· 부유한 시민의 초상화 등 세속적 주제\n· 위장된 상징 사용"],
+["위장된 상징이란?","종교적 도상을 사용하면서 그 안에 세속적 욕망을 숨겨 놓는 것. 이면에는 신흥 부르주아의 세속적 욕망이 담겨 있다."],
+["도나텔로의 의의와 특징은?","· 의의: 고전 이후 최초의 누드 환조상 제작, 콘트라포스토 부활, 완전히 독립된 조각 완성\n· 이상적 비례 추구\n· 미켈란젤로에게 영향을 주어 이후 조각이 독립된 예술품의 지위를 획득하도록 함"],
+["마사초가 르네상스 회화의 창시자로 불리는 이유는?","· 최초로 투시 원근법을 회화에 적용(관람자의 눈높이에 소실점을 맞춤)\n· 도나텔로의 영향으로 개별적 세부나 표면적 외형보다 본래의 구조와 인간의 태도에 관심 → 르네상스 인문주의 정신을 표현\n· 인체 구조와 의복 구조를 명확히 하기 위해 빛(명암법)을 도입, 화면 전체에 통일감 부여"],
+["보스(Bosch)는 누구에게 영향을 미쳤는가?","브뤼헐(네덜란드 풍속·풍경화)에게 직접적으로 영향을 주었고, 후대의 초현실주의에도 영향을 미쳤다."],
+["전성기 이탈리아 르네상스의 특징은?","· 다빈치·미켈란젤로·라파엘로 3대 거장 등장\n· 엄격한 구도와 완벽한 비례, 원근법 등 르네상스 기법을 총망라하여 회화의 발전이 정점에 이름\n· 미술의 주도권이 피렌체에서 로마와 베네치아로 이동\n· 이상적 사실주의"],
+["이상적 사실주의란?","사실성을 지니면서도 실제와 똑같이 그리지 않고 더 이상적이고 아름답게 표현하는 것. 인체의 자연스러움과 이상미가 결합된 것으로, 초기에는 다소 경직되고 조각적인 인체 표현이 나타났다."],
+["15세기와 16세기 르네상스를 각각 무엇이라 부르는가?","· 15세기: 콰트로첸토\n· 16세기: 친퀘첸토"],
+["다빈치 〈최후의 만찬〉과 미니멀리즘을 주제·형식 면에서 비교하면?","· 주제: 르네상스는 주제가 있음(예수가 못 박히기 전 12제자를 불러 최후의 만찬을 갖는 성경의 내용) / 미니멀리즘은 특별한 주제 없이 대상의 물질성 자체를 탐구\n· 형식: 르네상스는 사실적·관념적 색채를 사용하고 2차원 평면에 투시 원근법으로 공간감 강조(삼각형 구도) / 미니멀리즘은 조형 요소와 원리만으로 추상을 나타내고 최소한의 색으로 칠하며, 2·3차원을 결합해 회화도 조각도 아닌 새로운 공간을 만듦\n· 감상자: 르네상스는 수동적 감상 / 미니멀리즘은 능동적 참여"],
+["피렌체파와 베네치아파의 표현적 특징을 비교하면?","· 피렌체파: 형태 중심, 엄격한 윤곽선과 양감 중시, 원색과 장중한 주조색, 피라미드·수직수평의 안정적 구도, 선 원근법 적용 → 이성적·현실적\n· 베네치아파: 색채·빛·분위기 중시, 생동감 있고 다채로운 색채와 질감, 대각선의 대담하고 역동적인 화면 구성, 풍경 표현 → 서정적·낭만적"],
+["초기 북유럽 르네상스의 대표 작가는?","반 에이크 형제, 랭부르 형제(〈베리 공의 매우 호화로운 기도서〉)"],
+["얀 반 에이크의 특징은?","· 초상화에 3/4 측면을 도입하여 초상화의 수준을 끌어올림\n· 유화 기법을 발명(완성)\n· 글레이징 기법 사용"],
+["〈아르놀피니 부부의 결혼〉에서 거울 테두리의 작은 원 10개는 무엇을 상징하는가?","예수의 수난과 부활을 나타내며, 결혼한 부부가 따라야 하는 이상적인 규범을 상징한다. (거울 속에 비친 인물은 결혼의 증인)"],
+["〈아르놀피니 부부의 결혼〉에서 침대에 조각된 인물은?","성녀 마르가리타. 출산하는 여성의 수호성인으로, 석류와 함께 임신·출산을 상징한다."],
+["전성기 북유럽 르네상스의 특징은?","· 뒤러가 이탈리아에서 르네상스의 대표 기법(투시 원근법, 비례)을 들여와 북유럽에 전파\n· 종교개혁으로 현실에 대한 관심이 증대되면서 작품의 주제가 세속적이고 자기 성찰적인 주제로 전환\n· 보스의 초현실적 화면, 브뤼헐의 풍속화, 뒤러의 판화, 홀바인의 초상화 등 장르화 발달"],
+["비멜빌트(Wimmelbild)란?","독일어로 '숨은그림찾기'라는 의미. 수많은 인물과 동물 등이 복잡하게 배치되어 있어 관찰자가 특정한 요소를 찾아내는 재미를 제공하는 화면 구성. 브뤼헐 〈아이들의 놀이〉가 대표적."],
+["그뤼네발트 〈이젠하임 제단화〉 십자가 책형의 특징은?","· 중요도순에 따라 인물의 크기를 다르게 표현, 과장된 표현 사용\n· 중앙에 십자가에 매달린 예수\n· 왼쪽에 배치된 성모 마리아·요한·막달라 마리아는 인간으로서 예수의 죽음을 증언\n· 오른쪽에서 손가락질하는 세례 요한은 구세주로서 예수의 존재를 가리킴"],
+["뒤러 〈멜랑콜리아 I〉의 판화 기법은?","인그레이빙(동판)"],
+["뒤러 〈네 사도〉가 패널화로 제작된 배경은?","원래 종교화(제단화)로 제작하려 했으나, 종교개혁이 일어나면서 뒤러가 살던 곳에서 종교화 제작이 전면 금지되었다. 그래서 제단화가 아닌 두 폭의 패널화 형태로 제작되었다."],
+["〈네 사도〉에서 검(劍)은 무엇을 뜻하는가?","'말씀으로 성경을 알라'는 뜻. (나머지 도상인 책·열쇠 등은 통상적 해석과 동일)"],
+["아나모포시스(왜상)란?","거울에 비춰 보거나 특정한 각도에서 보아야 사물의 본래 형태를 확인할 수 있는 착시 그림. 홀바인 〈대사들〉이 대표적."],
+["조르조네가 영향을 받은 사람과 영향을 준 사람은?","· 영향을 받은 사람: 벨리니(〈성스러운 대화〉, 명상적인 분위기)\n· 영향을 준 사람: 티치아노\n벨리니가 이룩한 색채와 구도에 자신이 습득한 색채·분위기·비례를 더해 인물과 풍경이 한 덩어리처럼 일체화된 새로운 기법을 창조했고, 이것이 티치아노에게 계승·개선되었다."],
+["매너리즘의 등장 배경은?","· 사회적: 독일 농민 전쟁, 독일과 스페인의 전쟁, 카를 5세 용병들의 로마 약탈(로마 침공), 이탈리아의 쇠퇴, 시대적 불안\n· 사상적: 종교개혁으로 교황의 권위 실추, 코페르니쿠스의 지동설, 마젤란·콜럼버스의 세계 일주\n· 미술적: 미켈란젤로와 라파엘로가 기법을 이미 완성해 더 이상 그릴 것이 없다는 인식 → 의도적으로 조작되고 기교화된 표현 추구"],
+["매너리즘의 표현적 특징은?","· 왜곡되고 구불거리는 인체, 과도하게 길게 늘어뜨린 과장된 표현\n· 불분명하거나 여러 개인 소실점, 불명료한 구도\n· 비현실적인 조명 효과, 일정하지 않은 빛\n· 인위적인 색채 사용\n· 긴장과 부조화의 느낌"],
+["매너리즘의 조각적 특징과 그 창시자는?","피구라 세르펜티나타 — 뱀이 몸을 비틀며 감아 올라가는 듯한 나선형 자세. 창시자는 미켈란젤로."],
+["피구라 세르펜티나타의 효과는?","하나의 시점이 아닌 다시점을 통해 유기적인 움직임을 보여준다. 관람자가 한곳에 고정되지 않고 조각의 주위를 돌아가며 다각도에서 감상할 수 있다."],
+["매너리즘의 단계별 특징은?","· 1기 반고전주의: 구불구불하고 왜곡·늘어뜨린 인체 표현, 인위적인 빛, 불명료한 구도\n· 2기 우미주의: 귀족과 왕의 초상을 인간미가 결여되도록 그리고, 우아한 동시에 희귀한 취향 추구\n· 3기 반고전주의와 우미주의의 결합: 틴토레토, 엘 그레코(〈오르가스 백작의 매장〉)"],
+["퐁텐블로파란?","매너리즘 양식에 이탈리아 미술의 궁정 취향을 가미한 것으로, 감수성과 장식적 감각, 여성적 관능 및 창백한 우아함을 표현했다."]
+];
+const L=document.getElementById("list"),O=document.getElementById("only"),C=document.getElementById("cnt");
+let S=[];
+try{S=JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){}
+const on=i=>S.indexOf(i)>-1;
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+function render(){
+ L.innerHTML="";
+ QA.forEach((q,i)=>{
+  if(O.checked&&!on(i))return;
+  const d=document.createElement("div");
+  d.className="item"+(on(i)?" w":"");
+  const de=document.createElement("details");
+  de.innerHTML="<summary>"+(i+1)+". "+q[0]+"</summary><div class='a'></div>";
+  de.querySelector(".a").textContent=q[1];
+  const lb=document.createElement("label");lb.className="chk";
+  const cb=document.createElement("input");cb.type="checkbox";cb.checked=on(i);
+  cb.onchange=()=>{on(i)?S.splice(S.indexOf(i),1):S.push(i);save();render()};
+  lb.append(cb,document.createTextNode(" 틀림"));
+  d.append(de,lb);L.append(d);
+ });
+ C.textContent="총 "+QA.length+" · 오답 "+S.length;
+}
+O.onchange=render;
+document.getElementById("cp").onclick=()=>{
+ const t=S.slice().sort((a,b)=>a-b).map(i=>i+1).join(",");
+ const fb=()=>{const x=document.createElement("textarea");x.value=t;document.body.append(x);x.select();document.execCommand("copy");x.remove();alert("복사됨: "+t)};
+ navigator.clipboard?navigator.clipboard.writeText(t).then(()=>alert("복사됨: "+t),fb):fb();
+};
+document.getElementById("exp").onclick=()=>{
+ const w=S.slice().sort((a,b)=>a-b).map(i=>QA[i]);
+ if(!w.length)return alert("체크된 문항이 없습니다.");
+ const h=document.documentElement.outerHTML
+  .replace(/const QA=\[[\s\S]*?\n\];/,"const QA="+JSON.stringify(w)+";")
+  .replace(/const KEY="[^"]*";/,'const KEY="'+KEY+'-wrong";');
+ const a=document.createElement("a");
+ a.href=URL.createObjectURL(new Blob(["<!DOCTYPE html>"+h],{type:"text/html"}));
+ a.download=KEY+"-wrong.html";a.click();URL.revokeObjectURL(a.href);
+};
+render();
+</script>
+</body>
+</html>
