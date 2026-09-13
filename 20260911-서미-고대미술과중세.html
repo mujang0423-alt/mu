@@ -1,0 +1,64 @@
+<!doctype html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<script>const KEY="0911-서미-고대미술과중세";</script>
+<title>0911 서미 고대미술과중세</title>
+<style>
+body{font:16px/1.6 system-ui,-apple-system,sans-serif;margin:0;padding:12px;max-width:760px;background:#fafafa;color:#222}
+h1{font-size:17px;margin:0 0 6px}
+#bar{position:sticky;top:0;background:#fafafa;padding:8px 0;display:flex;gap:8px;flex-wrap:wrap;align-items:center;border-bottom:1px solid #ddd;z-index:1}
+button{padding:6px 10px;border:1px solid #bbb;border-radius:6px;background:#fff;font-size:14px}
+.c{border:1px solid #e0e0e0;border-radius:8px;background:#fff;margin:8px 0;padding:8px 10px}
+.c.x{border-color:#e3405a;background:#fff5f6}
+summary{cursor:pointer;font-weight:600}
+details p{margin:8px 0 0;padding-top:8px;border-top:1px dashed #ddd;white-space:pre-line}
+.c label{font-size:13px;color:#666;display:inline-block;margin-top:6px}
+</style>
+<h1>서양미술사 · 고대미술과 중세 (26.09.11)</h1>
+<div id="bar"><label><input type="checkbox" id="w"> 틀린 것만</label><button id="e">오답 내보내기</button><button id="n">번호 복사</button></div>
+<div id="app"></div>
+<script>
+const QA=[
+["폼페이 벽화의 4가지 양식을 순서대로 말하시오.","제1양식 구조 양식 / 제2양식 건축 양식 / 제3양식 장식 양식 / 제4양식 환상(혼합) 양식"],
+["폼페이 벽화 제1양식(구조 양식)의 특징은?","스투코(회벽) 기법으로 벽면을 채색하여 대리석 벽처럼 보이게 함. 실제 건축 재료를 모방한 평면 장식."],
+["폼페이 벽화 제2양식(건축 양식)의 특징은?","벽면에 기둥·서까래 등 건축 요소를 그려 넣음. 트롱프뢰유(눈속임) 효과와 원근법으로 공간감·깊이감을 표현."],
+["폼페이 벽화 제3양식(장식 양식)의 특징은?","건축적 환영이 사라지고 벽면이 다시 평평해짐. 가늘고 한정적인 장식 문양과 작은 화면 중심의 평면적 장식."],
+["폼페이 벽화 제4양식(환상 양식)의 특징은?","2·3양식의 혼합. 연극 무대 같은 환상적 연출, 창틀 너머로 보이는 듯한 풍경화 등 개방적 환영 표현."],
+["피디아스(Phidias)의 조각 경향은?","파르테논 신전 조각 등 신전 조각을 담당. 그리스 고전기의 이상미와 위엄을 구현."],
+["미론(Myron)의 조각 경향은?","'원반 던지는 사람'. 순간 동세를 포착하여 실제 움직임과 동작을 강조."],
+["폴리클레이토스(Polykleitos)의 조각 경향과 인체 비례는?","7등신 카논(Canon)을 정립. 수학적 비례로 인체미를 조화롭게 나타냄."],
+["8등신 비례를 적용하여 우아하고 늘씬한 형상을 추구한 조각가는?","리시포스(Lysippos)"],
+["도리아식·이오니아식·코린트식 주범의 차이는?","도리아식: 가장 이르고 단순, 장식 없는 주두. 이오니아식: 소용돌이(볼류트) 문양의 주두. 코린트식: 아칸서스 잎 장식, 가장 복잡하고 세밀."],
+["엔타블러처의 구성 요소는?","아키트레이브 - 프리즈 - 코니스 (아래에서 위 순서)"],
+["파르테논 신전에 적용된 특징은?","도리아식 주범, 엔타시스(배흘림기둥), 라이즈(기단·수평선의 미세한 곡률) 등 시각 보정 기법. 균형 잡힌 비례미. 페르시아 전쟁 승리 후 아테네의 위상을 반영."],
+["이집트 회화의 인체 표현 원칙은?","정면성의 원칙, 복합적 인체 표현(얼굴·다리는 측면, 눈·어깨는 정면). 눈에 보이는 대로가 아니라 가장 이상적이라 여겨지는 모습을 정해진 법칙에 따라 표현."],
+["이집트 회화의 구도상 특징은?","정면 시점과 위에서 내려다본 부감 시점이 함께 쓰이며, 병렬식(단을 나눈) 구도 등이 정해진 법칙에 따라 사용됨."],
+["신전의 높이를 높여 신에 대한 경외를 나타내고 외부의 위협으로부터 신전을 보호하고자 만든 메소포타미아의 계단식 건축물은?","지구라트(Ziggurat)"],
+["그리스 도기의 흑회식(黑繪式) 기법은?","붉은 점토 바탕 위에 인물·대상을 검은 안료로 칠하고, 세부는 송곳으로 긁어내어 바탕의 붉은색을 드러내 묘사."],
+["그리스 도기의 적회식(赤繪式) 기법은?","인물·대상을 제외한 배경을 검게 칠하고, 인물은 바탕의 붉은색으로 남긴 뒤 붓으로 세부를 묘사. 흑회식보다 자연스러운 표현이 가능."],
+["그리스·로마 신전에서 페디먼트의 정상과 양 모서리에 얹어 놓는 장식물을 무엇이라 하는가?","아크로테리온(Akroterion)"],
+["그리스 건축과 로마 건축을 비교하시오.","그리스: 기둥과 보의 가구식 구조, 신을 경배하는 신전 중심, 도리아식 위주. 로마: 아치·볼트·돔과 콘크리트 사용, 제국의 권력 과시와 공공 건축(목욕장·원형경기장 등) 중심, 이오니아·코린트·콤포지트 주범 선호."],
+["초기 제국 시대 로마 조각의 특징은?","아우구스투스 등 황제의 권위와 업적을 과시. 황제에게 초인적·영웅적 이미지를 부여하여 그리스 고전주의 양식이 이상적 사실주의로 수용됨. 거대 조각상과 전승 기념 부조·기념주를 통해 기념비적이고 서사적인 내용을 표현."],
+["비잔틴 미술의 배경과 특징은?","로마가 동서로 분열된 뒤 동로마(비잔틴)에서 전개. 황제가 교권까지 장악한 체제 아래 헬레니즘 전통과 동방 문화가 결합된 미술."],
+["기독교 공인 이후 초기 바실리카 양식의 특징은?","양옆에 측랑을 낀 긴 신랑(네이브), 위쪽에서 빛을 들이는 고측창(채광창), 반원형 후진(앱스), 목재 지붕. 로마 제국의 바실리카에 기원을 두며 이후 비잔틴 건축의 보편적 양식이 됨."],
+["바실리카 구조에서 현관에서 내진에 이르는 내부 중앙 복도를 무엇이라 하는가?","네이브(Nave, 신랑)"],
+["로마네스크 건축의 특징은?","반원 아치, 원통형·교차 궁륭, 육중한 벽과 작은 창. 어두운 실내에 벽화가 발달했고, 조각은 건축 구조에 종속되어 배치됨."],
+["고딕 건축의 특징은?","첨두 아치, 늑골 궁륭, 공중 부벽(플라잉 버트리스)으로 하중을 분산. 벽이 하중에서 자유로워져 스테인드글라스와 장미창을 설치, 수직성이 극대화됨."],
+["이집트 신왕국 시대에 발달한 조각·회화 양식은?","아마르나(아크나톤) 양식"],
+["아마르나(아크나톤) 양식의 특징은?","현실적·일상적 주제를 다루고, 엄격한 규범이 약해져 자연스럽고 개성을 드러내는 자연주의적 표현이 나타남."],
+["나르메르 왕의 승전 기념판(팔레트)의 의의는?","인류 최초의 상형문자가 새겨진 유물로, 문자 기록의 시작을 보여줌."]
+];
+</script>
+<script id="r">
+const A=document.getElementById('app'),W=document.getElementById('w'),E=s=>document.getElementById(s);
+let S={};try{S=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const flt=()=>[].forEach.call(A.children,(d,i)=>{d.hidden=W.checked&&!S[i]});
+QA.forEach((q,i)=>{const d=document.createElement('div');d.className='c'+(S[i]?' x':'');
+d.innerHTML='<details><summary>'+(i+1)+'. '+q[0]+'</summary><p>'+q[1]+'</p></details><label><input type="checkbox"'+(S[i]?' checked':'')+'> 틀림</label>';
+d.querySelector('input').onchange=function(){S[i]=this.checked;d.className='c'+(this.checked?' x':'');save();flt()};A.appendChild(d)});
+flt();W.onchange=flt;
+const fb=t=>{const x=document.createElement('textarea');x.value=t;document.body.appendChild(x);x.select();try{document.execCommand('copy')}catch(e){}x.remove()};
+E('n').onclick=()=>{const t=QA.map((q,i)=>S[i]?i+1:0).filter(Boolean).join(',');try{navigator.clipboard.writeText(t).catch(()=>fb(t))}catch(e){fb(t)}};
+E('e').onclick=()=>{const q=QA.filter((v,i)=>S[i]);if(!q.length)return;
+const h='<!doctype html><meta charset="utf-8"><title>'+KEY+'-wrong<\/title>'+document.querySelector('style').outerHTML+E('bar').outerHTML+'<div id="app"><\/div><script>const KEY="'+KEY+'-wrong";const QA='+JSON.stringify(q)+';<\/script><script>'+E('r').textContent+'<\/script>';
+const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([h],{type:'text/html'}));a.download=KEY+'-wrong.html';a.click()};
+</script>
