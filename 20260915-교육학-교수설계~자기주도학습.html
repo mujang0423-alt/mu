@@ -1,0 +1,64 @@
+<script>const KEY="0915-교육학-교수설계~자기주도학습";</script>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>0915-교육학-교수설계~자기주도학습</title>
+<style>
+body{font:15px/1.6 system-ui,sans-serif;margin:0 auto;max-width:760px;padding:0 12px 48px;background:#f4f2ec;color:#222}
+#bar{position:sticky;top:0;z-index:1;display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:8px 0;background:#f4f2ec;border-bottom:1px solid #d6d2c6}
+button{font:inherit;padding:5px 10px;border:1px solid #8a8577;border-radius:6px;background:#fff}
+.q{display:flex;gap:10px;align-items:flex-start;margin:8px 0;padding:10px 12px;border-radius:8px;background:#fff;border-left:4px solid #d6d2c6}
+.q.w{border-left-color:#c0392b;background:#fdf0ee}
+.q label{flex:none;font-size:13px;color:#c0392b;white-space:nowrap}
+details{flex:1;min-width:0}
+summary{cursor:pointer;font-weight:600}
+details p{margin:8px 0 0;white-space:pre-line;color:#333}
+.only .q:not(.w){display:none}
+</style>
+<div id="bar"><label><input type="checkbox" id="f"> 틀린 것만</label><button id="e">오답 내보내기</button><button id="c">번호 복사</button></div>
+<div id="L"></div>
+<script>
+const QA=[
+["딕과 캐리(Dick & Carey) 모형의 단계", "교수목적 설정 → 교수 분석 → 학습자 및 환경 분석 → 수행목표 진술 → 평가도구 개발 → 교수전략 개발 → 교수자료 개발 및 선정 → 형성평가 설계·실시 → 교수 프로그램 수정 → 총괄평가"],
+["딕과 캐리 모형의 교수 분석 단계에서 하는 일", "목표 유형을 분석하고, 목표 달성에 필요한 하위 기능을 분석"],
+["교수 분석이 필요한 이유", "· 성취 목표 확인\n· 계열화·조직으로 학습과 파지의 효율성 증가\n· 의사소통 원활\n· 교육 비용 절감\n· 선수학습 요소 확인, 형성평가 기준 설정 등"],
+["하위 기능 분석 방법 4가지", "군집 분석, 위계 분석, 절차 분석, 통합 분석"],
+["위계 분석을 사용하는 경우", "지적 기능 목표일 때, 상위–하위 기능을 위계적으로 계열화할 때"],
+["라이겔루스의 교수설계 3대 변인", "교수 조건, 교수 방법, 교수 성과(결과)"],
+["라이겔루스의 교수 조건", "교과 목표, 교과 특성, 학습자 특성, 제약 조건(환경)"],
+["라이겔루스의 교수 방법", "조직 전략, 전달 전략, 관리 전략"],
+["라이겔루스의 교수 성과", "효과성, 효율성, 매력성"],
+["교수 성과 중 매력성", "학습자가 지속적으로 학습하기를 원하는 동기 수준(프로그램에 대한 만족·흥미)"],
+["라이겔루스의 정교화 교수 이론", "· 여러 아이디어의 조직에 관한 거시적 설계 이론(줌렌즈식)\n· 수업 정수(epitome)로 전체 계열을 먼저 제시 → 점진적으로 상세하게 정교화 → 요약·종합으로 전체 계열을 정교화"],
+["정교화 이론의 7가지 교수 전략", "정교화된 계열화, 선수학습 계열화, 요약자, 종합자, 비유, 인지전략 촉진자, 학습자 통제"],
+["정교화 이론에서 요약자의 구성", "간결한 설명, 사례, 자기평가적 연습문제"],
+["4C/ID 모형", "복합적(복잡한) 인지 기능의 학습을 위해 제시된 교수설계 모형. 학습자가 과제를 수행하는 동안 복잡한 인지 기능을 습득하도록 함"],
+["4C/ID 모형의 구성 요소", "학습 과제, 지원적 정보, 절차적 정보, 부분 과제 연습"],
+["4C/ID의 절차적 정보", "· 문제 해결에 필요한 순환적(반복적) 절차적 지식의 학습을 지원하는 정보\n· 학습 과제별로 구체화하여, 학습자가 필요할 때 적시에 제시되도록 설계"],
+["4C/ID의 학습 과제", "· 문제나 프로젝트 형태의 실제적인 전체 과제로 제공\n· 단순한 것에서 복잡한 순서로 계열화\n· 안내와 지원을 점진적으로 줄이도록 설계"],
+["조나센 구성주의 학습환경(CLE)의 설계 요소 6가지", "문제/프로젝트, 관련 사례, 정보 자원, 인지 도구, 대화·협력 도구, 사회적·맥락적 지원"],
+["조나센 CLE의 인지 도구", "· 학습자가 문제를 원활히 해결하도록 인지 활동을 지원·촉진하는 도구\n· 예: 프레젠테이션 프로그램, 멀티미디어 저작 도구 → 시각화·조직화·수행지원·정보수집 도구"],
+["조나센 CLE의 대화·협력 도구", "· 사회적으로 공유된 지식을 협력하여 구성하도록 지원\n· 예: 학습 커뮤니티, 전자 게시판, 이메일, SNS, 채팅"],
+["브루너의 발견학습", "교사의 지시·스캐폴딩을 최소화하고, 학습 과제의 최종적 형태를 관찰·토론·실험 등을 통해 학습자 스스로 찾아내게 하는 방법"],
+["브루너 지식의 구조의 표현(표상) 방식", "작동적 표상, 영상적 표상, 상징적 표상"],
+["지식의 구조를 조직하는 방법", "나선형 교육과정"],
+["브루너 수업이론의 구성 요소", "학습 경향성(학습 의욕), 지식의 구조, 계열화, 강화"],
+["브루너 수업이론의 강화", "외적 보상보다 내재적 보상을 통해 학습 의욕을 높임"],
+["발견학습의 조건(학습자 요소)", "학습 태세, 요구 상태(학습자의 동기 수준), 관련 정보의 학습, 연습의 다양성"],
+["발견학습 조건 중 연습의 다양성", "정보를 접하는 사태(상황)를 다양하게 제공하여 여러 상황에서 학습·연습하게 함"],
+["자기주도학습", "학습자 스스로 학습 목표를 설정하고, 인적·물적 자원을 파악하며, 적절한 학습 전략을 선택·실행하고, 학습 결과를 스스로 평가하는 과정"],
+["자기주도학습 능력을 기르기 위한 방안", "· 교수·학습 과정 개선: 학생 참여형 수업 활성화, 교사의 가르치는 활동보다 학생 활동 중시\n· 교육과정·교과서 개선: 토픽 중심 교과서, 교육과정의 탄력적 운영(창의적 체험활동·방과후 활동 활용)\n· 평가 방법 개선: 평가의 개별화, 다양화, 자발적(자기) 평가"],
+["CAI와 CAT", "· CAI(컴퓨터 보조 수업): 컴퓨터가 학습 내용 제시 → 학생 응답 → 피드백 제공으로 수업을 보조\n· CAT(컴퓨터 적응형 검사): 학생 수준에 맞춰 문항 선택. 맞히면 더 어려운 문항, 틀리면 더 쉬운 문항 제시 → 개별화된 난이도 조절"]
+];
+function main(){
+const $=s=>document.querySelector(s),L=$('#L'),E=t=>t.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'})[c]);
+let S={};try{S=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}},W=()=>QA.map((_,i)=>i).filter(i=>S[i]);
+L.innerHTML=QA.map(([q,a],i)=>`<div class="q${S[i]?' w':''}"><label><input type="checkbox" data-i="${i}"${S[i]?' checked':''}> 틀림</label><details><summary>${i+1}. ${E(q)}</summary><p>${E(a)}</p></details></div>`).join('');
+L.onchange=e=>{const t=e.target,i=t.dataset.i;if(i==null)return;t.checked?S[i]=1:delete S[i];t.closest('.q').classList.toggle('w',t.checked);save()};
+$('#f').onchange=e=>L.classList.toggle('only',e.target.checked);
+$('#e').onclick=()=>{const w=W(),k=KEY+'-wrong';if(!w.length)return alert('체크된 문항이 없습니다');
+const h=`<script>const KEY=${JSON.stringify(k)};<\/script>\n<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${k}</title>${$('style').outerHTML}${$('#bar').outerHTML}<div id="L"></div><script>const QA=${JSON.stringify(w.map(i=>QA[i])).replace(/</g,'\\u003c')};\n${main}\nmain()<\/script>`;
+const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([h],{type:'text/html'}));a.download=k+'.html';a.click()};
+$('#c').onclick=()=>{const t=W().map(i=>i+1).join(','),ok=()=>alert('복사됨: '+(t||'(없음)')),fb=()=>{const x=document.createElement('textarea');x.value=t;document.body.append(x);x.select();try{document.execCommand('copy')}catch(e){}x.remove();ok()};
+navigator.clipboard?navigator.clipboard.writeText(t).then(ok,fb):fb()};
+}
+main();
+</script>

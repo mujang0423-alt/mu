@@ -1,0 +1,64 @@
+<!DOCTYPE html><script>const KEY="0916-서미-바로크~근대";</script>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>0916 서미 바로크~근대</title>
+<style>
+body{font-family:sans-serif;max-width:760px;margin:auto;padding:12px;line-height:1.6}
+.hd{position:sticky;top:0;background:#fff;padding:8px 0;border-bottom:1px solid #ccc;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+button{padding:6px 10px}
+.it{display:flex;gap:8px;align-items:flex-start;border-bottom:1px solid #eee;padding:6px 0}
+details{flex:1}summary{cursor:pointer;font-weight:600}
+details p{margin:6px 0;color:#333}
+.w summary{color:#c00}
+.only .it:not(.w){display:none}
+</style></head><body>
+<div class="hd"><label><input type="checkbox" id="f">틀린 것만</label><button id="ex">오답 내보내기</button><button id="cp">번호 복사</button></div>
+<div id="L"></div>
+<script id="d">const QA=[
+["바로크의 어원과 뜻은?","'일그러진 진주'를 뜻하는 포르투갈어(barroco)에서 유래"],
+["이탈리아 바로크에서 많이 그려진 주제와 배경은?","종교화. 반종교개혁의 성공으로 승리감에 도취, 신자를 교회로 끌어들일 방법 모색"],
+["벨라스케스 '시녀들'에서 공간 확장 방법은?","화면 밖(화가·관람자 위치)을 바라보는 인물들, 뒤쪽 거울에 비친 왕·왕비, 열린 문을 통해 화면 밖 공간까지 확장"],
+["플랑드르 바로크 반 다이크의 특징은?","루벤스의 영향. 초상화, 특히 위세(권위 과시) 초상화를 많이 그림"],
+["네덜란드 바로크에서 풍속화·풍경화·정물화가 발달한 배경은?","종교개혁 성공으로 종교화 금기시 / 상공업 발달로 중산층 증가 / 길드·민병대가 후원자가 되어 집단초상화 증가 / 중산층이 소비할 수 있는 풍속·풍경·정물화 수요"],
+["프란스 할스가 인물의 순간적 동작·표정을 포착하려 사용한 묘법은?","알라 프리마(alla prima)"],
+["렘브란트가 광원을 인물의 측후방에 두는 기법과 효과는?","렘브란트 라이팅. 얼굴에 그림자가 부드럽게 떨어져 미묘한 명암·모호한 윤곽 처리 → 미묘한 표정과 내면 감정 표현"],
+["얀 베르메르의 소속 지역과 묘사의 정확도를 높이려 활용한 장치는?","네덜란드 / 카메라 옵스큐라"],
+["로코코에서 샤르댕과 관련된 배경적 특징은?","계몽주의 영향으로 현상에 대한 이성적 접근·현실 자각이 화두. 역사적·교훈적(바니타스) 의미 대신 형식미·질감·공간 구성 추구"],
+["영국 로코코 게인즈버러와 레이놀즈의 초상화 비교는?","게인즈버러: 인물을 풍경과 함께 자연스럽게 그림 / 레이놀즈: 귀족 대상, 그랜드 매너, 고전적·근엄한 궁정식 초상화"],
+["신고전주의의 배경은?","프랑스 혁명 → 시민 계몽·의지 고취 필요 / 폼페이 유적 발굴, 빙켈만·레싱의 고대 연구 → 고전에 대한 동경 / 향락적 로코코에 대한 반발"],
+["앵그르 '그랑드 오달리스크'의 표현적 특징은?","실제보다 긴 허리 등 사실성보다 관능성 강조, 소품의 광택·질감 강조, 이국적 소재"],
+["이국 정서(이국 취미)를 뜻하며, 멀리 떨어진 미지의 이국을 소재로 비현실적 미를 표현하는 낭만주의 용어는?","엑조티시즘(exoticism)"],
+["제리코 '메두사호의 뗏목'과 들라크루아 '민중을 이끄는 자유의 여신'의 공통 제재는?","실제 일어난 당대 사건. 실제보다 훨씬 역동적으로 표현"],
+["들라크루아 '민중을 이끄는 자유의 여신'의 표현적 특징은?","삼각형 구도로 주제 집중, 빛과 구도의 극적 효과, 역동적·영웅적 표현으로 감정 전달, 원색으로 색채 강조"],
+["윌리엄 블레이크가 예언서 삽화 제작을 위해 고안한 기법은?","릴리프 에칭(relief etching)"],
+["릴리프 에칭이 일반 에칭과 다른 점은?","글과 그림을 한 판에 제작, 부식 후 남은 볼록(양각) 부분에 잉크를 묻혀 찍음(일반 에칭은 오목판) ※스터디 답 '양각·음각을 한 판에' — 교재 확인"],
+["프리드리히 작품의 르푸수아르(repoussoir) 기법의 뜻과 효과는?","'밀어내다, 물리치다'. 전경(화면 양옆)에 진한 색채의 큰 사물 배치 → 공간감 형성, 관람자 시선을 화면 안으로 집중, 주제 강조"],
+["고야의 '검은 회화'란?","환상적이고 어두운 작품으로 인간의 광기·어리석음·탐욕을 표현"],
+["컨스터블의 특징은?","보색 대비로 나뭇잎·녹음을 생생하게 표현, 야외 사생, 라위스달(바로크 풍경화)의 영향으로 화면 절반을 하늘이 차지하는 구성"],
+["컨스터블 풍경화와 바로크 풍경화의 차이는?","바로크: 역동적 구도, 어두운 색조 / 컨스터블: 자연이 주는 감동, 사생을 담아냄"],
+["1848년 2월 혁명 무렵 퐁텐블로 숲 인근에 모여 컨스터블의 영향 속에 프랑스 풍경의 서정성을 표현한 코로 등의 화가 집단은?","바르비종파"],
+["밀레의 특징은?","최초로 농부(노동자)를 주제로 그림. 농부를 이상화·숭고하게 표현하고 따스한 시선으로 바라봄"],
+["사실주의의 배경은?","산업혁명 → 임금 체불·장시간 노동 등 사회문제 / 마르크스·엥겔스의 사회주의 대두(노동자 단결로 자본가 계급 타도 주장) / 실증주의 철학"],
+["실증주의 철학이란?","모든 지식은 경험과 관찰을 통해 얻어진다는 철학"],
+["사실주의와 낭만주의의 주제 비교는?","둘 다 당대 현실을 다룸. 낭만주의: 강렬한 사건에 상상력 가미, 극적 표현 / 사실주의: 직접 본 현실, 현실 고발적, 노동자를 주제로 함"],
+["미국 사실주의 에이킨스가 원근법을 정확히 적용하기 위해 사용한 방법은?","격자(그리드)를 그려 그대로 옮겨 그림"],
+["에이킨스가 20세기 초 영향을 준 화파는?","애시캔 화파(Ashcan School)"],
+["휘슬러가 옹호한 신조는?","유미주의 — 예술을 위한 예술"],
+["라파엘 전파의 특징과 주제는?","라파엘로 이전(고딕·초기 르네상스)으로의 회귀 추구, 모리스에 영향 → 미술공예운동. 주제: 중세 로맨스 문학에 근거한 교훈적 이야기, 자연 풍경, 종교개혁 등 동시대 사회적 이슈"],
+["인상주의의 배경은?","튜브 물감·사진기 발달 → 야외 사생, 순간의 빛 포착 가능 / 산업혁명에 따른 경제적 부로 자유주의 사상 대두"],
+["인상주의 회화의 전체적 특징은?","단순화된 형태, 우키요에 영향의 잘린 파격적 구도, 평면성, 드러나는 붓 터치"],
+["인상주의가 우키요에에서 영향받은 점은?","넓은 면과 강렬한 색채, 단순화된 형태, 잘린 구도, 입체감 없는 평면적 묘사, 과장된 원근법·공간"],
+["마네 작품의 현대적 특징은?","매춘부 등 충격적 주제, 명암 그라데이션 없는 평평한 화면, 짧은 붓 터치로 마티에르, 고전 작품의 주제·모티브 차용 ※'검정 그림자'는 스터디 내 미확인 — 교재 확인"],
+["르누아르 작품의 인상주의적 특징은?","짧은 원색 붓 터치, 밝고 경쾌한 햇살 효과(모네와 공통)"],
+["드가의 특징은?","잘린 파격적 구도, 인공 조명, 견고한 윤곽선과 3차원적 깊이감(다른 인상주의와 차이), 최초로 파스텔화를 완성작으로 전시"],
+["로댕 조각의 특징은?","작가의 손 흔적을 조각에 남김, 마르코타주(기존 인체 조각 부분들을 조합해 하나의 조각으로 만드는 기법)"],
+["로댕 '칼레의 시민'의 특징은?","백년전쟁 중 영국군이 칼레를 포위했을 때 시민을 구하려 희생한 6명의 영웅 기념비. 죽음 앞 고뇌·두려움·갈등을 포착해 기념비의 이상성·숭고함과 거리가 멂. 좌대 최소화로 관람자 눈높이, 인물 간 열린 공간 배열로 닫힌 구조 탈피"],
+["로댕 '청동시대'의 특징은?","고전적 이상화를 벗어나 실물을 그대로 뜬 듯한 사실적 묘사와 포즈. 기계적으로 매끄럽게 다듬던 관습과 달리 생명감을 드러내는 직관적 표면 처리"],
+["메다르도 로소의 특징과 회화·조각의 경계를 허문 방법은?","로댕과 교류, 손자국 등을 남겨 인상주의의 빛을 조각으로 끌어옴. 뚜렷한 윤곽과 매끄러운 표면을 없애 경계를 희미하게 만듦"]
+];</script>
+<script>
+let S={};try{S=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){}
+const sv=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}},W=()=>Object.keys(S).map(Number).sort((a,b)=>a-b);
+QA.forEach(([q,a],i)=>{const n=i+1,d=document.createElement('div');d.className='it'+(S[n]?' w':'');d.innerHTML=`<input type="checkbox"${S[n]?' checked':''}><details><summary>${n}. ${q}</summary><p>${a}</p></details>`;d.firstChild.onchange=e=>{const c=e.target.checked;d.classList.toggle('w',c);c?S[n]=1:delete S[n];sv()};L.append(d)});
+f.onchange=()=>document.body.classList.toggle('only',f.checked);
+ex.onclick=()=>{const h=document.documentElement.cloneNode(1);h.querySelector('#L').innerHTML='';h.querySelector('body').className='';h.querySelector('script').textContent=`const KEY="${KEY}-wrong";`;h.querySelector('#d').textContent='const QA='+JSON.stringify(W().map(n=>QA[n-1]))+';';const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['<!DOCTYPE html>'+h.outerHTML],{type:'text/html;charset=utf-8'}));a.download=KEY+'-wrong.html';a.click()};
+cp.onclick=()=>{const s=W().join(','),fb=()=>{const t=document.createElement('textarea');t.value=s;document.body.append(t);t.select();document.execCommand('copy');t.remove()};try{navigator.clipboard.writeText(s).catch(fb)}catch(e){fb()}};
+</script></body></html>
