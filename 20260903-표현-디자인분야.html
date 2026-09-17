@@ -35,4 +35,8 @@ cpy.onclick=()=>{const t=S.join(",");try{navigator.clipboard.writeText(t).catch(
 exp.onclick=()=>{const src=document.querySelector("script").textContent.replace(/const QA=\[[\s\S]*?\];/,"const QA="+JSON.stringify(QA.filter((_,i)=>S.includes(i+1)))+";").replace('const KEY="'+KEY+'"','const KEY="'+KEY+'-wrong"');
 const h='<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+KEY+'-wrong<\/title>'+document.querySelector("style").outerHTML+'<\/head><body><h1>'+KEY+' 오답<\/h1>'+document.getElementById("bar").outerHTML+'<div id="list"><\/div><script>'+src+'<\/script><\/body><\/html>';
 const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([h],{type:"text/html"}));a.download=KEY+"-wrong.html";a.click();URL.revokeObjectURL(a.href)};
-</script></body></html>
+</script><style>.sk{display:none!important}</style><script>/*SUKJI*/addEventListener("load",()=>{const K=(typeof KEY!="undefined"?KEY:location.pathname)+"-d",ds=[...document.querySelectorAll("details")],t=document.createElement("input");let s={};try{s=JSON.parse(localStorage.getItem(K))||{}}catch(e){}
+const mk=(i,x)=>{const l=document.createElement("label");l.append(i,x);return l},f=()=>ds.forEach((d,i)=>{const p=d.parentElement,b=p.querySelectorAll("details").length>1?d:p,on=t.checked&&!!s[i];b.classList.toggle("sk",on);d._l.classList.toggle("sk",on)});
+t.type="checkbox";t.onchange=f;document.body.prepend(mk(t," 숙지 숨기기 "));
+ds.forEach((d,i)=>{const c=document.createElement("input");c.type="checkbox";c.checked=!!s[i];c.onchange=()=>{c.checked?s[i]=1:delete s[i];try{localStorage.setItem(K,JSON.stringify(s))}catch(e){}f()};d._l=mk(c," 숙지");d.after(d._l)})})</script>
+</body></html>

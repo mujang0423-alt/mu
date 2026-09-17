@@ -35,3 +35,7 @@ $('#exp').onclick=()=>{const q=QA.filter((_,i)=>st[i]);if(!q.length)return alert
 const h='<!doctype html><html lang=ko><meta charset=utf-8><title>'+KEY+'-wrong</title><script>const KEY='+JSON.stringify(KEY+'-wrong')+';const QA='+JSON.stringify(q)+';<\/script>'+$('style').outerHTML+$('#bar').outerHTML+'<div id=app></div>'+$('#s').outerHTML;
 const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([h],{type:'text/html'}));a.download=KEY+'-wrong.html';a.click();URL.revokeObjectURL(a.href)};
 </script>
+<style>.sk{display:none!important}</style><script>/*SUKJI*/addEventListener("load",()=>{const K=(typeof KEY!="undefined"?KEY:location.pathname)+"-d",ds=[...document.querySelectorAll("details")],t=document.createElement("input");let s={};try{s=JSON.parse(localStorage.getItem(K))||{}}catch(e){}
+const mk=(i,x)=>{const l=document.createElement("label");l.append(i,x);return l},f=()=>ds.forEach((d,i)=>{const p=d.parentElement,b=p.querySelectorAll("details").length>1?d:p,on=t.checked&&!!s[i];b.classList.toggle("sk",on);d._l.classList.toggle("sk",on)});
+t.type="checkbox";t.onchange=f;document.body.prepend(mk(t," 숙지 숨기기 "));
+ds.forEach((d,i)=>{const c=document.createElement("input");c.type="checkbox";c.checked=!!s[i];c.onchange=()=>{c.checked?s[i]=1:delete s[i];try{localStorage.setItem(K,JSON.stringify(s))}catch(e){}f()};d._l=mk(c," 숙지");d.after(d._l)})})</script>
