@@ -63,4 +63,8 @@ let W={};try{W=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){}
 const L=document.getElementById("l"),F=document.getElementById("f"),R=()=>[...L.children].forEach((d,i)=>d.hidden=F.checked&&!W[i]);
 QA.forEach(([q,a],i)=>{const d=document.createElement("div");d.className="q";d.innerHTML=`<details><summary>${i+1}. ${q}</summary><div class="a">${a}</div></details><label class="w"><input type="checkbox"${W[i]?" checked":""}> 틀림</label>`;d.querySelector("input").onchange=e=>{e.target.checked?W[i]=true:delete W[i];try{localStorage.setItem(KEY,JSON.stringify(W))}catch(x){}R()};L.append(d)});
 F.onchange=R;
-</script></body></html>
+</script><style>.sk{display:none!important}</style><script>/*SUKJI*/addEventListener("load",()=>{const K=(typeof KEY!="undefined"?KEY:location.pathname)+"-d",ds=[...document.querySelectorAll("details")],t=document.createElement("input");let s={};try{s=JSON.parse(localStorage.getItem(K))||{}}catch(e){}
+const mk=(i,x)=>{const l=document.createElement("label");l.append(i,x);return l},f=()=>ds.forEach((d,i)=>{const p=d.parentElement,b=p.querySelectorAll("details").length>1?d:p,on=t.checked&&!!s[i];b.classList.toggle("sk",on);d._l.classList.toggle("sk",on)});
+t.type="checkbox";t.onchange=f;document.body.prepend(mk(t," 숙지 숨기기 "));
+ds.forEach((d,i)=>{const c=document.createElement("input");c.type="checkbox";c.checked=!!s[i];c.onchange=()=>{c.checked?s[i]=1:delete s[i];try{localStorage.setItem(K,JSON.stringify(s))}catch(e){}f()};d._l=mk(c," 숙지");d.after(d._l)})})</script>
+</body></html>
