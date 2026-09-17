@@ -61,4 +61,8 @@ QA.forEach(([q,a],i)=>{const n=i+1,d=document.createElement('div');d.className='
 f.onchange=()=>document.body.classList.toggle('only',f.checked);
 ex.onclick=()=>{const h=document.documentElement.cloneNode(1);h.querySelector('#L').innerHTML='';h.querySelector('body').className='';h.querySelector('script').textContent=`const KEY="${KEY}-wrong";`;h.querySelector('#d').textContent='const QA='+JSON.stringify(W().map(n=>QA[n-1]))+';';const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['<!DOCTYPE html>'+h.outerHTML],{type:'text/html;charset=utf-8'}));a.download=KEY+'-wrong.html';a.click()};
 cp.onclick=()=>{const s=W().join(','),fb=()=>{const t=document.createElement('textarea');t.value=s;document.body.append(t);t.select();document.execCommand('copy');t.remove()};try{navigator.clipboard.writeText(s).catch(fb)}catch(e){fb()}};
-</script></body></html>
+</script><style>.sk{display:none!important}</style><script>/*SUKJI*/addEventListener("load",()=>{const K=(typeof KEY!="undefined"?KEY:location.pathname)+"-d",ds=[...document.querySelectorAll("details")],t=document.createElement("input");let s={};try{s=JSON.parse(localStorage.getItem(K))||{}}catch(e){}
+const mk=(i,x)=>{const l=document.createElement("label");l.append(i,x);return l},f=()=>ds.forEach((d,i)=>{const p=d.parentElement,b=p.querySelectorAll("details").length>1?d:p,on=t.checked&&!!s[i];b.classList.toggle("sk",on);d._l.classList.toggle("sk",on)});
+t.type="checkbox";t.onchange=f;document.body.prepend(mk(t," 숙지 숨기기 "));
+ds.forEach((d,i)=>{const c=document.createElement("input");c.type="checkbox";c.checked=!!s[i];c.onchange=()=>{c.checked?s[i]=1:delete s[i];try{localStorage.setItem(K,JSON.stringify(s))}catch(e){}f()};d._l=mk(c," 숙지");d.after(d._l)})})</script>
+</body></html>
