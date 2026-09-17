@@ -10,6 +10,7 @@ h2{font-size:15px;margin:20px 0 4px;opacity:.85}
 .bar{display:flex;gap:6px;flex-wrap:wrap;align-items:center;padding:8px 0;border-bottom:1px solid #8884;margin-bottom:8px}
 button{font:inherit;padding:5px 10px;border:1px solid #8887;border-radius:7px;background:transparent;color:inherit;cursor:pointer}
 button.on{background:#8883;font-weight:600}
+.tabs button{flex:1;padding:8px 10px}
 ul{list-style:none;padding:0;margin:0}
 li{border:1px solid #8884;border-radius:9px;padding:9px 11px;margin:7px 0;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 li a{flex:1;min-width:55%;text-decoration:none;font-weight:600;color:inherit}
@@ -28,6 +29,10 @@ textarea{width:100%;height:200px;font:13px/1.6 ui-monospace,monospace;margin-top
 
 <h1>복습 허브 <span id=dday></span></h1>
 
+<div class="bar tabs">
+<button id=t0 class=on>전화스터디</button>
+<button id=t1>전공복습</button>
+</div>
 <div class=bar>
 <button id=v0 class=on>최신순</button>
 <button id=v1>주차별</button>
@@ -122,6 +127,11 @@ const md=d=>(d.getMonth()+1)+"/"+d.getDate();
 
 let files=[], view=0;
 
+/* ── 탭: 파일명에 "전공복습"이 있으면 전공복습, 없으면 전화스터디 ── */
+let ALL=[], tab=0;
+const isMajor=n=>/전공복습/.test(n);
+const pick=()=>{files=ALL.filter(n=>isMajor(n)===(tab===1))};
+
 (function(){const t=new Date();t.setHours(0,0,0,0);
   const d=Math.round((new Date(EXAM[0],EXAM[1]-1,EXAM[2])-t)/864e5)-DOFF;
   dday.textContent=d>0?"D-"+d:d===0?"D-day":"D+"+(-d)})();
@@ -147,10 +157,12 @@ async function load(force){
   msg.textContent="불러오는 중…";list.innerHTML="";out.innerHTML="";
   try{
     const j=await (await fetch("https://api.github.com/repos/"+REPO+"/contents/?t="+Date.now())).json();
-    files=j.filter(f=>f.type==="file"&&/\.html$/i.test(f.name)&&!/^index/i.test(f.name))
+    ALL=j.filter(f=>f.type==="file"&&/\.html$/i.test(f.name)&&!/^index/i.test(f.name))
            .map(f=>f.name).sort().reverse();
   }catch(e){msg.textContent="목록을 불러오지 못했어요";return}
+  files=ALL;
   await syncKeys(force);
+  pick();
   render();
 }
 
@@ -165,6 +177,9 @@ function row(n){
 
 function render(){
   let h="", tot=0;
+  const mj=ALL.filter(isMajor).length;
+  t0.textContent="전화스터디 ("+(ALL.length-mj)+")";
+  t1.textContent="전공복습 ("+mj+")";
   files.forEach(n=>tot+=wrongOf(n).length);
   if(view===0){ h="<ul>"+files.map(row).join("")+"</ul>"; }
   else if(view===1){
@@ -276,7 +291,7 @@ const eq=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
 
 function stateKeys(){
   const s=new Set(Object.values(KEYS));
-  try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(/^qa-/.test(k))s.add(k)}}catch(e){}
+  try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(/^qa-|-d$/.test(k))s.add(k)}}catch(e){}
   return [...s];
 }
 function localState(){
@@ -329,6 +344,7 @@ async function sync(){
 }
 sy.onclick=sync;tk.onclick=setTok;
 
+[t0,t1].forEach((b,i)=>b.onclick=()=>{tab=i;out.innerHTML="";[t0,t1].forEach((x,j)=>x.className=i===j?"on":"");pick();render()});
 [v0,v1,v2].forEach((b,i)=>b.onclick=()=>{view=i;out.innerHTML="";[v0,v1,v2].forEach((x,j)=>x.className=i===j?"on":"");render()});
 rl.onclick=()=>load(1);
 load().then(()=>{if(LS("hub-token"))sync()});
