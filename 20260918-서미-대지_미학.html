@@ -101,4 +101,8 @@ QA.forEach(([q,a],i)=>{const d=document.createElement('div');d.className='it'+(S
 d.innerHTML=`<label><input type="checkbox"${S[i]?' checked':''}> 틀림</label><details><summary>${i+1}. ${q}</summary><div class="a">${a}</div></details>`;
 d.querySelector('input').onchange=e=>{e.target.checked?S[i]=true:delete S[i];d.classList.toggle('x',e.target.checked);sv()};l.append(d)});
 f.onchange=e=>document.body.classList.toggle('only',e.target.checked);
-</script></body></html>
+</script><style>.sk{display:none!important}</style><script>/*SUKJI*/addEventListener("load",()=>{const K=(typeof KEY!="undefined"?KEY:location.pathname)+"-d",ds=[...document.querySelectorAll("details")],t=document.createElement("input");let s={};try{s=JSON.parse(localStorage.getItem(K))||{}}catch(e){}
+const mk=(i,x)=>{const l=document.createElement("label");l.append(i,x);return l},f=()=>ds.forEach((d,i)=>{const p=d.parentElement,b=p.querySelectorAll("details").length>1?d:p,on=t.checked&&!!s[i];b.classList.toggle("sk",on);d._l.classList.toggle("sk",on)});
+t.type="checkbox";t.onchange=f;document.body.prepend(mk(t," 숙지 숨기기 "));
+ds.forEach((d,i)=>{const c=document.createElement("input");c.type="checkbox";c.checked=!!s[i];c.onchange=()=>{c.checked?s[i]=1:delete s[i];try{localStorage.setItem(K,JSON.stringify(s))}catch(e){}f()};d._l=mk(c," 숙지");d.after(d._l)})})</script>
+</body></html>
