@@ -1,0 +1,37 @@
+name: addons
+on:
+  push:
+    paths: ['.github/workflows/addons.yml']
+  workflow_run:
+    workflows: [memo]
+    types: [completed]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: addons
+jobs:
+  add:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - run: |
+          python3 - <<'PY'
+          import pathlib
+          TAG='<script src="addons.js"></script>'
+          for p in pathlib.Path('.').rglob('*.html'):
+            if '.github' in p.parts or p.name.lower().startswith('index'): continue
+            t=p.read_text(encoding='utf-8')
+            if 'addons.js' in t: continue
+            i=t.lower().rfind('</body>')
+            t=t[:i]+TAG+t[i:] if i>=0 else t+TAG
+            p.write_text(t,encoding='utf-8')
+          PY
+          git config user.name bot
+          git config user.email bot@users.noreply.github.com
+          git add -A
+          git diff --cached --quiet && exit 0
+          git commit -m "addons 연결"
+          for n in 1 2 3; do git pull --rebase && git push && exit 0; sleep 5; done
+          exit 1
