@@ -25,8 +25,26 @@ details[open] summary{margin-bottom:7px;border-bottom:1px dashed #8884;padding-b
 .src{font-size:12px;opacity:.6;margin:12px 0 2px}
 #msg{font-size:13px;opacity:.7}
 textarea{width:100%;height:200px;font:13px/1.6 ui-monospace,monospace;margin-top:10px;padding:8px;border:1px solid #8886;border-radius:8px;background:transparent;color:inherit}
+.it{border:1px solid #8884;border-radius:9px;padding:9px 11px;margin:9px 0}
+.it details{border:0;padding:0;margin:0}
+.it .a{margin-top:2px}
+.mmb{margin-top:8px;padding:8px 10px;border-left:3px solid #e9a23b;background:rgba(233,162,59,.12);border-radius:0 6px 6px 0;white-space:pre-wrap;font-size:15px}
+.mmb img{display:block;max-width:100%;border-radius:6px;margin-top:6px}
+.ctl{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-size:13px;margin-top:8px}
+.ctl .sp{flex:1;min-width:40%;opacity:.55;font-size:12px}
+.ctl button{font-size:12px;padding:3px 8px}
+.ctl button.ok{border-color:#3a9d5d;color:#3a9d5d}.ctl button.ng{border-color:#e56;color:#e56}
+.undo{font-size:13px;opacity:.75;display:flex;gap:10px;align-items:center}
+.undo button{font-size:12px;padding:2px 8px}
+.it.gone{padding:6px 11px;border-style:dashed}
+.st{color:#d9a300;font-weight:700;margin-right:4px}
+.cn{font-size:11px;font-weight:700;background:#e56;color:#fff;border-radius:5px;padding:0 5px;margin-left:6px;vertical-align:1px}
+.ad{font-size:11px;font-weight:600;color:#3a7bd5;border:1px solid #3a7bd5;border-radius:4px;padding:0 4px;margin-right:6px}
+#q{flex:1;min-width:50%;font:inherit;padding:6px 10px;border:1px solid #8887;border-radius:7px;background:transparent;color:inherit}
+.hot{border-color:#e5a100;font-weight:600}
 </style>
 
+<!-- SUKJI 제외: 허브에는 숙지 스크립트를 붙이지 않음 -->
 <h1>복습 허브 <span id=dday></span></h1>
 
 <div class="bar tabs">
@@ -40,9 +58,18 @@ textarea{width:100%;height:200px;font:13px/1.6 ui-monospace,monospace;margin-top
 <button id=rl>새로고침</button>
 </div>
 <div class=bar>
-<button id=go>전체 오답 모아보기</button>
-<button id=rnd>랜덤 오답 10문항</button>
+<button id=td class=hot>오늘 복습</button>
+<button id=sr>★ 별표</button>
+<button id=rp>상습 오답</button>
+<button id=go>전체 오답</button>
+<button id=rnd>랜덤 오답 10</button>
 <button id=txt>오답 텍스트</button>
+</div>
+<div class=bar>
+<input id=q type=search placeholder="문제·답·메모 검색 (전체 파일)">
+<button id=qs>검색</button>
+</div>
+<div class=bar>
 <button id=sy>동기화</button>
 <button id=tk>토큰</button>
 <span id=msg>불러오는 중…</span>
@@ -51,6 +78,8 @@ textarea{width:100%;height:200px;font:13px/1.6 ui-monospace,monospace;margin-top
 <div id=list></div>
 <div id=out></div>
 
+<script>window.HUB=1</script>
+<script src="addons.js"></script>
 <script>
 const REPO="mujang0423-alt/mu", EXAM=[2026,11,28], DOFF=0;
 
@@ -116,19 +145,92 @@ function subjOf(n){
   for(const[s,al]of SUBJ)if(al.some(a=>t.includes(a)))return s;
   return "기타";
 }
-let KEYS={};
-const wrongOf=n=>{try{const o=JSON.parse(localStorage.getItem(KEYS[n]||key(n)))||{};
-  return Object.keys(o).filter(i=>o[i]).map(Number).sort((a,b)=>a-b)}catch(e){return[]}};
 const visits=()=>{try{return JSON.parse(localStorage.getItem("hub-visit"))||{}}catch(e){return{}}};
 function mark(n){try{const v=visits();v[n]=Date.now();localStorage.setItem("hub-visit",JSON.stringify(v))}catch(e){}}
 const days=t=>Math.floor((Date.now()-t)/864e5);
 const monday=d=>{const x=new Date(d),w=(x.getDay()+6)%7;x.setDate(x.getDate()-w);x.setHours(0,0,0,0);return x};
 const md=d=>(d.getMonth()+1)+"/"+d.getDate();
 
-let files=[], view=0;
 
-/* ── 탭: 파일명에 "전공복습"이 있으면 전공복습, 없으면 전화스터디 ── */
-let ALL=[], tab=0;
+const A=window.AD;
+if(!A){document.getElementById("msg").textContent="addons.js를 못 불러왔어요. 저장소에 addons.js가 있는지 확인해 주세요."}
+const {esc:E,get:G,op:OP,today:TD,plus:PL,IV,J,LSg,LSs,setOf,setPut,tok}=A||{};
+
+/* ── 파일 정보: KEY, 틀림 저장 형식 ── */
+let META=J?J("hub-meta",{}):{};
+const WK=n=>(META[n]&&META[n].k)||key(n);
+const FM=n=>(META[n]&&META[n].f)||"obj";
+const NM=n=>A.nameOf(WK(n));
+const DIR=location.pathname.replace(/[^/]*$/,"");
+const SK=n=>(META[n]&&META[n].k)?META[n].k+"-d":DIR+encodeURIComponent(n)+"-d";
+const FMT=()=>{const o={};Object.keys(META).forEach(n=>{if(META[n].f==="idx")o[WK(n)]="idx"});return o};
+
+const TX={};                                  // 파일별 문항 [문제,답]
+const strip=s=>String(s==null?"":s).replace(/<br\s*\/?>/gi,"\n").replace(/<[^>]+>/g,"").replace(/&nbsp;/g," ").replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&amp;/g,"&").trim();
+function qaOf(t){
+  const m=t.match(/const QA=(\[[\s\S]*?\n\]);/);
+  if(m){let a=null;
+    try{a=JSON.parse(m[1])}catch(e){try{a=JSON.parse(m[1].replace(/,\s*\]$/,"]"))}catch(e2){try{a=new Function("return "+m[1])()}catch(e3){}}}
+    if(Array.isArray(a))return a.map(x=>[strip(x[0]),strip(x[1])]);}
+  const d=new DOMParser().parseFromString(t,"text/html");
+  return [...d.querySelectorAll("details")].map(x=>[
+    (x.querySelector("summary")?.textContent||"").replace(/^\s*\d+\.\s*/,"").trim(),
+    (x.querySelector(".a")?.textContent||"").trim()]);
+}
+async function fetchText(n,fresh){return (await fetch(encodeURIComponent(n)+(fresh?"?t="+Date.now():""),fresh?{cache:"no-store"}:{})).text()}
+async function syncMeta(force){
+  const todo=ALL.filter(n=>force||!META[n]);
+  for(let i=0;i<todo.length;i+=8){
+    msg.textContent="파일 확인 중… "+Math.min(i+8,todo.length)+"/"+todo.length;
+    await Promise.all(todo.slice(i,i+8).map(async n=>{
+      try{const t=await fetchText(n,1),m=t.match(/KEY\s*=\s*["']([^"']+)["']/);
+        META[n]={k:m?m[1]:"",f:/S\.includes\(/.test(t)?"idx":"obj"};TX[n]=qaOf(t)}catch(e){}
+    }));
+  }
+  LSs("hub-meta",JSON.stringify(META));
+  // 예전 동기화 때문에 형식이 망가진 파일 복구(배열이어야 하는데 객체로 저장된 경우)
+  Object.keys(META).forEach(n=>{if(META[n].f==="idx"){const v=J(WK(n),null);if(v&&!Array.isArray(v))setPut(WK(n),"idx",setOf(WK(n),"idx"))}});
+}
+
+/* ── 문항 상태 ── */
+const isW=it=>it.ad?!!G(it.N,["aw",it.k]):setOf(WK(it.n),FM(it.n)).has(it.k);
+const isS=it=>it.ad?!!G(it.N,["as",it.k]):setOf(SK(it.n),"obj").has(it.k);
+const isStar=it=>!!G(it.N,["star",it.k]);
+const cnt=it=>A.cntOf(it.N,it.k,isW(it));
+function setW(it,v){
+  if(it.ad)OP(it.N,["aw",it.k],v?1:null);
+  else{const s=setOf(WK(it.n),FM(it.n));v?s.add(it.k):s.delete(it.k);setPut(WK(it.n),FM(it.n),s);later()}
+}
+function setS(it,v){
+  if(it.ad)OP(it.N,["as",it.k],v?1:null);
+  else{const s=setOf(SK(it.n),"obj");v?s.add(it.k):s.delete(it.k);setPut(SK(it.n),"obj",s);later()}
+}
+function wrongOf(n){
+  const s=[...setOf(WK(n),FM(n))],N=NM(n),add=G(N,["add"])||{};
+  Object.keys(G(N,["aw"])||{}).forEach(k=>{if(add[k])s.push(k)});return s;
+}
+function itemsOf(n){
+  const N=NM(n),qa=TX[n]||[],r=qa.map((x,i)=>({n,N,k:String(i),no:i+1,q:x[0],a:x[1]}));
+  const add=G(N,["add"])||{};
+  Object.keys(add).sort((x,y)=>(add[x].c||0)-(add[y].c||0)).forEach((k,j)=>r.push({n,N,k,no:"추가"+(j+1),q:add[k].q,a:add[k].a||"",ad:1}));
+  return r;
+}
+async function ensure(list){
+  const need=list.filter(n=>!TX[n]);
+  for(let i=0;i<need.length;i+=8){
+    msg.textContent="문항 불러오는 중… "+Math.min(i+8,need.length)+"/"+need.length;
+    await Promise.all(need.slice(i,i+8).map(async n=>{try{TX[n]=qaOf(await fetchText(n))}catch(e){TX[n]=[]}}));
+  }
+  const dl=list.filter(n=>!DL[n]);
+  for(let i=0;i<dl.length;i+=8){
+    msg.textContent="메모·별표 불러오는 중… "+Math.min(i+8,dl.length)+"/"+dl.length;
+    await Promise.all(dl.slice(i,i+8).map(async n=>{await A.load(NM(n));DL[n]=1}));
+  }
+  msg.textContent="";
+}
+const DL={};
+
+let files=[], view=0, ALL=[], tab=0;
 const isMajor=n=>/전공복습/.test(n);
 const pick=()=>{files=ALL.filter(n=>isMajor(n)===(tab===1))};
 
@@ -136,179 +238,183 @@ const pick=()=>{files=ALL.filter(n=>isMajor(n)===(tab===1))};
   const d=Math.round((new Date(EXAM[0],EXAM[1]-1,EXAM[2])-t)/864e5)-DOFF;
   dday.textContent=d>0?"D-"+d:d===0?"D-day":"D+"+(-d)})();
 
-async function syncKeys(force){
-  let c={};
-  if(!force){try{c=JSON.parse(localStorage.getItem("hub-keys"))||{}}catch(e){}}
-  const todo=files.filter(n=>!c[n]);
-  for(let i=0;i<todo.length;i++){
-    const n=todo[i];
-    msg.textContent="파일 확인 중… "+(i+1)+"/"+todo.length;
-    try{
-      const t=await (await fetch(encodeURIComponent(n)+"?t="+Date.now())).text();
-      const m=t.match(/KEY\s*=\s*["']([^"']+)["']/);
-      c[n]=m?m[1]:key(n);
-    }catch(e){c[n]=key(n)}
-  }
-  try{localStorage.setItem("hub-keys",JSON.stringify(c))}catch(e){}
-  KEYS=c;
-}
-
 async function load(force){
+  if(!A)return;
   msg.textContent="불러오는 중…";list.innerHTML="";out.innerHTML="";
   try{
-    const j=await (await fetch("https://api.github.com/repos/"+REPO+"/contents/?t="+Date.now())).json();
-    ALL=j.filter(f=>f.type==="file"&&/\.html$/i.test(f.name)&&!/^index/i.test(f.name))
-           .map(f=>f.name).sort().reverse();
+    const j=await (await fetch("https://api.github.com/repos/"+REPO+"/contents/?t="+Date.now(),tok()?{headers:{Authorization:"Bearer "+tok()}}:{})).json();
+    ALL=j.filter(f=>f.type==="file"&&/\.html$/i.test(f.name)&&!/^index/i.test(f.name)).map(f=>f.name).sort().reverse();
   }catch(e){msg.textContent="목록을 불러오지 못했어요";return}
-  files=ALL;
-  await syncKeys(force);
-  pick();
-  render();
+  await syncMeta(force);
+  pick();render();
 }
 
 function row(n){
-  const w=wrongOf(n), v=visits()[n], d=(v==null)?null:days(v);
-  return "<li><a href='"+encodeURIComponent(n)+"' data-f=\""+esc(n)+"\">"
-    +esc(key(n))+"</a><span class=tag>"+subjOf(n)+"</span>"
-    +(w.length?"<span class=w>오답 "+w.length+"</span>":"")
+  const w=wrongOf(n).length,N=NM(n),st=Object.keys(G(N,["star"])||{}).length,v=visits()[n],d=(v==null)?null:days(v);
+  return "<li><a href='"+encodeURIComponent(n)+"' data-f=\""+E(n)+"\">"
+    +E(key(n))+"</a><span class=tag>"+subjOf(n)+"</span>"
+    +(st?"<span class=st>★"+st+"</span>":"")
+    +(w?"<span class=w>오답 "+w+"</span>":"")
     +"<span class='n"+(d===null||d>=7?" old":"")+"'>"
     +(d===null?"미복습":d===0?"오늘":d+"일 전")+"</span></li>";
 }
-
 function render(){
-  let h="", tot=0;
+  let h="",tot=0;
   const mj=ALL.filter(isMajor).length;
   t0.textContent="전화스터디 ("+(ALL.length-mj)+")";
   t1.textContent="전공복습 ("+mj+")";
   files.forEach(n=>tot+=wrongOf(n).length);
-  if(view===0){ h="<ul>"+files.map(row).join("")+"</ul>"; }
-  else if(view===1){
-    h=byWeek(files,n=>n).map(w=>
-      "<h2>"+wkLabel(w[0])+" ("+w[1].length+")</h2><ul>"+w[1].map(row).join("")+"</ul>").join("");
-  } else {
-    const order=SUBJ.map(s=>s[0]).concat("기타"), g={};
+  if(view===0){h="<ul>"+files.map(row).join("")+"</ul>"}
+  else if(view===1){h=byWeek(files,n=>n).map(w=>"<h2>"+wkLabel(w[0])+" ("+w[1].length+")</h2><ul>"+w[1].map(row).join("")+"</ul>").join("")}
+  else{
+    const order=SUBJ.map(s=>s[0]).concat("기타"),g={};
     files.forEach(n=>{const s=subjOf(n);(g[s]=g[s]||[]).push(n)});
     h=order.filter(s=>g[s]).map(s=>"<h2>"+s+" ("+g[s].length+")</h2><ul>"+g[s].map(row).join("")+"</ul>").join("");
   }
-  list.innerHTML=h;
-  list.style.display="";
+  list.innerHTML=h;list.style.display="";
   msg.textContent=files.length+"개 파일 / 오답 "+tot+"문항";
 }
-
 list.onclick=e=>{const a=e.target.closest("a[data-f]");if(a)mark(a.dataset.f)};
 
-async function parse(n){
-  const t=await (await fetch(encodeURIComponent(n)+"?t="+Date.now())).text();
-  const m=t.match(/const QA=(\[[\s\S]*?\n\]);/);
-  if(m){try{return JSON.parse(m[1])}catch(e){}}
-  const d=new DOMParser().parseFromString(t,"text/html");
-  return [...d.querySelectorAll("details")].map(x=>[
-    (x.querySelector("summary")?.textContent||"").replace(/^\s*\d+\.\s*/,"").trim(),
-    (x.querySelector(".a")?.textContent||"").trim()]);
-}
-
-async function collect(){
-  const r=[];
-  for(const n of files){
-    const w=wrongOf(n);if(!w.length)continue;
-    let qa=[];try{qa=await parse(n)}catch(e){continue}
-    r.push([n,w.filter(i=>qa[i]).map(i=>[i+1,qa[i][0],qa[i][1]])]);
-  }
-  return r;
-}
-
-const busy=(b,t,f)=>{b.disabled=f;b.textContent=t};
-
 const wkKey=n=>{const d=dateOf(n);return d?monday(d).getTime():0};
-const wkLabel=k=>{if(!k)return "날짜 없음";
-  const m=new Date(+k),e=new Date(+k+6*864e5);return md(m)+" ~ "+md(e)};
+const wkLabel=k=>{if(!k)return "날짜 없음";const m=new Date(+k),e=new Date(+k+6*864e5);return md(m)+" ~ "+md(e)};
 function byWeek(arr,get){
   const g={};arr.forEach(x=>{const k=wkKey(get(x));(g[k]=g[k]||[]).push(x)});
   return Object.keys(g).sort((a,b)=>b-a).map(k=>[+k,g[k]]);
 }
-function showOut(h){
-  list.style.display="none";
-  out.innerHTML="<div class=bar><button id=bk>← 목록으로</button></div>"+h;
-  bk.onclick=()=>{out.innerHTML="";list.style.display=""};
-  scrollTo(0,0);
+function showOut(title){
+  list.style.display="none";out.innerHTML="";
+  const b=A.el("div","bar"),bk=A.btn("← 목록으로",()=>{out.innerHTML="";render()});b.append(bk);
+  out.append(b);if(title)out.insertAdjacentHTML("beforeend","<h2>"+title+"</h2>");scrollTo(0,0);
 }
+const src=it=>subjOf(it.n)+" | "+key(it.n)+" · "+it.no+"번";
 
-go.onclick=async()=>{
-  busy(go,"모으는 중…",1);
-  const r=await collect();
-  const tot=r.reduce((s,x)=>s+x[1].length,0);
-  if(!tot){showOut("<p id=msg>체크된 오답이 없어요. 각 파일에서 '틀림'을 체크한 뒤 다시 눌러주세요.</p>")}
-  else{
-    const h=byWeek(r,x=>x[0]).map(function(w){
-      const n=w[1].reduce((s,x)=>s+x[1].length,0);
-      return "<h2>"+wkLabel(w[0])+" · 오답 "+n+"</h2>"+w[1].map(function(x){
-        return "<div class=src>"+subjOf(x[0])+" | "+esc(key(x[0]))+" · 번호 "+x[1].map(q=>q[0]).join(",")+"</div>"
-          +x[1].map(q=>"<details><summary>"+q[0]+". "+esc(q[1])+"</summary><div class=a>"+esc(q[2])+"</div></details>").join("");
-      }).join("");
-    }).join("");
-    showOut("<h2>전체 오답 "+tot+"문항</h2>"+h);
+/* ── 문항 카드: 답·메모·형광펜 + 별표/틀림/숙지 (+오늘 복습 버튼) ── */
+function card(it,mode){
+  const w=A.el("div","it"),d=A.el("details"),s=A.el("summary"),a=A.el("div","a",it.a),m=A.el("div","mmb");
+  const head=()=>{const n=cnt(it);s.innerHTML=(isStar(it)?"<span class=st>★</span>":"")+(it.ad?"<span class=ad>추가</span>":"")+E(it.q)+(n>=2?"<span class=cn>"+(n>=3?"3회+":n+"회")+"</span>":"")};
+  head();
+  const mh=A.memoHTML(G(it.N,[it.k]));m.innerHTML=mh;if(!mh)m.style.display="none";
+  d.append(s,a,m);A.paint(a,G(it.N,["hl",it.k,"a"]));A.paint(m,G(it.N,["hl",it.k,"m"]));
+  const ctl=A.el("div","ctl"),sp=A.el("span","sp",src(it));
+  const cb=(t,v,f)=>{const l=A.el("label"),c=A.el("input");c.type="checkbox";c.checked=v;c.onchange=()=>f(c.checked);l.append(c," "+t);return l};
+  const bs=A.btn(isStar(it)?"★":"☆",()=>{const v=!isStar(it);OP(it.N,["star",it.k],v?1:null);bs.textContent=v?"★":"☆";head();
+    if(mode==="star"&&!v)gone("별표 해제",()=>{OP(it.N,["star",it.k],1);bs.textContent="★";head()})});
+  const lw=cb("틀림",isW(it),v=>{setW(it,v);if(v)A.bump(it.N,it.k,false);head();
+    if(!v&&(mode==="wrong"))gone("오답에서 뺌",()=>{setW(it,true);lw.firstChild.checked=true})});
+  const ls=cb("숙지",isS(it),v=>{setS(it,v);if(v)gone("숙지 처리됨",()=>{setS(it,false);ls.firstChild.checked=false})});
+  ctl.append(sp,bs,lw,ls);
+  if(mode==="wrong"||mode==="star"){
+    const bw=A.btn("또 틀림",()=>{if(A.bump(it.N,it.k,isW(it))){setW(it,true);lw.firstChild.checked=true;head();bw.disabled=true;bw.textContent="오늘 기록됨"}});
+    const c=G(it.N,["cnt",it.k]);if(c&&c.d===TD()){bw.disabled=true;bw.textContent="오늘 기록됨"}
+    ctl.append(bw);
   }
-  busy(go,"전체 오답 모아보기",0);
-};
-
-txt.onclick=async()=>{
-  busy(txt,"뽑는 중…",1);
-  const r=await collect();
-  const s=byWeek(r,x=>x[0]).map(function(w){
-    return "【"+wkLabel(w[0])+"】\n\n"+w[1].map(function(x){
-      return "["+subjOf(x[0])+"] "+key(x[0])+" 오답: "+x[1].map(q=>q[0]).join(",")+"\n\n"
-        +x[1].map(q=>q[0]+". "+q[1]+"\n"+q[2]).join("\n\n");
-    }).join("\n\n———\n\n");
-  }).join("\n\n════════\n\n");
-  showOut("<textarea readonly onclick=this.select()>"+esc(s||"체크된 오답이 없어요.")+"</textarea>");
-  busy(txt,"오답 텍스트",0);
-};
-
-rnd.onclick=async()=>{
-  busy(rnd,"뽑는 중…",1);
-  const pool=[];
-  for(const n of files){
-    const w=wrongOf(n);if(!w.length)continue;
-    let qa=[];try{qa=await parse(n)}catch(e){continue}
-    w.forEach(i=>{if(qa[i])pool.push([key(n),i+1,qa[i][0],qa[i][1],subjOf(n)])});
+  if(mode==="srs"){
+    const prev=()=>({s:G(it.N,["srs",it.k]),c:G(it.N,["cnt",it.k]),w:isW(it)});
+    const back=p=>()=>{OP(it.N,["srs",it.k],p.s||null);OP(it.N,["cnt",it.k],p.c||null);setW(it,p.w);lw.firstChild.checked=p.w;head()};
+    ctl.append(
+      A.btn("기억남",()=>{const p=prev(),b=Math.min(((p.s&&p.s.b)||0)+1,IV.length-1),due=PL(IV[b]);
+        OP(it.N,["srs",it.k],{b:b,due:due});gone("✓ 다음 복습 "+(+due.slice(5,7))+"/"+(+due.slice(8)),back(p))},"ok"),
+      A.btn("헷갈림",()=>{const p=prev();A.bump(it.N,it.k,p.w);OP(it.N,["srs",it.k],{b:0,due:PL(1)});setW(it,true);lw.firstChild.checked=true;head();
+        gone("내일 다시 나와요",back(p))},"ng"));
   }
-  for(let i=pool.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));const t=pool[i];pool[i]=pool[j];pool[j]=t}
-  const p=pool.slice(0,10);
-  showOut(p.length?"<h2>랜덤 오답 "+p.length+"문항 <span class=n>(전체 오답 "+pool.length+")</span></h2>"+p.map(q=>
-    "<details><summary>"+esc(q[2])+"</summary><div class=a>"+esc(q[3])
-    +"</div><div class=src>"+q[4]+" | "+esc(q[0])+" · "+q[1]+"번</div></details>").join("")
-    :"<p id=msg>체크된 오답이 없어요. 각 파일에서 '틀림'을 체크한 뒤 다시 눌러주세요.</p>");
-  busy(rnd,"랜덤 오답 10문항",0);
-};
+  w.append(d,ctl);
+  const u=A.el("div","undo");u.style.display="none";w.append(u);
+  function gone(t,undo){
+    d.style.display=ctl.style.display="none";w.classList.add("gone");u.innerHTML="";u.style.display="";
+    u.append(A.el("span",null,t+" · "+it.q.slice(0,22)+(it.q.length>22?"…":"")),A.btn("되돌리기",()=>{undo();u.style.display="none";d.style.display=ctl.style.display="";w.classList.remove("gone")}));
+  }
+  return w;
+}
+function groups(items,mode){        // 주차 → 파일별로 묶어서 보여주기
+  const byF={};items.forEach(it=>(byF[it.n]=byF[it.n]||[]).push(it));
+  byWeek(Object.keys(byF),n=>n).forEach(w=>{
+    const c=w[1].reduce((s,n)=>s+byF[n].length,0);
+    out.insertAdjacentHTML("beforeend","<h2>"+wkLabel(w[0])+" · "+c+"문항</h2>");
+    w[1].forEach(n=>byF[n].forEach(it=>out.append(card(it,mode))));
+  });
+}
+async function run(b,t,f){if(!A)return;const o=b.textContent;b.disabled=true;b.textContent=t;try{await f()}catch(e){msg.textContent="오류: "+e.message}b.disabled=false;b.textContent=o}
+const pool=()=>files.flatMap(itemsOf);
+const empty=t=>out.insertAdjacentHTML("beforeend","<p id=msg>"+t+"</p>");
 
-/* ── 기기 간 동기화 ── */
+go.onclick=()=>run(go,"모으는 중…",async()=>{
+  await ensure(files);const it=pool().filter(x=>isW(x)&&!isS(x));
+  showOut("전체 오답 "+it.length+"문항");it.length?groups(it,"wrong"):empty("체크된 오답이 없어요. (숙지한 문항은 빠져요)");
+});
+rnd.onclick=()=>run(rnd,"뽑는 중…",async()=>{
+  await ensure(files);const p=pool().filter(x=>isW(x)&&!isS(x));
+  for(let i=p.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[p[i],p[j]]=[p[j],p[i]]}
+  showOut("랜덤 오답 "+Math.min(10,p.length)+"문항 <span class=n>(전체 "+p.length+")</span>");
+  p.length?p.slice(0,10).forEach(it=>out.append(card(it,"wrong"))):empty("체크된 오답이 없어요.");
+});
+sr.onclick=()=>run(sr,"모으는 중…",async()=>{
+  await ensure(files);const it=pool().filter(x=>isStar(x)&&!isS(x));
+  showOut("★ 별표 "+it.length+"문항");it.length?groups(it,"star"):empty("별표한 문항이 없어요. 각 파일에서 답을 펼치고 ☆ 별표를 눌러 주세요.");
+});
+rp.onclick=()=>run(rp,"모으는 중…",async()=>{
+  await ensure(files);const it=pool().filter(x=>cnt(x)>=2&&!isS(x)).sort((a,b)=>cnt(b)-cnt(a));
+  showOut("상습 오답 (2번 이상) "+it.length+"문항");
+  it.length?it.forEach(x=>out.append(card(x,"wrong"))):empty("아직 두 번 이상 틀린 문항이 없어요. 다시 틀렸을 땐 '또 틀림'이나 오늘 복습의 '헷갈림'을 눌러 주세요.");
+});
+td.onclick=()=>run(td,"고르는 중…",async()=>{
+  await ensure(files);const T=TD(),day=s=>Math.round((new Date(T)-new Date(s))/864e5);
+  const cand=pool().filter(x=>(isW(x)||isStar(x))&&!isS(x));
+  const due=cand.filter(x=>{const s=G(x.N,["srs",x.k]);return !s||s.due<=T});
+  const score=x=>{const s=G(x.N,["srs",x.k]);return (isStar(x)?100:0)+Math.max(0,cnt(x)-1)*40+(s?day(s.due)*3:20)+(isW(x)?10:0)};
+  due.sort((a,b)=>score(b)-score(a));
+  const pick20=due.slice(0,20);
+  showOut("오늘 복습 "+pick20.length+"문항 <span class=n>(오늘 대상 "+due.length+" / 전체 관리 "+cand.length+")</span>");
+  out.insertAdjacentHTML("beforeend","<p class=src>답을 펼쳐 보고 <b>기억남</b>(간격 2→4→8→16→30일) 또는 <b>헷갈림</b>(내일 다시 + 틀린 횟수 +1)을 눌러 주세요. 별표·상습 오답이 먼저 나와요.</p>");
+  pick20.length?pick20.forEach(x=>out.append(card(x,"srs"))):empty("오늘 복습할 문항을 다 했어요 👏");
+});
+async function search(){
+  const w=q.value.trim().toLowerCase();if(!w)return;
+  await run(qs,"찾는 중…",async()=>{
+    await ensure(ALL);
+    const hit=ALL.flatMap(itemsOf).filter(x=>{const m=G(x.N,[x.k]);return (x.q+"\n"+x.a+"\n"+(m&&m.t||"")).toLowerCase().includes(w)});
+    showOut("검색 “"+E(q.value.trim())+"” "+hit.length+"건"+(hit.length>100?" (100건까지 표시)":""));
+    hit.length?hit.slice(0,100).forEach(x=>out.append(card(x,"search"))):empty("검색 결과가 없어요.");
+  });
+}
+qs.onclick=search;q.onkeydown=e=>{if(e.key==="Enter")search()};
+
+txt.onclick=()=>run(txt,"뽑는 중…",async()=>{
+  await ensure(files);const it=pool().filter(x=>isW(x)&&!isS(x)),byF={};
+  it.forEach(x=>(byF[x.n]=byF[x.n]||[]).push(x));
+  const s=byWeek(Object.keys(byF),n=>n).map(w=>"【"+wkLabel(w[0])+"】\n\n"+w[1].map(n=>
+    "["+subjOf(n)+"] "+key(n)+" 오답: "+byF[n].map(x=>x.no).join(",")+"\n\n"
+    +byF[n].map(x=>{const m=G(x.N,[x.k]);return (isStar(x)?"★ ":"")+x.no+". "+x.q+"\n"+x.a+(m&&m.t?"\n  └ 메모: "+m.t:"")}).join("\n\n")
+  ).join("\n\n———\n\n")).join("\n\n════════\n\n");
+  showOut("");out.insertAdjacentHTML("beforeend","<textarea readonly onclick=this.select()>"+E(s||"체크된 오답이 없어요.")+"</textarea>");
+});
+
+/* ── 기기 간 동기화 (틀림·숙지·방문기록) ── */
 const API="https://api.github.com/repos/"+REPO+"/contents/";
 const LS=(k,v)=>{try{return v===undefined?localStorage.getItem(k):localStorage.setItem(k,v)}catch(e){return null}};
-const b64=s=>btoa(String.fromCharCode.apply(null,new TextEncoder().encode(s)));
-const ub64=s=>new TextDecoder().decode(Uint8Array.from(atob(s.replace(/\s/g,"")),c=>c.charCodeAt(0)));
-const norm=o=>{const r={};Object.keys(o||{}).forEach(i=>{if(o[i])r[i]=true});return r};
 const eq=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
-
+const canon=(k,f)=>{const o={};setOf(k,f).forEach(i=>o[i]=true);return o};
+const norm=o=>{const r={};Object.keys(o||{}).forEach(i=>{if(o[i])r[i]=true});return r};
 function stateKeys(){
-  const s=new Set(Object.values(KEYS));
+  const s=new Set(ALL.map(WK).filter(Boolean));
   try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(/^qa-|-d$/.test(k))s.add(k)}}catch(e){}
   return [...s];
 }
 function localState(){
-  const o={};stateKeys().forEach(k=>{try{const v=localStorage.getItem(k);if(v)o[k]=norm(JSON.parse(v))}catch(e){}});
+  const F=FMT(),o={};
+  stateKeys().forEach(k=>{if(LS(k)!=null)o[k]=canon(k,F[k]||"obj")});
   o._visit=visits();return o;
 }
 function merge(base,loc,rem){
-  const out={}, ks=new Set([].concat(Object.keys(base),Object.keys(loc),Object.keys(rem)));
+  const out={},ks=new Set([].concat(Object.keys(base),Object.keys(loc),Object.keys(rem)));
   ks.forEach(k=>{
     if(k==="_visit"){
       const v=Object.assign({},base._visit,loc._visit);
       Object.keys(rem._visit||{}).forEach(f=>{if(!v[f]||rem._visit[f]>v[f])v[f]=rem._visit[f]});
       out._visit=v;return;
     }
-    const b=norm(base[k]),l=norm(loc[k]),r=norm(rem[k]);
-    const lc=!eq(b,l), rc=!eq(b,r);
-    out[k]= (lc&&rc) ? Object.assign({},l,r) : lc ? l : rc ? r : l;
+    const b=norm(base[k]),l=norm(loc[k]),r=norm(rem[k]),lc=!eq(b,l),rc=!eq(b,r);
+    out[k]=(lc&&rc)?Object.assign({},l,r):lc?l:rc?r:l;
   });
   return out;
 }
@@ -319,37 +425,37 @@ function setTok(){
   if(t.trim())LS("hub-token",t.trim());else try{localStorage.removeItem("hub-token")}catch(e){}
   msg.textContent=t.trim()?"토큰 저장됨":"토큰 삭제됨";
 }
+let syncing=0,lt;
+const later=()=>{if(!LS("hub-token"))return;clearTimeout(lt);lt=setTimeout(sync,3000)};
 async function sync(){
   const T=LS("hub-token");
   if(!T){setTok();return}
-  busy(sy,"동기화 중…",1);
+  if(syncing)return;syncing=1;sy.disabled=true;sy.textContent="동기화 중…";
   try{
     let rem={},sha=null;
-    const g=await fetch(API+"state.json?t="+Date.now(),{headers:{Authorization:"Bearer "+T}});
-    if(g.ok){const j=await g.json();sha=j.sha;try{rem=JSON.parse(ub64(j.content))}catch(e){}}
+    const g=await fetch(API+"state.json?t="+Date.now(),{headers:{Authorization:"Bearer "+T},cache:"no-store"});
+    if(g.ok){const j=await g.json();sha=j.sha;try{rem=JSON.parse(A.ub64(j.content))}catch(e){}}
     else if(g.status!==404)throw new Error("읽기 실패 "+g.status);
     let base={};try{base=JSON.parse(LS("hub-base")||"{}")}catch(e){}
-    const m=merge(base,localState(),rem);
-    Object.keys(m).forEach(k=>{if(k!=="_visit")LS(k,JSON.stringify(m[k]))});
+    const m=merge(base,localState(),rem),F=FMT();
+    Object.keys(m).forEach(k=>{if(k!=="_visit")setPut(k,F[k]||"obj",new Set(Object.keys(m[k])))});
     LS("hub-visit",JSON.stringify(m._visit||{}));
     const body=JSON.stringify(m);
     const p=await fetch(API+"state.json",{method:"PUT",
       headers:{Authorization:"Bearer "+T,"Content-Type":"application/json"},
-      body:JSON.stringify(sha?{message:"sync",content:b64(body),sha:sha}:{message:"sync",content:b64(body)})});
+      body:JSON.stringify(sha?{message:"sync",content:A.b64(body),sha:sha}:{message:"sync",content:A.b64(body)})});
     if(!p.ok)throw new Error(((await p.json()).message)||("쓰기 실패 "+p.status));
     LS("hub-base",body);
-    render();msg.textContent="동기화 완료 "+new Date().toLocaleTimeString("ko-KR",{hour:"2-digit",minute:"2-digit"});
+    if(!out.innerHTML)render();
+    msg.textContent="동기화 완료 "+new Date().toLocaleTimeString("ko-KR",{hour:"2-digit",minute:"2-digit"});
   }catch(e){msg.textContent="동기화 실패: "+e.message}
-  busy(sy,"동기화",0);
+  syncing=0;sy.disabled=false;sy.textContent="동기화";
 }
 sy.onclick=sync;tk.onclick=setTok;
+if(A)A.status=t=>{if(t)msg.textContent=t};
 
 [t0,t1].forEach((b,i)=>b.onclick=()=>{tab=i;out.innerHTML="";[t0,t1].forEach((x,j)=>x.className=i===j?"on":"");pick();render()});
 [v0,v1,v2].forEach((b,i)=>b.onclick=()=>{view=i;out.innerHTML="";[v0,v1,v2].forEach((x,j)=>x.className=i===j?"on":"");render()});
 rl.onclick=()=>load(1);
 load().then(()=>{if(LS("hub-token"))sync()});
 </script>
-<style>.sk{display:none!important}</style><script>/*SUKJI*/addEventListener("load",()=>{const K=(typeof KEY!="undefined"?KEY:location.pathname)+"-d",ds=[...document.querySelectorAll("details")],t=document.createElement("input");let s={};try{s=JSON.parse(localStorage.getItem(K))||{}}catch(e){}
-const mk=(i,x)=>{const l=document.createElement("label");l.append(i,x);return l},f=()=>ds.forEach((d,i)=>{const p=d.parentElement,b=p.querySelectorAll("details").length>1?d:p,on=t.checked&&!!s[i];b.classList.toggle("sk",on);d._l.classList.toggle("sk",on)});
-t.type="checkbox";t.onchange=f;document.body.prepend(mk(t," 숙지 숨기기 "));
-ds.forEach((d,i)=>{const c=document.createElement("input");c.type="checkbox";c.checked=!!s[i];c.onchange=()=>{c.checked?s[i]=1:delete s[i];try{localStorage.setItem(K,JSON.stringify(s))}catch(e){}f()};d._l=mk(c," 숙지");d.after(d._l)})})</script>
