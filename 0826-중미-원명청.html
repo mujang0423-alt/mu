@@ -102,3 +102,107 @@ cp.onclick=async()=>{const t=wr().map(i=>i+1).join(",");try{await navigator.clip
 const mk=(i,x)=>{const l=document.createElement("label");l.append(i,x);return l},f=()=>ds.forEach((d,i)=>{const p=d.parentElement,b=p.querySelectorAll("details").length>1?d:p,on=t.checked&&!!s[i];b.classList.toggle("sk",on);d._l.classList.toggle("sk",on)});
 t.type="checkbox";t.onchange=f;document.body.prepend(mk(t," 숙지 숨기기 "));
 ds.forEach((d,i)=>{const c=document.createElement("input");c.type="checkbox";c.checked=!!s[i];c.onchange=()=>{c.checked?s[i]=1:delete s[i];try{localStorage.setItem(K,JSON.stringify(s))}catch(e){}f()};d._l=mk(c," 숙지");d.after(d._l)})})</script>
+<style>
+.mm{margin-top:6px}
+.mm-box{margin-top:8px;padding:8px 10px;border-left:3px solid #e9a23b;background:rgba(233,162,59,.12);border-radius:0 6px 6px 0;white-space:pre-wrap;font-size:.95em;line-height:1.6}
+.mm-box img{display:block;max-width:100%;border-radius:6px;margin-top:6px}
+.mm button{font:inherit;font-size:.8em;padding:3px 9px;margin:6px 6px 0 0;border:1px solid rgba(128,128,128,.5);border-radius:6px;background:transparent;color:inherit;cursor:pointer}
+.mm button:disabled{opacity:.5}
+.mm textarea{display:block;width:100%;box-sizing:border-box;min-height:84px;margin-top:8px;font:inherit;font-size:.95em;padding:7px;border:1px solid rgba(128,128,128,.5);border-radius:6px;background:transparent;color:inherit}
+.mm-th{display:inline-block;position:relative;margin:8px 8px 0 0}
+.mm-th img{height:72px;border-radius:4px;display:block}
+.mm-th b{position:absolute;top:-7px;right:-7px;background:#e56;color:#fff;border-radius:50%;width:22px;height:22px;line-height:22px;text-align:center;font-size:14px;cursor:pointer}
+.mm-st{font-size:.8em;opacity:.7}
+</style><script>/*MEMO*/addEventListener("load",()=>{
+const ds=[...document.querySelectorAll("details")];if(!ds.length)return;
+const H=location.hostname,seg=location.pathname.split("/").filter(Boolean);
+const REPO=/\.github\.io$/.test(H)&&seg.length>1?H.split(".")[0]+"/"+seg[0]:"mujang0423-alt/mu",BR="main";
+const RAW="https://raw.githubusercontent.com/"+REPO+"/"+BR+"/",API="https://api.github.com/repos/"+REPO+"/contents/";
+const NAME=(typeof KEY!="undefined"?KEY:decodeURIComponent(seg[seg.length-1]||"x").replace(/\.html?$/i,"")).replace(/[\\\/:*?"<>|#%]/g,"_");
+const PATH="memo/"+NAME+".json",LK="mm|"+NAME;
+const enc=p=>p.split("/").map(encodeURIComponent).join("/");
+const tok=()=>{try{return localStorage.getItem("hub-token")}catch(e){return null}};
+const b64=s=>{const u=new TextEncoder().encode(s);let r="";for(let i=0;i<u.length;i+=8192)r+=String.fromCharCode.apply(null,u.subarray(i,i+8192));return btoa(r)};
+const ub64=s=>new TextDecoder().decode(Uint8Array.from(atob(s.replace(/\s/g,"")),c=>c.charCodeAt(0)));
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const el=(t,c)=>{const e=document.createElement(t);if(c)e.className=c;return e};
+const btn=(x,f)=>{const b=el("button");b.type="button";b.textContent=x;b.onclick=e=>{e.preventDefault();f()};return b};
+let M={};try{M=JSON.parse(localStorage.getItem(LK))||{}}catch(e){}
+const store=()=>{try{localStorage.setItem(LK,JSON.stringify(M))}catch(e){}};
+const ui=[];
+
+function view(i){
+  const u=ui[i],m=M[i]||{},has=!!((m.t&&m.t.trim())||(m.img&&m.img.length));
+  u.box.innerHTML=has?esc(m.t||"")+(m.img||[]).map(p=>'<img loading="lazy" src="'+esc(RAW+enc(p))+'">').join(""):"";
+  u.box.style.display=has?"":"none";
+  u.btn.textContent=has?"메모 수정":"＋ 메모";
+}
+function shrink(f){return new Promise((res,rej)=>{const im=new Image();im.onload=()=>{
+  const s=Math.min(1,1400/Math.max(im.width,im.height)),c=el("canvas");c.width=Math.round(im.width*s);c.height=Math.round(im.height*s);
+  const x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,c.width,c.height);x.drawImage(im,0,0,c.width,c.height);
+  const d=c.toDataURL("image/jpeg",.82);URL.revokeObjectURL(im.src);res({url:d,b64:d.split(",")[1]})};
+  im.onerror=()=>rej(new Error("이미지를 읽지 못함"));im.src=URL.createObjectURL(f)})}
+async function get(){
+  const r=await fetch(API+enc(PATH)+"?ref="+BR+"&t="+Date.now(),{headers:{Authorization:"Bearer "+tok()},cache:"no-store"});
+  if(r.status===404)return{d:{},sha:null};
+  if(!r.ok)throw new Error("읽기 실패 "+r.status);
+  const j=await r.json();let d={};try{d=JSON.parse(ub64(j.content))||{}}catch(e){}
+  return{d:d,sha:j.sha};
+}
+async function put(p,content,msg,sha){
+  const b={message:msg,content:content,branch:BR};if(sha)b.sha=sha;
+  const r=await fetch(API+enc(p),{method:"PUT",headers:{Authorization:"Bearer "+tok(),"Content-Type":"application/json"},body:JSON.stringify(b)});
+  if(!r.ok){let m=r.status;try{m=(await r.json()).message||m}catch(e){}const e=new Error(m);e.status=r.status;throw e}
+}
+async function commit(i,v){
+  for(let n=0;;n++){
+    const g=await get(),d=g.d;if(v)d[i]=v;else delete d[i];
+    try{await put(PATH,b64(JSON.stringify(d,null,1)),"메모: "+NAME+" "+(i+1)+"번",g.sha);M=d;store();return}
+    catch(e){if(n>=2||(e.status!==409&&e.status!==422))throw e}
+  }
+}
+function thumb(src,rm){const w=el("span","mm-th"),im=el("img"),x=el("b");im.src=src;x.textContent="×";x.onclick=rm;w.append(im,x);return w}
+
+function edit(i){
+  const u=ui[i],m=M[i]||{},imgs=(m.img||[]).slice(),adds=[];
+  const ta=el("textarea");ta.value=m.t||"";ta.placeholder="모르는 단어 뜻, 보충 설명…";
+  const th=el("div"),fi=el("input"),st=el("span","mm-st");
+  fi.type="file";fi.accept="image/*";fi.multiple=true;fi.style.display="none";
+  const draw=()=>{th.innerHTML="";
+    imgs.forEach((p,k)=>th.append(thumb(RAW+enc(p),()=>{imgs.splice(k,1);draw()})));
+    adds.forEach((a,k)=>th.append(thumb(a.url,()=>{adds.splice(k,1);draw()})))};
+  fi.onchange=async()=>{for(const f of fi.files){try{adds.push(await shrink(f))}catch(e){st.textContent=e.message}}fi.value="";draw()};
+  const close=()=>{u.ed.innerHTML="";u.ed.style.display="none";u.bar.style.display="";view(i)};
+  const ok=btn("저장",async()=>{
+    if(!tok()){st.textContent="허브(index)에서 '토큰'을 먼저 저장해야 해요";return}
+    ok.disabled=true;
+    try{
+      const paths=[];
+      for(let k=0;k<adds.length;k++){
+        st.textContent="사진 올리는 중 "+(k+1)+"/"+adds.length;
+        const p="memo/img/"+NAME+"-"+(i+1)+"-"+Date.now().toString(36)+k+".jpg";
+        await put(p,adds[k].b64,"메모 사진: "+NAME);paths.push(p);
+      }
+      st.textContent="저장 중…";
+      const t=ta.value.replace(/\s+$/,""),all=imgs.concat(paths);
+      await commit(i,(t||all.length)?{t:t,img:all}:null);
+      ds.forEach((_,k)=>{if(k!==i)view(k)});close();
+    }catch(e){st.textContent="저장 실패: "+e.message;ok.disabled=false}
+  });
+  u.ed.innerHTML="";u.ed.append(ta,th,fi,btn("사진 추가",()=>fi.click()),ok,btn("취소",close),st);
+  u.bar.style.display="none";u.ed.style.display="";draw();ta.focus();
+}
+
+ds.forEach((d,i)=>{
+  const w=el("div","mm"),box=el("div","mm-box"),bar=el("div"),ed=el("div"),b=btn("＋ 메모",()=>edit(i));
+  bar.append(b);ed.style.display="none";w.append(box,bar,ed);d.append(w);
+  ui[i]={box:box,bar:bar,ed:ed,btn:b};view(i);
+});
+
+(async()=>{try{
+  let d;
+  if(tok())d=(await get()).d;
+  else{const r=await fetch(RAW+enc(PATH)+"?t="+Date.now(),{cache:"no-store"});if(r.status===404)d={};else if(r.ok)d=await r.json();else return}
+  M=d||{};store();ds.forEach((_,k)=>{if(ui[k].ed.style.display==="none")view(k)});
+}catch(e){}})();
+})</script>
