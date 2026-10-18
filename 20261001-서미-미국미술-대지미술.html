@@ -1,0 +1,87 @@
+﻿<script>const KEY="1001-서미-미국미술-대지미술";
+const QA=[
+[
+"정밀주의가 관람자와 거리를 유지한 방식",
+"사회비판 주제를 배제하고 테크놀로지가 강조된 산업도시 풍경의 삭막한 분위기를 강조"
+],
+[
+"에드워드 호퍼가 영향을 준 사조",
+"극사실주의, 팝아트"
+],
+[
+"추상표현주의에 영향을 준 철학과 미술운동",
+"실존주의 / 초현실주의(무의식 탐구, 자동기술법)"
+],
+[
+"호프만이 물감 튜브를 캔버스에 직접 짠 작업의 의의",
+"거칠고 두꺼운 터치로 액션페인팅의 선구적 면모"
+],
+[
+"로스코의 부유하는 효과 제작법",
+"휘발성 강한 안료로 엷은 색면을 차곡차곡 겹쳐 칠함"
+],
+[
+"모빌 / 스태빌 명명자",
+"모빌: 뒤샹 / 스태빌: 아르프"
+],
+[
+"앵포르멜의 타시즘",
+"'얼룩'. 캔버스에 모래·점토·타르 등을 발라 물성 극대화"
+],
+[
+"알베르토 부리의 재료와 영향",
+"마대천·플라스틱·나무 조각 등으로 물질성 극대화 → 라우센버그 컴바인 페인팅에 직접 영향"
+],
+[
+"폰타나 공간주의 선언의 명칭과 핵심",
+"백색 선언. 이젤 회화 전통 거부, 미술과 과학기술을 결합해 시간·공간을 통일한 예술"
+],
+[
+"프랜시스 베이컨의 모티브",
+"십자가 책형, 비명 지르는 얼굴, 변형·왜곡된 육체"
+],
+[
+"베이컨이 화면 구성 틀을 빌려온 대상",
+"아이젠슈타인의 영화, 마이브리지의 연속사진"
+],
+[
+"프랭크 스텔라 성형 캔버스",
+"회화는 환영의 창이 아닌 사물. 그림 표면과 캔버스 바탕을 일치시켜 형태대로 잘라냄"
+],
+[
+"옵아트의 다른 명칭과 영향받은 사조",
+"망막의 미술, 지각적 추상 / 신인상주의 광학이론, 오르피즘 색채 리듬, 신조형주의 기하추상"
+],
+[
+"아상블라주 창시자",
+"장 뒤뷔페"
+],
+[
+"호크니의 포토콜라주 명칭",
+"조이너(Joiners)"
+]
+];
+</script>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<style>
+body{font:16px/1.6 system-ui,sans-serif;max-width:760px;margin:auto;padding:12px;color-scheme:light dark}
+#bar{position:sticky;top:0;background:Canvas;padding:8px 0;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+#L>div{border:1px solid #8886;border-radius:8px;margin:8px 0;padding:8px 10px}
+summary{cursor:pointer;font-weight:600}
+details p{margin:8px 0 0}
+label{font-size:14px}
+#L>.x{border-color:#e55}
+#L.o>div:not(.x){display:none}
+</style>
+<div id=bar><label><input type=checkbox id=t> 틀린 것만</label><button id=e>오답 내보내기</button><button id=c>번호 복사</button></div>
+<div id=L></div>
+<script>
+const T=[...document.querySelectorAll('meta,style,#bar,#L')].map(n=>n.outerHTML).join('')+'<script>'+document.currentScript.text+'<\/script>';
+let S=[];try{S=JSON.parse(localStorage[KEY])||[]}catch(_){}
+const sv=()=>{try{localStorage[KEY]=JSON.stringify(S)}catch(_){}};
+document.title=KEY;
+QA.forEach(([q,a],i)=>{const d=document.createElement('div');d.innerHTML=`<details><summary>${i+1}. ${q}</summary><p>${a}</p></details><label><input type=checkbox> 틀림</label>`;const b=d.querySelector('input');b.checked=d.classList.toggle('x',S.includes(i));b.onchange=()=>{d.classList.toggle('x',b.checked);S=b.checked?[...S,i]:S.filter(n=>n!=i);sv()};L.append(d)});
+t.onchange=()=>L.classList.toggle('o',t.checked);
+e.onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff<script>const KEY="'+KEY+'-wrong";\nconst QA='+JSON.stringify(QA.filter((_,i)=>S.includes(i)))+';<\/script>'+T],{type:'text/html'}));a.download=KEY+'-wrong.html';a.click()};
+c.onclick=()=>{const s=[...S].sort((a,b)=>a-b).map(n=>n+1).join(','),f=()=>{const x=document.createElement('textarea');x.value=s;document.body.append(x);x.select();document.execCommand('copy');x.remove()};try{navigator.clipboard.writeText(s).catch(f)}catch(_){f()}};
+</script>

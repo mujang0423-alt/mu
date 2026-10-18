@@ -1,0 +1,75 @@
+﻿<script>const KEY="1002-한미-고려-건축";
+const QA=[
+[
+"장애물을 이용해 성의 방어력을 증진(수원화성)",
+"해자"
+],
+[
+"한 폭으로 주로 머리맡에 세워 두는 가림용 표구",
+"가리개 (두 폭 걸개글씨는 대련)"
+],
+[
+"부처가 되기 전 성불하기 위해 수행하며 중생을 제도하는 존재",
+"보살"
+],
+[
+"추녀마루 위에 놓는 장식 토우",
+"잡상"
+],
+[
+"착고·부고·적새",
+"착고: 기왓골을 막는 기와 / 부고: 착고 위에 한 단 더 얹는 기와 / 적새: 마루를 쌓는 암키와"
+],
+[
+"왕위 찬탈(아사세 태자)과 아미타 신앙 관련 변상도",
+"관무량수경변상도"
+],
+[
+"고려 산수화의 특징",
+"화원 외 문인·사대부도 그림, 기록·주술 목적이 아닌 순수 감상용, 실경산수 등장"
+],
+[
+"권문세족 시기 유행한 종교",
+"교종, 라마교"
+],
+[
+"종보 위에서 종도리를 받치는 부재(산 모양·낙타등 모양)",
+"대공"
+],
+[
+"특별한 구조 없이 돌을 쌓은 기단과 그 하위 분류",
+"적석식 기단 → 자연석, 장대석"
+],
+[
+"어제비장전 판화의 형식",
+"목판화(볼록판화)"
+],
+[
+"관촉사 은진미륵 조성 주체와 배경",
+"광종. 왕즉불 사상, 호족 견제와 왕권 강화"
+]
+];
+</script>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<style>
+body{font:16px/1.6 system-ui,sans-serif;max-width:760px;margin:auto;padding:12px;color-scheme:light dark}
+#bar{position:sticky;top:0;background:Canvas;padding:8px 0;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+#L>div{border:1px solid #8886;border-radius:8px;margin:8px 0;padding:8px 10px}
+summary{cursor:pointer;font-weight:600}
+details p{margin:8px 0 0}
+label{font-size:14px}
+#L>.x{border-color:#e55}
+#L.o>div:not(.x){display:none}
+</style>
+<div id=bar><label><input type=checkbox id=t> 틀린 것만</label><button id=e>오답 내보내기</button><button id=c>번호 복사</button></div>
+<div id=L></div>
+<script>
+const T=[...document.querySelectorAll('meta,style,#bar,#L')].map(n=>n.outerHTML).join('')+'<script>'+document.currentScript.text+'<\/script>';
+let S=[];try{S=JSON.parse(localStorage[KEY])||[]}catch(_){}
+const sv=()=>{try{localStorage[KEY]=JSON.stringify(S)}catch(_){}};
+document.title=KEY;
+QA.forEach(([q,a],i)=>{const d=document.createElement('div');d.innerHTML=`<details><summary>${i+1}. ${q}</summary><p>${a}</p></details><label><input type=checkbox> 틀림</label>`;const b=d.querySelector('input');b.checked=d.classList.toggle('x',S.includes(i));b.onchange=()=>{d.classList.toggle('x',b.checked);S=b.checked?[...S,i]:S.filter(n=>n!=i);sv()};L.append(d)});
+t.onchange=()=>L.classList.toggle('o',t.checked);
+e.onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff<script>const KEY="'+KEY+'-wrong";\nconst QA='+JSON.stringify(QA.filter((_,i)=>S.includes(i)))+';<\/script>'+T],{type:'text/html'}));a.download=KEY+'-wrong.html';a.click()};
+c.onclick=()=>{const s=[...S].sort((a,b)=>a-b).map(n=>n+1).join(','),f=()=>{const x=document.createElement('textarea');x.value=s;document.body.append(x);x.select();document.execCommand('copy');x.remove()};try{navigator.clipboard.writeText(s).catch(f)}catch(_){f()}};
+</script>

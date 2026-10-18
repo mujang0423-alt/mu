@@ -1,0 +1,91 @@
+﻿<script>const KEY="1002-서미-퍼포먼스-미학";
+const QA=[
+[
+"해프닝 vs 퍼포먼스",
+"해프닝: 미리 계획된 연기나 즉흥 행위를 수행 / 퍼포먼스: 포괄 개념, 작가(또는 고용 모델)의 행위를 관객에게 보여줌"
+],
+[
+"불특정 다수가 SNS로 모여 정해진 동작 후 흩어짐",
+"플래시몹"
+],
+[
+"비토 아콘치가 영향받은 이론과 관객 개념",
+"힘의 장 이론 / 관객을 작가의 물리적 공간이자 작품의 일부로 포함"
+],
+[
+"페미니즘 1·2·3세대",
+"1세대: 여성성·여성 작업 강조 / 2세대: 사회적 성 젠더, 고정관념 탈피 / 3세대(90년대): 여성 우월 강조, 차용"
+],
+[
+"바바라 크루거 양식 (트루이즘과 구분)",
+"흑백 사진 위 붉은 띠에 흰 문구로 사회 비판. 트루이즘은 제니 홀저"
+],
+[
+"신디 셔먼 구토 사진의 물음",
+"쓰레기장 같은 찌꺼기로 인간 사회·현대 참상 비유, 전시할 수 없는 사진을 찍는 것이 허용되는가"
+],
+[
+"신표현주의가 반발한 대상",
+"미니멀리즘·개념미술의 차갑고 이지적인 접근 (실존주의 가치관 기반)"
+],
+[
+"안젤름 키퍼의 기법",
+"짚·재 등을 섞은 임파스토, 거친 마티에르"
+],
+[
+"헤겔 예술 단계: 상징·고전·낭만",
+"상징: 건축 / 고전: 조각 / 낭만: 회화·음악·시"
+],
+[
+"론 뮤익이 명성을 얻은 전시(YBA 산실)",
+"센세이션전"
+],
+[
+"트레이시 에민처럼 자신의 감정과 삶을 진솔하게 드러내는 경향",
+"고백 예술"
+],
+[
+"소형 카메라로 피사체가 의식하지 못한 순간을 찍은 사진",
+"캔디드 포토그래피"
+],
+[
+"결정적 순간 vs 캔디드 포토그래피",
+"결정적 순간(브레송): 원하는 순간을 기다려 포착하는 계획적 촬영 / 캔디드: 무계획적 순간 포착"
+],
+[
+"크로체 저서 / 그린버그 『더 새로운 ○○을 향하여』",
+"『미학』 / 라오콘"
+],
+[
+"관계미학 정의와 부리오가 추구한 가치",
+"관람자를 작품에 끌어들여 관계 맺게 하며 인간·사회 문제를 다룸, 전시를 통한 사회적 상호작용 중시 / 상호주체성, 유쾌함(conviviality)"
+],
+[
+"'살아있는 그림', 배우가 장면을 연출해 포즈를 취하는 형식 (롤랑 바르트)",
+"타블로 비방"
+]
+];
+</script>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<style>
+body{font:16px/1.6 system-ui,sans-serif;max-width:760px;margin:auto;padding:12px;color-scheme:light dark}
+#bar{position:sticky;top:0;background:Canvas;padding:8px 0;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+#L>div{border:1px solid #8886;border-radius:8px;margin:8px 0;padding:8px 10px}
+summary{cursor:pointer;font-weight:600}
+details p{margin:8px 0 0}
+label{font-size:14px}
+#L>.x{border-color:#e55}
+#L.o>div:not(.x){display:none}
+</style>
+<div id=bar><label><input type=checkbox id=t> 틀린 것만</label><button id=e>오답 내보내기</button><button id=c>번호 복사</button></div>
+<div id=L></div>
+<script>
+const T=[...document.querySelectorAll('meta,style,#bar,#L')].map(n=>n.outerHTML).join('')+'<script>'+document.currentScript.text+'<\/script>';
+let S=[];try{S=JSON.parse(localStorage[KEY])||[]}catch(_){}
+const sv=()=>{try{localStorage[KEY]=JSON.stringify(S)}catch(_){}};
+document.title=KEY;
+QA.forEach(([q,a],i)=>{const d=document.createElement('div');d.innerHTML=`<details><summary>${i+1}. ${q}</summary><p>${a}</p></details><label><input type=checkbox> 틀림</label>`;const b=d.querySelector('input');b.checked=d.classList.toggle('x',S.includes(i));b.onchange=()=>{d.classList.toggle('x',b.checked);S=b.checked?[...S,i]:S.filter(n=>n!=i);sv()};L.append(d)});
+t.onchange=()=>L.classList.toggle('o',t.checked);
+e.onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff<script>const KEY="'+KEY+'-wrong";\nconst QA='+JSON.stringify(QA.filter((_,i)=>S.includes(i)))+';<\/script>'+T],{type:'text/html'}));a.download=KEY+'-wrong.html';a.click()};
+c.onclick=()=>{const s=[...S].sort((a,b)=>a-b).map(n=>n+1).join(','),f=()=>{const x=document.createElement('textarea');x.value=s;document.body.append(x);x.select();document.execCommand('copy');x.remove()};try{navigator.clipboard.writeText(s).catch(f)}catch(_){f()}};
+</script>

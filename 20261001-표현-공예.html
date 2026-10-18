@@ -1,0 +1,87 @@
+﻿<script>const KEY="1001-표현-공예";
+const QA=[
+[
+"횡염식 가마의 단점",
+"앞에서 들어온 불길이 뒤로 빠져 앞뒤 온도차가 생김 → 내부 균일 온도 유지 어려움, 열효율 낮음"
+],
+[
+"파라핀염(크랙) 과정과 고착",
+"도안→녹인 파라핀으로 문양→염료→천 전체 파라핀으로 덮고 구겨 균열→균열에 짙은 염료→신문지 덮고 다림질로 파라핀 제거→신문지에 싸서 찜통 수증기로 열고착"
+],
+[
+"금속판 위에 다른 색 금속선을 땜해 붙인 뒤 두드려 평면화, 상감 같은 효과",
+"오버레이 (판을 파지 않음 ↔ 파서 넣는 상감)"
+],
+[
+"유리 웜워킹 종류",
+"퓨징, 슬럼핑, 가마 캐스팅, 파트 드 베르(유리가루를 접착제로 개어 성형)"
+],
+[
+"샴브레이 / 데님 조직",
+"샴브레이: 평직 / 데님: 능직"
+],
+[
+"지승 기법의 다른 이름, 꼰 노끈의 명칭",
+"노엮개 / 지노"
+],
+[
+"도자기 제작 과정",
+"수비→반죽(꼬박밀기)→성형(장식)→건조→초벌→시유→재벌 (시유는 초벌 후)"
+],
+[
+"합성염료 염색 과정과 정련 이유",
+"정련→표백→염색→후처리 / 정련: 섬유의 풀기·불순물 제거, 안 하면 얼룩·염착 불량"
+],
+[
+"금속판 안쪽을 망치로 두드려 부조처럼 튀어나오게 하는 기법",
+"르푸세(리푸세). 타출: 문양 틀에 대고 두드려 찍어냄 / 레이징: 열풀림하며 두드려 반구로 올림"
+],
+[
+"샌드블라스팅",
+"연마제(모래 등)를 고압으로 유리에 분사해 무늬를 새김"
+],
+[
+"속에 촉을 끼우지만 겉 단면은 직각으로 연결되는 짜임 / 한쪽 단면을 다른 쪽에 새겨 물리는 짜임",
+"맞짜임 / 턱짜임"
+],
+[
+"아플리케 vs 패치워크",
+"아플리케: 바탕천 위에 천·레이스·가죽을 오려 붙여 윤곽을 꿰맴 / 패치워크: 작은 천 조각을 이어 큰 천으로"
+],
+[
+"여러 장의 한지를 물만으로 붙여 공기층 없이 밀착 후 주무르고 비벼 강하게 만드는 기법",
+"줌치 기법"
+],
+[
+"종이 펄프에 아교·석회를 섞어 형틀에 눌러 열을 가하고 칠·바니시로 마감한 서양 기법",
+"파피에 마셰"
+],
+[
+"휜 자개를 망치로 두드려 펴면서 표면에 인위적 균열 무늬를 내는 나전 기법",
+"타찰법"
+]
+];
+</script>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<style>
+body{font:16px/1.6 system-ui,sans-serif;max-width:760px;margin:auto;padding:12px;color-scheme:light dark}
+#bar{position:sticky;top:0;background:Canvas;padding:8px 0;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+#L>div{border:1px solid #8886;border-radius:8px;margin:8px 0;padding:8px 10px}
+summary{cursor:pointer;font-weight:600}
+details p{margin:8px 0 0}
+label{font-size:14px}
+#L>.x{border-color:#e55}
+#L.o>div:not(.x){display:none}
+</style>
+<div id=bar><label><input type=checkbox id=t> 틀린 것만</label><button id=e>오답 내보내기</button><button id=c>번호 복사</button></div>
+<div id=L></div>
+<script>
+const T=[...document.querySelectorAll('meta,style,#bar,#L')].map(n=>n.outerHTML).join('')+'<script>'+document.currentScript.text+'<\/script>';
+let S=[];try{S=JSON.parse(localStorage[KEY])||[]}catch(_){}
+const sv=()=>{try{localStorage[KEY]=JSON.stringify(S)}catch(_){}};
+document.title=KEY;
+QA.forEach(([q,a],i)=>{const d=document.createElement('div');d.innerHTML=`<details><summary>${i+1}. ${q}</summary><p>${a}</p></details><label><input type=checkbox> 틀림</label>`;const b=d.querySelector('input');b.checked=d.classList.toggle('x',S.includes(i));b.onchange=()=>{d.classList.toggle('x',b.checked);S=b.checked?[...S,i]:S.filter(n=>n!=i);sv()};L.append(d)});
+t.onchange=()=>L.classList.toggle('o',t.checked);
+e.onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff<script>const KEY="'+KEY+'-wrong";\nconst QA='+JSON.stringify(QA.filter((_,i)=>S.includes(i)))+';<\/script>'+T],{type:'text/html'}));a.download=KEY+'-wrong.html';a.click()};
+c.onclick=()=>{const s=[...S].sort((a,b)=>a-b).map(n=>n+1).join(','),f=()=>{const x=document.createElement('textarea');x.value=s;document.body.append(x);x.select();document.execCommand('copy');x.remove()};try{navigator.clipboard.writeText(s).catch(f)}catch(_){f()}};
+</script>

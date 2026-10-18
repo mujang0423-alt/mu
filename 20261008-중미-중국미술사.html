@@ -1,0 +1,87 @@
+﻿<script>const KEY="1008-중미-중국미술사";
+const QA=[
+[
+"인물용봉백화·인물어룡백화의 내용",
+"여자·남자 묘주가 용이 끄는 수레를 타고 승천해 영생을 기원, 비단에 수묵 단채"
+],
+[
+"돈황·운강·용문 석굴 비교",
+"돈황: 최초 석굴, 자갈층이라 소조불, 교각상 / 운강: 사암, 담요 5굴(왕즉불), 간다라 양식 융합→후기 수골청상·포의박대 / 용문: 석회암, 북위불→풍만한 남조·당 양식"
+],
+[
+"성리학에서 대상을 탐구해 이치를 깨닫는 것",
+"격물치지"
+],
+[
+"석각이 다다른 경지",
+"일격(逸格)·일품"
+],
+[
+"남송 청자 / 발·완을 엎어 굽는 기법",
+"유약이 두껍고 빙렬 많은 담청색 / 복소법"
+],
+[
+"명대 두채",
+"청화로 윤곽을 그려 고온 소성 후 윤곽 안에 녹·황·적색 등 상회 안료를 칠해 저온 재소성 (유하채+유상채)"
+],
+[
+"심주의 의의",
+"원대 이후 침체된 문인화 부흥(명대 오파 선구), 문인이 다루지 않던 소재(새우·게 등)에 관심"
+],
+[
+"고개지 「낙신부도」 주제",
+"조식의 「낙신부」를 그림으로, 조식과 낙수 여신의 사랑 (이시동도법)"
+],
+[
+"이사훈 구작법과 이전 시대 차이",
+"이전: 윤곽선만 그림 / 구작법: 윤곽선 후 붓을 눕혀 도끼로 찍은 듯한 필촉으로 질감 표현"
+],
+[
+"형호가 중국 미술사에 미친 영향",
+"수묵산수가 주류가 되는 결정적 계기, 화북산수 전형 확립 → 이성·범관·관동으로 계승"
+],
+[
+"범관의 준법",
+"우점준"
+],
+[
+"오진 「묵죽보」의 의의",
+"법칙 연구에 머물던 묵죽화를 완전한 회화 단계로 격상 (방작의 원류이기도)"
+],
+[
+"정운붕 「세상도」의 상징",
+"象=코끼리·형상, 마음의 형상을 씻는다"
+],
+[
+"왕시민 / 팔대산인의 화파",
+"왕시민: 정통파(사왕) / 팔대산인: 혁신파"
+],
+[
+"혁신파 등장 배경",
+"명 멸망과 만주족(청) 지배에 저항한 명 유민 화가들"
+]
+];
+</script>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<style>
+body{font:16px/1.6 system-ui,sans-serif;max-width:760px;margin:auto;padding:12px;color-scheme:light dark}
+#bar{position:sticky;top:0;background:Canvas;padding:8px 0;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+#L>div{border:1px solid #8886;border-radius:8px;margin:8px 0;padding:8px 10px}
+summary{cursor:pointer;font-weight:600}
+details p{margin:8px 0 0}
+label{font-size:14px}
+#L>.x{border-color:#e55}
+#L.o>div:not(.x){display:none}
+</style>
+<div id=bar><label><input type=checkbox id=t> 틀린 것만</label><button id=e>오답 내보내기</button><button id=c>번호 복사</button></div>
+<div id=L></div>
+<script>
+const T=[...document.querySelectorAll('meta,style,#bar,#L')].map(n=>n.outerHTML).join('')+'<script>'+document.currentScript.text+'<\/script>';
+let S=[];try{S=JSON.parse(localStorage[KEY])||[]}catch(_){}
+const sv=()=>{try{localStorage[KEY]=JSON.stringify(S)}catch(_){}};
+document.title=KEY;
+QA.forEach(([q,a],i)=>{const d=document.createElement('div');d.innerHTML=`<details><summary>${i+1}. ${q}</summary><p>${a}</p></details><label><input type=checkbox> 틀림</label>`;const b=d.querySelector('input');b.checked=d.classList.toggle('x',S.includes(i));b.onchange=()=>{d.classList.toggle('x',b.checked);S=b.checked?[...S,i]:S.filter(n=>n!=i);sv()};L.append(d)});
+t.onchange=()=>L.classList.toggle('o',t.checked);
+e.onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff<script>const KEY="'+KEY+'-wrong";\nconst QA='+JSON.stringify(QA.filter((_,i)=>S.includes(i)))+';<\/script>'+T],{type:'text/html'}));a.download=KEY+'-wrong.html';a.click()};
+c.onclick=()=>{const s=[...S].sort((a,b)=>a-b).map(n=>n+1).join(','),f=()=>{const x=document.createElement('textarea');x.value=s;document.body.append(x);x.select();document.execCommand('copy');x.remove()};try{navigator.clipboard.writeText(s).catch(f)}catch(_){f()}};
+</script>

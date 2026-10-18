@@ -1,0 +1,66 @@
+<script>const KEY="1015-미교-교수학습방법~평가";</script>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>1015-미교-교수학습방법~평가</title>
+<style>
+body{font:16px/1.65 system-ui,sans-serif;max-width:760px;margin:auto;padding:0 14px 40px;color:#1d2330;background:#fafbfc}
+#bar{position:sticky;top:0;z-index:1;display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:10px 0;background:inherit;border-bottom:2px solid #2f5d8a}
+button{font:inherit;font-size:14px;padding:5px 12px;border:1px solid #2f5d8a;border-radius:6px;background:#fff;color:#2f5d8a}
+.q{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #e3e6ea}
+.q>label{flex:none;font-size:13px;color:#b3261e;padding-top:2px}
+.w summary{color:#b3261e}
+details{flex:1}summary{cursor:pointer;font-weight:600}
+details p{margin:8px 0 0;padding:10px 12px;background:#eef3f8;border-radius:6px;white-space:pre-line}
+.only .q:not(.w){display:none}
+@media(prefers-color-scheme:dark){body{background:#15181d;color:#e6e8eb}button{background:#1f242b;color:#8fb8e0;border-color:#8fb8e0}details p{background:#222a33}.q{border-color:#2c323a}}
+</style>
+<body>
+<script>const QA=[
+["PCK의 구성 요소는?", "교과 내용 지식, 교육학적 지식, 학습자 지식"],
+["PCK 중 학습자 지식이란?", "학습자를 이해하고, 그 이해를 바탕으로 격려·존중하며 상호작용·의사소통하는 지식"],
+["직접 교수법의 단계는?", "문제 인식 → 설명 및 시범 → 질의응답 → 연습 → 작품 제작 → 정리 및 발전"],
+["반응 중심 학습법의 단계는?", "반응 형성 → 반응 명료화 → 반응 심화 → 반응 내면화(정리 및 발전)"],
+["반응 형성 단계에서 하는 일은?", "학습자의 선지식·경험을 자극해 작품에 대한 반응을 형성"],
+["반응 명료화 단계에서 하는 일은?", "교사-학생, 학생-학생 간 질문·토의·반성으로 형성된 반응을 명료화"],
+["반응 내면화 단계에서 하는 일은?", "자신의 반응에 의미·가치를 부여하고 긍정적 태도 형성"],
+["귀납적 사고법의 단계는?", "문제 인식 → 관계 탐색 → 개념 발견 → 개념 적용 → 정리 및 발전"],
+["귀납적 사고법 문제 인식 단계에서 준비할 학습 자료는?", "경험해 보지 못한 색다른 자료로 호기심을 유발하고 기존 사고 체계에 충격을 주는 자료"],
+["귀납적 사고법 관계 탐색 단계에서 하는 일은?", "자료를 탐색하며 토의로 유사점·차이점 발견, 자신의 생각을 언어화해 타인과 대비시켜 정교화"],
+["귀납적 사고법 개념 발견 단계에서 하는 일은?", "탐색한 사실로 상호 관계·규칙성을 찾아 개념 발견, 용어 정의로 추상 개념을 언어화"],
+["귀납적 사고법 개념 적용 단계에서 교사의 역할은?", "학생이 배운 개념을 얼마나 이해했는지 알아볼 적용 기회 마련"],
+["스캠퍼(SCAMPER) 기법 7가지는?", "대체하기, 결합하기, 적용하기, 수정하기, 다른 용도로 사용하기, 제거하기, 재배열하기"],
+["'선풍기 모터 위치를 바닥 쪽으로 옮기면?'은 스캠퍼의 어디에 해당?", "재배열하기"],
+["속성 열거법의 단계는?", "대상의 주요 속성 열거 → 속성의 변경 방법 열거 → 다른 대상의 속성 변경에 활용"],
+["각 요인의 속성을 가로·세로·높이축에 열거해 교차 상자에 아이디어를 기록하는 방법은?", "형태 분석법"],
+["여섯 색깔 사고 모자 중 빨간 모자의 역할은?", "감정적·주관적 사고(느낌, 직관)"],
+["여섯 색깔 사고 모자 중 파란 모자와 초록 모자의 역할은?", "파랑: 사고 과정을 정리·종합하는 수렴적 역할 / 초록: 확산적·창의적 아이디어 생성"],
+["여섯 색깔 사고 모자의 장점은?", "다양한 관점으로 사고, 한 번에 한 가지 사고에 집중해 중구난방 논의 방지·깊이 있는 토론, 감정과 논리를 분리해 생각하는 힘"],
+["학생이 스스로 질문·가설 설정·관찰·문제 해결로 고등 사고 능력을 기르는 방법(반응 중심·창의적 문제 해결·귀납적 사고법 포함)은?", "탐구 학습법"],
+["킬패트릭이 제시한, 학생이 스스로 과정을 기획·진행하는 방법은?", "프로젝트법(구안법)"],
+["프로젝트의 종류 중 두 가지와 '그림 감상하기'의 분류는?", "아이디어를 외적으로 표현하는 프로젝트, 심미적 경험을 즐기는 프로젝트 등 / 그림 감상하기 = 심미적 경험을 즐기는 프로젝트"],
+["프로젝트법 목표 설정 단계의 지도상 유의점은?", "학습자의 흥미·능력에 맞게 스스로 설정, 시간 낭비 없는 목표, 기존 지식·기능을 토대로 함, 학교 교육 계획과 연관"],
+["프로젝트법 평가 단계의 지도상 유의점은?", "결과를 전시·보고 형태로 학급 전체에 발표, 자기·상호·교사 평가의 조화, 스스로 평가가 원칙이며 교사는 적절한 조언 제시"],
+["토론법의 단계는?", "도입 → 의제 점검·공유 → 진행 방법 결정 → 진행 → 정리 및 평가"],
+["토론법 진행 단계에서 교사의 지도는?", "진행 순서를 알리고 정해진 시간 안에 의견을 피력하게 함, 자신과 타인의 발언을 정리·기록하게 함, 토론 규칙 준수 지도"],
+["창의적 문제 해결법의 단계는?", "문제 인식 → 아이디어 탐색 → 아이디어 정교화 → 아이디어 적용 → 종합 및 재검토"],
+["창의적 문제 해결법 문제 인식 단계에서 하는 일은?", "문제를 인식하고 다양한 자료·정보를 모아 문제를 검토·해체·분류"],
+["창의적 문제 해결법 아이디어 정교화 단계에서 하는 일은?", "아이디어 분석·정교화, 시각화를 위한 스케치, 최선의 아이디어 선택, 재검토·보완"],
+["브레인스토밍의 4원칙은?", "비판 금지(판단 유보), 자유분방, 질보다 양, 결합과 개선"],
+["마인드맵이란?", "부잔이 개발, 중심에서 사방으로 뻗는 방사형 사고 표현으로 생각을 글자·기호·그림으로 마음속 지도처럼 표현"],
+["강제 연결법이란?", "서로 관련 없는 대상을 인위적으로 연결해 아이디어를 얻는 방법(아이디어가 더 나오지 않을 때 활용)"],
+["문제 중심 학습(PBL)의 일반적 단계는?", "문제 인식 및 확인 → 자료 수집 → 해결안 도출 → 해결안 발표 → 정리 및 평가"],
+["문제 중심 학습의 장점은?", "가설 설정·검증으로 가설-연역적 추론 능력 향상, 정보 탐색·공유로 성찰적 사고 향상, 실생활과 연계"],
+["랜싱의 미술교육 목표 구분은?", "인지적, 심동적, 정의적 영역"],
+["평가 시기에 따른 평가 유형은?", "진단평가(수업 전), 형성평가(수업 중), 총괄평가(수업 후)"],
+["진단평가의 기능은?", "선수학습 정도 진단, 교과 목표에 대한 사전 성취 수준 진단, 학습자의 전반적 특성 파악 → 수업 계획에 반영"],
+["서술형·논술형 평가로 평가할 수 있는 내용은?", "조형 요소와 원리, 제작 방법, 미술사 관련 지식·이해 정도"],
+["연구 보고서법의 평가 기준은?", "자료 수집의 다양성·충실성, 수집 자료의 분석·종합 능력, 보고서 작성 양식, 내용의 질과 독창성"],
+["토론법의 평가 관점은?", "사전 준비 자료의 다양성·충실성, 토론 내용의 충실성·논리성, 반대 의견을 존중하는 태도, 토론 진행 방법"],
+["감상문·비평문 평가로 볼 수 있는 능력과 글에 포함할 내용은?", "학생 준비도, 이해력, 표현력, 비평 능력, 미술사 이해 / 작품 주제, 표현 특징, 재료와 기법, 제작 의도, 느낀 점"],
+["포트폴리오 평가의 개념과 학생·교사 측면 장점은?", "작품을 지속적·체계적으로 모은 개인별 작품집을 이용한 평가 / 학생: 변화 과정 확인, 장단점·잠재력 스스로 인식 / 교사: 과거와 현재 상태 파악, 발전 방향 조언 가능"]];</script>
+<script id="m">
+let S=[];try{S=JSON.parse(localStorage[KEY]||"[]")}catch(e){}
+const b=document.body,L=()=>[...S].sort((x,y)=>x-y),sv=()=>{try{localStorage[KEY]=JSON.stringify(S)}catch(e){}};
+b.insertAdjacentHTML('afterbegin','<div id=bar><label><input type=checkbox id=o> 틀린 것만</label><button id=x>오답 내보내기</button><button id=c>번호 복사</button></div>'+QA.map((q,i)=>{const w=S.includes(i);return`<div class="q${w?' w':''}"><label><input type=checkbox data-i=${i}${w?' checked':''}> 틀림</label><details><summary>${i+1}. ${q[0]}</summary><p>${q[1]}</p></details></div>`}).join(''));
+b.onchange=e=>{const t=e.target;if(t.id=='o')return b.classList.toggle('only',t.checked);const i=+t.dataset.i;S=t.checked?[...S,i]:S.filter(v=>v!=i);t.closest('.q').classList.toggle('w',t.checked);sv()};
+x.onclick=()=>{if(!S.length)return alert('체크된 문항이 없습니다');const k=KEY+'-wrong',a=document.createElement('a');a.href=URL.createObjectURL(new Blob([`<script>const KEY=${JSON.stringify(k)};<\/script>\n<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${k}</title>${document.querySelector('style').outerHTML}<body><script>const QA=${JSON.stringify(L().map(i=>QA[i]))};<\/script><script id="m">${m.textContent}<\/script>`],{type:'text/html'}));a.download=k+'.html';a.click()};
+c.onclick=()=>{const t=L().map(i=>i+1).join(','),f=()=>{const a=document.createElement('textarea');a.value=t;b.append(a);a.select();document.execCommand('copy');a.remove()};try{navigator.clipboard.writeText(t).catch(f)}catch(e){f()}};
+</script>

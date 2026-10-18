@@ -1,0 +1,72 @@
+<script>const KEY="1014-표현-공예";</script>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>1014-표현-공예</title>
+<style>
+body{font:16px/1.65 system-ui,sans-serif;max-width:760px;margin:auto;padding:0 14px 40px;color:#1d2330;background:#fafbfc}
+#bar{position:sticky;top:0;z-index:1;display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:10px 0;background:inherit;border-bottom:2px solid #2f5d8a}
+button{font:inherit;font-size:14px;padding:5px 12px;border:1px solid #2f5d8a;border-radius:6px;background:#fff;color:#2f5d8a}
+.q{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #e3e6ea}
+.q>label{flex:none;font-size:13px;color:#b3261e;padding-top:2px}
+.w summary{color:#b3261e}
+details{flex:1}summary{cursor:pointer;font-weight:600}
+details p{margin:8px 0 0;padding:10px 12px;background:#eef3f8;border-radius:6px;white-space:pre-line}
+.only .q:not(.w){display:none}
+@media(prefers-color-scheme:dark){body{background:#15181d;color:#e6e8eb}button{background:#1f242b;color:#8fb8e0;border-color:#8fb8e0}details p{background:#222a33}.q{border-color:#2c323a}}
+</style>
+<body>
+<script>const QA=[
+["합성 염료 중 직접 염료와 산성 염료의 대상 섬유는?", "직접 염료: 식물성(면·마) / 산성 염료: 동물성(견·모)"],
+["직접 염료와 산성 염료의 특징은?", "직접: 간편·저렴하나 일광 견뢰도가 약해 후처리 필요 / 산성: 견뢰도(내구성)가 강함"],
+["자연 염색 제작 과정은?", "정련 → 염재 추출 → 염색 → 수세 → 매염 → 풀먹임(후처리)"],
+["자연 염색에서 정련을 하는 이유는?", "불순물이 염료 침투를 방해하므로 제거 → 균일한 염색"],
+["침염의 방법과 장단점은?", "염액에 섬유를 담가 염색 / 장점: 전체가 고르게 염색 / 단점: 원하는 문양 표현에 한계"],
+["붓으로 그리듯 염색하는 방법은?", "묘염(채화염)"],
+["전사염의 방법과 장점은?", "전사지에 그림 → 천 위에 뒤집어 올려 다림질 / 과정이 간단·빠름, 준비물이 적어 학교 적용 용이, 대량 생산 가능"],
+["선염의 개념과 종류는?", "원단을 짜기 전 원료·원사 상태로 염색 / 원료염(솜 상태), 톱염(섬유 다발), 사염(실)"],
+["선염의 장점은?", "균일한 염색, 원하는 문양을 직조로 표현, 견뢰도가 높음"],
+["금속에서 연성과 전성이란?", "연성: 잡아당기면 길게 늘어나는 성질 / 전성: 두드리거나 누르면 얇게 퍼지는 성질"],
+["광석에서 금속을 골라내고 정련해 목적에 맞는 금속 재료를 만드는 것은?", "야금"],
+["금속 표면을 정으로 쪼아 자국을 내 장식하는 기법과 그중 모조란?", "조금 / 모조: 세부를 가는 음각선으로 섬세하게 새김"],
+["틀 윤곽 위에 금속판을 고정하고 망치로 두드려 형태를 만드는 기법은? (르푸세와 비교)", "다이 포밍 / 르푸세: 금속판 안쪽을 두드려 부조처럼 튀어나오게 함"],
+["알트 블랭킹이란?", "금속판에 모양을 뚫고 그 자리에 다른 금속을 끼워 접합하는 기법"],
+["방짜유기 제작 과정은?", "바둑 만들기 → 넓힘질 → 우김질 → 냄질 → 닥침질 → 제질 → 담금질 → 가질 → 완성"],
+["방짜유기의 냄질과 닥침질이란?", "냄질: 우김질로 겹쳐 붙은 것을 한 장씩 떼어냄 / 닥침질: 냄질 후 불에 달구어 형태를 바로잡음"],
+["칠보에서 동판 뒷면에 유약을 뿌리는 이유는?", "동판의 휘어짐 방지"],
+["칠보에서 바탕 유약 위에 덩어리 유약을 녹여 번짐·혼색 효과를 내는 기법은?", "입자 칠보"],
+["마블 칠보란?", "소성 중 유약이 녹으면 꺼내 긁거나 휘저어 대리석 무늬를 만든 뒤 다시 굽는 기법"],
+["유리 공예 콜드워킹 5가지는?", "라미네이팅, 샌드블라스팅, 스테인드글라스, 인그레이빙, 커팅"],
+["샌드블라스팅이란?", "모래 등을 고압으로 분사해 유리 표면에 질감을 내는 기법"],
+["웜워킹 3가지와 슬럼핑의 종류는?", "퓨징, 캐스팅, 슬럼핑 / 슬럼핑 인투, 슬럼핑 오버, 자유 슬럼핑"],
+["블로잉과 플레임워킹의 차이는?", "블로잉: 블로우 파이프에 말아 입김을 불어 성형 / 플레임워킹: 유리봉을 토치 불꽃에 녹이며 성형"],
+["목질을 가는 섬유로 부숴 고압으로 만든 판재는?", "MDF"],
+["베니어 합판이란?", "얇게 깎은 단판(베니어)을 나뭇결이 직교하도록 겹쳐 붙인 판재"],
+["대패질 방향에 따른 두 가지와 엇결의 특징은?", "순결, 엇결 / 엇결: 결 반대 방향으로 깎아 표면이 거칠어짐"],
+["목재 표면에 홈이 있을 때 처리 방법은?", "퍼티·모델링 페이스트로 미리 메우거나, 톱밥을 목공용 접착제와 섞어 메움"],
+["이음의 두 가지 종류는?", "쪽매이음(판재 옆면끼리 맞대어 넓게 이음), 촉이음(가운데 촉을 끼워 이음)"],
+["전통 목가구에서 짜임과 이음의 차이는?", "짜임: 결구(모서리) 부분을 튼튼하게 / 이음: 목재 길이를 연장, 힘을 덜 받는 부분"],
+["가구 몸체와 문판을 연결해 여닫게 하는 장석은?", "경첩"],
+["장과 농의 차이는?", "장: 2~3층이며 층이 분리되지 않음 / 농: 층이 분리됨"],
+["귀장식과 감잡이의 차이는?", "둘 다 모서리 보호 / 귀장식: 모서리에 붙임 / 감잡이: 접합부를 양면에서 감싸 보호"],
+["가구 옆면·윗판에 달아 들어 옮기거나 당길 수 있게 한 손잡이는?", "들쇠"],
+["평좌식 책상 경상과 서안의 차이는?", "경상: 양 끝이 말려 올라감 / 서안: 평평함"],
+["통나무 속을 파서 둥글게 만든 나무 그릇은?", "함지박"],
+["지역별 소반 3가지는?", "나주반, 해주반, 통영반"],
+["지공예의 줌치 기법이란?", "여러 장의 한지를 물만으로 공기층 없이 밀착시켜 주무르고 비벼 질기게 만드는 기법"],
+["목골 지장 기법이란?", "목재로 골격을 짠 뒤 종이를 여러 겹 덧발라 만드는 기법"],
+["한지 제작 과정은?", "닥나무 채취 → 찌기 → 껍질 벗기기(백피) → 잿물에 삶기 → 고해 → 해리 → 초지(발로 뜨기) → 압착 → 건조 → 도침"],
+["한지의 고해·해리·도침이란?", "고해: 백피를 두드려 섬유를 풀어지게 함 / 해리: 닥섬유를 닥풀과 함께 물에 풂 / 도침: 두드려 섬유 사이를 치밀하게 해 강도를 높이는 우리나라만의 방식"],
+["나전칠기 자개 재료는?", "전복·조개 껍데기, 대모(바다거북 등딱지)"],
+["나전칠기 제작 과정은?", "백골 → 생칠 → 삼베·종이 바르기 → 고래(토회) 바르기 → 연마·생칠·흑칠 반복 → 자개를 인두로 부착 → 옻칠 → 연마로 자개 드러냄 → 광택"],
+["나전 장식의 평탈법이란?", "자개를 붙이고 옻칠을 여러 번 한 뒤 연마해 문양을 드러내는 기법"],
+["알껍질을 부숴 부착하는 나전칠기 기법은?", "난각 기법"],
+["화각 제작 과정은?", "쇠뿔 위아래 절단 → 세로로 절반 → 불에 쬐어 펴 각판 제작 → 얇게 갈기 → 뒷면에 석채로 그림 → 아교로 백골에 부착 → 각판 사이 정리 → 우골 테두리 → 콩기름 마무리"],
+["화각에서 우골 테를 두르는 이유는?", "각판의 이탈·뒤틀림 방지, 통일감 부여"],
+["알루미늄 표면에 전기 작용으로 미세 구멍을 내고 염료를 흡착시키는 방법과 장점은?", "양극 산화법 / 화려하고 다양한 색상, 반영구적, 표면 강화·부식 방지"],
+["맞새김(투조) 중 문양투와 바탕투는?", "문양투: 문양을 없애고 바탕만 남김 / 바탕투: 바탕을 없애고 문양만 남김"]];</script>
+<script id="m">
+let S=[];try{S=JSON.parse(localStorage[KEY]||"[]")}catch(e){}
+const b=document.body,L=()=>[...S].sort((x,y)=>x-y),sv=()=>{try{localStorage[KEY]=JSON.stringify(S)}catch(e){}};
+b.insertAdjacentHTML('afterbegin','<div id=bar><label><input type=checkbox id=o> 틀린 것만</label><button id=x>오답 내보내기</button><button id=c>번호 복사</button></div>'+QA.map((q,i)=>{const w=S.includes(i);return`<div class="q${w?' w':''}"><label><input type=checkbox data-i=${i}${w?' checked':''}> 틀림</label><details><summary>${i+1}. ${q[0]}</summary><p>${q[1]}</p></details></div>`}).join(''));
+b.onchange=e=>{const t=e.target;if(t.id=='o')return b.classList.toggle('only',t.checked);const i=+t.dataset.i;S=t.checked?[...S,i]:S.filter(v=>v!=i);t.closest('.q').classList.toggle('w',t.checked);sv()};
+x.onclick=()=>{if(!S.length)return alert('체크된 문항이 없습니다');const k=KEY+'-wrong',a=document.createElement('a');a.href=URL.createObjectURL(new Blob([`<script>const KEY=${JSON.stringify(k)};<\/script>\n<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${k}</title>${document.querySelector('style').outerHTML}<body><script>const QA=${JSON.stringify(L().map(i=>QA[i]))};<\/script><script id="m">${m.textContent}<\/script>`],{type:'text/html'}));a.download=k+'.html';a.click()};
+c.onclick=()=>{const t=L().map(i=>i+1).join(','),f=()=>{const a=document.createElement('textarea');a.value=t;b.append(a);a.select();document.execCommand('copy');a.remove()};try{navigator.clipboard.writeText(t).catch(f)}catch(e){f()}};
+</script>

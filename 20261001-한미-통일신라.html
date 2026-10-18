@@ -1,0 +1,75 @@
+﻿<script>const KEY="1001-한미-통일신라";
+const QA=[
+[
+"석가모니가 깨달음을 얻은 직후 설법한 내용을 담은 경전",
+"화엄경"
+],
+[
+"삼신불",
+"법신 비로자나불, 보신 노사나불(아미타불로 보기도 함), 응신 석가모니불"
+],
+[
+"녹유 사이호의 성격",
+"녹유를 시유한 토기. 화장한 뼈를 담은 뼈항아리(골호)로 불교 화장 문화 반영. 인화문을 표면 전체에 반복, 굽이 낮아짐"
+],
+[
+"영암 구림리 도기의 의의",
+"국내 최초의 시유도기"
+],
+[
+"신라 백지묵서 대방광불화엄경 변상도의 의의",
+"현존 우리나라에서 가장 오래된 변상도(사경화)"
+],
+[
+"석굴암 창건 목적(개인/국가)",
+"개인: 김대성이 전세 부모의 안녕을 기원 / 국가: 외세 침략·국가 재난을 불교의 힘으로 막으려는 호국"
+],
+[
+"감산사 석조미륵보살·아미타불 조성자",
+"김지성 (석굴암은 김대성)"
+],
+[
+"괘릉 무인상에 드러난 국제성",
+"서역인의 얼굴 생김새와 골격"
+],
+[
+"옷주름이 목→가슴→다리→발목까지 U자형으로 연속해 늘어진 착의 형식",
+"우전왕식"
+],
+[
+"승려 모습, 수행자 중 가장 높은 경지, 고려 때 크게 유행",
+"나한(아라한)"
+],
+[
+"상륜부 중 석가모니가 열반 때 보병을 얹으라 한 것에서 유래, 감로수 용기를 상징",
+"용차"
+],
+[
+"불교 의식 때 흔들어 소리 내는 불구, 금강저+종이 합쳐진 밀교 의식구",
+"금강령"
+]
+];
+</script>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<style>
+body{font:16px/1.6 system-ui,sans-serif;max-width:760px;margin:auto;padding:12px;color-scheme:light dark}
+#bar{position:sticky;top:0;background:Canvas;padding:8px 0;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+#L>div{border:1px solid #8886;border-radius:8px;margin:8px 0;padding:8px 10px}
+summary{cursor:pointer;font-weight:600}
+details p{margin:8px 0 0}
+label{font-size:14px}
+#L>.x{border-color:#e55}
+#L.o>div:not(.x){display:none}
+</style>
+<div id=bar><label><input type=checkbox id=t> 틀린 것만</label><button id=e>오답 내보내기</button><button id=c>번호 복사</button></div>
+<div id=L></div>
+<script>
+const T=[...document.querySelectorAll('meta,style,#bar,#L')].map(n=>n.outerHTML).join('')+'<script>'+document.currentScript.text+'<\/script>';
+let S=[];try{S=JSON.parse(localStorage[KEY])||[]}catch(_){}
+const sv=()=>{try{localStorage[KEY]=JSON.stringify(S)}catch(_){}};
+document.title=KEY;
+QA.forEach(([q,a],i)=>{const d=document.createElement('div');d.innerHTML=`<details><summary>${i+1}. ${q}</summary><p>${a}</p></details><label><input type=checkbox> 틀림</label>`;const b=d.querySelector('input');b.checked=d.classList.toggle('x',S.includes(i));b.onchange=()=>{d.classList.toggle('x',b.checked);S=b.checked?[...S,i]:S.filter(n=>n!=i);sv()};L.append(d)});
+t.onchange=()=>L.classList.toggle('o',t.checked);
+e.onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff<script>const KEY="'+KEY+'-wrong";\nconst QA='+JSON.stringify(QA.filter((_,i)=>S.includes(i)))+';<\/script>'+T],{type:'text/html'}));a.download=KEY+'-wrong.html';a.click()};
+c.onclick=()=>{const s=[...S].sort((a,b)=>a-b).map(n=>n+1).join(','),f=()=>{const x=document.createElement('textarea');x.value=s;document.body.append(x);x.select();document.execCommand('copy');x.remove()};try{navigator.clipboard.writeText(s).catch(f)}catch(_){f()}};
+</script>

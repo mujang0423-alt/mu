@@ -1,0 +1,83 @@
+﻿<script>const KEY="1005-교육학-교육행정";
+const QA=[
+[
+"점증모형 장점",
+"현실적, 안정적 정책 결정·집행, 폭넓은 지지 확보, 실현 가능성 높음 (단점: 보수적, 혁신 어려움)"
+],
+[
+"쓰레기통 모형의 4요소",
+"문제, 해결책, 참여자, 선택 기회가 우연히 만날 때 결정"
+],
+[
+"서지오바니 지도성에서 '현장교육 전문가' / '성직자' 역할",
+"교육적 지도성 / 문화적 지도성"
+],
+[
+"도덕적 지도성: 바람직한 학교 유형과 전략",
+"도덕적이고 효과적인 학교(Ⅰ), 도덕적 학교(Ⅱ) / 전문직업적 사회화, 목적 설정·공유, 동료의식·상호의존성"
+],
+[
+"변혁적 지도성 4요소",
+"이상적 영향력, 영감적 동기화, 개별적 배려, 지적 자극"
+],
+[
+"컨설팅 장학의 원리",
+"전문성, 자발성, 자문성, 독립성, 일시성, 교육성"
+],
+[
+"인간자원론적 장학 vs 인간관계론적 장학",
+"인간자원론: 의사결정 참여→학교 효과성 증대→직무만족 / 인간관계론: 참여→직무만족→학교 효과성 증대"
+],
+[
+"책임장학 방법",
+"학습 평가 방법을 협의회에서 합의·결정 후, 학생이 목표를 달성했는지 관찰. 학생 성취도 중심"
+],
+[
+"지도성 대용상황: 구성원 응집력은 어떤 특성",
+"조직 특성 (구성원 특성: 능력·전문성 등)"
+],
+[
+"공정성 회복 행동",
+"투입 변경, 성과 변경, 투입·성과의 인지적 왜곡, 비교대상 변경, 조직 이탈"
+],
+[
+"품목별 예산제도 장단점",
+"장: 회계책임 분명, 예산 유용·남용 방지 / 단: 사업 전체 개요 파악 어려움, 신축적 대응 어려움"
+],
+[
+"영기준 예산제도 장단점",
+"장: 전 교직원 참여, 창의·자발적 사업, 우선순위 높은 사업으로 재배분 / 단: 시간·노력 부담, 우선순위 결정 어려움, 시행착오"
+],
+[
+"MBO 장단점",
+"장: 효율성, 참여의식, 관료화 방지, 역할갈등 해소 / 단: 단기·구체적 목표 치중(전인교육 부적합), 업무부담, 복잡한 환경에 효용 제약"
+],
+[
+"목표설정이론과 목표의 속성",
+"목표가 동기 형성의 가장 중요한 요인 / 구체성, 곤란성, 참여, 수용성, 피드백, 경쟁"
+]
+];
+</script>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<style>
+body{font:16px/1.6 system-ui,sans-serif;max-width:760px;margin:auto;padding:12px;color-scheme:light dark}
+#bar{position:sticky;top:0;background:Canvas;padding:8px 0;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+#L>div{border:1px solid #8886;border-radius:8px;margin:8px 0;padding:8px 10px}
+summary{cursor:pointer;font-weight:600}
+details p{margin:8px 0 0}
+label{font-size:14px}
+#L>.x{border-color:#e55}
+#L.o>div:not(.x){display:none}
+</style>
+<div id=bar><label><input type=checkbox id=t> 틀린 것만</label><button id=e>오답 내보내기</button><button id=c>번호 복사</button></div>
+<div id=L></div>
+<script>
+const T=[...document.querySelectorAll('meta,style,#bar,#L')].map(n=>n.outerHTML).join('')+'<script>'+document.currentScript.text+'<\/script>';
+let S=[];try{S=JSON.parse(localStorage[KEY])||[]}catch(_){}
+const sv=()=>{try{localStorage[KEY]=JSON.stringify(S)}catch(_){}};
+document.title=KEY;
+QA.forEach(([q,a],i)=>{const d=document.createElement('div');d.innerHTML=`<details><summary>${i+1}. ${q}</summary><p>${a}</p></details><label><input type=checkbox> 틀림</label>`;const b=d.querySelector('input');b.checked=d.classList.toggle('x',S.includes(i));b.onchange=()=>{d.classList.toggle('x',b.checked);S=b.checked?[...S,i]:S.filter(n=>n!=i);sv()};L.append(d)});
+t.onchange=()=>L.classList.toggle('o',t.checked);
+e.onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff<script>const KEY="'+KEY+'-wrong";\nconst QA='+JSON.stringify(QA.filter((_,i)=>S.includes(i)))+';<\/script>'+T],{type:'text/html'}));a.download=KEY+'-wrong.html';a.click()};
+c.onclick=()=>{const s=[...S].sort((a,b)=>a-b).map(n=>n+1).join(','),f=()=>{const x=document.createElement('textarea');x.value=s;document.body.append(x);x.select();document.execCommand('copy');x.remove()};try{navigator.clipboard.writeText(s).catch(f)}catch(_){f()}};
+</script>

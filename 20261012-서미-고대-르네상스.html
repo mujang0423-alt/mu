@@ -1,0 +1,95 @@
+﻿<script>const KEY="1012-서미-고대-르네상스";
+const QA=[
+[
+"열주랑으로 둘러싸인 공간",
+"페리스타일"
+],
+[
+"로마인의 취향에 맞게 그리스 작가가 로마에서 제작한 미술",
+"그레코로만 양식"
+],
+[
+"로마 기둥 양식 2가지",
+"콤포지트, 투스칸(도리아식 간략형)"
+],
+[
+"엔타블러처 위 코니스·팀파눔을 합친 명칭",
+"페디먼트"
+],
+[
+"펜던티브",
+"돔 바깥면을 수직으로 잘라 아치 개구부를 만들 때 아래에 남는 곡면 삼각형 이음새 (스퀸치와 구분)"
+],
+[
+"크노소스 궁전 기둥",
+"역엔타시스(아래가 좁은) 원기둥"
+],
+[
+"이집트 상형문자에서 왕의 이름을 둘러싼 타원형 테",
+"카르투슈"
+],
+[
+"폼페이 벽화 제1양식(스투코)",
+"벽을 쌓고 회반죽·채색으로 대리석 판처럼 보이게 함"
+],
+[
+"조토의 미술사적 의의",
+"자연 관찰에 의한 사실주의로 회화 흐름을 중세에서 르네상스로 바꾼 선구"
+],
+[
+"투시원근법을 체계화한 알베르티의 책",
+"『회화론』"
+],
+[
+"기를란다요 「성모의 탄생」의 태도",
+"성화에 후원자 가족을 등장시켜 종교화의 세속적 요구를 반영한 절충적 태도"
+],
+[
+"뒤러 「네 사도」가 독립 패널화인 이유",
+"루터 종교개혁으로 제단화(종교화)가 금지되어"
+],
+[
+"조르조네의 업적",
+"시적 정취의 풍경화 창출, 공적 대형 장식화가 아닌 개인 수집가용 소형 유화"
+],
+[
+"마사초 「성전세」의 연속묘사",
+"베드로가 중앙·왼쪽·오른쪽에서 서로 다른 시간대의 행위를 한 화면에"
+],
+[
+"보티첼리 「봄」의 연속묘사",
+"화면 오른쪽 끝, 제피로스에 떠밀린 클로리스가 플로라로 변하는 장면"
+],
+[
+"브뤼헐이 개척한 장르",
+"풍속화"
+],
+[
+"「최후의 만찬」에서 얼굴의 섬세한 감정을 드러낸 기법",
+"스푸마토"
+]
+];
+</script>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<style>
+body{font:16px/1.6 system-ui,sans-serif;max-width:760px;margin:auto;padding:12px;color-scheme:light dark}
+#bar{position:sticky;top:0;background:Canvas;padding:8px 0;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+#L>div{border:1px solid #8886;border-radius:8px;margin:8px 0;padding:8px 10px}
+summary{cursor:pointer;font-weight:600}
+details p{margin:8px 0 0}
+label{font-size:14px}
+#L>.x{border-color:#e55}
+#L.o>div:not(.x){display:none}
+</style>
+<div id=bar><label><input type=checkbox id=t> 틀린 것만</label><button id=e>오답 내보내기</button><button id=c>번호 복사</button></div>
+<div id=L></div>
+<script>
+const T=[...document.querySelectorAll('meta,style,#bar,#L')].map(n=>n.outerHTML).join('')+'<script>'+document.currentScript.text+'<\/script>';
+let S=[];try{S=JSON.parse(localStorage[KEY])||[]}catch(_){}
+const sv=()=>{try{localStorage[KEY]=JSON.stringify(S)}catch(_){}};
+document.title=KEY;
+QA.forEach(([q,a],i)=>{const d=document.createElement('div');d.innerHTML=`<details><summary>${i+1}. ${q}</summary><p>${a}</p></details><label><input type=checkbox> 틀림</label>`;const b=d.querySelector('input');b.checked=d.classList.toggle('x',S.includes(i));b.onchange=()=>{d.classList.toggle('x',b.checked);S=b.checked?[...S,i]:S.filter(n=>n!=i);sv()};L.append(d)});
+t.onchange=()=>L.classList.toggle('o',t.checked);
+e.onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff<script>const KEY="'+KEY+'-wrong";\nconst QA='+JSON.stringify(QA.filter((_,i)=>S.includes(i)))+';<\/script>'+T],{type:'text/html'}));a.download=KEY+'-wrong.html';a.click()};
+c.onclick=()=>{const s=[...S].sort((a,b)=>a-b).map(n=>n+1).join(','),f=()=>{const x=document.createElement('textarea');x.value=s;document.body.append(x);x.select();document.execCommand('copy');x.remove()};try{navigator.clipboard.writeText(s).catch(f)}catch(_){f()}};
+</script>

@@ -1,0 +1,95 @@
+﻿<script>const KEY="0930-서미-신인상주의-초현실주의";
+const QA=[
+[
+"신인상주의에 영향을 준 이론가 2명",
+"슈브뢸(색채 대비·보색 이론), 루드(광학 이론·망막상 병치혼합)"
+],
+[
+"세잔의 파사주(passage) 기법",
+"윤곽선 없이 두꺼운 붓질의 색면을 병치·구축해 색면 차이로 입체감 표현. '통행하다'라는 뜻으로 막힘없이 색면이 이어짐"
+],
+[
+"고갱 「우리는 어디서 와서…」 중앙의 열매 따는 젊은이 상징",
+"인간의 욕망 (아기는 탄생)"
+],
+[
+"고갱의 종합주의는 무엇을 종합하는가",
+"해체된 색면의 종합 + 감정과 형식의 종합"
+],
+[
+"칸딘스키 『예술에 있어서 정신적인 것에 대하여』: 형태·색채는 인간 심리와 연결되며 '이것'의 원칙을 나타낸다",
+"내적 필연성"
+],
+[
+"청기사파와 바우하우스의 공통점",
+"음악·미술·문학 등이 어우러진 총체예술 추구"
+],
+[
+"'자생적으로 습득한'이란 뜻, 순진·소박한 성향의 그룹(소박파)",
+"나이브 아트 (루소)"
+],
+[
+"브랑쿠시가 중시한 아프리카 조각의 제작 기법",
+"조수에게 맡기지 않고 작가가 직접 깎는 직접 조각"
+],
+[
+"피카소 「기타」의 조각사적 의의",
+"양감과 실공간·허공간이 동등한 존재가 되어 조각의 공간 개념을 새롭게 정립"
+],
+[
+"퓌토 그룹이 비유클리드 기하학·4차원 개념을 도입한 이유",
+"입체주의에 이론적 토대를 부여하기 위해"
+],
+[
+"피카소 「게르니카」를 무채색으로 표현한 이유",
+"전쟁의 절망감 표현"
+],
+[
+"미래주의 2차 선언문의 핵심",
+"마리네티의 미래주의 사상을 회화에서 실천할 것을 주장(미래주의 화가 선언)"
+],
+[
+"러시아 아방가르드: 1920 가보·페브스너 선언 / 1921 타틀린 측 선언",
+"사실주의 선언 / 구성주의 선언"
+],
+[
+"타틀린: 판재·철사 등은 사실적 재현을 위한 독립된 정물이 아니라 '이것'의 역할",
+"구성 속에 포함되는 요소"
+],
+[
+"엘 리시츠키 '프라운(Proun)'",
+"'새로움을 위한 계획'. 건축적 구조와 회화적 색채를 결합한 3차원적 회화"
+],
+[
+"초현실주의 두 분류와 대표 작가",
+"자연주의적(환영적) 초현실주의: 마그리트 등 세밀한 묘사 / 유기적 추상: 미로·마송, 자동기술법"
+],
+[
+"조르주 바타유가 편집한 잡지 (무관한 글·사진을 폭력적으로 뒤섞음, 알파벳 사전 형식)",
+"『도퀴망(Documents)』"
+]
+];
+</script>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<style>
+body{font:16px/1.6 system-ui,sans-serif;max-width:760px;margin:auto;padding:12px;color-scheme:light dark}
+#bar{position:sticky;top:0;background:Canvas;padding:8px 0;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+#L>div{border:1px solid #8886;border-radius:8px;margin:8px 0;padding:8px 10px}
+summary{cursor:pointer;font-weight:600}
+details p{margin:8px 0 0}
+label{font-size:14px}
+#L>.x{border-color:#e55}
+#L.o>div:not(.x){display:none}
+</style>
+<div id=bar><label><input type=checkbox id=t> 틀린 것만</label><button id=e>오답 내보내기</button><button id=c>번호 복사</button></div>
+<div id=L></div>
+<script>
+const T=[...document.querySelectorAll('meta,style,#bar,#L')].map(n=>n.outerHTML).join('')+'<script>'+document.currentScript.text+'<\/script>';
+let S=[];try{S=JSON.parse(localStorage[KEY])||[]}catch(_){}
+const sv=()=>{try{localStorage[KEY]=JSON.stringify(S)}catch(_){}};
+document.title=KEY;
+QA.forEach(([q,a],i)=>{const d=document.createElement('div');d.innerHTML=`<details><summary>${i+1}. ${q}</summary><p>${a}</p></details><label><input type=checkbox> 틀림</label>`;const b=d.querySelector('input');b.checked=d.classList.toggle('x',S.includes(i));b.onchange=()=>{d.classList.toggle('x',b.checked);S=b.checked?[...S,i]:S.filter(n=>n!=i);sv()};L.append(d)});
+t.onchange=()=>L.classList.toggle('o',t.checked);
+e.onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff<script>const KEY="'+KEY+'-wrong";\nconst QA='+JSON.stringify(QA.filter((_,i)=>S.includes(i)))+';<\/script>'+T],{type:'text/html'}));a.download=KEY+'-wrong.html';a.click()};
+c.onclick=()=>{const s=[...S].sort((a,b)=>a-b).map(n=>n+1).join(','),f=()=>{const x=document.createElement('textarea');x.value=s;document.body.append(x);x.select();document.execCommand('copy');x.remove()};try{navigator.clipboard.writeText(s).catch(f)}catch(_){f()}};
+</script>
