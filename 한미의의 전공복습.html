@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<script>
+const KEY="한미의의 전공복습";
+const QA=[["[고구려] 현존하는 연대(539)를 알 수 있는 가장 오래된 불상", "연가7년명금동여래입상"], ["[고구려] 연화화생 장면을 상징하는 화불 표현이 최초로 등장 / 일광삼존형식", "신묘명금동삼존불"], ["[고구려] 출토지가 확실한 유일한 고구려 반가사유상 / 연꽃대좌와 족좌가 함께 조각된 최초의 예", "평천리 금동반가사유상"], ["[고구려] 연대(357년)가 확실한 최초의 벽화고분", "동수묘(안악3호분)"], ["[백제] 본존 자리에 보살이 서고 좌우에 여래입상이 서 있는 독특한 구조", "태안마애삼존불입상"], ["[백제] 현존 백제 불상 중 가장 오래된 것으로 추정(백현최고)", "보원사 금동여래입상"], ["[백제] 묘주를 알 수 있는 최초의 왕릉 / 훼손되지 않고 발견된 최초의 무덤 / 매지권으로 연대·피장자 확인 / 벽돌쌓기·천장아치", "무령왕릉"], ["[백제] 유일한 벽화가 있는 벽돌무덤 / 남조풍 고분에 고구려식 벽화 접목", "송산리6호분"], ["[백제] 현존 석탑 중 가장 크고 오래된 석탑(현석최고최대) / 목탑구조 석탑의 시작 / 우리나라 석탑의 효시", "미륵사지 석탑"], ["[백제] 회화가 거의 남지 않은 백제의 산수화·회화 수준과 형식을 짐작케 하는 사료", "산수문전"], ["[신라] 현존 신라 금동불 중 가장 오래된 불상", "황룡사 금동여래입상"], ["[신라] 고신라 일반 석조물 중 유일 현존 / 천문관찰·길흉", "첨성대"], ["[신라] 현존 신라 석탑 중 가장 오래된 탑", "분황사 모전석탑"], ["[신라] 634년 제작연대가 확실한 석부조", "분황사탑 인왕상"], ["[신라] 본존불이 우리나라 유일의 의좌상", "미륵삼존불"], ["[신라] 우리나라 최대의 고분", "황남대총"], ["[신라] 정면위주의 불상에서 전면위주의 입체감과 사실성을 찾기 시작한 불상", "금동삼산관미륵보살반가사유상"], ["[통일신라] 연대가 확실한 순금제 불상", "황복사 금제아미타여래좌상"], ["[통일신라] 현존하는 세계 최고 목판인쇄본(750)", "무구정광대다라니경"], ["[통일신라] 쌍탑가람 최초 배치 / 건립시기가 정확한 최초의 사례 / 신라탑+백제탑 절충양식", "감은사지 3층석탑"], ["[통일신라] 우리나라 항마촉지인 불상의 최초의 예", "군위 삼존석불 본존불"], ["[통일신라] 우리나라에서 가장 오래된 목조불상", "해인사 목조비로자나불상"], ["[통일신라] 현존하는 가장 크고 오래된 전탑", "안동 법흥사지 칠층전탑"], ["[통일신라] 풍수지리설을 바탕으로 세운 최초의 예 / 자연암반을 하층기단으로 삼음 / 4단 옥개받침", "경주 남산 용장사곡 삼층석탑"], ["[통일신라] 건립연대(844)가 확실한 가장 오래된 부도 / 석조 부도 양식의 시원", "원주 흥법사지 염거화상탑"], ["[통일신라] 불경을 붓으로 옮긴 현존 최고의 사경화 / 화엄경의 표장화", "대방광불화엄경 변상도"], ["[통일신라] 기단에 최초로 십이지신상 등장", "원원사지 동 삼층석탑"], ["[고려] 현존 고려 회화 중 가장 오래된 작품 / 고려 목판화 기술의 우수성 / 중국과의 예술적 교류", "어제비장전"], ["[고려] 우리나라에서 발견된 유일한 승려 조각", "해인사 건칠 희랑대사상"], ["[고려] 금강산 실경을 압축한 실경산수 / 가장 오래된 금강산 표현", "노영 <지장보살도>"], ["[고려] 현존하는 가장 오래된 목조건축", "봉정사 극락전"], ["[고려] 시기를 알 수 있는 최고(最古) 건축물", "수덕사 대웅전"], ["[고려] 현존 다포양식 중 가장 오래된 건축물", "심원사 보광전"], ["[고려] 현존 가장 오래된 불교 벽화 / 고분벽화 제외 가장 오래된 채색 그림", "부석사 조사당 벽화"], ["[고려] 석굴암 본존불을 계승한 복고적 경향 / 현존 최대의 철불(2.8m)", "하사창동 철조석가여래좌상"], ["[고려] 현존하는 가장 크고 오래된 소조불", "부석사 소조여래좌상"], ["[고려] 현존하는 최대의 석조 불상", "관촉사 미륵불"], ["[고려] 남한에 있는 유일한 고려시대 다각다층탑", "월정사 8각9층석탑"], ["[고려] 건립연대·조성경위를 알 수 있는 현존 최고·최초의 대리석탑", "경천사지 10층석탑"], ["[고려] 고려시대 백제계열 석탑 중 가장 큰 규모", "익산 왕궁리 오층석탑"], ["[조선] 조선시대 산수화 중 가장 오래된 작품", "몽유도원도"], ["[조선] 한국 궁궐 중 가장 대규모 궁", "경복궁"], ["[조선] 현존 목조건물 중 가장 큰 규모", "경복궁 근정전"], ["[조선] 현존 유일 목탑 / 현존 가장 오래된 목조 5층탑 / 사모지붕", "법주사 팔상전"], ["[조선] 현존 유일의 3층 목조건축", "금산사 미륵전"], ["[조선] 한국 최대 규모 서원", "도산서원"], ["[조선] 한국 최초의 서양식 건물", "덕수궁 석조전"], ["[조선] 현존 가장 오래된 궁궐", "창경궁"], ["[조선] 연대가 분명하게 확인되는 가장 오래된 청화백자", "백자청화 홍치이년명 송죽문 항아리"], ["[조선] 안견파 화풍을 따르던 화원도 남종화풍을 수용했음을 시사", "이정근 <미법산수도>"], ["[조선] 절파화풍이 유행하던 당시 진취적인 남종화풍 작품", "이영윤 <방황공망산수도>"], ["[조선] 예찬의 간결한 구도+조선중기 특징 / 부분적 남종화 수용 입증", "나옹 이정 <한강조주도>"], ["[조선] 부러진 늙은 가지+수직으로 곧게 뻗은 어린 가지 병치 / 조선 특유 묵매도 양식의 전형", "어몽룡"], ["[조선] 속화라 불리던 일상의 현장 모습을 본격적으로 표현한 최초의 화가", "윤두서"], ["[조선] 한국 회화사상 최초의 자화상", "윤두서 <자화상>"], ["[조선] 관념적 산수인물화·화본풍 고사인물화에서 벗어나 현실 속 인물을 현장감 있게 그림", "조영석"], ["[조선] 기록성·사실성+창의성·해학성 / 풍속화를 예술적으로 승화시킨 한국적 풍속인물화의 대가", "김홍도"], ["[조선] 남종화풍이 폭넓게 수용되던 시기 북종화 기법 반영 / 보수적·복고적 성향", "김두량 <월야산수도>"], ["[조선] 수묵사의화조화의 전통을 새롭게 해석", "홍세섭"], ["[조선] 안중식·조석진 등 현대 한국화 1세대에 영향 / 근대화단의 기틀 마련", "장승업"], ["[근대] 우리나라 최초의 서양화가", "고희동"], ["[근대] 한국인 최초로 개인전 개최(평양)", "김관호"], ["[근대] 우리나라 최초의 누드화", "김관호 <해질녘>"], ["[근대] 한국 최초의 근대 미술협회(1918)", "서화협회"], ["[근대] 최초로 근대 서양 조각 기법 도입 / 근대 조각 출발", "김복진"], ["[현대] 우리나라 최초의 현대미술 그룹(1948)", "신사실파"], ["[현대] 동양에서 일어난 최초의 현대미술 운동(이우환)", "모노하"], ["[현대] 이론적 개념을 바탕으로 한 최초의 집단적 움직임 / 시대적 공감대의 필연적 형식", "60년대 앵포르멜"]];//END
+</script>
+<title>[한미] 한미의의 전공복습</title>
+<style>
+:root{--bg:#f6f7f9;--fg:#1f2430;--ac:#2f5d8a;--ln:#dde1e7;--w:#fbeaea;color-scheme:light}
+@media(prefers-color-scheme:dark){:root{--bg:#171a20;--fg:#e6e8ec;--ac:#8fb5de;--ln:#2c313a;--w:#3a2326;color-scheme:dark}}
+body{margin:0 auto;max-width:720px;padding:16px;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,"Apple SD Gothic Neo","Noto Sans KR",sans-serif}
+h1{font-size:1.25rem;margin:.2em 0 .5em}h1 b{color:var(--ac)}
+#bar{position:sticky;top:0;z-index:1;background:var(--bg);display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid var(--ln)}
+button{font:inherit;font-size:.9rem;padding:5px 12px;border:1px solid var(--ac);background:none;color:var(--ac);border-radius:6px;cursor:pointer}
+.i{display:flex;gap:10px;align-items:flex-start;padding:10px 4px;border-bottom:1px solid var(--ln)}
+.i.w{background:var(--w)}.i input{margin-top:6px;width:18px;height:18px;flex:none}
+details{flex:1}summary{cursor:pointer}details p{margin:.4em 0 0;color:var(--ac);font-weight:700}
+.only .i:not(.w){display:none}
+</style></head><body>
+<h1><b>한미</b> 한미의의 전공복습</h1>
+<div id="bar"><label><input type="checkbox" id="t"> 틀린 것만</label><button id="x">오답 내보내기</button><button id="c">번호 복사</button></div>
+<div id="L"></div>
+<script>
+const SRC=document.documentElement.outerHTML,$=s=>document.querySelector(s),L=$('#L');let S={};
+try{S=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){}
+const sv=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}},W=()=>QA.map((_,i)=>i).filter(i=>S[i]);
+L.innerHTML=QA.map(([q,a],i)=>`<div class="i${S[i]?' w':''}"><input type="checkbox" data-i="${i}"${S[i]?' checked':''}><details><summary>${i+1}. ${q}</summary><p>${a}</p></details></div>`).join('');
+L.onchange=e=>{const c=e.target,i=c.dataset.i;c.checked?S[i]=1:delete S[i];c.parentNode.classList.toggle('w',c.checked);sv()};
+$('#t').onchange=e=>document.body.classList.toggle('only',e.target.checked);
+$('#x').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['<!DOCTYPE html>'+SRC.replace(/const QA=[\s\S]*?\/\/END/,()=>'const QA='+JSON.stringify(W().map(i=>QA[i]))+';//END').replace(/const KEY=".*?"/,()=>'const KEY="'+KEY+'-wrong"')],{type:'text/html'}));a.download=KEY+'-wrong.html';a.click()};
+$('#c').onclick=()=>{const t=W().map(i=>i+1).join(','),f=()=>{const x=document.createElement('textarea');x.value=t;document.body.append(x);x.select();document.execCommand('copy');x.remove()};try{navigator.clipboard.writeText(t).catch(f)}catch(e){f()}};
+</script></body></html>

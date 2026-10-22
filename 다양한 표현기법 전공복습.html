@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<script>
+const KEY="다양한 표현기법 전공복습";
+const QA=[["[우연] 물감을 뿌리거나 떨어뜨리거나 흘려 우연의 효과(폴록 액션페인팅)", "드리핑"], ["[우연] 마르기 전 칠하거나 물에 적신 종이에 칠해 자연스럽게 퍼지게 함", "번지기"], ["[우연] 종이에 물감을 떨어뜨린 후 불어서 퍼지게 함", "물감 불기"], ["[우연] 물 위에 유성물감을 흘려 휘저은 무늬를 종이로 덮어 찍어냄", "마블링"], ["[우연] 불로 태운 불규칙한 외곽선·그을음의 농담 이용", "태우기"], ["[초현실] 요철 있는 물체 위에 종이를 놓고 연필 등으로 문질러 나타냄(에른스트)", "프로타주"], ["[초현실] 바탕색 위에 두텁게 덧칠한 후 긁어 밑색이 드러나게 함(=스크래치)", "그라타주"], ["[초현실] 한쪽 면에 물감을 칠하고 접었다 펼쳐 대칭형 모양을 찍어냄", "데칼코마니"], ["[초현실] 이성을 벗어나 무의식대로 손 가는 대로 그림 / 이후 비의도적 우연 효과로 의미 확장", "자동기술법"], ["[초현실] 관계없는 대상을 이질적 환경에 배치해 낯설고 비논리적 상황 연출(=전치기법)", "데페이즈망"], ["[초현실] 달리 창안 / 착란적 현상의 비판적·해석적 연상 / 하나의 대상에서 다른 형체가 보이는 이중 형상", "편집광적 비판"], ["[재료] 풀과 물감을 섞어 손가락으로 그림", "핑거 페인팅"], ["[재료] 크레파스·양초로 그린 후 수채 채색, 물과 기름의 배척 효과", "배틱"], ["[재료] 신문지·상표·벽지·차표 등 인쇄된 종이를 오려 붙임(피카소·브라크)", "파피에 콜레"], ["[재료] 실·종이·모래·헝겊 등을 붙임 / 파피에 콜레의 발전 / 다다·초현실주의 발전 / 평면과 입체의 경계를 허묾", "콜라주"], ["[재료] 콜라주의 반대, 떼어냄 / 찢고 지우고 불태우는 파괴행위로 우연한 효과", "데콜라주"], ["[재료] 콜라주의 확대 개념, 회화에 3차원 물체 결합(네오다다 라우션버그)", "컴바인 페인팅"], ["[재료] 3차원 입체 물체를 결합·수집·집적(신사실주의 아르망)", "아상블라주"], ["[재료] 비슷한 크기 색종이·색타일 조각을 붙임 / 메소포타미아 시작, 비잔틴 교회 벽화에서 번성", "모자이크"], ["[재료] 종이를 오려 붙여 가구·소품 장식 / 말년 마티스의 과슈 색종이 작업", "데쿠파주"], ["[재료] 뒤뷔페가 정신병자·어린아이 그림의 거칠고 창조적인 표현을 지칭 / '원생 미술'", "아르 브뤼"], ["[재료] 프란스 할스 창시 / 'at first' / 밑색 없이 한 겹 칠로 빠르게 완성 / 인상주의의 대표적 방법", "알라 프리마"], ["[재료] 변형·왜곡, 형체와 비례를 파괴 / 야수주의·표현주의의 예술적 강조 수단", "데포르마시옹"], ["[재료] 분해·해체 / 입체주의의 대상 해체와 재조립 과정", "데콩포제"], ["[재료] '눈속임' / 실물 같은 철저한 사실적 묘사 / 바로크 정물화·천장화", "트롱프뢰유"], ["[재료] 한 가지 색의 농담·명암만으로 부조 같은 입체감 / 실내벽면 장식화 / 17~19세기 초", "그리자유"], ["[재료] 기름을 많이 섞어 투명하게, 마른 밑색 위에 묽은 물감을 겹쳐 밑색이 비쳐 보임", "글레이징"], ["[재료] 건축에서 초칠 도료가 마르기 전 선각으로 문양 / 도기 태토·회화 물감을 긁어냄", "즈그라피토"], ["[재료] 물감을 두텁게 덧칠해 다양한 질감효과(마티에르)", "임파스토(앙파트망)"], ["[재료] 밑색이 드러나도록 불투명 물감을 드문드문 엷게 덧칠", "스컴블링"], ["[재료] 촛불 연기를 불어 그을음 얼룩을 입힘(초현실주의 화가 볼프강 개발)", "푸마주"], ["[재료] 명암(대조)법 / 다빈치 완성 / 바로크 렘브란트·카라바조의 극적 효과", "키아로스쿠로"], ["[재료] 카라바조 영향, 더 극명한 명암대비 화파·양식 / 만프레디·조르주 드 라 투르", "테네브리즘"], ["[재료] 인물 측후면에 광원을 두는 반역광, 얼굴 윤곽을 따라 부드러운 그림자", "렘브란트 라이팅"], ["[재료] 타피에의 저서에서 유래 / 앵포르멜 계열 / 기하학적 추상과 대비되는 표현주의적 경향 / 물질성·제스처", "아르 오트르"], ["[재료] 1945년 뒤뷔페 개인전 주제 / 모래·돌·유리 파편을 안료와 섞어 바름", "오트파트"], ["[재료] 검은 윤곽 대신 캔버스의 흰 바탕을 남겨 흰 윤곽선으로 테두리", "앙티세른"], ["[재료] 대상의 윤곽을 짙은 색으로 강조해 구분 / 종합주의", "클루아조니즘"], ["[재료] 실내정경·일상 주변의 사소한 모습을 주제로 삼는 화풍", "앙티미즘"], ["[재료] 캐프로 / 신아방가르드 / 폴록의 작업 경향에 물체·공간을 무작위로 덧붙임", "액션콜라주"], ["[재료] '도장을 찍는다' / 오브제를 합성수지·흙판에 찍어 기호를 만듦 / 일반 오브제 아트와 차이", "카세타주"], ["[기타] 특정 미술가의 초기~말년 작품을 총망라한 목록", "카탈로그 레조네"], ["[사진] 서로 다른 사진을 붙여 새 이미지 / 조형적 측면에 관심", "포토콜라주"], ["[사진] 사진 조합으로 풍자적·가치지향적 메시지 / 네거티브 필름 겹쳐 현상 / 베를린 다다의 정치적 선전도구", "포토몽타주"], ["[사진] 카메라 없이 감광지와 광원 사이에 물체를 놓고 노출(만 레이·모홀리나기)", "포토그램"], ["[사진] 현상 중 극단적 빛으로 명암 반전, 윤곽 강조, 부조효과(만 레이 창안)", "솔라리제이션"], ["[사진] 실에 매단 광원의 흔들림 운동을 카메라로 포착, 몽환적 화면", "펜둘럼"]];//END
+</script>
+<title>[표현] 다양한 표현기법 전공복습</title>
+<style>
+:root{--bg:#f6f7f9;--fg:#1f2430;--ac:#2f5d8a;--ln:#dde1e7;--w:#fbeaea;color-scheme:light}
+@media(prefers-color-scheme:dark){:root{--bg:#171a20;--fg:#e6e8ec;--ac:#8fb5de;--ln:#2c313a;--w:#3a2326;color-scheme:dark}}
+body{margin:0 auto;max-width:720px;padding:16px;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,"Apple SD Gothic Neo","Noto Sans KR",sans-serif}
+h1{font-size:1.25rem;margin:.2em 0 .5em}h1 b{color:var(--ac)}
+#bar{position:sticky;top:0;z-index:1;background:var(--bg);display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid var(--ln)}
+button{font:inherit;font-size:.9rem;padding:5px 12px;border:1px solid var(--ac);background:none;color:var(--ac);border-radius:6px;cursor:pointer}
+.i{display:flex;gap:10px;align-items:flex-start;padding:10px 4px;border-bottom:1px solid var(--ln)}
+.i.w{background:var(--w)}.i input{margin-top:6px;width:18px;height:18px;flex:none}
+details{flex:1}summary{cursor:pointer}details p{margin:.4em 0 0;color:var(--ac);font-weight:700}
+.only .i:not(.w){display:none}
+</style></head><body>
+<h1><b>표현</b> 다양한 표현기법 전공복습</h1>
+<div id="bar"><label><input type="checkbox" id="t"> 틀린 것만</label><button id="x">오답 내보내기</button><button id="c">번호 복사</button></div>
+<div id="L"></div>
+<script>
+const SRC=document.documentElement.outerHTML,$=s=>document.querySelector(s),L=$('#L');let S={};
+try{S=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){}
+const sv=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}},W=()=>QA.map((_,i)=>i).filter(i=>S[i]);
+L.innerHTML=QA.map(([q,a],i)=>`<div class="i${S[i]?' w':''}"><input type="checkbox" data-i="${i}"${S[i]?' checked':''}><details><summary>${i+1}. ${q}</summary><p>${a}</p></details></div>`).join('');
+L.onchange=e=>{const c=e.target,i=c.dataset.i;c.checked?S[i]=1:delete S[i];c.parentNode.classList.toggle('w',c.checked);sv()};
+$('#t').onchange=e=>document.body.classList.toggle('only',e.target.checked);
+$('#x').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['<!DOCTYPE html>'+SRC.replace(/const QA=[\s\S]*?\/\/END/,()=>'const QA='+JSON.stringify(W().map(i=>QA[i]))+';//END').replace(/const KEY=".*?"/,()=>'const KEY="'+KEY+'-wrong"')],{type:'text/html'}));a.download=KEY+'-wrong.html';a.click()};
+$('#c').onclick=()=>{const t=W().map(i=>i+1).join(','),f=()=>{const x=document.createElement('textarea');x.value=t;document.body.append(x);x.select();document.execCommand('copy');x.remove()};try{navigator.clipboard.writeText(t).catch(f)}catch(e){f()}};
+</script></body></html>
