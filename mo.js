@@ -10,12 +10,14 @@ header{position:sticky;top:0;z-index:1;background:var(--m);padding:8px 12px;disp
 header b{flex:1 1 100%;font-size:15px}
 button{font:inherit;font-size:14px;padding:3px 10px;border:1px solid var(--a);border-radius:6px;background:none;color:var(--t)}
 #app{max-width:720px;margin:auto;padding:12px 14px 60px}
-.q{border-bottom:1px solid var(--m);padding:10px 0}.q label{float:right;font-size:14px}
+.q{border-bottom:1px solid var(--m);padding:10px 0;display:flex;flex-wrap:wrap;align-items:center;gap:2px 14px}
+.q>b{flex:1}.q>:not(b):not(details){font-size:14px;float:none;margin:0;position:static}.q>details{order:9;flex:1 1 100%}
+h2{scroll-margin-top:120px}
 summary{cursor:pointer;margin-top:4px}
 .a{margin:6px 0 0;padding:8px 10px;background:var(--m);border-radius:6px}
 h2{color:var(--a);margin-top:28px}h3{font-size:16px;margin:20px 0 4px}ul{margin:0;padding-left:20px}
 </style>`);
-d.body.innerHTML='<header><b></b><label><input type="checkbox" id="f"> 틀린 것만</label><button id="x">오답 내보내기</button><button id="c">번호 복사</button></header><main id="app"></main>';
+d.body.innerHTML='<header><b></b><label><input type="checkbox" id="f"> 틀린 것만</label><button id="x">오답 내보내기</button><button id="c">번호 복사</button><button id="n">노트 내보내기</button></header><main id="app"></main>';
 $('header b').textContent=KEY;
 let S={};try{S=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){}
 if(Array.isArray(S))S=Object.fromEntries(S.map(i=>[i,true]));
@@ -33,4 +35,7 @@ const j=v=>JSON.stringify(v).replace(/</g,'\\u003c'),T='<'+'/script>';
 const data='const KEY='+j(KEY+'-wrong')+';\nconst QA=[\n'+W().map(i=>j(QA[i])).join(',\n')+'\n];\nconst NOTE=[];';
 const html='<!DOCTYPE html>\n<meta charset="utf-8">\n<script>\n'+data+'\n'+T+'\n'+(js?'<script id="mo">\n'+js+'\n'+T:'<script src="mo.js" defer>'+T)+'\n';
 const a=d.createElement('a');a.href=URL.createObjectURL(new Blob([html],{type:'text/html;charset=utf-8'}));a.download=KEY+'-wrong.html';a.click()};
+const dl=(s,n,ty)=>{const a=d.createElement('a');a.href=URL.createObjectURL(new Blob([s],{type:ty+';charset=utf-8'}));a.download=n;a.click()};
+if(!NOTE.length)$('#n').hidden=true;
+$('#n').onclick=()=>dl(KEY+' 개념노트\n\n'+NOTE.map(n=>'## '+n[0]+' ['+n[1]+'] '+n[2]+'\n'+n[3].map(l=>'- '+l).join('\n')).join('\n\n')+'\n',KEY+'-노트.txt','text/plain');
 };document.body?go():document.addEventListener('DOMContentLoaded',go)})();
