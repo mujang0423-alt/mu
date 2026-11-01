@@ -1,0 +1,24 @@
+<script>const KEY="1016-서미-현대미술";</script>
+<meta charset="utf-8"><title>1016-서미-현대미술</title>
+<style>
+body{font:15px/1.65 system-ui,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;max-width:760px;margin:0 auto;padding:0 14px 40px;background:#f6f7f9;color:#1f2328}
+#bar{position:sticky;top:0;z-index:1;display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:10px 0;background:#f6f7f9;border-bottom:2px solid #2f5d8a}
+button{font:inherit;padding:5px 11px;border:1px solid #2f5d8a;border-radius:4px;background:#fff;color:#2f5d8a;cursor:pointer}
+.it{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid #dde1e6}
+.it>label{flex:none;font-size:13px;color:#b42318;padding-top:1px}
+details{flex:1;min-width:0}summary{cursor:pointer;font-weight:600}
+details p{margin:6px 0 2px;padding:8px 10px;background:#fff;border-left:3px solid #2f5d8a;white-space:pre-line}
+@media(prefers-color-scheme:dark){body,#bar{background:#15181c;color:#d8dde3}details p,button{background:#20252b;color:#cfe0f2}.it{border-color:#2c3239}}
+</style>
+<body>
+<script>const QA=[["퍼포먼스 아트의 기원 — 바우하우스·미래주의·다다 각각?", "바우하우스: 연극적 실험\n미래주의: 세라테(저녁 공연·이벤트)\n다다: 즉흥적 예술"], ["캐프로가 「마당」을 수록해 1966년 출간한 책?", "『아상블라주, 환경 그리고 해프닝』"], ["비토 아콘치가 '힘의 장' 이론의 영향을 받았다고 보는 이유?", "관객을 작가의 물리적 공간으로 끌어들여 작품의 일부로 포함시켰기 때문"], ["곤잘레스-토레스가 속한, 거리·지하철 등 공공장소를 전시장으로 삼은 신세대 작가 집단?", "그룹 머티리얼(Group Material) ※게릴라 아트 X"], ["론 뮤익의 거대·축소된 극사실 인체가 유발하는 감정(개념)?", "언캐니(낯설고 불쾌함) → 불쾌한 골짜기(uncanny valley) ※애브젝션보다 언캐니로 설명"], ["네오지오가 신표현주의에 반발하며 미디어·테크놀로지에 기초해 추구한 것?", "쿨 아트 — 포스트모더니즘 정신은 고수, 방법론만 교체"], ["아르테 포베라가 대항한 두 사조?", "미니멀리즘, 팝아트(상업성)"], ["아르테 포베라가 가공하지 않은 재료를 드러낸 의미 2가지?", "① 인간 삶의 본질·근원 탐구\n② 문화에 오염되지 않은 물질의 원초적 모습 제시"], ["바바라 크루거·신디 셔먼·제니 홀저·셰리 레빈은 몇 세대 페미니즘?", "2세대(1980년대) ※3세대와의 경계로 보기도 함"], ["패러디 vs 샘플링?", "패러디: 형식은 차용하되 다른 내용을 암시 → 원작과 구분 가능\n샘플링: 원작을 위조하듯 구분하기 힘들게 만들어 더 강하게 조롱·풍자"], ["신표현주의가 뿌리를 둔 20세기 초 사조와 특징?", "독일 표현주의 — 미니멀·개념미술에 반발, 회화·구상성·메시지(내면의 자유로운 표현)의 부활"], ["바젤리츠 '거꾸로 된 그림'의 주 기법과 영향받은 사조?", "타시즘 기법, 매너리즘의 영향"], ["줄리언 슈나벨이 깨진 접시를 붙여 그린 회화?", "플레이트 페인팅"], ["1826년 감광성 아스팔트를 바른 판에 상을 얻은 최초의 사진술과 발명자?", "헬리오그래피 — 니엡스 ※다게레오타입 X"], ["구르스키가 스승 베허 부부와 다른 점?", "베허: 같은 유형을 중립적 시선으로 반복 촬영(유형학적 사진)\n구르스키: 변화무쌍한 장면을 스펙터클하게 보여 경외감·숭고함 유발"], ["오리엔탈리즘 vs 옥시덴탈리즘?", "오리엔탈리즘: 서구가 세계를 서양/동양으로 나눠 동양 식민지배를 정당화하는 시각\n옥시덴탈리즘: 반대로 동양에 의해 날조된 서양 이미지"]];</script>
+<script id="app">
+let W;try{W=new Set(JSON.parse(localStorage.getItem(KEY))||[])}catch(e){W=new Set}
+const sv=()=>{try{localStorage.setItem(KEY,JSON.stringify([...W]))}catch(e){}},B=document.body,bar=document.createElement('div'),L=document.createElement('div');
+bar.id='bar';bar.innerHTML='<label><input type=checkbox> 틀린 것만</label><button>오답 내보내기</button><button>번호 복사</button>';B.append(bar,L);
+const[f,ex,cp]=bar.querySelectorAll('input,button'),F=()=>[...L.children].forEach((e,i)=>e.hidden=f.checked&&!W.has(i));
+QA.forEach(([q,a],i)=>{const d=document.createElement('div');d.className='it';d.innerHTML=`<label><input type=checkbox> 틀림</label><details><summary>${i+1}. ${q}</summary><p>${a}</p></details>`;const c=d.querySelector('input');c.checked=W.has(i);c.onchange=()=>{c.checked?W.add(i):W.delete(i);sv();F()};L.append(d)});
+f.onchange=F;
+ex.onclick=()=>{const s=QA.filter((_,i)=>W.has(i));if(!s.length)return alert('체크된 문항이 없습니다');const h=`<script>const KEY=${JSON.stringify(KEY+'-wrong')};<\/script>\n<meta charset="utf-8"><title>${KEY}-wrong</title>${document.querySelector('style').outerHTML}<body><script>const QA=${JSON.stringify(s)};<\/script><script id="app">${document.getElementById('app').textContent}<\/script>`,a=document.createElement('a');a.href=URL.createObjectURL(new Blob([h],{type:'text/html'}));a.download=KEY+'-wrong.html';a.click()};
+cp.onclick=()=>{const s=[...W].sort((a,b)=>a-b).map(i=>i+1).join(','),ok=()=>{cp.textContent='복사됨: '+(s||'없음');setTimeout(()=>cp.textContent='번호 복사',1500)},fb=()=>{const t=document.createElement('textarea');t.value=s;B.append(t);t.select();try{document.execCommand('copy')}catch(e){}t.remove();ok()};try{navigator.clipboard.writeText(s).then(ok,fb)}catch(e){fb()}};
+</script>
